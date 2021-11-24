@@ -20,7 +20,22 @@ public class MainController {
     }
 
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "main/login";
+    }
 
+
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "main/register";
+    }
+
+
+    @GetMapping("/buildOne")
+    public String showBaukastenPage() {
+        return "baukasten/one.html";
+    }
 
 
 }

@@ -1,0 +1,193 @@
+<div th:fragment="modals">
+
+<!-- ADD PAGE MODAL ---------------------------------->
+  <div id="addPage" class="modal">
+    <div class="modal-content">
+      <h4>Seite hinzufügen</h4>
+      <p>Du musst eine der Folgenden Seiten wählen:</p>
+
+
+      <div class="collection">
+        <a href="#!" class="collection-item">Kontankt und Öffnungszeiten</a>
+        <a href="#!" class="collection-item">Über uns</a>
+        <a href="#!" class="collection-item">Fotos</a>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+
+
+
+
+
+
+<!-- Header Div MODAL ---------------------------------->
+  <div id="headerContent" class="modal">
+    <div class="modal-content">
+      <h4>Bild und Text hinzufügen</h4>
+      <p>Überschrift sowie Hintergrundbild bitte eingeben.
+          <br>
+          Die Überschrift wird vor dem Bild dargestellt.
+      </p>
+
+      <div class="row">
+      <form class="col l7">
+        <div class="row">
+          <div class="input-field col s9">
+            <i class="material-icons prefix">title</i>
+            <input id="input_text" type="text" data-length="10">
+            <label for="input_text">Überschrift</label>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s9 marg-t-0">
+                <div class="file-field input-field">
+                <div class="btn">
+                    <span>Bild</span>
+                    <input type="file" multiple>
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
+                </div>
+                </div>
+            </div>
+        </div>
+
+      </form>
+    
+
+      <div class="col l5">
+            <img th:src="@{css/baukasten/overlayText.png}"  class="overlayImg">
+        </div>
+
+      </div>
+
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Hinzufügen</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+
+
+
+
+  <!-- Main Left MODAL ---------------------------------->
+  <div id="mainLeft" class="modal">
+    <div class="modal-content">
+      <h4>Element hinzufügen</h4>
+      <p>Du musst eines der Folgenden Elemente auswählen:</p>
+
+      <h5>Empfohlen:</h5>
+
+      <div class="collection">
+        <a href="#!" class="collection-item">Bestellformular / Speisekarte</a>
+      </div>
+
+      <h5>Sonstiges:</h5>
+      <div class="collection">
+        <a href="#!" class="collection-item">Google Maps Standort</a>
+        <a href="#!" class="collection-item">Allgemeiner Text</a>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
+    </div>
+  </div>
+
+<!----------------------------------------------------->
+
+
+  <!-- Main Right MODAL ---------------------------------->
+  <div id="mainRight" class="modal">
+    <div class="modal-content">
+      <h4>Element hinzufügen</h4>
+      <p>Du musst eines der Folgenden Elemente auswählen:</p>
+
+      <div class="collection">
+        <a href="#!" class="collection-item">Öffnungszeiten</a>
+        <a href="#!" class="collection-item">Kontaktinformationen</a>
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
+    </div>
+  </div>
+
+<!----------------------------------------------------->
+
+
+
+  <!-- Logo und Navbar MODAL ---------------------------------->
+  <div id="logoModal" class="modal">
+    <div class="modal-content">
+      <h4>Logo und Navbar Einstellungen</h4>
+      <p class="logoModalParagraph">Hier kannst du den Logo-Text sowie die Farben der Navigation ändern.</p>
+
+
+      
+
+      <div class="row">
+      <form class="col l7">
+        <div class="row marg-b-0">
+          <div class="input-field col s9">
+            <i class="material-icons prefix">notes</i>
+            <input id="input_text1" type="text" data-length="10">
+            <label for="input_text1">Restaurantnamen</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s9">
+            <h6>Farbe der Navbar: </h6>
+            <input id="color-picker" value='#276cb8' />
+          </div>
+        </div>
+
+
+       
+
+      </form>
+    
+
+      <div class="col l5">
+           
+        </div>
+
+      </div>
+
+  
+
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Anwenden</a>
+    </div>
+  </div>
+
+<!----------------------------------------------------->
+
+
+</div>
+

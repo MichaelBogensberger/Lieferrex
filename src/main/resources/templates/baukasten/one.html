@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Vorlage 1</title>
+
+  <link th:href="@{/css/baukasten/one.css}" rel="stylesheet" />
+
+  <div th:replace="baukasten/fragments/header"></div>
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    <div th:replace="baukasten/fragments/modals"></div>
+
+
+    <nav>
+        <div class="nav-wrapper">
+
+        <a href="#logoModal" class="brand-logo modal-trigger brand-logo-js brand-logo-mob">ASIAMIX</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons menu-icon">menu</i></a>
+           
+
+        <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html">HOME</a></li>
+            <li><a href="#addPage" class="modal-trigger">ADD PAGE</a></li>
+
+        </ul>
+        </div>
+    </nav>
+
+      
+    <ul class="sidenav nav-mob" id="mobile-demo">
+      <h1 class="side-line-menu">ASIAMIX</h1>
+      <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
+
+     </ul>
+
+
+           
+    
+
+        
+
+
+<div class="row">
+      <div class="col l12 m12 s12 header-div"><span class="flow-text">
+        <div>
+
+            <span class="material-icons-outlined modal-trigger" href="#headerContent">add</span>
+            
+        </div>
+      </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m7 l9 main-left">
+        <div>
+
+        <span class="material-icons-outlined modal-trigger" href="#mainLeft">add</span>
+
+
+        </div>
+    </div>
+
+
+    <div class="col s12 m5 l3 main-right" >
+        <div>
+
+        <span class="material-icons-outlined modal-trigger" href="#mainRight">add</span>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+  
+
+</body>
+
+
+<script type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>
+
+
+
+
+</html>

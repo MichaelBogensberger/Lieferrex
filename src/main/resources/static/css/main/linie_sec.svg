@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1071" fill="none" style=""><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+
+<defs>
+<linearGradient id="paint0_linear" x1="1.0002357378595002" y1="0.06871210096618072" x2="0.661008958038661" y2="1.0004321521175454">
+<stop stop-color="#0052A2"/>
+<stop offset="1" stop-color="#02386E"/>
+</linearGradient>
+</defs>
+<g class="currentLayer" style=""><title>Layer 1</title><path d="M806.5 1083.5C1535.7 1083.5 1942 333 1922.5 0H2021V1157L-100 1137C-14 1091 77.3 1083.5 806.5 1083.5Z" fill="url(#paint0_linear)" id="svg_1" class=""/></g></svg>
