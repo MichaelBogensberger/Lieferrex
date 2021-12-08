@@ -1,4 +1,4 @@
-package com.htlimst.lieferrex;
+package com.htlimst.lieferrex.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
