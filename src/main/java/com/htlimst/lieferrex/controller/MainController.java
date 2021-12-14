@@ -38,4 +38,11 @@ public class MainController {
     }
 
 
+    @GetMapping("/dashboard")
+    public String showDashboard() {
+        return "dashboard/dashboard.html";
+    }
+
+
+
 }

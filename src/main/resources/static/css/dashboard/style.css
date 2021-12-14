@@ -1,0 +1,93 @@
+  :root {
+
+    
+    --pink-color-main: #FF0266;
+    --pink-color-light: #ff0256;
+    --pink-color-sec: #FF7597;
+    --blue-color-dm-main: #021b32;
+    --blue-color-dm-sec: #ffffff0a;
+    /* light mode input border color */
+    --lm-input-box-shadow-focus: 0 0 0 0.2rem rgba(255, 117, 151, 1);
+
+    /* Body bg color */
+    --dm-base-body-bg-color: var(--blue-color-dm-main);
+    /* sidenav */
+    --dm-sidebar-bg-color: var(--blue-color-dm-main);
+    /* navbar */
+    --dm-navbar-bg-color:var(--blue-color-dm-main);
+
+  
+    --primary-color: var(--pink-color-main);                                     /* Before: var(--blue-color) */
+    --primary-color-light: var(--pink-color-light);                         /* Before: var(--blue-color-light) */
+    --primary-box-shadow-color: var(--pink-color-sec);               /* Before: var(--blue-box-shadow-color) */
+
+    /* Card */
+    --card-border-radius: 8px;                           /* Before: var(--base-border-radius) */
+  
+    /* Card (dark mode only) */
+    --dm-card-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);     /* Before: none */
+      
+
+    /* Input (dark mode only) */
+    --dm-input-box-shadow: var(--lm-input-box-shadow);      /* Before: none */
+
+
+  }
+  
+  /* 
+    Local scope 
+    ~ This way, only the primary button's height and border width is affected.
+    ~ Default button remains the same.
+  */
+  .btn-primary {
+    --button-height: 3.2rem;  /* Before: 3.2rem (32px) after 3.6 */
+    --button-border-width: 0; /* Before: var(--base-border-width) */
+  }
+
+
+  .dark-mode .card {
+    background:  var(--blue-color-dm-sec) !important;
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+    backdrop-filter: blur(2.6px);
+    -webkit-backdrop-filter: blur(2.6px);
+  }
+
+
+  /* Borders ausschalten  */
+  .navbar-fixed-bottom {
+    border: 0px !important;
+  }
+
+  .sidebar {
+      border: 0px !important;
+  }
+
+  .navbar {
+      border: 0px !important;
+  }
+
+
+
+
+  /* Card light mode */
+  .card {
+    border: 0px;
+    border-radius: 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  .btn {
+    border: 0px;
+  }
+
+
+  .form-control {
+    border:0px;
+    background-color: #EEEEEE;
+  }
+
+  .form-control:hover {
+    background-color: #e4e4e4;
+  }
+
+
