@@ -6,29 +6,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import java.sql.Time;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "angestellter")
-public class Angestellter {
+@Table(name = "oeffnungszeit")
+public class Oeffnungszeit {
 
     @Id
-    @Column(name = "angestellter_id")
+    @Column(name = "oeffnungszeit_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="mandant_id", nullable=false)
-    private Mandant mandant;
+    private Integer tag;
+    private Time oeffnungszeit;
+    private Time startpause;
+    private Time endepause;
+    private Time schliessungszeit;
 
-    private String vorname;
-    private String nachname;
-    private String benutzername;
-    private String passwort;
+
+
+
+
 
 }
-

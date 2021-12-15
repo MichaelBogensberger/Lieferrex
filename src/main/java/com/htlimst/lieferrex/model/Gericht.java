@@ -24,7 +24,7 @@ public class Gericht {
     @Column(name = "mandat_id")
     private String mandatId;
 
-    private String gericht;
+    private String name;
     private String beschreibung;
     private String preis;
 }
