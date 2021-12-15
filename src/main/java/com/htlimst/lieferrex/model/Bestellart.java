@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +23,15 @@ public class Bestellart {
     private Long id;
 
     private String bestellart;
+
+
+
+
+
+    @OneToMany(mappedBy="bestellart")
+    private Set<Bestellung> bestellungen;
+
+
+
 
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Angestellter {
 
     @Id
     @Column(name = "angestellter_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -29,6 +30,9 @@ public class Angestellter {
     private String nachname;
     private String benutzername;
     private String passwort;
+
+    @ManyToMany
+    private Set<Rolle> rolle;
 
 }
 

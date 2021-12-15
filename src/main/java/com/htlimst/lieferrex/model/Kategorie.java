@@ -19,10 +19,11 @@ public class Kategorie {
 
     @Id
     @Column(name = "kategorie_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
 
 
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Gericht {
 
     @Id
     @Column(name = "gericht_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "mandat_id")
@@ -26,6 +27,12 @@ public class Gericht {
 
     private String name;
     private String beschreibung;
-    private String preis;
+    private Double preis;
+
+
+    @ManyToMany
+    private Set<Gerichtstatus> gerichtstatus;
+
+
 }
 

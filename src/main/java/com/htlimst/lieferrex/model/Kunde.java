@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class Kunde {
 
     @Id
     @Column(name = "kunde_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String vorname;
@@ -30,10 +31,15 @@ public class Kunde {
     private String ort;
 
     @Size(min=4,max = 6)
-    private String plz;
+    private Integer plz;
     private String strasse;
     private String hausnummer;
-    private String telefonnummer;
+    private Integer telefonnummer;
     private String land;
-    private String newsletter;
+    private boolean newsletter;
+
+    @OneToMany(mappedBy="kunde")
+    private Set<Bestellung> bestellungen;
+
+
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -14,14 +15,15 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "bestellstatus")
-public class bestellstatus {
+public class Bestellstatus {
 
     @Id
     @Column(name = "bestellstatus_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String bestellstatus;
+
 
 
 }

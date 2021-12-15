@@ -18,7 +18,7 @@ public class Oeffnungszeit {
 
     @Id
     @Column(name = "oeffnungszeit_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer tag;
@@ -27,7 +27,9 @@ public class Oeffnungszeit {
     private Time endepause;
     private Time schliessungszeit;
 
-
+    @ManyToOne
+    @JoinColumn(name="mandant_id", nullable=false)
+    private Mandant mandant;
 
 
 

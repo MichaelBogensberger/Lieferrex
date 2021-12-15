@@ -21,7 +21,7 @@ public class Mandant {
 
     @Id
     @Column(name = "mandant_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firmenname;
@@ -29,16 +29,16 @@ public class Mandant {
     private String ort;
 
     @Size(min=4,max = 6)
-    private String plz;
+    private Integer plz;
 
     private String strasse;
-    private Integer hausnummer;
-    private String telefon;
+    private String hausnummer;
+    private Integer telefon;
 
     //@Email
     private String email;
-    private String mindestbestellwert;
-    private String lieferkosten;
+    private Double mindestbestellwert;
+    private Double lieferkosten;
 
 
 }
