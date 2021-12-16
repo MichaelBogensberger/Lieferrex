@@ -37,5 +37,17 @@ public class Gericht {
     private Set<Gerichtstatus> gerichtstatus;
 
 
+    @ManyToOne
+    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
+    private Mandant mandant;
+
+
+    @OneToMany(mappedBy="gericht")
+    private Set<GerichtBestellung> gerichteBestellungen;
+
+
+
+
+
 }
 

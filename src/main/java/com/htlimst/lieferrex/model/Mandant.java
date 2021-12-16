@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -39,6 +39,28 @@ public class Mandant {
     private String email;
     private Double mindestbestellwert;
     private Double lieferkosten;
+
+    @ManyToMany
+    @JoinTable(
+            name = "mandant_kategorie",
+            joinColumns = @JoinColumn(name = "mandant_id"),
+            inverseJoinColumns = @JoinColumn(name = "kategorie_id"))
+    private Set<Kategorie> kategorie;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "mandant_bestellart",
+            joinColumns = @JoinColumn(name = "mandant_id"),
+            inverseJoinColumns = @JoinColumn(name = "bestellart_id"))
+    private Set<Bestellart> bestellart;
+
+
+    @OneToMany(mappedBy="mandant")
+    private Set<Gericht> gerichte;
+
+    @OneToMany(mappedBy="mandant")
+    private Set<Bestellung> bestellungen;
 
 
 }

@@ -47,6 +47,14 @@ public class Bestellung {
     @JoinColumn(name="kunde_id", nullable=false, insertable=false, updatable=false)
     private Kunde kunde;
 
+    @ManyToOne
+    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
+    private Mandant mandant;
+
+
+    @OneToMany(mappedBy="bestellung")
+    private Set<GerichtBestellung> gerichteBestellungen;
+
 
 }
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,10 @@ public class Kategorie {
     private Long id;
 
     private String name;
+
+
+
+
 
 
 
