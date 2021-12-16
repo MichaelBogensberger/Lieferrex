@@ -22,7 +22,7 @@ public class Gerichtstatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer status;
+    private String status;
 
 
 

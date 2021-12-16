@@ -26,6 +26,7 @@ public class Gericht {
     private String name;
     private String beschreibung;
     private Double preis;
+    private Double preisangebot;
 
 
     @ManyToMany

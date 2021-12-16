@@ -28,8 +28,14 @@ public class Bestellung {
     private Double gesamtpreis;
     private Double trinkgeld;
 
+
     @ManyToMany
+    @JoinTable(
+            name = "bestellung_bestellstatus",
+            joinColumns = @JoinColumn(name = "bestellung_id"),
+            inverseJoinColumns = @JoinColumn(name = "bestellstatus_id"))
     private Set<Bestellstatus> bestellstatus;
+
 
 
     @ManyToOne

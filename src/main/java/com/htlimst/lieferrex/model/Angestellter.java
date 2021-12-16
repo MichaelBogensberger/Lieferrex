@@ -32,6 +32,10 @@ public class Angestellter {
     private String passwort;
 
     @ManyToMany
+    @JoinTable(
+            name = "angestellter_rolle",
+            joinColumns = @JoinColumn(name = "angestellter_id"),
+            inverseJoinColumns = @JoinColumn(name = "rolle_id"))
     private Set<Rolle> rolle;
 
 }
