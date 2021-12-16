@@ -62,5 +62,8 @@ public class Mandant {
     @OneToMany(mappedBy="mandant")
     private Set<Bestellung> bestellungen;
 
+    @OneToMany(mappedBy="mandant")
+    private Set<Angestellter> angestellte;
+
 
 }
