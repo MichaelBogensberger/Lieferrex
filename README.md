@@ -1,3 +1,3 @@
 # Lieferrex
 
-Individualisierbare Bestellplattform für Restaurants mit Liefer-/Abholservice
+Individualisierbare Bestellplattform für Restaurants mit Liefer-/Abholservices
