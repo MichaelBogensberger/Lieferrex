@@ -1,4 +1,3 @@
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -35,7 +34,6 @@
 
 
 Das Ziel des Projektes ist eine Webseite, über die Kunden und Kundinnen Essen bei Restaurants bestellen können. Es gibt auch eine Liste, die alle Restaurants beinhaltet, damit Kunden ein passendes finden können. Die Unternehmen, die diesen Service verwenden, gestalten sich individuelle Webseiten, die dann auf einem Webserver gehostet werden. Alle Accounts werden in einer Datenbank gespeichert.
-Here's why:
 
 
 ### Built With
@@ -47,4 +45,10 @@ Folgende Technologien wurden verwendet um das Projekt zu realisieren:
 * [Halfmoon](https://www.gethalfmoon.com/)
 * [Thymeleaf](https://www.thymeleaf.org/)
 * [JQuery](https://jquery.com)
+
+
+
+
+
+
 
