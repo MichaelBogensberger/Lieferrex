@@ -59,8 +59,8 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1">
                         <!-- w-200 = width: 20rem (200px) -->
-                        <a href="#" class="dropdown-item active">Overview</a>
-                        <a href="#" class="dropdown-item">Alle Bestellungen</a>
+                        <a href="/dashboard" class="dropdown-item active">Overview</a>
+                        <a href="/dashboard/bestellungen" class="dropdown-item">Alle Bestellungen</a>
                         <a href="#" class="dropdown-item">Lieferungen</a>
                         <a href="#" class="dropdown-item">Abholungen</a>
                         <div class="dropdown-divider"></div>
@@ -98,13 +98,13 @@
                 <!-- Sidebar links (with icons) and titles -->
                 <h5 class="sidebar-title">Hauptregister</h5>
                 <div class="sidebar-divider"></div>
-                <a href="#" class="sidebar-link sidebar-link-with-icon active">
+                <a href="/dashboard" class="sidebar-link sidebar-link-with-icon active">
                     <span class="sidebar-icon">
                         <i class="fa fa-home" aria-hidden="true"></i>
                     </span>
                     Overview
                 </a>
-                <a href="#" class="sidebar-link sidebar-link-with-icon">
+                <a href="/dashboard/bestellungen" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
                         <i class="fa fa-globe" aria-hidden="true"></i>
                     </span>
@@ -315,14 +315,32 @@
 
                             </div>
                             <div class="col-lg-4">
+
+
                                 <div class="content card pt-15 pb-15">
-                                    <h2 class="content-title mb-0">Disabled</h2>
-                                    <p class="mb-20 mt-0">Die folgenden Gerichte sind nicht aktiviert</p>
-                                    <h6 class="font-size-12 mb-0 ">Hühnchen mit Reis <a href="#" class="badge badge-success ml-5 pl-5 pr-5 pt-0 pb-0 float-right">activate</a> </h6>
-                                    <h6 class="font-size-12 mb-0 ">Döner mit alles <a href="#" class="badge badge-success ml-5 pl-5 pr-5 pt-0 pb-0 float-right">activate</a> </h6>
-                                    <h6 class="font-size-12 mb-0 ">Schnitzel <a href="#" class="badge badge-success ml-5 pl-5 pr-5 pt-0 pb-0 float-right">activate</a> </h6>
-                                    <h6 class="font-size-12 mb-0 ">Dürüm <a href="#" class="badge badge-success ml-5 pl-5 pr-5 pt-0 pb-0 float-right">activate</a> </h6>
+                                    <h2 class="content-title mb-0">Popular</h2>
+                                    <p class="mb-20 mt-0">Folgende Gerichte wurden am öfftesten gekauft</p>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <p class="text-truncate mt-0 mb-0">Döner mit Tomaten</p>
+                                            <span class="badge badge-primary badge-pill">1.265</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <p class="text-truncate mt-0 mb-0">Katze alla Ming</p>
+                                            <span class="badge badge-primary badge-pill">234</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <p class="text-truncate mt-0 mb-0">Burger süß sauer</p>
+                                            <span class="badge badge-primary badge-pill">69</span>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn btn-block" type="button">mehr anzeigen</button>
+                                    </div>
                                 </div>
+
+
 
 
                             </div>
