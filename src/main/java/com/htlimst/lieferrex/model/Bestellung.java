@@ -23,12 +23,6 @@ public class Bestellung {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mandat_id")
-    private String mandatId;
-
-    @Column(name = "kunde_id")
-    private String kundeId;
-
     private Integer dauer;
     private Timestamp bestelldatum;
     private Double gesamtpreis;

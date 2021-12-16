@@ -11,10 +11,10 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
 @Entity
 @Table(name = "gericht")
+@Getter
 public class Gericht {
 
     @Id
@@ -22,8 +22,6 @@ public class Gericht {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mandat_id")
-    private String mandatId;
 
     private String name;
     private String beschreibung;
@@ -31,6 +29,10 @@ public class Gericht {
 
 
     @ManyToMany
+    @JoinTable(
+            name = "gericht_gerichtstatus",
+            joinColumns = @JoinColumn(name = "gericht_id"),
+            inverseJoinColumns = @JoinColumn(name = "gerichtstatus_id"))
     private Set<Gerichtstatus> gerichtstatus;
 
 
