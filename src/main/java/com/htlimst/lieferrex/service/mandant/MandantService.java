@@ -7,6 +7,6 @@ import java.util.List;
 public interface MandantService {
     List<Mandant> alleMandanten();
     Mandant mandantEinfuegen(Mandant mandant);
-    Mandant mandantMitId(Long id);
+    Mandant mandantMitId(Long id); //throws MandantNichtGefunden
     void mandantLoeschenMitId(Long id);
 }
