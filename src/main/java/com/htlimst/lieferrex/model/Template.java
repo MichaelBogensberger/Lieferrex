@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +25,9 @@ public class Template {
 
     private String template;
 
+    @OneToMany(mappedBy = "template")
+    Set<Position> positionen;
+
+    @OneToMany(mappedBy = "template")
+    Set<Mandant> mandanten;
 }

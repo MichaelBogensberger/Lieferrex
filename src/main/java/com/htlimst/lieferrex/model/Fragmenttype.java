@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @AllArgsConstructor
@@ -22,5 +24,8 @@ public class Fragmenttype {
     private Long id;
 
     private String fragmenttype;
+
+    @OneToMany(mappedBy = "fragmenttype")
+    private Set<Fragment> fragmente;
 
 }

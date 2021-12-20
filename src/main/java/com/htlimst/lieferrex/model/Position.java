@@ -26,8 +26,4 @@ public class Position {
     @ManyToOne
     @JoinColumn(name="template_id", nullable=false)
     private Template template;
-
-    public String getPosition(){
-        return this.position;
-    }
 }

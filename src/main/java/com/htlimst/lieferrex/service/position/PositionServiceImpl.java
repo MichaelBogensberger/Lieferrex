@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 public class PositionServiceImpl implements PositionService{
     
     @Autowired
-    private PositionRepository repo;
+    private PositionRepository positionRepository;
 
-    public Position getById(Long id) {
-        return repo.findPositionById(id).get();
+    public Position getPositionById(Long id) {
+        return positionRepository.findPositionById(id).get();
     }
 }
