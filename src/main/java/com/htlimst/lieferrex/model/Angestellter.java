@@ -29,6 +29,7 @@ public class Angestellter {
     private String vorname;
     private String nachname;
     private String benutzername;
+    private String email;
     private String passwort;
 
     @ManyToMany

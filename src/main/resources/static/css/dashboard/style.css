@@ -1,93 +1,178 @@
-  :root {
-
-    
-    --pink-color-main: #FF0266;
+:root {
+    --pink-color-main: #ff0266;
     --pink-color-light: #ff0256;
-    --pink-color-sec: #FF7597;
+    --pink-color-sec: #ff7597;
     --blue-color-dm-main: #021b32;
     --blue-color-dm-sec: #ffffff0a;
+
     /* light mode input border color */
     --lm-input-box-shadow-focus: 0 0 0 0.2rem rgba(255, 117, 151, 1);
 
-    /* Body bg color */
-    --dm-base-body-bg-color: var(--blue-color-dm-main);
-    /* sidenav */
-    --dm-sidebar-bg-color: var(--blue-color-dm-main);
-    /* navbar */
-    --dm-navbar-bg-color:var(--blue-color-dm-main);
 
-  
-    --primary-color: var(--pink-color-main);                                     /* Before: var(--blue-color) */
-    --primary-color-light: var(--pink-color-light);                         /* Before: var(--blue-color-light) */
-    --primary-box-shadow-color: var(--pink-color-sec);               /* Before: var(--blue-box-shadow-color) */
+
+    /* Body bg color */
+    --dm-base-body-bg-image: url("dashboard_bg.png");
+    --dm-base-body-bg-color: #12073C;
+    /* sidenav */
+    --dm-sidebar-bg-color: transparent;
+    /* navbar */
+    --dm-navbar-bg-color: transparent;
+
+
+
+    --primary-color: var(--pink-color-main);
+    --primary-color-light: var(--pink-color-light);
+    --primary-box-shadow-color: var(--pink-color-sec);
+
+
+
+
+    /*
+    --dm-button-primary-bg-color: var(--pink-color-main);
+    --dm-badge-primary-bg-color: var(--pink-color-main);
+    --dm-badge-primary-border-color: var(--pink-color-main);
+    --dm-sidebar-link-text-color-active: var(--pink-color-main);
+
+    --dm-sidebar-link-text-color-active-hover: var(--pink-color-light);
+    --dm-button-primary-bg-color-hover: var(--pink-color-light);
+    */
+
 
     /* Card */
-    --card-border-radius: 8px;                           /* Before: var(--base-border-radius) */
-  
+    --card-border-radius: 8px; /* Before: var(--base-border-radius) */
+
     /* Card (dark mode only) */
-    --dm-card-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);     /* Before: none */
-      
+    --dm-card-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Before: none */
 
     /* Input (dark mode only) */
-    --dm-input-box-shadow: var(--lm-input-box-shadow);      /* Before: none */
+    --dm-input-box-shadow: var(--lm-input-box-shadow); /* Before: none */
+}
 
-
-  }
-  
-  /* 
+/* 
     Local scope 
     ~ This way, only the primary button's height and border width is affected.
     ~ Default button remains the same.
   */
-  .btn-primary {
-    --button-height: 3.2rem;  /* Before: 3.2rem (32px) after 3.6 */
+.btn-primary {
+    --button-height: 3.2rem; /* Before: 3.2rem (32px) after 3.6 */
     --button-border-width: 0; /* Before: var(--base-border-width) */
-  }
+}
 
-
-  .dark-mode .card {
-    background:  var(--blue-color-dm-sec) !important;
+.dark-mode .card {
+    background: var(--blue-color-dm-sec) !important;
     /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
     backdrop-filter: blur(2.6px);
     -webkit-backdrop-filter: blur(2.6px);
-  }
+}
 
-
-  /* Borders ausschalten  */
-  .navbar-fixed-bottom {
+/* Borders ausschalten  */
+.navbar-fixed-bottom {
     border: 0px !important;
-  }
+}
 
-  .sidebar {
-      border: 0px !important;
-  }
+.sidebar {
+    border: 0px !important;
+}
 
-  .navbar {
-      border: 0px !important;
-  }
-
-
+.navbar {
+    border: 0px !important;
+}
 
 
-  /* Card light mode */
-  .card {
+/* Card light mode */
+.card {
     border: 0px;
     border-radius: 8px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  }
+}
 
-  .btn {
+.btn {
     border: 0px;
-  }
+}
 
+.form-control {
+    border: 0px;
+    background-color: #eeeeee;
+}
 
-  .form-control {
-    border:0px;
-    background-color: #EEEEEE;
-  }
-
-  .form-control:hover {
+.form-control:hover {
     background-color: #e4e4e4;
-  }
+}
+
+.first-card {
+    background: rgb(243, 121, 66);
+    background: linear-gradient(
+            90deg,
+            rgba(243, 121, 66, 1) 0%,
+            rgba(255, 207, 96, 1) 100%
+    );
+    color: white;
+}
+
+.second-card {
+    background: rgb(90, 185, 119);
+    background: linear-gradient(
+            90deg,
+            rgba(90, 185, 119, 1) 0%,
+            rgba(115, 194, 167, 1) 100%
+    );
+    color: white;
+}
+
+.third-card {
+    background: rgb(117, 101, 170);
+    background: linear-gradient(
+            90deg,
+            rgba(117, 101, 170, 1) 0%,
+            rgba(165, 94, 164, 1) 100%
+    );
+    color: white;
+}
 
 
+.dark-mode {
+    background-image: var(--dm-base-body-bg-image);
+}
+
+.dark-mode .card {
+    background: rgb(255 255 255 / 10%) !important;
+
+    backdrop-filter: blur( 16.5px );
+    -webkit-backdrop-filter: blur( 16.5px );
+    border-radius: 10px !important;
+    /*border: 1px solid rgba( 255, 255, 255, 0.18 );*/
+}
+
+
+
+.font-size-35 {
+    font-size: 35px;
+}
+
+.max-width-80 {
+    max-width: 80px;
+}
+
+@media (max-width: 769px) {
+    .max-width-on-md-140 {
+        max-width: 140px;
+    }
+
+    .dark-mode {
+        background-position: 30% 50%;
+    }
+
+
+}
+
+@media (max-width: 350px) {
+    .max-width-on-sm-100 {
+        max-width: 100px;
+    }
+}
+
+
+.sidenav-pfp {
+    width: 45px !important;
+    height: 45px !important;
+}
