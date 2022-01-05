@@ -45,6 +45,12 @@ Folgende Technologien wurden verwendet um das Projekt zu realisieren:
 * [JQuery](https://jquery.com)
 
 
+### Spring profiles
+Default Profile is dev
+```
+mvn clean install -Ppro
+mvn clean install -Pdev
+```
 
 
 
