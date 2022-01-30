@@ -23,7 +23,7 @@ public class Umsatz {
 
     private int monat;
     private int jahr;
-    private Double Umsatz;
+    private Double umsatz;
 
 
     @ManyToOne
