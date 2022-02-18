@@ -48,7 +48,7 @@ Folgende Technologien wurden verwendet um das Projekt zu realisieren:
 ### Spring profiles
 Default Profile is dev
 ```
-mvn clean install -Ppro
+mvn clean install -Pprod
 mvn clean install -Pdev
 ```
 
