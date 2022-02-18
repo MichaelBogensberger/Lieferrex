@@ -32,11 +32,9 @@ public class Angestellter {
     private String nachname;
     @Min(3)
     private String benutzername;
-<<<<<<< HEAD
+
     @Min(8)
-=======
     private String email;
->>>>>>> origin/main
     private String passwort;
 
     @ManyToMany
