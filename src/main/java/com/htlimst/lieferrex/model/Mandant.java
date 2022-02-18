@@ -37,6 +37,9 @@ public class Mandant {
         private String hausnummer;
         private String telefon;
 
+        private double umsatz_summe;
+        private int seitenaufrufe_summe;
+
         // @Email
         private String email;
         private Double mindestbestellwert;
@@ -62,4 +65,9 @@ public class Mandant {
         @ManyToOne
         @JoinColumn(name="template_id", nullable=false)
         private Template template;
+
+        @OneToMany(mappedBy = "mandant")
+        private Set<Umsatz> umsatz;
+
+
 }

@@ -62,6 +62,7 @@ public class MainController {
         return "baukasten/one.html";
     }
 
+    /*
     @GetMapping("/restaurant/{restaurant}")
     public String Template(Model model, @PathVariable String restaurant) {
         // X Restaurant Name
@@ -84,7 +85,7 @@ public class MainController {
         map.put("img", "https://via.placeholder.com/200");
         model.addAttribute("one", map);
         return "baukasten/template.html";
-    }
+    } */
 
 
     @GetMapping("/dashboard")
@@ -97,6 +98,15 @@ public class MainController {
         return "dashboard/bestellungen.html";
     }
 
+    @GetMapping("/dashboard/gerichte")
+    public String showDashboardGerichte() {
+        return "dashboard/gerichte.html";
+    }
+
+    @GetMapping("/dashboard/benutzer")
+    public String showDashboardBenutzer() {
+        return "dashboard/benutzer.html";
+    }
 
 
 }
