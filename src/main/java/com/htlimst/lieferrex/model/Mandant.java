@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -22,9 +23,11 @@ public class Mandant {
         @Column(name = "mandant_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-
+        @NotEmpty
         private String firmenname;
+        @NotEmpty
         private String land;
+        @NotEmpty
         private String ort;
 
         @Size(min = 4, max = 6)
@@ -32,7 +35,7 @@ public class Mandant {
 
         private String strasse;
         private String hausnummer;
-        private Integer telefon;
+        private String telefon;
 
         // @Email
         private String email;

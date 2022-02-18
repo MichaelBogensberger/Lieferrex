@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Set;
 
 
@@ -25,10 +26,13 @@ public class Angestellter {
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false)
     private Mandant mandant;
-
+    @Min(3)
     private String vorname;
+    @Min(3)
     private String nachname;
+    @Min(3)
     private String benutzername;
+    @Min(8)
     private String passwort;
 
     @ManyToMany

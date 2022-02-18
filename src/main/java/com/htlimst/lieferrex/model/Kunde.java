@@ -34,7 +34,7 @@ public class Kunde {
     private Integer plz;
     private String strasse;
     private String hausnummer;
-    private Integer telefonnummer;
+    private String telefonnummer;
     private String land;
     private boolean newsletter;
 
