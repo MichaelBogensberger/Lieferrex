@@ -19,6 +19,152 @@
     <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
     <div class="sticky-alerts"></div>
 
+
+    <!-- MODAL gerichte hinzufügen -->
+    <div class="modal" id="modal-add-gericht" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title">Gericht hinzufügen</h5>
+                <form action="..." method="...">
+                    <div class="form-group">
+                        <label for="gericht-name" class="required">Name</label>
+                        <input type="text" id="gericht-name" class="form-control" placeholder="Wiener Schnitzel" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="gericht-desc" class="required">Beschreibung</label>
+                        <input type="text" id="gericht-desc" class="form-control" placeholder="Leckeres Wiener Schnitzel mit Kartoffelsalat" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="gericht-preis" class="required">Preis</label>
+                        <input type="number" id="gericht-preis" class="form-control" placeholder="12,50" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-switch">
+                            <input type="checkbox" id="gerichte-aktiviert" value="true" checked="checked">
+                            <label for="gerichte-aktiviert">aktiviert</label>
+                        </div>
+                    </div>
+
+
+
+                    <input class="btn btn-primary btn-block" type="submit" value="erstellen">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL gerichte bearbeiten -->
+    <div class="modal" id="modal-edit-gericht" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title">Gericht hinzufügen</h5>
+                <form action="..." method="...">
+                    <div class="form-group">
+                        <label for="gericht-edit-name" class="required">Name</label>
+                        <input type="text" id="gericht-edit-name" class="form-control" placeholder="Wiener Schnitzel" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="gericht-edit-desc" class="required">Beschreibung</label>
+                        <input type="text" id="gericht-edit-desc" class="form-control" placeholder="Leckeres Wiener Schnitzel mit Kartoffelsalat" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="gericht-edit-preis" class="required">Preis</label>
+                        <input type="number" id="gericht-edit-preis" class="form-control" placeholder="12,50" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gericht-edit-aktionspreis" class="required">Aktionspreis</label>
+                        <input type="number" id="gericht-edit-aktionspreis" class="form-control" placeholder="7,50" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-switch">
+                            <input type="checkbox" id="gerichte-edit-aktiviert" value="true" checked="checked">
+                            <label for="gerichte-edit-aktiviert">aktiviert</label>
+                        </div>
+                    </div>
+
+
+
+                    <input class="btn btn-primary btn-block" type="submit" value="speichern">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL gerichte info -->
+    <div class="modal" id="modal-info-gericht" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title">Informationen zum Gericht</h5>
+
+
+                <p class="card-title mb-5 font-size-16">Name:</p>
+                <input type="text" disabled class="form-control" value="Wiener Schnitzel">
+
+                <p class="card-title mb-5 mt-10 font-size-16">Beschreibung:</p>
+                <textarea class="form-control form-control-sm" rows="3" cols="50" disabled >Saftiges Wiener Schnitzel mit Kartoffelsalat</textarea>
+
+                <p class="card-title mb-5 mt-10 font-size-16">Preis:</p>
+                <input type="text" disabled class="form-control" value="12,50">
+
+                <p class="card-title mb-5 mt-10 font-size-16">Aktionspreis:</p>
+                <input type="text" disabled class="form-control" value="7,50">
+
+                <div class="form-group mt-20 mb-0">
+                    <div class="custom-switch">
+                        <input type="checkbox" id="gerichte-info-aktiviert" disabled value="true" checked="checked">
+                        <label for="gerichte-info-aktiviert">aktiviert</label>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAL gerichte delete -->
+    <div class="modal" id="modal-delete-gericht" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title mb-5">Gericht Löschen</h5>
+                <p class="mt-0">
+                    Möchten Sie das Gericht wirklich löschen?
+                </p>
+
+
+                <div class="text-right mt-20"> <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
+                    <a href="#" class="btn mr-5" role="button">cancel</a>
+                    <a href="#" class="btn btn-danger" role="button">löschen</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Navbar start -->
     <nav class="navbar">
 
@@ -272,7 +418,7 @@
                                         <th>Name</th>
                                         <th class="d-none d-md-table-cell">Preis</th>
                                         <th class="d-none d-md-table-cell">Status</th>
-                                        <th class="d-none d-md-table-cell">Beshreibung</th>
+                                        <th class="d-none d-md-table-cell">Beschreibung</th>
                                         <th class="d-none d-md-table-cell">detail</th>
                                         <th >edit</th>
                                         <th >delete</th>
@@ -286,17 +432,17 @@
                                         <td class="d-none d-md-table-cell">aktiviert</td>
                                         <td class="d-none d-md-table-cell text-truncate max-width-80">Kartoffelsalat aus der Mongolei mit einem Fleisch aus dem Regionalen Markt von Wuhan</td>
                                         <td class="d-none d-md-table-cell">
-                                            <a href="#"
+                                            <a href="#modal-info-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-edit-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-delete-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -310,17 +456,17 @@
                                         <td class="d-none d-md-table-cell">aktiviert</td>
                                         <td class="d-none d-md-table-cell text-truncate max-width-80">Dirgisches Fleisch</td>
                                         <td class="d-none d-md-table-cell">
-                                            <a href="#"
+                                            <a href="#modal-info-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-edit-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-delete-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -334,17 +480,17 @@
                                         <td class="d-none d-md-table-cell">aktiviert</td>
                                         <td class="d-none d-md-table-cell text-truncate max-width-80">mongolische Katze</td>
                                         <td class="d-none d-md-table-cell">
-                                            <a href="#"
+                                            <a href="#modal-info-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-edit-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td >
-                                            <a href="#"
+                                            <a href="#modal-delete-gericht"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -380,7 +526,7 @@
 
 
                                 <div class="d-flex justify-content-center">
-                                    <button class="btn btn-primary btn-block" type="button">Gericht hinzufügen</button>
+                                    <a href="#modal-add-gericht" class="w-full"><button class="btn btn-primary btn-block" type="button">Gericht hinzufügen</button></a>
                                 </div>
                             </div>
 
