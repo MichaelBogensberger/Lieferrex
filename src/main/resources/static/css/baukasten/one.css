@@ -246,3 +246,9 @@ header, main, footer {
     float: right;
     border-radius: 5px;
 }
+
+/*
+.collection a.collection-item {
+    color: #379683 !important;
+    font-weight: 500;
+} */
