@@ -62,6 +62,7 @@ public class MainController {
         return "baukasten/one.html";
     }
 
+
     /*
     @GetMapping("/restaurant/{restaurant}")
     public String Template(Model model, @PathVariable String restaurant) {
@@ -107,6 +108,12 @@ public class MainController {
     public String showDashboardBenutzer() {
         return "dashboard/benutzer.html";
     }
+
+    @GetMapping("/dashboard/mandant")
+    public String showDashboardMandant() {
+        return "dashboard/mandant.html";
+    }
+
 
 
 }
