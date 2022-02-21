@@ -15,6 +15,114 @@
 <!-- Page wrapper start -->
 <div class="page-wrapper with-navbar with-sidebar ">
 
+
+    <!-- MODAL zugang hinzufügen -->
+    <div class="modal" id="modal-add-zugang" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title">Zugang hinzufügen</h5>
+                <form action="..." method="...">
+                    <div class="form-group">
+                        <label for="zugang-add-firstname" class="required">Vorname</label>
+                        <input type="text" id="zugang-add-firstname" class="form-control" placeholder="Max" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="zugang-add-lastname" class="required">Nachname</label>
+                        <input type="text" id="zugang-add-lastname" class="form-control" placeholder="Mustermann" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-add-lastname" class="required">Username</label>
+                        <input type="text" id="zugang-add-username" class="form-control" placeholder="maxm" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-add-email" class="required">Email</label>
+                        <input type="text" id="zugang-add-email" class="form-control" placeholder="mustermann@gmail.com" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-add-password" class="required">Passwort</label>
+                        <input type="password" id="zugang-add-password" class="form-control" placeholder="" required="required">
+                    </div>
+
+                    <input class="btn btn-primary btn-block" type="submit" value="erstellen">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL zugang bearbeiten -->
+    <div class="modal" id="modal-edit-zugang" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title">Zugang bearbeiten</h5>
+                <form action="..." method="...">
+                    <div class="form-group">
+                        <label for="zugang-edit-firstname" class="required">Vorname</label>
+                        <input type="text" id="zugang-edit-firstname" class="form-control" value="Max" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="zugang-edit-lastname" class="required">Nachname</label>
+                        <input type="text" id="zugang-edit-lastname" class="form-control" value="Mustermann" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-edit-lastname" class="required">Username</label>
+                        <input type="text" id="zugang-edit-username" class="form-control" value="maxm" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-edit-email" class="required">Email</label>
+                        <input type="text" id="zugang-edit-email" class="form-control" value="mustermann@gmail.com" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zugang-edit-password" class="required">Passwort</label>
+                        <input type="password" id="zugang-edit-password" class="form-control" required="required">
+                    </div>
+
+                    <input class="btn btn-primary btn-block" type="submit" value="speichern">
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL gerichte delete -->
+    <div class="modal" id="modal-delete-zugang" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <a href="#" class="btn close" role="button" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <h5 class="modal-title mb-5">Zugang Löschen</h5>
+                <p class="mt-0">
+                    Möchten Sie den Zugang wirklich löschen?
+                </p>
+
+
+                <div class="text-right mt-20"> <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
+                    <a href="#" class="btn mr-5" role="button">cancel</a>
+                    <a href="#" class="btn btn-danger" role="button">löschen</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
     <!-- Sticky alerts (toasts), empty container -->
     <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
     <div class="sticky-alerts"></div>
@@ -284,12 +392,12 @@
                                         <td class="d-none d-md-table-cell">Bogensberger</td>
                                         <td class="d-none d-md-table-cell">Angestellter</td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-edit-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-delete-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -302,12 +410,12 @@
                                         <td class="d-none d-md-table-cell">Meislinger</td>
                                         <td class="d-none d-md-table-cell">Administrator</td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-edit-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-delete-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -319,12 +427,12 @@
                                         <td class="d-none d-md-table-cell">Eraslan</td>
                                         <td class="d-none d-md-table-cell">Angestellter</td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-edit-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                         <td>
-                                            <a href="#"
+                                            <a href="#modal-delete-zugang"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
@@ -350,7 +458,7 @@
 
 
                                 <div class="d-flex justify-content-center">
-                                    <button class="btn btn-primary btn-block" type="button">Zugang hinzufügen</button>
+                                    <a href="#modal-add-zugang" class="w-full"><button class="btn btn-primary btn-block" type="button">Zugang hinzufügen</button></a>
                                 </div>
 
                             </div>
