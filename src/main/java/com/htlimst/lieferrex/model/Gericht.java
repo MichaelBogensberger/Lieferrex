@@ -30,6 +30,8 @@ public class Gericht {
     private Double preis;
     private Double preisangebot;
     private int anzahl_gekauft;
+    // 0=deaktiviert, 1=aktiviert, 2=in aktion
+    private int status;
 
 
     @ManyToMany

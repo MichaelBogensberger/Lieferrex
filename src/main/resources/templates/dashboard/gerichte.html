@@ -85,13 +85,19 @@
                         <input type="number" id="gericht-edit-aktionspreis" class="form-control" placeholder="7,50" required="required">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-10">
                         <div class="custom-switch">
                             <input type="checkbox" id="gerichte-edit-aktiviert" value="true" checked="checked">
                             <label for="gerichte-edit-aktiviert">aktiviert</label>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="custom-switch">
+                            <input type="checkbox" id="gerichte-edit-aktionspreis" value="true" >
+                            <label for="gerichte-edit-aktionspreis">Aktionspreis verwenden</label>
+                        </div>
+                    </div>
 
 
                     <input class="btn btn-primary btn-block" type="submit" value="speichern">
@@ -125,10 +131,17 @@
                 <p class="card-title mb-5 mt-10 font-size-16">Aktionspreis:</p>
                 <input type="text" disabled class="form-control" value="7,50">
 
-                <div class="form-group mt-20 mb-0">
+                <div class="form-group mt-20 mb-10">
                     <div class="custom-switch">
                         <input type="checkbox" id="gerichte-info-aktiviert" disabled value="true" checked="checked">
                         <label for="gerichte-info-aktiviert">aktiviert</label>
+                    </div>
+                </div>
+
+                <div class="form-group mb-0">
+                    <div class="custom-switch">
+                        <input type="checkbox" id="gerichte-info-aktionspreis" disabled value="true">
+                        <label for="gerichte-info-aktionspreis">Aktionspreis verwenden</label>
                     </div>
                 </div>
 
