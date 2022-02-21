@@ -33,15 +33,6 @@ public class Gericht {
     // 0=deaktiviert, 1=aktiviert, 2=in aktion
     private int status;
 
-
-    @ManyToMany
-    @JoinTable(
-            name = "gericht_gerichtstatus",
-            joinColumns = @JoinColumn(name = "gericht_id"),
-            inverseJoinColumns = @JoinColumn(name = "gerichtstatus_id"))
-    private Set<Gerichtstatus> gerichtstatus;
-
-
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
     private Mandant mandant;
