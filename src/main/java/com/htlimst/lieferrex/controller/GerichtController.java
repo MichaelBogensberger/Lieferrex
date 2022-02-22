@@ -6,14 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/dashboard/gerichte")
+@RequestMapping("/dashboard/gericht")
 public class GerichtController {
 
     @Autowired
     private GerichtService gerichtService;
 
     @DeleteMapping("{gericht_id}")
-    public void gerichtLoeschen(Long id){
+    public void gerichtLoeschen(@PathVariable("gericht_id") Long id){
         this.gerichtService.gerichtLoeschen(id);
     }
 
