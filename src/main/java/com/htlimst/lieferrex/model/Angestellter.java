@@ -26,14 +26,11 @@ public class Angestellter {
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false)
     private Mandant mandant;
-    @Min(3)
     private String vorname;
-    @Min(3)
     private String nachname;
-    @Min(3)
-    private String benutzername;
+    // benutzername fliegt raus. es wird alles durch email erledigt
+    //private String benutzername;
 
-    @Min(8)
     private String email;
     private String passwort;
 

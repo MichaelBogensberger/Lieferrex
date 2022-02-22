@@ -10,6 +10,5 @@ import java.util.List;
 
 @Repository
 public interface AngestellterRepository extends JpaRepository<Angestellter,Long> {
-    List<Angestellter> findByBenutzername(Angestellter angestellter);
 
 }

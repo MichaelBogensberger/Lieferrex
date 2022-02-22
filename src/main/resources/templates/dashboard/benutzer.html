@@ -34,19 +34,33 @@
                         <input type="text" id="zugang-add-lastname" class="form-control" placeholder="Mustermann" required="required">
                     </div>
 
+                    <!--
                     <div class="form-group">
                         <label for="zugang-add-lastname" class="required">Username</label>
                         <input type="text" id="zugang-add-username" class="form-control" placeholder="maxm" required="required">
                     </div>
+                    -->
 
                     <div class="form-group">
                         <label for="zugang-add-email" class="required">Email</label>
                         <input type="text" id="zugang-add-email" class="form-control" placeholder="mustermann@gmail.com" required="required">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-10">
                         <label for="zugang-add-password" class="required">Passwort</label>
                         <input type="password" id="zugang-add-password" class="form-control" placeholder="" required="required">
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="zugang-add-rolle-admin" class="required mb-0">Rolle</label>
+                        <div class="custom-radio">
+                            <input type="radio" name="rolle" id="zugang-add-rolle-ang" value="angestellter" required="required" checked>
+                            <label for="zugang-add-rolle-ang">Angestellter</label>
+                        </div>
+                        <div class="custom-radio">
+                            <input type="radio" name="rolle" id="zugang-add-rolle-admin" value="admin" required="required">
+                            <label for="zugang-add-rolle-admin">Administrator</label>
+                        </div>
                     </div>
 
                     <input class="btn btn-primary btn-block" type="submit" value="erstellen">
@@ -75,19 +89,35 @@
                         <input type="text" id="zugang-edit-lastname" class="form-control" value="Mustermann" required="required">
                     </div>
 
+                    <!--
                     <div class="form-group">
                         <label for="zugang-edit-lastname" class="required">Username</label>
                         <input type="text" id="zugang-edit-username" class="form-control" value="maxm" required="required">
                     </div>
+                    -->
+
+
 
                     <div class="form-group">
                         <label for="zugang-edit-email" class="required">Email</label>
                         <input type="text" id="zugang-edit-email" class="form-control" value="mustermann@gmail.com" required="required">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-10">
                         <label for="zugang-edit-password" class="required">Passwort</label>
                         <input type="password" id="zugang-edit-password" class="form-control" required="required">
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="zugang-edit-rolle-admin" class="required mb-0">Rolle</label>
+                        <div class="custom-radio">
+                            <input type="radio" name="rolle" id="zugang-edit-rolle-ang" value="angestellter" required="required" checked>
+                            <label for="zugang-edit-rolle-ang">Angestellter</label>
+                        </div>
+                        <div class="custom-radio">
+                            <input type="radio" name="rolle" id="zugang-edit-rolle-admin" value="admin" required="required">
+                            <label for="zugang-edit-rolle-admin">Administrator</label>
+                        </div>
                     </div>
 
                     <input class="btn btn-primary btn-block" type="submit" value="speichern">
