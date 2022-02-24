@@ -20,7 +20,7 @@ public class Bestellart {
 
     @Id
     @Column(name = "bestellart_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
     private String bestellart;
