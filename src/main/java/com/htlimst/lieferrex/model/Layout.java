@@ -6,28 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "template")
-public class Template {
+@Table(name = "layout")
+public class Layout {
+
 
     @Id
-    @Column(name = "template_id")
+    @Column(name = "layout_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    private String name;
 
-    private String template;
+    @OneToMany(mappedBy = "layout")
+    private Set<Position> positionen;
 
-    @OneToMany(mappedBy = "template")
-    Set<Position> positionen;
+    @OneToMany(mappedBy = "layout")
+    private Set<Mandant> mandanten;
 
-    @OneToMany(mappedBy = "template")
-    Set<Mandant> mandanten;
+
 }

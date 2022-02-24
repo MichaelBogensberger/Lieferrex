@@ -1,7 +1,9 @@
-package com.htlimst.lieferrex.service.fragment;
+package com.htlimst.lieferrex.service.fragmenttext;
 
 import com.htlimst.lieferrex.model.Fragment;
+import com.htlimst.lieferrex.model.Fragmenttext;
 import com.htlimst.lieferrex.repository.FragmentRepository;
+import com.htlimst.lieferrex.repository.FragmentTextRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.mandant.MandantService;
 
@@ -12,10 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FragmentServiceImpl implements FragmentService {
+public class FragmentTextServiceImpl implements FragmentTextService {
 
     @Autowired
-    private FragmentRepository fragmentRepository;
+    private FragmentTextRepository fragmenttextRepository;
 
     // @Autowired
     // private MandantRepository mandantRepository;
@@ -43,8 +45,8 @@ public class FragmentServiceImpl implements FragmentService {
     // }
 
     @Override
-    public List<Fragment> findFragmentByMandant_id(Long id){
-        return fragmentRepository.findFragmentByMandant_id(id);
+    public Optional<Fragmenttext> findFragmenttextByFragment_id(Long id){
+        return fragmenttextRepository.findFragmenttextByFragment_id(id);
     }
 
 }

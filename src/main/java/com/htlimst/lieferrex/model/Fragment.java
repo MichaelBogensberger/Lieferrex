@@ -1,12 +1,14 @@
 package com.htlimst.lieferrex.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,25 +18,26 @@ import javax.persistence.*;
 @Table(name = "fragment")
 public class Fragment {
 
+
     @Id
     @Column(name = "fragment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name="mandant_id", nullable=false)
+    @JoinColumn(name="position_id", nullable=false, insertable=false, updatable=false)
+    private Position position;
+
+    @ManyToOne
+    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
     private Mandant mandant;
 
-    private String title;
-    private String beschreibung;
-    private String image;
 
-    @ManyToOne
-    @JoinColumn(name="fragmenttype_id", nullable=false)
-    private Fragmenttype fragmenttype;
+    @OneToOne(mappedBy = "fragment")
+    private Fragmenttext fragmenttext;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "positionid_id", referencedColumnName = "position_id")
-    private Position position;
+    @OneToOne(mappedBy = "fragment")
+    private Fragmentmap fragmentmap;
 }
-

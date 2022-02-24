@@ -1,12 +1,12 @@
 package com.htlimst.lieferrex.service.fragment;
 
-import java.util.Set;
-
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Mandant;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface FragmentService {
-    Fragment getFragmentById(Long id);
 
-    Set<Fragment> getAllFragmentsByMandant(Mandant mandant);
+    List<Fragment> findFragmentByMandant_id(Long id);
+
 }

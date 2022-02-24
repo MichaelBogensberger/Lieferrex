@@ -15,23 +15,22 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "position")
-public class Position {
+@Table(name = "fragmenttext")
+public class Fragmenttext {
 
 
     @Id
-    @Column(name = "position_id")
+    @Column(name = "fragmenttext_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
-    private String name;
+    private String text;
 
-    @ManyToOne
-    @JoinColumn(name="layout_id", nullable=false, insertable=false, updatable=false)
-    private Layout layout;
+    @NotEmpty
+    private String farbe;
 
-    @OneToMany(mappedBy = "position")
-    private Set<Fragment> fragmente;
-
+    @OneToOne
+    @JoinColumn(name="fragment_id", nullable=false, insertable=false, updatable=false)
+    private Fragment fragment;
 
 }

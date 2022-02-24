@@ -1,14 +1,17 @@
 package com.htlimst.lieferrex.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import com.htlimst.lieferrex.model.Fragment;
+import com.htlimst.lieferrex.model.Fragmenttext;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.MandantRepository;
-import com.htlimst.lieferrex.service.fragment.FragmentService;
-import com.htlimst.lieferrex.service.position.PositionService;
-import com.htlimst.lieferrex.service.template.TemplateService;
+import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
+import com.htlimst.lieferrex.service.fragmentmap.FragmentMapServiceImpl;
+import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
+import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,18 +22,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
 
-    @Autowired
-    private PositionService positionService;
-
-    @Autowired
-    private FragmentService fragmentService;
-
-    @Autowired
-    private TemplateService templateService;
-
     // Testweise, ausgetauscht mit Serv
     @Autowired
     private MandantRepository mandantRepository;
+
+    @Autowired
+    private MandantServiceImpl mandantServiceImpl;
+
+    @Autowired
+    private FragmentServiceImpl fragmentServiceImpl;
+
+    @Autowired
+    private FragmentTextServiceImpl fragmenttextServiceImpl;
+
+    @Autowired
+    private FragmentMapServiceImpl fragmentmapServiceImpl;
 
     @GetMapping("")
     public String showIndexPage() {
@@ -62,33 +68,6 @@ public class MainController {
         return "baukasten/one.html";
     }
 
-
-    /*
-    @GetMapping("/restaurant/{restaurant}")
-    public String Template(Model model, @PathVariable String restaurant) {
-        // X Restaurant Name
-        // X Get template
-        // Get Fragments and Position
-        // Build HashMap
-        // Return template
-
-        Mandant mandant = mandantRepository.findMandantByFirmenname(restaurant).get();
-        Set<Fragment> fragments = fragmentService.getAllFragmentsByMandant(mandant);
-
-        for (Fragment fragment : fragments) {
-            System.out.println(fragment.getTitle());
-        }
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("name", "afasf");
-        map.put("title", restaurant);
-        map.put("beschreibung", mandant.getTemplate().getTemplate());
-        map.put("img", "https://via.placeholder.com/200");
-        model.addAttribute("one", map);
-        return "baukasten/template.html";
-    } */
-
-
     @GetMapping("/dashboard")
     public String showDashboard() {
         return "dashboard/dashboard.html";
@@ -114,6 +93,33 @@ public class MainController {
         return "dashboard/mandant.html";
     }
 
+    @GetMapping("/baukasten/{restaurant}")
+    public String showBaukasten(Model model, @PathVariable String restaurant){
+        // Get Mandant ueber Name in der URL
+        Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
+        // Alle Fragmente des Mandaten ueber dessen ID
+        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
+        // HashMap zum Uebertragen der Daten
+        HashMap<String, String> map = new HashMap<>();
+
+        map.put("layout", mandant.getLayout().getName());
+
+        // System.out.println(fragmenttextServiceImpl.findFragmenttextByFragment_id(1L).get().getText());
+        
+        for (Fragment fragment : fragments) {
+            
+            if(fragmenttextServiceImpl.findFragmenttextByFragment_id(fragment.getId()).isPresent()){
+                System.out.println(fragment.getFragmenttext().getText() + "  |  " + fragment.getFragmenttext().getFarbe());
+            } else if (fragmentmapServiceImpl.findFragmentmapByFragment_id(fragment.getId()).isPresent()){
+                System.out.println(fragment.getFragmentmap().getLatitude() + "  |  " + fragment.getFragmentmap().getLongitude());
+            }
+
+        }
+
+        model.addAttribute("data", map);
+
+        return "baukasten/frame.html";
+    }
 
 }

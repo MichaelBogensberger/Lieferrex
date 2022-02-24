@@ -62,12 +62,15 @@ public class Mandant {
         @OneToMany(mappedBy = "mandant")
         private Set<Angestellter> angestellte;
 
-        @ManyToOne
-        @JoinColumn(name="template_id", nullable=false)
-        private Template template;
-
         @OneToMany(mappedBy = "mandant")
         private Set<Umsatz> umsatz;
+
+        @ManyToOne
+        @JoinColumn(name="layout_id", nullable=false, insertable=false, updatable=false)
+        private Layout layout;
+
+        @OneToMany(mappedBy = "mandant")
+        private Set<Fragment> fragmente;
 
 
 }
