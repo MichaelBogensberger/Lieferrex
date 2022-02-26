@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface AngestellterRepository extends JpaRepository<Angestellter,Long> {
-
+    Angestellter findByEmail(String email);
 }

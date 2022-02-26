@@ -25,6 +25,7 @@ public class Rolle {
     @NotNull
     private String rolle;
 
-
-
+    public Rolle(String rolle) {
+        this.rolle = rolle;
+    }
 }

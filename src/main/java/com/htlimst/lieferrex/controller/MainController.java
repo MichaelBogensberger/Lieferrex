@@ -24,24 +24,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
 
-    // Testweise, ausgetauscht mit Serv
-    @Autowired
     private MandantRepository mandantRepository;
-
-    @Autowired
     private MandantServiceImpl mandantServiceImpl;
-
-    @Autowired
     private FragmentServiceImpl fragmentServiceImpl;
-
-    @Autowired
     private FragmentTextServiceImpl fragmenttextServiceImpl;
-
-    @Autowired
     private FragmentMapServiceImpl fragmentmapServiceImpl;
 
     @Autowired
     private GerichtService gerichtService;
+
+    public MainController(MandantRepository mandantRepository, MandantServiceImpl mandantServiceImpl, FragmentServiceImpl fragmentServiceImpl, FragmentTextServiceImpl fragmenttextServiceImpl, FragmentMapServiceImpl fragmentmapServiceImpl) {
+        this.mandantRepository = mandantRepository;
+        this.mandantServiceImpl = mandantServiceImpl;
+        this.fragmentServiceImpl = fragmentServiceImpl;
+        this.fragmenttextServiceImpl = fragmenttextServiceImpl;
+        this.fragmentmapServiceImpl = fragmentmapServiceImpl;
+    }
 
     @GetMapping("")
     public String showIndexPage() {
@@ -53,18 +51,6 @@ public class MainController {
     @GetMapping("/search")
     public String showSearchPage() {
         return "main/search";
-    }
-
-
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "main/login";
-    }
-
-
-    @GetMapping("/register")
-    public String showRegisterPage() {
-        return "main/register";
     }
 
 
