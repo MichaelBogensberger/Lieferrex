@@ -3,11 +3,11 @@ package com.htlimst.lieferrex.service.gericht;
 import com.htlimst.lieferrex.model.Gericht;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GerichtService {
-    public Gericht gerichtEinfuegen(Gericht gericht);
-    public Gericht gerichtAusgebenById(Long id);
-    public Gericht gerichtUpdate(Long id);
-    public void gerichtLoeschen(Long id);
-    public List<Gericht> gerichtAusgabe();
+    public List<Gericht> getGerichte();
+    public Optional<Gericht> getGerichtById(Long id);
+    public List<Gericht> getGerichtByStatus();
+    public List<Gericht> getGerichtByStatusZero();
 }

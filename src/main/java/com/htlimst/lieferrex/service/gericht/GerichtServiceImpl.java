@@ -5,6 +5,7 @@ import com.htlimst.lieferrex.repository.GerichtRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GerichtServiceImpl implements GerichtService{
@@ -12,35 +13,26 @@ public class GerichtServiceImpl implements GerichtService{
     private GerichtRepository gerichtRepo;
 
     public GerichtServiceImpl(GerichtRepository gerichtRepo){
-        this.gerichtRepo =gerichtRepo;
+        this.gerichtRepo = gerichtRepo;
     }
 
     @Override
-    public Gericht gerichtEinfuegen(Gericht gericht) {
-        return gerichtRepo.save(gericht);
-    }
-
-    @Override
-    public Gericht gerichtAusgebenById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Gericht gerichtUpdate(Long id) {
-        return null;
-    }
-
-    @Override
-    public void gerichtLoeschen(Long id) {
-        boolean exists = gerichtRepo.existsById(id);
-        if(!exists){
-            throw new IllegalStateException("Gericht mit ID" + id + "nicht gefunden");
-        }
-        gerichtRepo.deleteById(id);
-    }
-
-    @Override
-    public List<Gericht> gerichtAusgabe() {
+    public List<Gericht> getGerichte() {
         return gerichtRepo.findAll();
+    }
+
+    @Override
+    public Optional<Gericht> getGerichtById(Long id) {
+        return gerichtRepo.findById(id);
+    }
+
+    @Override
+    public List<Gericht> getGerichtByStatus() {
+        return gerichtRepo.getGerichtByEnabled();
+    }
+
+    @Override
+    public List<Gericht> getGerichtByStatusZero() {
+        return gerichtRepo.getGerichtByEnabledWhereStatusZero();
     }
 }

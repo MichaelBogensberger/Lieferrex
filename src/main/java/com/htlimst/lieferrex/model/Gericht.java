@@ -32,7 +32,6 @@ public class Gericht {
     private int anzahl_gekauft;
     // 0=deaktiviert, 1=aktiviert, 2=in aktion
     private int status;
-    private boolean enabled;
 
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)

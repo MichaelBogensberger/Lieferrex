@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.w3.org/1999/html">
 <head>
 
     <title>Dashboard</title>
@@ -137,24 +137,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                <tr>
-                                    <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">Schnitzel mit kartoffelsalat</th>
-                                    <td class="d-none d-md-table-cell">5,50 €</td>
-                                    <td class="d-none d-md-table-cell">4,50 €</td>
-                                    <td class="d-none d-md-table-cell text-truncate max-width-130">Kartoffelsalat aus der Mongolei mit einem Fleisch aus dem Regionalen Markt von Wuhan</td>
-                                    <td class="text-center">
-                                        <a href="#"
-                                           class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                           role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    </td>
-                                    <!--
-                                    <td >
-                                        <a href="#modal-deaktivate-gericht"
-                                           class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                           role="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                    </td> -->
-                                </tr>
+                                <th:block th:each="gericht: ${gerichteListStatusZero}">
+                                    <tr>
+                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">[[${gericht.name}]]</th>
+                                        <td class="d-none d-md-table-cell">[[${gericht.preis}]] €</td>
+                                        <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
+                                        <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.status}]]</td>
+                                        <td class="text-center">
+                                            <a href="#"
+                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                               role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+                                        <!--
+                                        <td >
+                                            <a href="#modal-deaktivate-gericht"
+                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                               role="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                        </td> -->
+                                    </tr>
+                                </th:block>
 
 
 
@@ -511,76 +512,30 @@
                                     </thead>
                                     <tbody>
 
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100 max-width-150">Schnitzel mit kartoffelsalat</th>
-                                        <td class="d-none d-md-table-cell">5,50 €</td>
-                                        <td class="d-none d-md-table-cell">4,50 €</td>
-                                        <td class="d-none d-md-table-cell text-truncate max-width-130">Kartoffelsalat aus der Mongolei mit einem Fleisch aus dem Regionalen Markt von Wuhan</td>
-                                        <td class="d-none d-md-table-cell">
-                                            <a href="#modal-info-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td >
-                                            <a href="#modal-edit-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                        <!--
-                                        <td >
-                                            <a href="#modal-deaktivate-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </td> -->
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100 max-width-150">Döner mit alles</th>
-                                        <td class="d-none d-md-table-cell">4,30 €</td>
-                                        <td class="d-none d-md-table-cell">3,30 €</td>
-                                        <td class="d-none d-md-table-cell text-truncate max-width-130">Dirgisches Fleisch</td>
-                                        <td class="d-none d-md-table-cell">
-                                            <a href="#modal-info-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td >
-                                            <a href="#modal-edit-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100 max-width-150">Katze süß sauer</th>
-                                        <td class="d-none d-md-table-cell">22,45 €</td>
-                                        <td class="d-none d-md-table-cell">21,68 €</td>
-                                        <td class="d-none d-md-table-cell text-truncate max-width-130">mongolische Katze</td>
-                                        <td class="d-none d-md-table-cell">
-                                            <a href="#modal-info-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td >
-                                            <a href="#modal-edit-gericht"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-
-
-
-
-
-
-
-
-
-
+                                    <th:block th:each="gericht: ${gerichteList}">
+                                        <tr>
+                                            <th class="text-truncate max-width-on-md-140 max-width-on-sm-100 max-width-150">[[${gericht.name}]]</th>
+                                            <td class="d-none d-md-table-cell">[[${gericht.preis}]] €</td>
+                                            <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
+                                            <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.beschreibung}]]</td>
+                                            <td class="d-none d-md-table-cell">
+                                                <a href="#modal-info-gericht"
+                                                   class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                                   role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td >
+                                                <a href="#modal-edit-gericht"
+                                                   class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                                   role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            </td>
+                                            <!--
+                                            <td >
+                                                <a href="#modal-deaktivate-gericht"
+                                                   class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                                   role="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            </td> -->
+                                        </tr>
+                                    </th:block>
                                     </tbody>
                                 </table>
 

@@ -6,11 +6,13 @@ import java.util.Set;
 
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Fragmenttext;
+import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentmap.FragmentMapServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
+import com.htlimst.lieferrex.service.gericht.GerichtService;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class MainController {
 
     @Autowired
     private FragmentMapServiceImpl fragmentmapServiceImpl;
+
+    @Autowired
+    private GerichtService gerichtService;
 
     @GetMapping("")
     public String showIndexPage() {
@@ -76,11 +81,6 @@ public class MainController {
     @GetMapping("/dashboard/bestellungen")
     public String showDashboardBestellungen() {
         return "dashboard/bestellungen.html";
-    }
-
-    @GetMapping("/dashboard/gerichte")
-    public String showDashboardGerichte() {
-        return "dashboard/gerichte.html";
     }
 
     @GetMapping("/dashboard/benutzer")
