@@ -25,8 +25,6 @@ public class Kunde {
 
     private String vorname;
     private String nachname;
-    // benutzername fliegt raus. es wird alles durch email erledigt
-    //private String benutzername;
     private String email;
     private String passwort;
     private String ort;
