@@ -32,7 +32,6 @@ public class GerichtController {
     public String showModalGericht(@PathVariable("id") Long id, Model model){
         Optional<Gericht> gericht = gerichtService.getGerichtById(id);
         model.addAttribute("gericht", gericht);
-
         return "edit";
     }
 

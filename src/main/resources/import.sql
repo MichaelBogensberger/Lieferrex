@@ -9,7 +9,7 @@ INSERT INTO `bestellung` (`bestellung_id`, `bestelldatum`, `dauer`, `gesamtpreis
 INSERT INTO `bestellung_bestellstatus` (`bestellung_id`, `bestellstatus_id`) VALUES ('1', '1'), ('2', '2');
 INSERT INTO `gericht` (`gericht_id`, `anzahl_gekauft`, `beschreibung`, `name`, `preis`, `preisangebot`, `status`, `mandant_id`) VALUES (NULL, '15', 'Wässrig', 'Wasser', '5.0', '0', '1', '1'), (NULL, '100', 'Fleischig', 'Fleischkas', '10', '0', '0', '2'), (NULL, '1502', 'Ein super leckerer Döner mit spezial Soße', 'Döner Kebab', '5.0', '1.0', '2', '2');
 INSERT INTO `gericht_bestellung` (`gericht_betsellung_id`, `anmerkung`, `bestellung_id`, `gericht_id`) VALUES ('1', 'Scharf', '1', '1'), ('2', 'Kalt', '2', '2');
-INSERT INTO `rolle` (`rolle_id`, `rolle`) VALUES ('1', 'ROLE_USER'), ('2', 'ROLE_MANDANT'), ('2', 'ROLE_ANGESTELLTER');
+INSERT INTO `rolle` (`rolle_id`, `rolle`) VALUES ('1', 'ROLE_USER'), ('2', 'ROLE_MANDANT'), ('3', 'ROLE_ANGESTELLTER');
 INSERT INTO `angestellter_rolle` (`angestellter_id`, `rolle_id`) VALUES ('2', '1'), ('1', '2');
 INSERT INTO `mandant_bestellart` (`mandant_id`, `bestellart_id`) VALUES ('1', '1'), ('1', '2');
 INSERT INTO `mandant_kategorie` (`mandant_id`, `kategorie_id`) VALUES ('2', '2'), ('2', '1');
