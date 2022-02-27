@@ -69,6 +69,12 @@ public class MainController {
         return "dashboard/bestellungen.html";
     }
 
+    @GetMapping("/dashboard/zustellungen")
+    public String showDashboardZustellungen() {
+        return "dashboard/zustellung.html";
+    }
+
+
     @GetMapping("/dashboard/benutzer")
     public String showDashboardBenutzer() {
         return "dashboard/benutzer.html";
