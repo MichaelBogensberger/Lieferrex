@@ -490,9 +490,18 @@
                                     <p class="mb-20 mt-0">Hier können die Gerichte bearbeiter werden</p>
 
 
+                            <!--
+                                <tr th:each="gericht: ${gerichteList}">
+                                    <td ><a data-bs-toggle="modal" data-row="${gericht}"
+                                            th:attr="data-bs-target='#editGericht-'+${gericht.id}">Inactivate</a>
+
+                                    </td>
+                                </tr>
+                            -->
 
 
-                                <table class="table table-hover">
+
+                                        <table class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th>Name</th>
@@ -601,10 +610,15 @@
 
 
 </div>
+
+
 <!-- Page wrapper end -->
 
 <!-- Halfmoon JS -->
 <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+
+
+
 </body>
 
 
