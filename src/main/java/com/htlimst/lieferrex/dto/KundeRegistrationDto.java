@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "Passwörter müssen übereinstimmen"),
 })
-public class UserRegistrationDto {
+public class KundeRegistrationDto {
 
-    private String firstName;
-    private String lastName;
+    private String vorname;
+    private String nachname;
 
     @NotEmpty
     @Email
@@ -28,10 +28,21 @@ public class UserRegistrationDto {
 
     @NotEmpty
     @Size(min = 8, message = "muss mehr als 8 Zeichen lang sein")
-    private String password;
+    private String passwort;
 
     @NotEmpty
     @Size(min = 8, message = "muss mehr als 8 Zeichen lang sein")
-    private String confirmPassword;
+    private String confirmPasswort;
+
+    private String ort;
+
+    @Size(min=4,max = 6, message = "muss mehr als 8 Zeichen lang sein")
+    private Integer plz;
+    private String strasse;
+    private String hausnummer;
+    private Integer telefonnummer;
+    private String land;
+    private boolean newsletter;
+    private boolean agb;
 
 }

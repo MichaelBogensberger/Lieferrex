@@ -28,4 +28,8 @@ public class Rolle {
     public Rolle(String rolle) {
         this.rolle = rolle;
     }
+
+    public String getRolle() {
+        return rolle;
+    }
 }

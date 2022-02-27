@@ -1,93 +1,77 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>Lieferrex - Login</title>
+    <meta charset="utf-8">
+    <title>Lieferrex - Login</title>
 
     <div th:replace="main/fragments/header"></div>
 
-  <!-- Login Style -->
-  <link th:href="@{/css/main/login.css}" rel="stylesheet" />
-
-
-
-
+    <!-- Login Style -->
+    <link th:href="@{/css/main/login.css}" rel="stylesheet"/>
 
 
 </head>
 <body class="login-body">
 
 
-    <div id="login-div">
-
-     
-        
-
-    
-            <form class="col s12" id="login-form">
-            <h1 class="login-form-ueb">Einloggen</h1>
-
-            <div class="row login-row-mail">
-                <div class="input-field col s12 login-div-mail">
-                    <input id="email" type="email" class="validate login-inp" placeholder="Email">
-                    <label for="email"></label>
-
-                </div>
-                </div>
-
-              <div class="row login-pw-row">
-                <div class="input-field col s12 login-div-pw">
-                  <input id="password" type="password" class="validate login-inp" placeholder="Passwort">
-                  <label for="password"></label>
-                  <span class="helper-text" data-error="wrong" data-success="right">Passwort vergessen</span>
-        
-                </div>
-              </div>
-
-              <btn class="btn waves-light btn-raised btn-round waves-effect btn-login">Login</btn>
-
-              <!--
-              <h1 class="side-line-menu-login">oder</h1>
-
-              
-              <button class="login-google-btn" type="submit">
-                <img class="login-google-img hoverable" src="google.png" alt="submit" />
-            </button>
-            -->
-            <!--
-            <btn class="btn waves-light btn-raised btn-round waves-effect login-btn-google">Google</btn>
-            -->
+<div id="login-div">
 
 
+    <form class="col s12" id="login-form" th:action="@{/login}" method="post">
 
 
+        <h1 class="login-form-ueb">Einloggen</h1>
 
-
-            </form>
-     
-
-          
-
-
-
-
-
-
-
-
-    </div>
-
-
-    <footer class="footer">
-        <div class="container">
-            <a href="/" class="animsition-link" style="color: #939C9E;">
-                <p class="back-index">Startseite</p>
-            </a>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Invalid username or
+                password.
+            </div>
         </div>
-    </footer>
-    
+
+        <div class="row login-row-mail">
+            <div class="input-field col s12 login-div-mail">
+                <input id="username" name="username" type="email" class="validate login-inp" placeholder="Email">
+                <label for="email"></label>
+
+            </div>
+        </div>
+
+        <div class="row login-pw-row">
+            <div class="input-field col s12 login-div-pw">
+                <input id="password" name="password" type="password" class="validate login-inp" placeholder="Passwort">
+                <label for="password"></label>
+                <span class="helper-text" data-error="wrong" data-success="right">Passwort vergessen</span>
+
+            </div>
+        </div>
+
+        <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Log In" />
+        <!--
+        <h1 class="side-line-menu-login">oder</h1>
 
 
+        <button class="login-google-btn" type="submit">
+          <img class="login-google-img hoverable" src="google.png" alt="submit" />
+      </button>
+      -->
+        <!--
+        <btn class="btn waves-light btn-raised btn-round waves-effect login-btn-google">Google</btn>
+        -->
+
+
+    </form>
+
+
+</div>
+
+
+<footer class="footer">
+    <div class="container">
+        <a href="/" class="animsition-link" style="color: #939C9E;">
+            <p class="back-index">Startseite</p>
+        </a>
+    </div>
+</footer>
 
 
 </body>

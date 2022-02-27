@@ -1,285 +1,257 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>Lieferrex - Login</title>
+    <meta charset="utf-8">
+    <title>Lieferrex - Login</title>
 
     <div th:replace="main/fragments/header"></div>
 
     <!-- Login Style -->
-    <link th:href="@{/css/main/login.css}" rel="stylesheet" />
-
+    <link th:href="@{/css/main/login.css}" rel="stylesheet"/>
 
 
 </head>
 <body class="login-body">
 
 
-    <div id="reg-div" >
-
-     
-        
-
-    
-            <form class="col s12" id="reg-form">
-            <h1 class="login-form-ueb reg-form-ueb">Registrieren</h1>
-
-                     
-
-            <ul class="stepper horizontal">
-
-              <li class="step active">
-                  <div class="step-title waves-effect">Essentials</div>
-                  <div class="step-content">
-                   
-
-                  <!--
-                  <div class="row">
-
-                    <div class="col s6">
-                      <h1 class="ess-step-ueb">Neu registireren</h1>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
+<div id="reg-div">
 
 
-                    </div>
+    <div th:if="${param.success}">
+        <div class="alert alert-info">You've successfully registered
+            to our awesome app!
+        </div>
+    </div>
 
-                    <div class="col s6">6-columns (one-half)</div>
-                  </div>
-                -->
+<!--  POST Form  -->
+    <form class="col s12" id="reg-form" th:action="@{/register}" th:object="${user}" method="post">
+        <h1 class="login-form-ueb reg-form-ueb">Registrieren</h1>
+
+        <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error</p>
+
+
+        <ul class="stepper horizontal">
+
+            <li class="step active">
+
+                <div class="step-title waves-effect">Essentials</div>
 
 
 
-              <div class="row">
-                  <form class="col s12">
+                <div class="step-content">
+
+
+                    <!--
                     <div class="row">
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm  prefix">face</i>
-                          <input id="vname" type="text" class="validate login-inp" placeholder="Vorname">
-                          <label for="nname"></label>
-                      </div>
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm prefix">badge</i>
-                          <input id="nname" type="text" class="validate login-inp" placeholder="Nachname">
-                          <label for="nname"></label>
-                      </div>
+
+                      <div class="col s6">
+                        <h1 class="ess-step-ueb">Neu registireren</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
 
 
+                      </div>
+
+                      <div class="col s6">6-columns (one-half)</div>
                     </div>
-
-                    <div class="row">
-                      <div class="input-field login-div-mail col s12 m12 l12">
-                      <i class="material-icons-outlined white-dm prefix">email</i>
-                          <input id="vname" type="email" class="validate login-inp" placeholder="Email">
-                          <label for="nname"></label>
-                      </div>
-                    </div>
-
+                  -->
 
 
                     <div class="row">
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm prefix">password</i>
-                          <input id="vname" type="password" class="validate login-inp" placeholder="Passwort">
-                          <label for="nname"></label>
-                      </div>
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                           <i class="material-icons-outlined white-dm prefix">replay</i>
-                          <input id="nname" type="password" class="validate login-inp" placeholder="Passwort wiederholen">
-                          <label for="nname"></label>
-                      </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6" th:classappend="${#fields.hasErrors('vorname')}? 'has-error':''">
+                                    <i class="material-icons-outlined white-dm  prefix">face</i>
+                                    <input id="vname" type="text" forclass="validate login-inp" placeholder="Vorname" th:field="*{vorname}">
+                                    <p class="error-message" th:each="error: ${#fields.errors('vorname')}" th:text="${error}">Validation error</p>
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">badge</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="Nachname">
+                                    <label for="nname"></label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">email</i>
+                                    <input id="vname" type="email" class="validate login-inp" placeholder="Email">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">password</i>
+                                    <input id="vname" type="password" class="validate login-inp" placeholder="Passwort">
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">replay</i>
+                                    <input id="nname" type="password" class="validate login-inp"
+                                           placeholder="Passwort wiederholen">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+
                     </div>
-
-
-                  </form>
-                </div>
-                      
-
-
-
-
-
-
-
-
 
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
                         <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
                     </div>
-                  </div>
-              </li>
-
-
-
-
-              <li class="step">
-                  <div class="step-title waves-effect">Adresse</div>
-                  <div class="step-content">
-                   
-                  
-
-
-                  <div class="row">
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm prefix">map</i>
-                          <input id="vname" type="text" class="validate login-inp" placeholder="Ort">
-                          <label for="nname"></label>
-                      </div>
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm prefix">location_city</i>
-                          <input id="nname" type="text" class="validate login-inp" placeholder="PLZ">
-                          <label for="nname"></label>
-                      </div>
-
-
-                    </div>
-
-
-                    <div class="row">
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                        <i class="material-icons-outlined white-dm prefix">home</i>
-                          <input id="vname" type="text" class="validate login-inp" placeholder="Straße">
-                          <label for="nname"></label>
-                      </div>
-                      <div class="input-field login-div-mail col s12 m6 l6">
-                           <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                          <input id="nname" type="text" class="validate login-inp" placeholder="Zusatz">
-                          <label for="nname"></label>
-                      </div>
-                    </div>
-
-
-                    <div class="row">
-                      <div class="input-field login-div-mail col s12 m12 l12">
-                      <i class="material-icons-outlined white-dm prefix">call</i>
-                          <input id="vname" type="tel" class="validate login-inp" placeholder="Telefonnummer">
-                          <label for="nname"></label>
-                          <span class="helper-text white-dm" data-error="wrong" data-success="right">Für eventuelle Rücksprachen</span>
-                      </div>
-                    </div>
-
-
-
-                  </form>
                 </div>
+            </li>
 
 
+            <li class="step">
+                <div class="step-title waves-effect">Adresse</div>
+                <div class="step-content">
 
 
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">map</i>
+                                    <input id="vname" type="text" class="validate login-inp" placeholder="Ort">
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">location_city</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="PLZ">
+                                    <label for="nname"></label>
+                                </div>
 
 
+                            </div>
 
 
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">home</i>
+                                    <input id="vname" type="text" class="validate login-inp" placeholder="Straße">
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="Zusatz">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">call</i>
+                                    <input id="vname" type="tel" class="validate login-inp" placeholder="Land">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">call</i>
+                                    <input id="vname" type="tel" class="validate login-inp" placeholder="Telefonnummer">
+                                    <label for="nname"></label>
+                                    <span class="helper-text white-dm" data-error="wrong" data-success="right">Für eventuelle Rücksprachen</span>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
 
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
                         <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
                     </div>
-                  </div>
-              </li>
+                </div>
+            </li>
 
 
-              <li class="step">
-                  <div class="step-title waves-effect">Accept</div>
-                  <div class="step-content">
+            <li class="step">
+                <div class="step-title waves-effect">Accept</div>
+                <div class="step-content">
                     <!-- Your step content goes here (like inputs or so) -->
 
 
                     <div class="row">
-                          <div class="col s12 m12 l6">
-                            <p class="white-dm">labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        <div class="col s12 m12 l6">
+                            <p class="white-dm">labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                                sanctus est Lorem ipsum dolor sit amet.</p>
 
                             <form action="#">
-                              <p>
-                                <label>
-                                  <input type="checkbox" />
-                                  <span>AGB zustimmen</span>
-                                </label>
-                              </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox"/>
+                                        <span>AGB zustimmen</span>
+                                    </label>
+                                </p>
 
-                              <p>
-                                <label>
-                                  <input type="checkbox" />
-                                  <span>Infos über Mail bekommen</span>
-                                </label>
-                              </p>
+                                <p>
+                                    <label>
+                                        <input type="checkbox"/>
+                                        <span>Infos über Mail bekommen</span>
+                                    </label>
+                                </p>
 
                             </form>
 
-                          
-                          </div>
-                          <div class="col s12 m12 l6">
-                          <a href="#">AGB Richtlinien</a>
-                          <br>
-                          <a href="#">Impressum</a>
-                          <br>
-                          <a href="#">Sonstiges</a>
 
-                          </div>
+                        </div>
+                        <div class="col s12 m12 l6">
+                            <a href="#">AGB Richtlinien</a>
+                            <br>
+                            <a href="#">Impressum</a>
+                            <br>
+                            <a href="#">Sonstiges</a>
+
+                        </div>
                     </div>
-
 
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
-                        <button class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>
+                        <button type="submit" class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>
                     </div>
-                  </div>
-              </li>
+                </div>
+            </li>
+
+        </ul>
+
+    </form>
 
 
+</div>
 
 
-            </ul>
-
-
-
-
-
-
-            </form>
-     
-
-          
-
-
-
-
-
-
-
-
+<footer class="footer footer-reg">
+    <div class="container">
+        <a href="/" class="animsition-link" style="color: #939C9E;">
+            <p class="back-index color-white">Startseite</p>
+        </a>
     </div>
-
-
-    <footer class="footer footer-reg">
-        <div class="container">
-            <a href="/" class="animsition-link" style="color: #939C9E;">
-                <p class="back-index color-white">Startseite</p>
-            </a>
-        </div>
-    </footer>
-    
-
-
+</footer>
 
 
 </body>
 
 
-
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 
 
-
 <script>
-   var stepper = document.querySelector('.stepper');
-   var stepperInstace = new MStepper(stepper, {
-      // options
-      firstActive: 0 // this is the default
-   })
+    var stepper = document.querySelector('.stepper');
+    var stepperInstace = new MStepper(stepper, {
+        // options
+        firstActive: 0 // this is the default
+    })
 </script>

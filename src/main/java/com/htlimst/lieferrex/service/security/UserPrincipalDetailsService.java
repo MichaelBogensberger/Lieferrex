@@ -46,6 +46,8 @@ public class UserPrincipalDetailsService implements UserDetailsService {
         Optional<Kunde> kunde = Optional.ofNullable(this.kundeRepository.findByEmail(email));
         Optional<Angestellter> angestellter = Optional.ofNullable(this.angestellterRepository.findByEmail(email));
 
+
+
         if (kunde.isPresent()){
             userPojo = UserPojo.builder().
                     benutzername(kunde.get().getEmail()).

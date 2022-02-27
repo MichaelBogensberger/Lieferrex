@@ -29,16 +29,11 @@ public class Kunde {
     private String passwort;
     private String ort;
 
-    @Size(min=4,max = 6)
+    //@Size(min=4,max = 6)
     private Integer plz;
     private String strasse;
     private String hausnummer;
     private Integer telefonnummer;
     private String land;
     private boolean newsletter;
-
-    @OneToMany(mappedBy="kunde")
-    private Set<Bestellung> bestellungen;
-
-
 }
