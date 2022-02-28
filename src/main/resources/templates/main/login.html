@@ -22,16 +22,19 @@
 
         <h1 class="login-form-ueb">Einloggen</h1>
 
+        <!--
         <div th:if="${param.error}">
             <div class="alert alert-danger">Invalid username or
                 password.
             </div>
         </div>
+        -->
+
 
         <div class="row login-row-mail">
             <div class="input-field col s12 login-div-mail">
                 <input id="username" name="username" type="email" class="validate login-inp" placeholder="Email">
-                <label for="email"></label>
+                <label for="username"></label>
 
             </div>
         </div>
@@ -45,7 +48,10 @@
             </div>
         </div>
 
-        <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Log In" />
+
+        <button type="submit" name="login-submit" id="login-submit" class=" btn waves-light btn-raised btn-round waves-effect btn-login">login</button>
+
+
         <!--
         <h1 class="side-line-menu-login">oder</h1>
 
@@ -75,6 +81,20 @@
 
 
 </body>
+
+<script>
+    $( document ).ready(function() {
+
+        let searchParams = new URLSearchParams(window.location.search);
+        if(searchParams.has('error') == true) {
+            M.toast({html: 'Email oder Passwort inkorrekt!'})
+        }
+    });
+
+
+
+
+</script>
 
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
