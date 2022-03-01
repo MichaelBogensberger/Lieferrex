@@ -24,7 +24,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## 😄 About The Project
+## About The Project
 
 <p align="center">
   <img width="800px" src="https://github.com/MichaelBogensberger/Lieferrex/blob/main/images/screenshot.png?raw=true" alt="Sublime's custom image"/>
