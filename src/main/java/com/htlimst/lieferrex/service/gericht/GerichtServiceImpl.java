@@ -35,4 +35,19 @@ public class GerichtServiceImpl implements GerichtService{
     public List<Gericht> getGerichtByStatusZero() {
         return gerichtRepo.getGerichtByEnabledWhereStatusZero();
     }
+
+    @Override
+    public Gericht apiUpdateGericht(Long id, Gericht givenGericht) {
+        Gericht foundGericht = gerichtRepo.findById(id).get();
+
+        foundGericht.setName(givenGericht.getName());
+        foundGericht.setBeschreibung(givenGericht.getBeschreibung());
+        foundGericht.setPreis(givenGericht.getPreis());
+        foundGericht.setPreisangebot(givenGericht.getPreisangebot());
+        foundGericht.setStatus(givenGericht.getStatus());
+
+        return gerichtRepo.save(foundGericht);
+    }
+
+
 }

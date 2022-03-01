@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,11 +34,12 @@ public class Gericht {
     // 0=deaktiviert, 1=aktiviert, 2=in aktion
     private int status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
     private Mandant mandant;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy="gericht")
     private Set<GerichtBestellung> gerichteBestellungen;
 

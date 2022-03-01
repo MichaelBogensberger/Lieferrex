@@ -1,7 +1,9 @@
-package com.htlimst.lieferrex.controller;
+package com.htlimst.lieferrex.controller.gericht;
 
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.service.gericht.GerichtService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,9 @@ public class GerichtController {
 
     @GetMapping
     public String showDashboardGerichte(Model model) {
+        // Gerichte mit Status 1 oder 2
         List<Gericht> gerichteList = gerichtService.getGerichtByStatus();
+        // Gerichte mit Status 0
         List<Gericht> gerichteListStatusZero = gerichtService.getGerichtByStatusZero();
         model.addAttribute("gerichteList", gerichteList);
         model.addAttribute("gerichteListStatusZero", gerichteListStatusZero);
