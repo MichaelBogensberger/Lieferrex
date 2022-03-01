@@ -21,7 +21,7 @@ public class Oeffnungszeit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer tag;
+    private int tag;
     private Time oeffnungszeit;
     private Time startpause;
     private Time endepause;

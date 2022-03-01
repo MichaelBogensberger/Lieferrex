@@ -23,11 +23,11 @@ public class Umsatz {
 
     private int monat;
     private int jahr;
-    private Double umsatz;
+    private double umsatz;
 
 
     @ManyToOne
-    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="mandant_id", nullable=false, updatable=false)
     private Mandant mandant;
 
 

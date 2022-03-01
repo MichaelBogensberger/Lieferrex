@@ -25,7 +25,6 @@ public class Bestellart {
     @NotEmpty
     private String bestellart;
 
-    @NotEmpty
     @OneToMany(mappedBy="bestellart")
     private Set<Bestellung> bestellungen;
 

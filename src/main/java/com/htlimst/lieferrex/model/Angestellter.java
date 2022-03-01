@@ -40,13 +40,6 @@ public class Angestellter {
             inverseJoinColumns = @JoinColumn(name = "rolle_id"))
     private Collection<Rolle> rolle;
 
-    public Angestellter(Long id, Mandant mandant, String vorname, String nachname, String email, String passwort) {
-        this.id = id;
-        this.mandant = mandant;
-        this.vorname = vorname;
-        this.nachname = nachname;
-        this.email = email;
-        this.passwort = passwort;
-    }
+
 }
 

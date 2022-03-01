@@ -24,12 +24,12 @@ public class GerichtBestellung {
     private String anmerkung;
 
     @ManyToOne
-    @JoinColumn(name="gericht_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="gericht_id", nullable=false, updatable=false)
     private Gericht gericht;
 
 
     @ManyToOne
-    @JoinColumn(name="bestellung_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="bestellung_id", nullable=false, updatable=false)
     private Bestellung bestellung;
 
 

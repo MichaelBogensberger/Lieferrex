@@ -34,16 +34,22 @@ public class Gericht {
     private int status;
 
     @ManyToOne
-    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="mandant_id", nullable=false, updatable=false)
     private Mandant mandant;
 
 
     @OneToMany(mappedBy="gericht")
     private Set<GerichtBestellung> gerichteBestellungen;
 
-
-
-
-
+    public Gericht(Long id, String name, String beschreibung, Double preis, Double preisangebot, int anzahl_gekauft, int status, Mandant mandant) {
+        this.id = id;
+        this.name = name;
+        this.beschreibung = beschreibung;
+        this.preis = preis;
+        this.preisangebot = preisangebot;
+        this.anzahl_gekauft = anzahl_gekauft;
+        this.status = status;
+        this.mandant = mandant;
+    }
 }
 
