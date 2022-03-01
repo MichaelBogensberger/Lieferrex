@@ -24,6 +24,7 @@ public class GerichtController {
 
     @GetMapping
     public String showDashboardGerichte(Model model) {
+
         // Gerichte mit Status 1 oder 2
         List<Gericht> gerichteList = gerichtService.getGerichtByStatus();
         // Gerichte mit Status 0
