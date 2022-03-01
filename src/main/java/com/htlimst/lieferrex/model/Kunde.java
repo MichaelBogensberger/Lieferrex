@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -30,10 +30,25 @@ public class Kunde {
     private String ort;
 
     //@Size(min=4,max = 6)
-    private Integer plz;
+    private int plz;
     private String strasse;
     private String hausnummer;
-    private Integer telefonnummer;
+    private int telefonnummer;
     private String land;
     private boolean newsletter;
+
+    public Kunde(Long id, String vorname, String nachname, String email, String passwort, String ort, int plz, String strasse, String hausnummer, int telefonnummer, String land, boolean newsletter) {
+        this.id = id;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.email = email;
+        this.passwort = passwort;
+        this.ort = ort;
+        this.plz = plz;
+        this.strasse = strasse;
+        this.hausnummer = hausnummer;
+        this.telefonnummer = telefonnummer;
+        this.land = land;
+        this.newsletter = newsletter;
+    }
 }

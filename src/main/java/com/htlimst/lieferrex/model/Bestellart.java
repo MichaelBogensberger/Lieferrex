@@ -25,14 +25,13 @@ public class Bestellart {
     @NotEmpty
     private String bestellart;
 
-
-
-
     @NotEmpty
     @OneToMany(mappedBy="bestellart")
     private Set<Bestellung> bestellungen;
 
 
-
-
+    public Bestellart(Long id, String bestellart) {
+        this.id = id;
+        this.bestellart = bestellart;
+    }
 }

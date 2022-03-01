@@ -30,20 +30,20 @@ public class Mandant {
         @NotEmpty
         private String ort;
 
-        @Size(min = 4, max = 6)
-        private Integer plz;
+        //@Size(min = 4, max = 6)
+        private int plz;
 
         private String strasse;
         private String hausnummer;
-        private String telefon;
+        private int telefonnummer;
 
         private double umsatz_summe;
         private int seitenaufrufe_summe;
 
         // @Email
         private String email;
-        private Double mindestbestellwert;
-        private Double lieferkosten;
+        private double mindestbestellwert;
+        private double lieferkosten;
 
         @ManyToMany
         @JoinTable(name = "mandant_kategorie", joinColumns = @JoinColumn(name = "mandant_id"), inverseJoinColumns = @JoinColumn(name = "kategorie_id"))
@@ -65,12 +65,29 @@ public class Mandant {
         @OneToMany(mappedBy = "mandant")
         private Set<Umsatz> umsatz;
 
-        @ManyToOne
-        @JoinColumn(name="layout_id", nullable=false, insertable=false, updatable=false)
-        private Layout layout;
-
         @OneToMany(mappedBy = "mandant")
         private Set<Fragment> fragmente;
 
 
+        @ManyToOne
+        @JoinColumn(name="layout_id", nullable=false, updatable=false)
+        private Layout layout;
+
+
+        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, int telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Layout layout) {
+                this.id = id;
+                this.firmenname = firmenname;
+                this.land = land;
+                this.ort = ort;
+                this.plz = plz;
+                this.strasse = strasse;
+                this.hausnummer = hausnummer;
+                this.telefonnummer = telefonnummer;
+                this.umsatz_summe = umsatz_summe;
+                this.seitenaufrufe_summe = seitenaufrufe_summe;
+                this.email = email;
+                this.mindestbestellwert = mindestbestellwert;
+                this.lieferkosten = lieferkosten;
+                this.layout = layout;
+        }
 }

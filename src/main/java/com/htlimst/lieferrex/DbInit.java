@@ -1,13 +1,7 @@
 package com.htlimst.lieferrex;
 
-import com.htlimst.lieferrex.model.Angestellter;
-import com.htlimst.lieferrex.model.Kunde;
-import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.model.Rolle;
-import com.htlimst.lieferrex.repository.AngestellterRepository;
-import com.htlimst.lieferrex.repository.KundeRepository;
-import com.htlimst.lieferrex.repository.MandantRepository;
-import com.htlimst.lieferrex.repository.RolleRepository;
+import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,59 +14,64 @@ import java.util.Set;
 
 @Service
 public class DbInit implements CommandLineRunner {
-    private KundeRepository kundeRepository;
+    @Autowired
     private AngestellterRepository angestellterRepository;
+    @Autowired
+    private BestellartRepository bestellartRepository;
+    @Autowired
+    private BestellstatusRepository bestellstatusRepository;
+    @Autowired
+    private BestellungRepository bestellungRepository;
+    @Autowired
+    private FragmentMapRepository fragmentMapRepository;
+    @Autowired
+    private FragmentRepository fragmentRepository;
+    @Autowired
+    private FragmentTextRepository fragmentTextRepository;
+    @Autowired
+    private GerichtRepository gerichtRepository;
+    @Autowired
+    private KategorieRepository kategorieRepository;
+    @Autowired
+    private KundeRepository kundeRepository;
+    @Autowired
+    private LayoutRepository layoutRepository;
+    @Autowired
     private MandantRepository mandantRepository;
+    @Autowired
+    private OeffnungszeitRepository oeffnungszeitRepository;
+    @Autowired
     private RolleRepository rolleRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public DbInit(KundeRepository kundeRepository, AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository rolleRepository, PasswordEncoder passwordEncoder) {
-        this.kundeRepository = kundeRepository;
-        this.angestellterRepository = angestellterRepository;
-        this.mandantRepository = mandantRepository;
-        this.rolleRepository = rolleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+
 
 
     @Override
     public void run(String... args) {
-        Kunde kunde;
-        Angestellter angestellter;
+
+        Layout layout = new Layout(null, "Testlayout");
+        layoutRepository.save(layout);
 
 
-        try {
-            List<Kunde> kundeList = kundeRepository.getAllByEmail("kunde1@gmail.com");
-            kundeRepository.deleteAll(kundeList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, layout);
+        mandantRepository.save(mandant);
 
-        try {
-            List<Angestellter> angestellterList = angestellterRepository.getAllByEmail("angestellter@gmail.com");
-            angestellterRepository.deleteAll(angestellterList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("kunde1234"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);
+        this.kundeRepository.save(kunde);
 
+        Kategorie kategorie = new Kategorie(null, "Türkisch");
+        this.kategorieRepository.save(kategorie);
 
-        Mandant mandant = mandantRepository.getById(1L);
-        List<Rolle> rollen = Arrays.asList(rolleRepository.getById(2L), rolleRepository.getById(1L));
+        Bestellart bestellart = new Bestellart(null, "Abholung");
+        this.bestellartRepository.save(bestellart);
 
-        // Crete users
-        try {
-            angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellter@gmail.com", this.passwordEncoder.encode("ange1234"), rollen);
-            this.angestellterRepository.save(angestellter);
-            kunde = new Kunde(null, "Vorname", "Nachname", "kunde1@gmail.com", this.passwordEncoder.encode("kunde1234"), "Imst", 12345, "Straße", "1", 066411, "Österreich", true);
-            this.kundeRepository.save(kunde);
+        Angestellter angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellt@gmail.com", this.passwordEncoder.encode("angestellt1234"));
+        this.angestellterRepository.save(angestellter);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
+        Bestellstatus bestellstatus = new Bestellstatus(null, "Abgeschlossen");
+        this.bestellstatusRepository.save(bestellstatus);
 
 
 

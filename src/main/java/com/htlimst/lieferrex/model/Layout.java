@@ -33,4 +33,8 @@ public class Layout {
     private Set<Mandant> mandanten;
 
 
+    public Layout(Long id, String name) {
+        this.id=id;
+        this.name=name;
+    }
 }

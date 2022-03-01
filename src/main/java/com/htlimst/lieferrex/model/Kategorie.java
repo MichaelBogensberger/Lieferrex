@@ -26,10 +26,4 @@ public class Kategorie {
     @NotEmpty
     private String name;
 
-
-
-
-
-
-
 }
