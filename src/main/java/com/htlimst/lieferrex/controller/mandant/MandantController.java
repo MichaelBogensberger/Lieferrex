@@ -11,6 +11,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MandantController {
@@ -30,6 +32,23 @@ public class MandantController {
         model.addAttribute("mandant", foundAngestellter.getMandant());
 
         return "dashboard/mandant.html";
+    }
+
+    @PostMapping("/dashboard/mandant/save")
+    public String saveUser(Mandant mandant, RedirectAttributes ra, @AuthenticationPrincipal UserPrincipal principal) {
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
+
+        mandant.setId(foundMandant.getId());
+        mandant.setLayout(foundMandant.getLayout());
+        mandant.setSeitenaufrufe_summe(foundMandant.getSeitenaufrufe_summe());
+        mandant.setUmsatz_summe(foundMandant.getUmsatz_summe());
+
+
+        mandantService.save(mandant);
+
+        ra.addFlashAttribute("message", "Einstellungen geändert");
+        return "redirect:/dashboard/mandant";
     }
 
 

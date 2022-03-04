@@ -48,4 +48,10 @@ public class MandantServiceImpl implements MandantService {
         return mandantRepository.getById(3L);
     }
 
+    @Override
+    public void save(Mandant mandant) {
+        mandantRepository.save(mandant);
+    }
+
+
 }

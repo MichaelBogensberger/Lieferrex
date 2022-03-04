@@ -70,7 +70,7 @@ public class Mandant {
 
 
         @ManyToOne
-        @JoinColumn(name="layout_id", nullable=false, updatable=false)
+        @JoinColumn(name="layout_id")
         private Layout layout;
 
 

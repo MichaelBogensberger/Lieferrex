@@ -16,4 +16,7 @@ public interface MandantService {
     Mandant listAll();
 
 
+    void save(Mandant mandant);
+
+
 }
