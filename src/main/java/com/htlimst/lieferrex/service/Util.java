@@ -1,4 +1,4 @@
-package com.htlimst.lieferrex.security;
+package com.htlimst.lieferrex.service;
 
 import com.htlimst.lieferrex.repository.KundeRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
@@ -14,7 +14,7 @@ import java.util.Collection;
 
 
 @Service
-public class AccessValidation {
+public class Util {
 
     @Autowired
     MandantRepository mandantRepository;
