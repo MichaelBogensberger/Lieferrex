@@ -11,7 +11,6 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
-
 @Service
 public class DbInit implements CommandLineRunner {
     @Autowired
@@ -54,8 +53,12 @@ public class DbInit implements CommandLineRunner {
 
 
 
+
+
     @Override
     public void run(String... args) {
+
+        deleteAll();
 
         Layout layout = new Layout(null, "Testlayout");
         layoutRepository.save(layout);
@@ -103,7 +106,7 @@ public class DbInit implements CommandLineRunner {
         Angestellter angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellt@gmail.com", this.passwordEncoder.encode("angestellt1234"), angestellerRollen);
         this.angestellterRepository.save(angestellter);
 
-        Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, 1, new Time(10, 0,0), new Time(14, 0,0),new Time(16, 0,0), new Time(22, 0,0), mandant);
+        Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, 1, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant);
         this.oeffnungszeitRepository.save(oeffnungszeit);
 
         Umsatz umsatz = new Umsatz(null, 3, 2022, 22325.50, mandant);
@@ -111,7 +114,22 @@ public class DbInit implements CommandLineRunner {
 
         Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
         this.seitenaufrufeRepository.save(seitenaufrufe);
-
+    }
+    private void deleteAll() {
+        seitenaufrufeRepository.deleteAll();
+        umsatzRepository.deleteAll();
+        oeffnungszeitRepository.deleteAll();
+        angestellterRepository.deleteAll();
+        rolleRepository.deleteAll();
+        gerichtBestellungRepository.deleteAll();
+        gerichtRepository.deleteAll();
+        bestellungRepository.deleteAll();
+        bestellstatusRepository.deleteAll();
+        kundeRepository.deleteAll();
+        mandantRepository.deleteAll();
+        kategorieRepository.deleteAll();
+        bestellartRepository.deleteAll();
+        layoutRepository.deleteAll();
     }
 
 }
