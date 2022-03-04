@@ -12,4 +12,8 @@ public interface MandantService {
     void mandantLoeschenMitId(Long id);
 
     Optional<Mandant> findMandantByFirmenname(String name);
+
+    Mandant listAll();
+
+
 }

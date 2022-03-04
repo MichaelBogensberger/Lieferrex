@@ -43,4 +43,9 @@ public class MandantServiceImpl implements MandantService {
         return mandantRepository.findMandantByFirmenname(name);
     }
 
+    @Override
+    public Mandant listAll() {
+        return mandantRepository.getById(3L);
+    }
+
 }

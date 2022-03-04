@@ -80,10 +80,6 @@ public class MainController {
         return "dashboard/benutzer.html";
     }
 
-    @GetMapping("/dashboard/mandant")
-    public String showDashboardMandant() {
-        return "dashboard/mandant.html";
-    }
 
     @GetMapping("/baukasten/{restaurant}")
     public String showBaukasten(Model model, @PathVariable String restaurant){

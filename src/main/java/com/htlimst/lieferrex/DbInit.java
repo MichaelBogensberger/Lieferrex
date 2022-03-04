@@ -76,7 +76,7 @@ public class DbInit implements CommandLineRunner {
         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, mandantKategorie, mandantBestellart, layout);
         mandantRepository.save(mandant);
 
-        Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("kunde1234"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);
+        Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("123"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);
         this.kundeRepository.save(kunde);
 
 
@@ -102,8 +102,8 @@ public class DbInit implements CommandLineRunner {
         this.rolleRepository.save(rolle3);
 
         Set angestellerRollen = new HashSet();
-        angestellerRollen.add(rolle1);
-        Angestellter angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellt@gmail.com", this.passwordEncoder.encode("angestellt1234"), angestellerRollen);
+        angestellerRollen.add(rolle3);
+        Angestellter angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellt@gmail.com", this.passwordEncoder.encode("123"), angestellerRollen);
         this.angestellterRepository.save(angestellter);
 
         Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, 1, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant);

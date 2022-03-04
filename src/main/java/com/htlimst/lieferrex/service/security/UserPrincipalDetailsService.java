@@ -52,7 +52,7 @@ public class UserPrincipalDetailsService implements UserDetailsService {
             userPojo = UserPojo.builder().
                     benutzername(kunde.get().getEmail()).
                     passwort(kunde.get().getPasswort()).
-                    rollen(Arrays.asList(new Rolle("ROLE_USER"))).
+                    rollen(Arrays.asList(new Rolle("ROLE_KUNDE"))).
                     build();
         } else if (angestellter.isPresent()){
             userPojo = UserPojo.builder().
