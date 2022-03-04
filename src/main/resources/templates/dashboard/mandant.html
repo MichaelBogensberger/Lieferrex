@@ -186,7 +186,23 @@
 
 
             <div th:if="${message}" class="">
-                [[${message}]]
+
+                <script type="text/javascript">
+
+                    $( document ).ready(function() {
+                        halfmoon.initStickyAlert({
+                            content: "[[${message}]]",
+                            title: "Erfolgreich",
+                            alertType: "alert-success",
+                            fillType: "filled-lm"
+                        });
+
+                    });
+
+
+
+
+                </script>
             </div>
 
 

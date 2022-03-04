@@ -47,7 +47,7 @@ public class MandantController {
 
         mandantService.save(mandant);
 
-        ra.addFlashAttribute("message", "Einstellungen geändert");
+        ra.addFlashAttribute("message", "Einstellungen wurden geändert.");
         return "redirect:/dashboard/mandant";
     }
 
