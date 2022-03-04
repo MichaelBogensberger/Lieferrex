@@ -10,4 +10,7 @@ public interface GerichtService {
     public Optional<Gericht> getGerichtById(Long id);
     public List<Gericht> getGerichtByStatus();
     public List<Gericht> getGerichtByStatusZero();
+
+    Gericht apiUpdateGericht(Long id, Gericht givenGericht);
+
 }

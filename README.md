@@ -34,7 +34,7 @@
 Das Ziel des Projektes ist eine Webseite, über die Kunden und Kundinnen Essen bei Restaurants bestellen können. Es gibt auch eine Liste, die alle Restaurants beinhaltet, damit Kunden ein passendes finden können. Die Unternehmen, die diesen Service verwenden, gestalten sich individuelle Webseiten, die dann auf einem Webserver gehostet werden. Alle Accounts werden in einer Datenbank gespeichert.
 
 
-### Built With
+### 🔨 Built With
 
 Folgende Technologien wurden verwendet um das Projekt zu realisieren:
 
@@ -45,7 +45,7 @@ Folgende Technologien wurden verwendet um das Projekt zu realisieren:
 * [JQuery](https://jquery.com)
 
 
-### Spring profiles
+### 📃 Spring profiles
 Default Profile is dev
 ```
 mvn clean install -Pprod

@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="gericht-preis" class="required">Preis</label>
-                        <input type="number" id="gericht-preis" class="form-control" placeholder="12,50" required="required">
+                        <input step="any" type="number" id="gericht-preis" class="form-control" placeholder="12,50" required="required">
                     </div>
 
                     <div class="form-group">
@@ -69,33 +69,33 @@
                 <form action="..." method="...">
                     <div class="form-group">
                         <label for="gericht-edit-name" class="required">Name</label>
-                        <input type="text" id="gericht-edit-name" class="form-control" value="Wiener Schnitzel" required="required">
+                        <input type="text" id="gericht-edit-name" class="form-control" value="" required="required">
                     </div>
                     <div class="form-group">
                         <label for="gericht-edit-desc" class="required">Beschreibung</label>
-                        <input type="text" id="gericht-edit-desc" class="form-control" value="Leckeres Wiener Schnitzel mit Kartoffelsalat" required="required">
+                        <input type="text" id="gericht-edit-desc" class="form-control" value="" required="required">
                     </div>
                     <div class="form-group">
                         <label for="gericht-edit-preis" class="required">Preis</label>
-                        <input type="number" id="gericht-edit-preis" class="form-control" value="12.50" required="required">
+                        <input type="number" step="any" id="gericht-edit-preis" class="form-control" value="" required="required">
                     </div>
 
                     <div class="form-group">
                         <label for="gericht-edit-aktionspreis" class="required">Aktionspreis</label>
-                        <input type="number" id="gericht-edit-aktionspreis" class="form-control" value="7.50" required="required">
+                        <input type="number" step="any" id="gericht-edit-aktionspreis" class="form-control" value="" required="required">
                     </div>
 
                     <div class="form-group mb-10">
                         <div class="custom-switch">
-                            <input type="checkbox" id="gerichte-edit-aktiviert" value="true" checked="checked">
+                            <input type="checkbox" id="gerichte-edit-aktiviert" value="true">
                             <label for="gerichte-edit-aktiviert">aktiviert</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="custom-switch">
-                            <input type="checkbox" id="gerichte-edit-aktionspreis" value="true" >
-                            <label for="gerichte-edit-aktionspreis">Aktionspreis verwenden</label>
+                            <input type="checkbox" id="gerichte-edit-aktionspreis-aktiviert" value="true" >
+                            <label for="gerichte-edit-aktionspreis-aktiviert">Aktionspreis verwenden</label>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                                         <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">[[${gericht.name}]]</th>
                                         <td class="d-none d-md-table-cell">[[${gericht.preis}]] €</td>
                                         <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
-                                        <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.status}]]</td>
+                                        <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.beschreibung}]]</td>
                                         <td class="text-center">
                                             <a href="#"
                                                class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
@@ -188,28 +188,28 @@
 
 
                 <p class="card-title mb-5 font-size-16">Name:</p>
-                <input type="text" disabled class="form-control" value="Wiener Schnitzel">
+                <input type="text" disabled class="form-control" id="gericht-info-name" value="">
 
                 <p class="card-title mb-5 mt-10 font-size-16">Beschreibung:</p>
-                <textarea class="form-control form-control-sm" rows="3" cols="50" disabled >Saftiges Wiener Schnitzel mit Kartoffelsalat</textarea>
+                <textarea class="form-control form-control-sm" id="gericht-info-beschreibung" rows="3" cols="50" disabled ></textarea>
 
                 <p class="card-title mb-5 mt-10 font-size-16">Preis:</p>
-                <input type="text" disabled class="form-control" value="12,50">
+                <input type="text" disabled class="form-control" id="gericht-info-preis" value="">
 
                 <p class="card-title mb-5 mt-10 font-size-16">Aktionspreis:</p>
-                <input type="text" disabled class="form-control" value="7,50">
+                <input type="text" disabled class="form-control" value="" id="gericht-info-aktionspreis">
 
                 <div class="form-group mt-20 mb-10">
                     <div class="custom-switch">
-                        <input type="checkbox" id="gerichte-info-aktiviert" disabled value="true" checked="checked">
+                        <input type="checkbox" id="gerichte-info-aktiviert" disabled value="true">
                         <label for="gerichte-info-aktiviert">aktiviert</label>
                     </div>
                 </div>
 
                 <div class="form-group mb-0">
                     <div class="custom-switch">
-                        <input type="checkbox" id="gerichte-info-aktionspreis" disabled value="true">
-                        <label for="gerichte-info-aktionspreis">Aktionspreis verwenden</label>
+                        <input type="checkbox" id="gerichte-info-aktionspreis-aktiviert" disabled value="true">
+                        <label for="gerichte-info-aktionspreis-aktiviert">Aktionspreis verwenden</label>
                     </div>
                 </div>
 
@@ -521,14 +521,20 @@
                                             <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
                                             <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.beschreibung}]]</td>
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#modal-info-gericht"
+                                                <!-- href="#modal-info-gericht"
+                                                 onclick="gerichtInfo(2)"
+                                                 -->
+                                                <a  th:onclick="gerichtInfo([[${gericht.id}]])"
                                                    class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                                   role="button"><i class="fa fa-info" aria-hidden="true"></i></a>
+                                                   role="button">
+                                                    <p class="gericht-id" style="display: none">[[${gericht.id}]]</p>
+                                                    <i class="fa fa-info" aria-hidden="true"></i></a>
                                             </td>
                                             <td >
-                                                <a href="#modal-edit-gericht"
+                                                <a th:onclick="gerichtEdit([[${gericht.id}]])"
                                                    class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                                   role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                   role="button"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
                                             </td>
                                             <!--
                                             <td >
@@ -616,6 +622,74 @@
 
 <!-- Halfmoon JS -->
 <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+
+
+<script>
+    function gerichtInfo(id) {
+        //alert(id);
+
+        $.get("http://localhost:8080/api/gericht/" +id, function(data, status){
+            console.log(data)
+            //alert("Data: " + data + "\nStatus: " + status);
+
+            $('#gericht-info-name').val(data.name);
+            $('#gericht-info-beschreibung').val(data.beschreibung);
+            $('#gericht-info-preis').val(data.preis);
+            $('#gericht-info-aktionspreis').val(data.preisangebot);
+
+
+            if (data.status == 1 || data.status == 2) {
+                $('#gerichte-info-aktiviert').prop('checked', true);
+            } else {
+                $('#gerichte-info-aktiviert').prop('checked', false);
+            }
+
+            if(data.status == 2) {
+                $('#gerichte-info-aktionspreis-aktiviert').prop('checked', true);
+            } else {
+                $('#gerichte-info-aktionspreis-aktiviert').prop('checked', false);
+            }
+
+            halfmoon.toggleModal('modal-info-gericht')
+
+        });
+
+    }
+
+
+    function gerichtEdit(id) {
+
+
+
+
+        $.get("http://localhost:8080/api/gericht/" +id, function(data, status){
+
+            $('#gericht-edit-name').val(data.name);
+            $('#gericht-edit-desc').val(data.beschreibung);
+            $('#gericht-edit-preis').val(data.preis);
+            $('#gericht-edit-aktionspreis').val(data.preisangebot);
+
+            if (data.status == 1 || data.status == 2) {
+                $('#gerichte-edit-aktiviert').prop('checked', true);
+            } else {
+                $('#gerichte-edit-aktiviert').prop('checked', false);
+            }
+
+            if(data.status == 2) {
+                $('#gerichte-edit-aktionspreis-aktiviert').prop('checked', true);
+            } else {
+                $('#gerichte-edit-aktionspreis-aktiviert').prop('checked', false);
+            }
+
+
+        });
+
+        halfmoon.toggleModal('modal-edit-gericht');
+
+    }
+
+
+</script>
 
 
 
