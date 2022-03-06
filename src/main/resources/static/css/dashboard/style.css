@@ -199,3 +199,11 @@
     }
 
 }
+
+.dark-mode input[type="time"]::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+}
+
+.mt-50-p {
+    margin-top: 40% !important;
+}
