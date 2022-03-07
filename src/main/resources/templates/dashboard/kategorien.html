@@ -215,7 +215,7 @@
 
 
                             <div class="col-12 col-xl-4">
-                                <div class="card mt-0">
+                                <div class="card mt-0 mb-20">
                                     <h2 class="card-title mb-5 mt-0">Bearbeiten</h2>
                                     <p class="mt-0">Hier können Sie eine Kategorie auswählen:</p>
 
@@ -259,12 +259,35 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-xl-6">
+
+                            <div class="col-12 col-xl-5 d-none d-lg-block">
                                 <div class="card">
-                                    <h2 class="card-title">Sales</h2>
-                                    ...
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h2 class="card-title mb-0">Information</h2>
+                                            <p class="mt-0">Die hier ausgewählte Kategorie representiert das Restaurant. Nach jener Kategorie kann
+                                            nun auf der Kundenseite gefiltert bzw. gesucht werden.</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <img th:src="@{/css/dashboard/3dIcons/flag-dynamic-gradient.png}"  width="200px" class="img-fluid rounded" alt="...">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+
+                            <div class="content card pt-15 pb-15 d-lg-none ml-10 mr-10">
+                                <div class="text-center">
+                                    <img th:src="@{/css/dashboard/3dIcons/flag-dynamic-gradient.png}" width="240px" class="img-fluid rounded" alt="...">
+                                </div>
+                                <h2 class="content-title mb-5 text-center">Information</h2>
+                                <p class="mb-0 mt-0">Die hier ausgewählte Kategorie representiert das Restaurant. Nach jener Kategorie kann
+                                    nun auf der Kundenseite gefiltert bzw. gesucht werden.</p>
+                            </div>
+
+
 
                         </div>
 

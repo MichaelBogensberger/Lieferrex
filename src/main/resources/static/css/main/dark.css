@@ -242,5 +242,10 @@ ul.stepper .step:not(:last-of-type)::after {
 
 
 
-
-
+/* orders page */
+.orders-ueb {
+    color: #ffffff;
+}
+.orders-p {
+    color: #ffffff;
+}

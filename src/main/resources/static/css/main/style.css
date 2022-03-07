@@ -1078,3 +1078,45 @@ margin-left: 15px;
 
 
 
+
+.footer-b {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+}
+
+.back-index {
+    font-size: 15px;
+}
+
+.orders-ueb {
+    text-align: center;
+    font-weight: 500;
+    font-size: 35px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+
+.orders-p {
+    text-align: center;
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+.c-body-orders {
+    background-color: #EEEEEE !important;
+    padding: 12px !important;
+}
+
+.c-orders {
+    border-radius: 8px !important;
+    border: 5px solid #eeeeee;
+}
+
+.m0 {
+    margin: 0px !important;
+}

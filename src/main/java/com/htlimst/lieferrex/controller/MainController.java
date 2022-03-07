@@ -53,6 +53,11 @@ public class MainController {
         return "main/search";
     }
 
+    @GetMapping("/orders")
+    public String showOrdersPage() {
+        return "main/orders.html";
+    }
+
 
     @GetMapping("/buildOne")
     public String showBaukastenPage() {

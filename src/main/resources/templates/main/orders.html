@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Lieferrex - Login</title>
+
+    <div th:replace="main/fragments/header"></div>
+
+
+
+</head>
+<body>
+
+<div th:replace="main/fragments/modals"></div>
+
+
+
+<nav class="nav-main">
+    <div class="nav-wrapper">
+
+        <a href="/" class="sr-back-arr-a hide-mob"><span class="material-icons-outlined sr-back-arr">arrow_back</span></a>
+        <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
+
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons menu-icon">menu</i></a>
+
+
+    </div>
+</nav>
+
+
+
+<div class="row">
+    <div class="col l3 s1 m1"></div>
+    <div class="col l6 s10 m10">
+
+
+        <h1 class="orders-ueb">Alle Bestellungen</h1>
+        <p class="orders-p">Hier können sie alle Ihre Bestellungen einsehen:</p>
+
+
+        <ul class="collapsible c-orders">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">airport_shuttle</i>07.03.2022 — 23,45 €
+                    <span class="new badge" data-badge-caption="">in Zustellung</span>
+                </div>
+                <div class="collapsible-body c-body-orders">
+
+                    <h6 class="m0">&nbsp; Asiamix Imst - Hinterseberweg 12</h6> <br>
+
+                    <div class="chip">
+                        1x - Schnitzel mit Kebab
+                    </div>
+                    <div class="chip">
+                        1x - Dürüm
+                    </div>
+                    <div class="chip">
+                        2x - Coca Cola
+                    </div>
+
+                </div>
+            </li>
+
+
+
+
+
+
+            <li>
+                <div class="collapsible-header"><i class="material-icons">directions_run</i>02.03.2022 — 12,79 €
+                    <span class="new badge" data-badge-caption="">Zugestellt</span>
+                </div>
+                <div class="collapsible-body c-body-orders">
+
+                    <h6 class="m0">&nbsp; Burgerista - Ziegelstadelstraße 2A</h6> <br>
+
+                    <div class="chip">
+                        1x - Schnitzel mit Kebab
+                    </div>
+                    <div class="chip">
+                        1x - Dürüm
+                    </div>
+                    <div class="chip">
+                        2x - Coca Cola
+                    </div>
+
+                </div>
+            </li>
+
+
+
+
+        </ul>
+
+
+
+    </div>
+    <div class="col l3 s10 m10"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<footer class="footer-b">
+    <div class="container">
+        <a href="/" class="animsition-link" style="color: #939C9E;">
+            <p class="back-index">Startseite</p>
+        </a>
+    </div>
+</footer>
+
+
+</body>
+
+<script>
+
+</script>
+
+
+<script type="text/javascript" th:src="@{/js/main/script.js}"></script>
+
