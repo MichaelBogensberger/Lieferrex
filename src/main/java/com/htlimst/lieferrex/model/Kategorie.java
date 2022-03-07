@@ -23,7 +23,21 @@ public class Kategorie {
     @Column(name = "kategorie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // There are following types of categories:
+    // --> Fine Dining
+    // --> Casual Dining
+    // --> Family Style
+    // --> Fast Food
+    // --> Buffet
+    // --> other
     @NotEmpty
     private String name;
+
+
+    @OneToMany(mappedBy = "kategorie")
+    private Set<Mandant> mandanten;
+
+
 
 }

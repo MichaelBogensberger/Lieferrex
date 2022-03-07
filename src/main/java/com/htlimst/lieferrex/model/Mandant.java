@@ -45,9 +45,15 @@ public class Mandant {
         private double mindestbestellwert;
         private double lieferkosten;
 
+        /*
         @ManyToMany
         @JoinTable(name = "mandant_kategorie", joinColumns = @JoinColumn(name = "mandant_id"), inverseJoinColumns = @JoinColumn(name = "kategorie_id"))
         private Set<Kategorie> kategorie;
+         */
+        @ManyToOne
+        @JoinColumn(name="kategorie_id")
+        private Kategorie kategorie;
+
 
         @ManyToMany
         @JoinTable(name = "mandant_bestellart", joinColumns = @JoinColumn(name = "mandant_id"), inverseJoinColumns = @JoinColumn(name = "bestellart_id"))
@@ -74,7 +80,7 @@ public class Mandant {
         private Layout layout;
 
 
-        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, int telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Set<Kategorie> kategorie, Set<Bestellart> bestellart, Layout layout) {
+        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, int telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;

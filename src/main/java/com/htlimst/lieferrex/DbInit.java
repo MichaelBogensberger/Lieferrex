@@ -66,14 +66,16 @@ public class DbInit implements CommandLineRunner {
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
 
-        Kategorie kategorie = new Kategorie(null, "Türkisch");
-        this.kategorieRepository.save(kategorie);
 
-        Set mandantKategorie = new HashSet();
-        mandantKategorie.add(kategorie);
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
-        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, mandantKategorie, mandantBestellart, layout);
+        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layout);
+
+        Kategorie kategorie = new Kategorie();
+        kategorie.setName("Fine Dining");
+        kategorieRepository.save(kategorie);
+
+        mandant.setKategorie(kategorie);
         mandantRepository.save(mandant);
 
         Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("123"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);

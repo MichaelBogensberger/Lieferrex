@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="de">
 <head>
 
-    <title>Dashboard - Bestellungen</title>
+    <title>Dashboard</title>
     <div th:replace="dashboard/fragments/header"></div>
 
 </head>
@@ -14,7 +13,7 @@
 <!-- Reference: https://www.gethalfmoon.com/docs/modal -->
 
 <!-- Page wrapper start -->
-<div class="page-wrapper with-navbar with-sidebar ">
+<div class="page-wrapper with-navbar with-sidebar with-transitions">
 
     <!-- Sticky alerts (toasts), empty container -->
     <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
@@ -48,14 +47,16 @@
 
         <!-- Navbar content (with the dropdown menu) -->
         <div class="navbar-content d-md-none ml-auto">
+
+
             <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
             <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()">
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
 
-        </div>
 
+        </div>
 
 
     </nav>
@@ -68,7 +69,8 @@
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
+                <img class="sidenav-pfp rounded-circle"
+                     src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
                 Michael B
             </div>
             <!-- Sidebar content with the search box -->
@@ -90,14 +92,14 @@
                     </span>
                 Zubereitung
             </a>
-            <a href="/dashboard/zustellungen" class="sidebar-link sidebar-link-with-icon active">
+            <a href="/dashboard/zustellungen" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
                         <i class="fa fa-truck" aria-hidden="true"></i>
                     </span>
                 Zustellung
             </a>
 
-            <br />
+            <br/>
 
             <h5 class="sidebar-title">Verwaltung</h5>
             <div class="sidebar-divider"></div>
@@ -155,19 +157,21 @@
                 Öffnungszeiten
             </a>
 
-            <a href="/dashboard/kategorien" class="sidebar-link sidebar-link-with-icon">
+            <a href="/dashboard/kategorien" class="sidebar-link sidebar-link-with-icon active">
                         <span class="sidebar-icon">
                             <i class="fa fa-list-alt" aria-hidden="true"></i>
                         </span>
                 Resterauntkategorien
             </a>
 
+
         </div>
-
-
 
     </div>
     <!-- Sidebar end -->
+
+
+
 
     <!-- Content wrapper start -->
     <div class="content-wrapper">
@@ -176,112 +180,97 @@
 
 
         <div class="container-fluid">
+
+
+
+
+
             <div class="row row-eq-spacing-lg pl-0 pr-0 mt-0">
 
 
 
 
-                <div class="col-lg-6">
-                    <div class="content">
-
-                        <div class="d-block d-sm-none h-25"></div>
-
-                        <h2 class="card-title font-weight-bold mb-20">Lieferungen</h2>
 
 
-                        <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
-                            <div class="row">
 
-                                <div class="col-2 ">
-                                        <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">3</h2>
-                                        </span>
-                                </div>
 
-                                <div class="col-8 ">
+                <div class="col-lg-12 ">
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Max Mustermann</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Hinterseberweg 12</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">6064 Imst</p>
+                    <div class="content pt-15 pb-0 mb-0">
 
-                                    <div class="sidebar-divider"></div>
+                        <div class="ml-10">
+                            <div class="sidebar-link-with-icon mb-10">
+                                            <span class="sidebar-icon">
+                                                <i class="fa fa-outdent  text-white-lm" aria-hidden="true"></i>
+                                            </span>
+                                <h2 class="card-title font-weight-bold mb-0">Kategorien</h2>
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Schnitzel mit Kebab</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Dürüm</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Coca Cola</p>
-
-                                </div>
-
-                                <div class="col-2 ">
-
-                                    <div class="d-flex align-items-center justify-content-center h-100">
-                                        <div class="d-flex flex-column">
-                                            <a href="#"
-                                               class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
-
-                                        </div>
-                                    </div>
-
-                                </div>
                             </div>
+                            <p class="mt-0">Hier können Sie eine Kategorie für Ihr Restaurant auswählen:</p>
                         </div>
 
 
-                        <!-- CARDS END  -->
-
-
-                    </div>
-                </div>
-
-                <div class="col-lg-6 pr-lg-20">
-                    <div class="content pr-lg-20">
-
-                        <h2 class="card-title font-weight-bold mb-20">Abholungen</h2>
+                        <div class="row row-eq-spacing pl-0 ml-0">
 
 
 
-                        <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
-                            <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <div class="card mt-0">
+                                    <h2 class="card-title mb-5 mt-0">Bearbeiten</h2>
+                                    <p class="mt-0">Hier können Sie eine Kategorie auswählen:</p>
 
-                                <div class="col-2 ">
-                                        <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">6</h2>
-                                        </span>
-                                </div>
-
-                                <div class="col-8 ">
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Max Mustermann</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Ziegelstadelstraße 22b</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">5026 Salzburg</p>
-
-                                    <div class="sidebar-divider"></div>
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Dürm</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Burger</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Fanta</p>
-
-                                </div>
-
-                                <div class="col-2 ">
-
-                                    <div class="d-flex align-items-center justify-content-center h-100">
-                                        <div class="d-flex flex-column">
-                                            <a href="#"
-                                               class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
-
-                                        </div>
+                                    <!-- First radio button -->
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="fine-dining" value="fine-dining">
+                                        <label for="fine-dining">Fine Dining</label>
                                     </div>
+
+                                    <!-- Second radio button (checked by default) -->
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="casual-dining" value="casual-dining">
+                                        <label for="casual-dining">Casual Dining</label>
+                                    </div>
+
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="family-style" value="family-style">
+                                        <label for="family-style">Family Style</label>
+                                    </div>
+
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="fast-food" checked="checked" value="fast-food">
+                                        <label for="fast-food">Fast Food</label>
+                                    </div>
+
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="buffet" value="buffet">
+                                        <label for="buffet">Buffet</label>
+                                    </div>
+
+                                    <div class="custom-radio mb-5">
+                                        <input type="radio" name="radio-set-1" id="other" value="other">
+                                        <label for="other">other</label>
+                                    </div>
+
+
+                                    <button class="btn btn-primary btn-block mb-0 mt-20 pb-0" type="button">speichern</button>
+
+
 
                                 </div>
                             </div>
+
+                            <div class="col-12 col-xl-6">
+                                <div class="card">
+                                    <h2 class="card-title">Sales</h2>
+                                    ...
+                                </div>
+                            </div>
+
                         </div>
 
-                        <!-- CARDS END  -->
+
+
+
 
 
 
@@ -295,24 +284,21 @@
 
 
 
-
-
-
         </div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
+    <!-- Content wrapper end -->
 
-
-
-
-
-
-
-
-
-
-
-</div>
-<!-- Content wrapper end -->
 
 
 
@@ -322,6 +308,7 @@
 
 <!-- Halfmoon JS -->
 <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
-</body>
 
+
+</body>
 </html>
