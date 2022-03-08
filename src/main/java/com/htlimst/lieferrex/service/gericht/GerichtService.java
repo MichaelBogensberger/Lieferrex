@@ -12,5 +12,6 @@ public interface GerichtService {
     public List<Gericht> getGerichtByStatusZero();
 
     Gericht apiUpdateGericht(Long id, Gericht givenGericht);
+    public void save(Gericht  gericht);
 
 }

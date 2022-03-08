@@ -29,8 +29,7 @@ public class MandantServiceImpl implements MandantService {
 
     @Override
     public Mandant mandantMitId(Long id){
-        return null;
-
+        return mandantRepository.getById(id);
     }
 
     @Override
