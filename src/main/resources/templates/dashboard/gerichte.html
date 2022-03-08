@@ -67,7 +67,9 @@
                 </a>
                 <h5 class="modal-title">Gericht bearbeiten</h5>
                 <form th:action="@{/dashboard/gerichte/save}" method="post" th:object="${gericht}">
-
+                    <input type="hidden" id="gericht-edit-id" th:field="*{id}">
+                    <input type="hidden" id="gericht-edit-status" th:field="*{status}">
+                    <input type="hidden" id="gericht-edit-anzahl-gekauft" th:field="*{anzahl_gekauft}">
                     <div class="form-group">
                         <label for="gericht-edit-name" class="required">Name</label>
                         <input type="text" id="gericht-edit-name" class="form-control" value="" required="required" th:field="*{name}">
@@ -100,8 +102,6 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="gericht-edit-id" th:field="*{id}">
-                    <input type="hidden" name="gericht-edit-status" th:field="*{status}">
                     <input class="btn btn-primary btn-block" type="submit" value="speichern">
                 </form>
 
@@ -652,6 +652,7 @@
                 $('#gerichte-info-aktionspreis-aktiviert').prop('checked', false);
             }
 
+
             halfmoon.toggleModal('modal-info-gericht')
 
         });
@@ -672,6 +673,7 @@
             $('#gericht-edit-aktionspreis').val(data.preisangebot);
             $('#gericht-edit-id').val(data.id);
             $('#gericht-edit-status').val(data.status);
+            $('#gericht-edit-anzahl-gekauft').val(data.anzahl_gekauft);
 
             if (data.status == 1 || data.status == 2) {
                 $('#gerichte-edit-aktiviert').prop('checked', true);

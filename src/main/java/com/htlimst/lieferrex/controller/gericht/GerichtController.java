@@ -31,17 +31,13 @@ public class GerichtController {
 
     @GetMapping
     public String showDashboardGerichte(Model model) {
-
         // Gerichte mit Status 1 oder 2
         List<Gericht> gerichteList = gerichtService.getGerichtByStatus();
         // Gerichte mit Status 0
         List<Gericht> gerichteListStatusZero = gerichtService.getGerichtByStatusZero();
         model.addAttribute("gerichteList", gerichteList);
         model.addAttribute("gerichteListStatusZero", gerichteListStatusZero);
-        // ---------Grad nur zum testen für das erste Gericht !---------
-        Optional<Gericht> gerichte = gerichtService.getGerichtById(1L);
-        model.addAttribute("gericht", gerichte);
-        //---------------------------------------------------------------
+        model.addAttribute("gericht", new Gericht());
         return "dashboard/gerichte.html";
     }
     @GetMapping("/{id}")
