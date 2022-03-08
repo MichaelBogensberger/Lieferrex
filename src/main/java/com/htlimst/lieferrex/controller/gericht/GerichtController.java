@@ -48,9 +48,16 @@ public class GerichtController {
     }
 
     @PostMapping("/save")
-    public String saveGericht(Gericht gericht){
+    public String saveGericht(Gericht gericht, @RequestParam Optional<String> aktiviert, @RequestParam Optional<String> aktion){
         Mandant foundMandant = mandantService.mandantMitId(1L);
         gericht.setMandant(foundMandant);
+        if(!aktiviert.isPresent()){
+            gericht.setStatus(0);
+        } else if(!aktion.isPresent()){
+            gericht.setStatus(1);
+        } else {
+            gericht.setStatus(2);
+        }
         gerichtService.save(gericht);
         return "redirect:/dashboard/gerichte";
     }

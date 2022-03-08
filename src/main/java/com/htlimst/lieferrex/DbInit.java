@@ -76,7 +76,7 @@ public class DbInit implements CommandLineRunner {
         // Set positionsEINS = new HashSet();
         // Position position1 = new Position(null, "r1-c1", layout1);
 
-        
+
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
 
