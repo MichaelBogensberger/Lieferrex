@@ -48,6 +48,9 @@ public class GerichtServiceImpl implements GerichtService{
 
         return gerichtRepo.save(foundGericht);
     }
+    public void save(Gericht gericht){
+        gerichtRepo.save(gericht);
+    }
 
 
 }
