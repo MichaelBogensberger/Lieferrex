@@ -95,35 +95,4 @@ public class MainController {
         return "dashboard/oeffnungszeiten.html";
     }
 
-
-
-    @GetMapping("/baukasten/{restaurant}")
-    public String showBaukasten(Model model, @PathVariable String restaurant){
-        // Get Mandant ueber Name in der URL
-        Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
-        // Alle Fragmente des Mandaten ueber dessen ID
-        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
-
-        // HashMap zum Uebertragen der Daten
-        HashMap<String, String> map = new HashMap<>();
-
-        map.put("layout", mandant.getLayout().getName());
-
-        // System.out.println(fragmenttextServiceImpl.findFragmenttextByFragment_id(1L).get().getText());
-        
-        for (Fragment fragment : fragments) {
-            
-            if(fragmenttextServiceImpl.findFragmenttextByFragment_id(fragment.getId()).isPresent()){
-                System.out.println(fragment.getFragmenttext().getText() + "  |  " + fragment.getFragmenttext().getFarbe());
-            } else if (fragmentmapServiceImpl.findFragmentmapByFragment_id(fragment.getId()).isPresent()){
-                System.out.println(fragment.getFragmentmap().getLatitude() + "  |  " + fragment.getFragmentmap().getLongitude());
-            }
-
-        }
-
-        model.addAttribute("data", map);
-
-        return "baukasten/frame.html";
-    }
-
 }

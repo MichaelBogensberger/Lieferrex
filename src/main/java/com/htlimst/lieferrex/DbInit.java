@@ -49,6 +49,8 @@ public class DbInit implements CommandLineRunner {
     private UmsatzRepository umsatzRepository;
     @Autowired
     private SeitenaufrufeRepository seitenaufrufeRepository;
+    @Autowired
+    private PositionRepository positionRepository;
 
 
 
@@ -60,16 +62,28 @@ public class DbInit implements CommandLineRunner {
 
         deleteAll();
 
-        Layout layout = new Layout(null, "Testlayout");
-        layoutRepository.save(layout);
+        Layout layout1 = new Layout(null, "layoutEINS");
+        Layout layout2 = new Layout(null, "layoutZWEI");
+        Layout layout3 = new Layout(null, "layoutDREI");
+        Layout layout4 = new Layout(null, "layoutVIER");
+        layoutRepository.save(layout1);
+        layoutRepository.save(layout2);
+        layoutRepository.save(layout3);
+        layoutRepository.save(layout4);
 
+        // Fragments
+
+        // Set positionsEINS = new HashSet();
+        // Position position1 = new Position(null, "r1-c1", layout1);
+
+        
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
 
 
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
-        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layout);
+        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layout1);
 
         Kategorie kategorie = new Kategorie();
         kategorie.setName("Fine Dining");
