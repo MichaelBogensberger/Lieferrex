@@ -52,5 +52,11 @@ public class GerichtServiceImpl implements GerichtService{
         gerichtRepo.save(gericht);
     }
 
+    @Override
+    public void savingStatusGericht(Long id) {
+        Optional<Gericht> foundGericht = gerichtRepo.findById(id);
+        foundGericht.get().setStatus(1);
+        gerichtRepo.save(foundGericht.get());
+    }
 
 }

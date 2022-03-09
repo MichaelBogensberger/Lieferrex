@@ -146,9 +146,9 @@
                                         <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
                                         <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.beschreibung}]]</td>
                                         <td class="text-center">
-                                            <a href="#"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a th:href="@{/dashboard/gerichte/} + ${gericht.id}"
+                                           class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                           role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </td>
                                         <!--
                                         <td >
