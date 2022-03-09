@@ -59,4 +59,5 @@ public class GerichtServiceImpl implements GerichtService{
         gerichtRepo.save(foundGericht.get());
     }
 
+
 }

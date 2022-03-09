@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class GerichtController {
     }
 
     @PostMapping("/save")
-    public String saveGericht(Gericht gericht, @RequestParam Optional<String> aktiviert, @RequestParam Optional<String> aktion){
+    public String saveGericht(Gericht gericht, @RequestParam Optional<String> aktiviert, @RequestParam Optional<String> aktion, @RequestParam Optional<String> addPreisangebot){
         Mandant foundMandant = mandantService.mandantMitId(1L);
         gericht.setMandant(foundMandant);
         if(!aktiviert.isPresent()){
@@ -52,6 +53,9 @@ public class GerichtController {
             gericht.setStatus(1);
         } else {
             gericht.setStatus(2);
+        }
+        if(!addPreisangebot.isPresent()){
+            gericht.setPreisangebot(0.0);
         }
         gerichtService.save(gericht);
         return "redirect:/dashboard/gerichte";
