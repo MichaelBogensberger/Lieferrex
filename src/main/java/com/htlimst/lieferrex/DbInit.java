@@ -62,20 +62,49 @@ public class DbInit implements CommandLineRunner {
 
         deleteAll();
 
-        Layout layout1 = new Layout(null, "layoutEINS");
-        Layout layout2 = new Layout(null, "layoutZWEI");
-        Layout layout3 = new Layout(null, "layoutDREI");
-        Layout layout4 = new Layout(null, "layoutVIER");
-        layoutRepository.save(layout1);
-        layoutRepository.save(layout2);
-        layoutRepository.save(layout3);
-        layoutRepository.save(layout4);
+        // |---------- Layouts
+        ArrayList<Layout> layouts = new ArrayList<>();
+        
+        layouts.add(new Layout(null, "layoutEINS"));
+        layouts.add(new Layout(null, "layoutZWEI"));
+        layouts.add(new Layout(null, "layoutDREI"));
+        layouts.add(new Layout(null, "layoutVIER"));
+        
+        for (Layout layout : layouts) {
+            layoutRepository.save(layout);
+        }
 
-        // Fragments
+        // |---------- Positions
+        ArrayList<Position> positions = new ArrayList<>();
 
-        // Set positionsEINS = new HashSet();
-        // Position position1 = new Position(null, "r1-c1", layout1);
-
+        // Positions - Layout EINS
+        positions.add(new Position(null, "r1-c1", layouts.get(0), null));
+        positions.add(new Position(null, "r1-c1", layouts.get(0), null));
+        positions.add(new Position(null, "r2-c1", layouts.get(0), null));
+        positions.add(new Position(null, "r2-c2", layouts.get(0), null));
+        
+        // Positions - Layout ZWEI
+        positions.add(new Position(null, "r1-c1", layouts.get(1), null));
+        positions.add(new Position(null, "r2-c1", layouts.get(1), null));
+        positions.add(new Position(null, "r3-c1", layouts.get(1), null));
+        positions.add(new Position(null, "r3-c2", layouts.get(1), null));
+        
+        // Positions - Layout DREI
+        positions.add(new Position(null, "r1-c1", layouts.get(2), null));
+        positions.add(new Position(null, "r2-c1", layouts.get(2), null));
+        positions.add(new Position(null, "r2-c2", layouts.get(2), null));
+        positions.add(new Position(null, "r3-c1", layouts.get(2), null));
+        
+        // Positions - Layout VIER
+        positions.add(new Position(null, "r1-c1", layouts.get(3), null));
+        positions.add(new Position(null, "r1-c2", layouts.get(3), null));
+        positions.add(new Position(null, "r2-c1", layouts.get(3), null));
+        positions.add(new Position(null, "r3-c1", layouts.get(3), null));
+        positions.add(new Position(null, "r3-c2", layouts.get(3), null));
+        
+        for (Position position : positions) {
+            positionRepository.save(position);
+        }
 
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
