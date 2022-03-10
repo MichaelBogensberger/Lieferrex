@@ -1,7 +1,7 @@
 package com.htlimst.lieferrex.service.fragmentmap;
 
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Fragmentmap;
+import com.htlimst.lieferrex.model.fragments.FragmentMap;
 import com.htlimst.lieferrex.repository.FragmentRepository;
 import com.htlimst.lieferrex.repository.FragmentMapRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
@@ -45,7 +45,7 @@ public class FragmentMapServiceImpl implements FragmentMapService {
     // }
 
     @Override
-    public Optional<Fragmentmap> findFragmentmapByFragment_id(Long id){
+    public Optional<FragmentMap> findFragmentmapByFragment_id(Long id){
         return fragmentmapRepository.findFragmentmapByFragment_id(id);
     }
 

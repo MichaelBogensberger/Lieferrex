@@ -1,7 +1,7 @@
 package com.htlimst.lieferrex.service.fragmenttext;
 
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Fragmenttext;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.repository.FragmentRepository;
 import com.htlimst.lieferrex.repository.FragmentTextRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
@@ -45,7 +45,7 @@ public class FragmentTextServiceImpl implements FragmentTextService {
     // }
 
     @Override
-    public Optional<Fragmenttext> findFragmenttextByFragment_id(Long id){
+    public Optional<FragmentText> findFragmenttextByFragment_id(Long id){
         return fragmenttextRepository.findFragmenttextByFragment_id(id);
     }
 

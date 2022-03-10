@@ -9,6 +9,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import com.htlimst.lieferrex.model.fragments.FragmentMap;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -35,8 +38,8 @@ public class Fragment {
 
 
     @OneToOne(mappedBy = "fragment")
-    private Fragmenttext fragmenttext;
+    private FragmentText fragmenttext;
 
     @OneToOne(mappedBy = "fragment")
-    private Fragmentmap fragmentmap;
+    private FragmentMap fragmentmap;
 }

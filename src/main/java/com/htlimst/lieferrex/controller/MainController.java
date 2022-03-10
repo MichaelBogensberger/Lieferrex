@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Fragmenttext;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.MandantRepository;
