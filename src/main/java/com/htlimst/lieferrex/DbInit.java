@@ -80,29 +80,29 @@ public class DbInit implements CommandLineRunner {
         ArrayList<Position> positions = new ArrayList<>();
 
         // Positions - Layout EINS
-        positions.add(new Position(null, "r1-c1", savedLayouts.get(0), null));
-        positions.add(new Position(null, "r1-c1", savedLayouts.get(0), null));
-        positions.add(new Position(null, "r2-c1", savedLayouts.get(0), null));
-        positions.add(new Position(null, "r2-c2", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r2c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r2c2", savedLayouts.get(0), null));
         
         // Positions - Layout ZWEI
-        positions.add(new Position(null, "r1-c1", savedLayouts.get(1), null));
-        positions.add(new Position(null, "r2-c1", savedLayouts.get(1), null));
-        positions.add(new Position(null, "r3-c1", savedLayouts.get(1), null));
-        positions.add(new Position(null, "r3-c2", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r1c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r2c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r3c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r3c2", savedLayouts.get(1), null));
         
         // Positions - Layout DREI
-        positions.add(new Position(null, "r1-c1", savedLayouts.get(2), null));
-        positions.add(new Position(null, "r2-c1", savedLayouts.get(2), null));
-        positions.add(new Position(null, "r2-c2", savedLayouts.get(2), null));
-        positions.add(new Position(null, "r3-c1", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r1c1", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r2c1", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r2c2", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r3c1", savedLayouts.get(2), null));
         
         // Positions - Layout VIER
-        positions.add(new Position(null, "r1-c1", savedLayouts.get(3), null));
-        positions.add(new Position(null, "r1-c2", savedLayouts.get(3), null));
-        positions.add(new Position(null, "r2-c1", savedLayouts.get(3), null));
-        positions.add(new Position(null, "r3-c1", savedLayouts.get(3), null));
-        positions.add(new Position(null, "r3-c2", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r1c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r1c2", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r2c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r3c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r3c2", savedLayouts.get(3), null));
         
         for (Position position : positions) {
             positionRepository.save(position);
@@ -114,7 +114,7 @@ public class DbInit implements CommandLineRunner {
 
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
-        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
+        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0));
 
         Kategorie kategorie = new Kategorie();
         kategorie.setName("Fine Dining");
@@ -177,11 +177,12 @@ public class DbInit implements CommandLineRunner {
         bestellungRepository.deleteAll();
         bestellstatusRepository.deleteAll();
         kundeRepository.deleteAll();
+        fragmentRepository.deleteAll();
         mandantRepository.deleteAll();
         kategorieRepository.deleteAll();
         bestellartRepository.deleteAll();
-        layoutRepository.deleteAll();
         positionRepository.deleteAll();
+        layoutRepository.deleteAll();
     }
 
 }

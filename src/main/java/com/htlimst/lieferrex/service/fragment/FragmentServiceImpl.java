@@ -17,31 +17,7 @@ public class FragmentServiceImpl implements FragmentService {
     @Autowired
     private FragmentRepository fragmentRepository;
 
-    // @Autowired
-    // private MandantRepository mandantRepository;
-
-    // @Override
-    // public List<Mandant> alleMandanten(){
-    //     return null;
-    // }
-
-    // @Override
-    // public Mandant mandantEinfuegen(Mandant mandant){
-    //     return null;
-
-    // }
-
-    // @Override
-    // public Mandant mandantMitId(Long id){
-    //     return null;
-
-    // }
-
-    // @Override
-    // public void mandantLoeschenMitId(Long id){
-
-    // }
-
+    
     @Override
     public List<Fragment> findFragmentByMandant_id(Long id){
         return fragmentRepository.findFragmentByMandant_id(id);

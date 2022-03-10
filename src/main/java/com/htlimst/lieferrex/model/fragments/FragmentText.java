@@ -33,7 +33,7 @@ public class FragmentText {
     private String farbe;
 
     @OneToOne
-    @JoinColumn(name="fragment_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="fragment_id")
     private Fragment fragment;
 
 }
