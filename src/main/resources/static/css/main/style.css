@@ -1120,3 +1120,11 @@ margin-left: 15px;
 .m0 {
     margin: 0px !important;
 }
+
+.c-pointer:hover {
+    cursor: pointer;
+}
+
+.d-inline {
+    display: inline;
+}

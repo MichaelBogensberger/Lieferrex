@@ -45,17 +45,66 @@
                 </div>
                 <div class="collapsible-body c-body-orders">
 
-                    <h6 class="m0">&nbsp; Asiamix Imst - Hinterseberweg 12</h6> <br>
+                    <div class="row">
+                        <div class="col s12 l8">
+                            <h6 class="m0">&nbsp; Asiamix Imst - Hinterseberweg 12</h6> <br>
 
-                    <div class="chip">
-                        1x - Schnitzel mit Kebab
+                            <div class="chip">
+                                1x - Schnitzel mit Kebab
+                            </div>
+                            <div class="chip">
+                                1x - Dürüm
+                            </div>
+                            <div class="chip">
+                                2x - Coca Cola
+                            </div>
+                        </div>
+
+
+                            <div class="col s12 l4  sr-rest-stars hide-tab-rest-stars">
+
+                                <form action="/HALLO" method="post" class="d-inline">
+                                    <a onclick="$(this).closest('form').submit();">
+                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-1">star_rate </span>
+                                        <input type="hidden" name="star" value="1">
+                                    </a>
+                                </form>
+
+                                <form action="/HALLO" method="post" class="d-inline">
+                                    <a onclick="$(this).closest('form').submit();">
+                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-2">star_rate </span>
+                                        <input type="hidden" name="star" value="2">
+                                    </a>
+                                </form>
+
+                                <form action="/HALLO" method="post" class="d-inline">
+                                    <a onclick="$(this).closest('form').submit();">
+                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-3">star_rate </span>
+                                        <input type="hidden" name="star" value="3">
+                                    </a>
+                                </form>
+
+                                <form action="/HALLO" method="post" class="d-inline">
+                                    <a onclick="$(this).closest('form').submit();">
+                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-4" >star_rate </span>
+                                        <input type="hidden" name="star" value="4">
+                                    </a>
+                                </form>
+
+                                <form action="/HALLO" method="post" class="d-inline">
+                                    <a onclick="$(this).closest('form').submit();">
+                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-5">star_rate </span>
+                                        <input type="hidden" name="star" value="5">
+                                    </a>
+                                </form>
+
+
+                            </div>
+
+
+
                     </div>
-                    <div class="chip">
-                        1x - Dürüm
-                    </div>
-                    <div class="chip">
-                        2x - Coca Cola
-                    </div>
+
 
                 </div>
             </li>
@@ -71,19 +120,68 @@
                 </div>
                 <div class="collapsible-body c-body-orders">
 
-                    <h6 class="m0">&nbsp; Burgerista - Ziegelstadelstraße 2A</h6> <br>
+                    <div class="row">
+                        <div class="col s12 l8">
+                            <h6 class="m0">&nbsp; Burgerista - Ziegelstadelstraße 2A</h6> <br>
 
-                    <div class="chip">
-                        1x - Schnitzel mit Kebab
-                    </div>
-                    <div class="chip">
-                        1x - Dürüm
-                    </div>
-                    <div class="chip">
-                        2x - Coca Cola
+                            <div class="chip">
+                                1x - Schnitzel mit Kebab
+                            </div>
+                            <div class="chip">
+                                1x - Dürüm
+                            </div>
+                            <div class="chip">
+                                2x - Coca Cola
+                            </div>
+                        </div>
+
+
+                        <div class="col s12 l4  sr-rest-stars hide-tab-rest-stars">
+
+                            <form action="/HALLO" method="post" class="d-inline">
+                                <a onclick="$(this).closest('form').submit();">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-1">star_rate </span>
+                                    <input type="hidden" name="star" value="1">
+                                </a>
+                            </form>
+
+                            <form action="/HALLO" method="post" class="d-inline">
+                                <a onclick="$(this).closest('form').submit();">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-2">star_rate </span>
+                                    <input type="hidden" name="star" value="2">
+                                </a>
+                            </form>
+
+                            <form action="/HALLO" method="post" class="d-inline">
+                                <a onclick="$(this).closest('form').submit();">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-3">star_rate </span>
+                                    <input type="hidden" name="star" value="3">
+                                </a>
+                            </form>
+
+                            <form action="/HALLO" method="post" class="d-inline">
+                                <a onclick="$(this).closest('form').submit();">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-4" >star_rate </span>
+                                    <input type="hidden" name="star" value="4">
+                                </a>
+                            </form>
+
+                            <form action="/HALLO" method="post" class="d-inline">
+                                <a onclick="$(this).closest('form').submit();">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-5">star_rate </span>
+                                    <input type="hidden" name="star" value="5">
+                                </a>
+                            </form>
+
+
+                        </div>
+
+
+
                     </div>
 
-                </div>
+
+
             </li>
 
 
@@ -124,3 +222,67 @@
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 
+<script>
+    $( document ).ready(function() {
+
+        $(".star-1").hover(function () {
+            $('.star-1').text("star");
+        },
+        function () {
+            $('.star-1').text("star_rate");
+        });
+
+        $(".star-2").hover(function () {
+                $('.star-1').text("star");
+                $('.star-2').text("star");
+        },
+        function () {
+            $('.star-1').text("star_rate");
+            $('.star-2').text("star_rate");
+        });
+
+        $(".star-3").hover(function () {
+                $('.star-1').text("star");
+                $('.star-2').text("star");
+                $('.star-3').text("star");
+            },
+            function () {
+                $('.star-1').text("star_rate");
+                $('.star-2').text("star_rate");
+                $('.star-3').text("star_rate");
+            });
+
+
+        $(".star-4").hover(function () {
+                $('.star-1').text("star");
+                $('.star-2').text("star");
+                $('.star-3').text("star");
+                $('.star-4').text("star");
+            },
+            function () {
+                $('.star-1').text("star_rate");
+                $('.star-2').text("star_rate");
+                $('.star-3').text("star_rate");
+                $('.star-4').text("star_rate");
+            });
+
+        $(".star-5").hover(function () {
+                $('.star-1').text("star");
+                $('.star-2').text("star");
+                $('.star-3').text("star");
+                $('.star-4').text("star");
+                $('.star-5').text("star");
+            },
+            function () {
+                $('.star-1').text("star_rate");
+                $('.star-2').text("star_rate");
+                $('.star-3').text("star_rate");
+                $('.star-4').text("star_rate");
+                $('.star-5').text("star_rate");
+            });
+
+
+    });
+
+
+</script>

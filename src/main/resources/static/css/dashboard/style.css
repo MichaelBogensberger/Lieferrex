@@ -19,6 +19,10 @@
     --dm-navbar-bg-color: transparent;
 
 
+    --lm-base-body-bg-color: #F8F8F8;
+    --lm-sidebar-bg-color: #F8F8F8;
+    --lm-navbar-bg-color: #F8F8F8;
+
 
     --primary-color: var(--pink-color-main);
     --primary-color-light: var(--pink-color-light);
