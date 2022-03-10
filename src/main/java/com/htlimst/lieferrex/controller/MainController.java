@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Fragmenttext;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.MandantRepository;
@@ -93,37 +93,6 @@ public class MainController {
     @GetMapping("/dashboard/oeffnungszeiten")
     public String showDashboardOeffnungszeiten() {
         return "dashboard/oeffnungszeiten.html";
-    }
-
-
-
-    @GetMapping("/baukasten/{restaurant}")
-    public String showBaukasten(Model model, @PathVariable String restaurant){
-        // Get Mandant ueber Name in der URL
-        Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
-        // Alle Fragmente des Mandaten ueber dessen ID
-        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
-
-        // HashMap zum Uebertragen der Daten
-        HashMap<String, String> map = new HashMap<>();
-
-        map.put("layout", mandant.getLayout().getName());
-
-        // System.out.println(fragmenttextServiceImpl.findFragmenttextByFragment_id(1L).get().getText());
-        
-        for (Fragment fragment : fragments) {
-            
-            if(fragmenttextServiceImpl.findFragmenttextByFragment_id(fragment.getId()).isPresent()){
-                System.out.println(fragment.getFragmenttext().getText() + "  |  " + fragment.getFragmenttext().getFarbe());
-            } else if (fragmentmapServiceImpl.findFragmentmapByFragment_id(fragment.getId()).isPresent()){
-                System.out.println(fragment.getFragmentmap().getLatitude() + "  |  " + fragment.getFragmentmap().getLongitude());
-            }
-
-        }
-
-        model.addAttribute("data", map);
-
-        return "baukasten/frame.html";
     }
 
 }

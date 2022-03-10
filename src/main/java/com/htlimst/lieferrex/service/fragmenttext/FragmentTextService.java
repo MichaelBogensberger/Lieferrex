@@ -1,12 +1,10 @@
 package com.htlimst.lieferrex.service.fragmenttext;
 
-import com.htlimst.lieferrex.model.Fragmenttext;
-
-import java.util.List;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 import java.util.Optional;
 
 public interface FragmentTextService {
 
-    Optional<Fragmenttext> findFragmenttextByFragment_id(Long id);
+    Optional<FragmentText> findFragmenttextByFragment_id(Long id);
 
 }

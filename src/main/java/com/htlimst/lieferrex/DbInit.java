@@ -49,6 +49,8 @@ public class DbInit implements CommandLineRunner {
     private UmsatzRepository umsatzRepository;
     @Autowired
     private SeitenaufrufeRepository seitenaufrufeRepository;
+    @Autowired
+    private PositionRepository positionRepository;
 
 
 
@@ -60,8 +62,51 @@ public class DbInit implements CommandLineRunner {
 
         deleteAll();
 
-        Layout layout = new Layout(null, "Testlayout");
-        layoutRepository.save(layout);
+        // |---------- Layouts
+        ArrayList<Layout> layouts = new ArrayList<>();
+        ArrayList<Layout> savedLayouts = new ArrayList<>();
+        
+        layouts.add(new Layout(null, "layoutEINS"));
+        layouts.add(new Layout(null, "layoutZWEI"));
+        layouts.add(new Layout(null, "layoutDREI"));
+        layouts.add(new Layout(null, "layoutVIER"));
+        
+        for (Layout layout : layouts) {
+            layoutRepository.save(layout);
+            savedLayouts.add(layout);
+        }
+
+        // |---------- Positions
+        ArrayList<Position> positions = new ArrayList<>();
+
+        // Positions - Layout EINS
+        positions.add(new Position(null, "r1-c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r1-c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r2-c1", savedLayouts.get(0), null));
+        positions.add(new Position(null, "r2-c2", savedLayouts.get(0), null));
+        
+        // Positions - Layout ZWEI
+        positions.add(new Position(null, "r1-c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r2-c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r3-c1", savedLayouts.get(1), null));
+        positions.add(new Position(null, "r3-c2", savedLayouts.get(1), null));
+        
+        // Positions - Layout DREI
+        positions.add(new Position(null, "r1-c1", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r2-c1", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r2-c2", savedLayouts.get(2), null));
+        positions.add(new Position(null, "r3-c1", savedLayouts.get(2), null));
+        
+        // Positions - Layout VIER
+        positions.add(new Position(null, "r1-c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r1-c2", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r2-c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r3-c1", savedLayouts.get(3), null));
+        positions.add(new Position(null, "r3-c2", savedLayouts.get(3), null));
+        
+        for (Position position : positions) {
+            positionRepository.save(position);
+        }
 
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
@@ -69,7 +114,7 @@ public class DbInit implements CommandLineRunner {
 
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
-        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layout);
+        Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
 
         Kategorie kategorie = new Kategorie();
         kategorie.setName("Fine Dining");
@@ -90,8 +135,12 @@ public class DbInit implements CommandLineRunner {
         Bestellung bestellung = new Bestellung(null, 10, new Timestamp(2022, 3, 1, 15, 15, 0, 0), 15.5, 2.5, bestellart, kunde, mandant, bestellstatis);
         this.bestellungRepository.save(bestellung);
 
-        Gericht gericht = new Gericht(null, "Wiener Schnitzel", "Paniertes Kalbsschnitzel mit Kartoffelsalat", 10.50, 0.0, 15, 1, mandant);
+        Gericht gericht = new Gericht(null, "Wiener Schnitzel", "Paniertes Kalbsschnitzel mit Kartoffelsalat", 10.50, 0.0, 100, 1, mandant);
         this.gerichtRepository.save(gericht);
+        Gericht gericht2 = new Gericht(null, "Döner", "Döner mit Mangosoße", 5.50, 1.0, 150, 2, mandant);
+        this.gerichtRepository.save(gericht2);
+        Gericht gericht3 = new Gericht(null, "Pizza", "Pizza mit Lachs", 25.00, 0.0, 5, 0, mandant);
+        this.gerichtRepository.save(gericht3);
 
         GerichtBestellung gerichtBestellung = new GerichtBestellung(null, "Extra Preiselbeeren", gericht, bestellung);
         this.gerichtBestellungRepository.save(gerichtBestellung);
@@ -132,6 +181,7 @@ public class DbInit implements CommandLineRunner {
         kategorieRepository.deleteAll();
         bestellartRepository.deleteAll();
         layoutRepository.deleteAll();
+        positionRepository.deleteAll();
     }
 
 }

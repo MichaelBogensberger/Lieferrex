@@ -1,4 +1,4 @@
-package com.htlimst.lieferrex.model;
+package com.htlimst.lieferrex.model.fragments;
 
 
 import lombok.AllArgsConstructor;
@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
+import com.htlimst.lieferrex.model.Fragment;
+
 import java.util.Set;
 
 @AllArgsConstructor
@@ -16,7 +19,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "fragmenttext")
-public class Fragmenttext {
+public class FragmentText {
 
 
     @Id

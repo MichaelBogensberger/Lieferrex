@@ -28,23 +28,23 @@
                     <span aria-hidden="true">&times;</span>
                 </a>
                 <h5 class="modal-title">Gericht hinzufügen</h5>
-                <form action="..." method="...">
+                <form th:action="@{/dashboard/gerichte/save}" method="post" th:object="${gericht}">
                     <div class="form-group">
                         <label for="gericht-name" class="required">Name</label>
-                        <input type="text" id="gericht-name" class="form-control" placeholder="Wiener Schnitzel" required="required">
+                        <input type="text" id="gericht-name" class="form-control" placeholder="Wiener Schnitzel" th:field="*{name}" required="required">
                     </div>
                     <div class="form-group">
                         <label for="gericht-desc" class="required">Beschreibung</label>
-                        <input type="text" id="gericht-desc" class="form-control" placeholder="Leckeres Wiener Schnitzel mit Kartoffelsalat" required="required">
+                        <input type="text" id="gericht-desc" class="form-control" placeholder="Leckeres Wiener Schnitzel mit Kartoffelsalat" th:field="*{beschreibung}" required="required">
                     </div>
                     <div class="form-group">
                         <label for="gericht-preis" class="required">Preis</label>
-                        <input step="any" type="number" id="gericht-preis" class="form-control" placeholder="12,50" required="required">
+                        <input step="any" type="number" id="gericht-preis" class="form-control" placeholder="12,50" th:field="*{preis}" required="required">
                     </div>
 
                     <div class="form-group">
                         <div class="custom-switch">
-                            <input type="checkbox" id="gerichte-aktiviert" value="true" checked="checked">
+                            <input type="checkbox" id="gerichte-aktiviert" name="aktiviert" value="true" checked="checked">
                             <label for="gerichte-aktiviert">aktiviert</label>
                         </div>
                     </div>
@@ -66,39 +66,40 @@
                     <span aria-hidden="true">&times;</span>
                 </a>
                 <h5 class="modal-title">Gericht bearbeiten</h5>
-                <form action="..." method="...">
+                <form th:action="@{/dashboard/gerichte/save}" method="post" th:object="${gericht}">
+                    <input type="hidden" id="gericht-edit-id" th:field="*{id}">
+                    <input type="hidden" id="gericht-edit-anzahl-gekauft" th:field="*{anzahl_gekauft}">
                     <div class="form-group">
                         <label for="gericht-edit-name" class="required">Name</label>
-                        <input type="text" id="gericht-edit-name" class="form-control" value="" required="required">
+                        <input type="text" id="gericht-edit-name" class="form-control" value="" required="required" th:field="*{name}">
                     </div>
                     <div class="form-group">
                         <label for="gericht-edit-desc" class="required">Beschreibung</label>
-                        <input type="text" id="gericht-edit-desc" class="form-control" value="" required="required">
+                        <input type="text" id="gericht-edit-desc" class="form-control" value="" th:field="*{beschreibung}" required="required">
                     </div>
                     <div class="form-group">
                         <label for="gericht-edit-preis" class="required">Preis</label>
-                        <input type="number" step="any" id="gericht-edit-preis" class="form-control" value="" required="required">
+                        <input type="number" step="any" id="gericht-edit-preis" class="form-control" value="" th:field="*{preis}" required="required">
                     </div>
 
                     <div class="form-group">
                         <label for="gericht-edit-aktionspreis" class="required">Aktionspreis</label>
-                        <input type="number" step="any" id="gericht-edit-aktionspreis" class="form-control" value="" required="required">
+                        <input type="number" step="any" id="gericht-edit-aktionspreis" class="form-control" value="" th:field="*{preisangebot}" required="required">
                     </div>
 
                     <div class="form-group mb-10">
                         <div class="custom-switch">
-                            <input type="checkbox" id="gerichte-edit-aktiviert" value="true">
+                            <input type="checkbox" id="gerichte-edit-aktiviert" name="aktiviert" value="true">
                             <label for="gerichte-edit-aktiviert">aktiviert</label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="custom-switch">
-                            <input type="checkbox" id="gerichte-edit-aktionspreis-aktiviert" value="true" >
+                            <input type="checkbox" id="gerichte-edit-aktionspreis-aktiviert" name="aktion" value="true" >
                             <label for="gerichte-edit-aktionspreis-aktiviert">Aktionspreis verwenden</label>
                         </div>
                     </div>
-
 
                     <input class="btn btn-primary btn-block" type="submit" value="speichern">
                 </form>
@@ -144,9 +145,9 @@
                                         <td class="d-none d-md-table-cell">[[${gericht.preisangebot}]] €</td>
                                         <td class="d-none d-md-table-cell text-truncate max-width-130">[[${gericht.beschreibung}]]</td>
                                         <td class="text-center">
-                                            <a href="#"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a th:href="@{/dashboard/gerichte/} + ${gericht.id}"
+                                           class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                           role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </td>
                                         <!--
                                         <td >
@@ -650,6 +651,7 @@
                 $('#gerichte-info-aktionspreis-aktiviert').prop('checked', false);
             }
 
+
             halfmoon.toggleModal('modal-info-gericht')
 
         });
@@ -668,6 +670,9 @@
             $('#gericht-edit-desc').val(data.beschreibung);
             $('#gericht-edit-preis').val(data.preis);
             $('#gericht-edit-aktionspreis').val(data.preisangebot);
+            $('#gericht-edit-id').val(data.id);
+            $('#gericht-edit-status').val(data.status);
+            $('#gericht-edit-anzahl-gekauft').val(data.anzahl_gekauft);
 
             if (data.status == 1 || data.status == 2) {
                 $('#gerichte-edit-aktiviert').prop('checked', true);
@@ -680,7 +685,6 @@
             } else {
                 $('#gerichte-edit-aktionspreis-aktiviert').prop('checked', false);
             }
-
 
         });
 

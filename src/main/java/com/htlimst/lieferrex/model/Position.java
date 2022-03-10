@@ -27,7 +27,7 @@ public class Position {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="layout_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="layout_id")
     private Layout layout;
 
     @OneToMany(mappedBy = "position")

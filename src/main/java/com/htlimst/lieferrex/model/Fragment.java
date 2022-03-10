@@ -8,7 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
+
+import com.htlimst.lieferrex.model.fragments.FragmentMap;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,17 +29,17 @@ public class Fragment {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name="position_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="position_id")
     private Position position;
 
     @ManyToOne
-    @JoinColumn(name="mandant_id", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="mandant_id")
     private Mandant mandant;
 
 
     @OneToOne(mappedBy = "fragment")
-    private Fragmenttext fragmenttext;
+    private FragmentText fragmenttext;
 
     @OneToOne(mappedBy = "fragment")
-    private Fragmentmap fragmentmap;
+    private FragmentMap fragmentmap;
 }
