@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Lieferrex - Login</title>
+
+    <div th:replace="main/fragments/header"></div>
+
+    <!-- Login Style -->
+    <link th:href="@{/css/main/login.css}" rel="stylesheet"/>
+
+
+</head>
+<body class="login-body">
+
+
+<div id="reg-div" >
+
+
+
+
+
+    <form class="col s12" id="reg-form">
+        <h1 class="login-form-ueb reg-form-ueb">Partner werden</h1>
+
+
+
+        <ul class="stepper horizontal">
+            <li class="step active">
+                <div class="step-title waves-effect">Beschreibung</div>
+                <div class="step-content">
+
+
+
+                    <div class="row">
+
+                      <div class="col s6">
+                        <h1 class="ess-step-ueb white-dm">Partner werden</h1>
+                        <p class="white-dm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
+
+
+                      </div>
+
+                      <div class="col s6">
+                          <p class="white-dm">1) Beschreibung</p>
+                          <p class="white-dm">2) Grunddaten eingeben (Restaurant bezogen)</p>
+                          <p class="white-dm">3) Standort eingeben</p>
+                          <p class="white-dm">4) Admin Benutzer anlegen</p>
+                          <p class="white-dm">5) Registrieren</p>
+
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="step-actions">
+                        <!-- Here goes your actions buttons -->
+                        <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+            <li class="step">
+                <div class="step-title waves-effect">Essentials</div>
+                <div class="step-content">
+
+
+                    <!--
+                    <div class="row">
+
+                      <div class="col s6">
+                        <h1 class="ess-step-ueb">Neu registireren</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
+
+
+                      </div>
+
+                      <div class="col s6">6-columns (one-half)</div>
+                    </div>
+                  -->
+
+
+
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm  prefix">home</i>
+                                    <input id="firmenname" type="text" class="validate login-inp" placeholder="Firmenname">
+                                    <label for="firmenname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">email</i>
+                                    <input id="rest-email" type="email" class="validate login-inp" placeholder="Restaurant-Email">
+                                    <label for="rest-email"></label>
+                                </div>
+
+
+                            </div>
+
+                            <!--
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">email</i>
+                                    <input id="vname" type="email" class="validate login-inp" placeholder="Email">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+                            -->
+
+
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm  prefix">account_balance_wallet</i>
+                                    <input id="mindestbestellwert" type="number" step="any" class="validate login-inp" placeholder="Mindestbestellwert €">
+                                    <label for="mindestbestellwert"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">airport_shuttle</i>
+                                    <input id="lieferkosten" type="number" step="any"  class="validate login-inp" placeholder="Lieferkosten €">
+                                    <label for="lieferkosten"></label>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">call</i>
+                                    <input id="vname" type="tel" class="validate login-inp" placeholder="Telefonnummer">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="step-actions">
+                        <!-- Here goes your actions buttons -->
+                        <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+            <li class="step">
+                <div class="step-title waves-effect">Adresse</div>
+                <div class="step-content">
+
+
+
+
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">map</i>
+                                    <input id="vname" type="text" class="validate login-inp" placeholder="Ort">
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">location_city</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="PLZ">
+                                    <label for="nname"></label>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">home</i>
+                                    <input id="vname" type="text" class="validate login-inp" placeholder="Straße">
+                                    <label for="nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="Hausnummer">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">landscape</i>
+                                    <input id="nname" type="text" class="validate login-inp" placeholder="Land">
+                                    <label for="nname"></label>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </form>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div class="step-actions">
+                        <!-- Here goes your actions buttons -->
+                        <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
+                    </div>
+                </div>
+            </li>
+
+
+
+            <li class="step">
+                <div class="step-title waves-effect">Benutzer</div>
+                <div class="step-content">
+
+
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">face</i>
+                                    <input id="b-vname" type="text" class="validate login-inp" placeholder="Vorname">
+                                    <label for="b-nname"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">fingerprint</i>
+                                    <input id="b-nname" type="text" class="validate login-inp" placeholder="Nachname">
+                                    <label for="b-nname"></label>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">email</i>
+                                    <input id="b-email" type="email" class="validate login-inp" placeholder="Email">
+                                    <label for="b-email"></label>
+                                </div>
+                                <div class="input-field login-div-mail col s12 m6 l6">
+                                    <i class="material-icons-outlined white-dm prefix">vpn_key</i>
+                                    <input id="pwd" type="password" class="validate login-inp" placeholder="Passwort">
+                                    <label for="pwd"></label>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="input-field login-div-mail col s12 m12 l12">
+                                    <i class="material-icons-outlined white-dm prefix">vpn_key</i>
+                                    <input id="pwd-2" type="password" class="validate login-inp" placeholder="Passwort wiederholen">
+                                    <label for="pwd-2"></label>
+                                </div>
+                            </div>
+
+
+
+
+                        </form>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div class="step-actions">
+                        <!-- Here goes your actions buttons -->
+                        <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="step">
+                <div class="step-title waves-effect">Accept</div>
+                <div class="step-content">
+                    <!-- Your step content goes here (like inputs or so) -->
+
+
+                    <div class="row">
+                        <div class="col s12 m12 l6">
+                            <p class="white-dm">labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+                            <form action="#">
+                                <p>
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>AGB zustimmen</span>
+                                    </label>
+                                </p>
+
+                                <p>
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>Infos über Mail bekommen</span>
+                                    </label>
+                                </p>
+
+                            </form>
+
+
+                        </div>
+                        <div class="col s12 m12 l6">
+                            <a href="#">AGB Richtlinien</a>
+                            <br>
+                            <a href="#">Impressum</a>
+                            <br>
+                            <a href="#">Sonstiges</a>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="step-actions">
+                        <!-- Here goes your actions buttons -->
+                        <button class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+        </ul>
+
+
+
+
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<footer class="footer footer-reg">
+    <div class="container">
+        <a href="index.php" class="animsition-link" style="color: #939C9E;">
+            <p class="back-index color-white">Startseite</p>
+        </a>
+    </div>
+</footer>
+
+
+
+</body>
+
+
+<script type="text/javascript" th:src="@{/js/main/script.js}"></script>
+
+
+<script>
+    var stepper = document.querySelector('.stepper');
+    var stepperInstace = new MStepper(stepper, {
+        // options
+        firstActive: 0 // this is the default
+    })
+</script>
