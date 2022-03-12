@@ -1,6 +1,9 @@
 package com.htlimst.lieferrex;
 
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.fragments.FragmentMap;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
+import com.htlimst.lieferrex.model.fragments.FragmentType;
 import com.htlimst.lieferrex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -51,6 +54,8 @@ public class DbInit implements CommandLineRunner {
     private SeitenaufrufeRepository seitenaufrufeRepository;
     @Autowired
     private PositionRepository positionRepository;
+    @Autowired
+    private FragmentTypeRepository fragmentTypeRepository;
 
 
 
@@ -81,7 +86,6 @@ public class DbInit implements CommandLineRunner {
 
         // Positions - Layout EINS
         positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
-        positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
         positions.add(new Position(null, "r2c1", savedLayouts.get(0), null));
         positions.add(new Position(null, "r2c2", savedLayouts.get(0), null));
         
@@ -108,20 +112,76 @@ public class DbInit implements CommandLineRunner {
             positionRepository.save(position);
         }
 
+        // |---------- FragmentTypes
+
+        ArrayList<FragmentType> fragmentTypes = new ArrayList<>();
+
+        fragmentTypes.add(new FragmentType(null, "text", null));
+        fragmentTypes.add(new FragmentType(null, "map", null));
+
+        for (FragmentType fragmentType : fragmentTypes) {
+            fragmentTypeRepository.save(fragmentType);
+        }
+        
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
-
-
+        
+        
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0));
-
+        Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
+               
+        
         Kategorie kategorie = new Kategorie();
         kategorie.setName("Fine Dining");
         kategorieRepository.save(kategorie);
-
+        
         mandant.setKategorie(kategorie);
         mandantRepository.save(mandant);
+        mandant2.setKategorie(kategorie);
+        mandantRepository.save(mandant2);
+        
+        // |---------- Fragments 
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        
+        fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(0), null, null));
+        fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null));
+        fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null));
+        
+        fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(0), null, null));
+        fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null));
+        fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null));
+        fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null));
+
+        for (Fragment fragment : fragments) {
+            fragmentRepository.save(fragment);
+        }
+        
+        // |--------- FragmentTexts
+        ArrayList<FragmentText> fragmenttexts = new ArrayList<>();
+
+        fragmenttexts.add(new FragmentText(null, "Cooler Text des ersten Fragments", "#00ff00", fragments.get(0)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Text des dritten Fragments", "#00ff00", fragments.get(2)));
+
+        fragmenttexts.add(new FragmentText(null, "Cooler Text des ersten Fragments", "#00ff00", fragments.get(3)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
+        
+        for (FragmentText fragmentText : fragmenttexts) {
+            fragmentTextRepository.save(fragmentText);
+        }
+
+        // |--------- FragmentMaps
+        ArrayList<FragmentMap> fragmentmaps = new ArrayList<>();
+
+        fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(1)));
+        fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(4)));
+        
+        for (FragmentMap fragmentMap : fragmentmaps) {
+            fragmentMapRepository.save(fragmentMap);
+        }
+
 
         Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("123"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);
         this.kundeRepository.save(kunde);
@@ -166,6 +226,8 @@ public class DbInit implements CommandLineRunner {
         Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
         this.seitenaufrufeRepository.save(seitenaufrufe);
     }
+
+
     private void deleteAll() {
         seitenaufrufeRepository.deleteAll();
         umsatzRepository.deleteAll();
@@ -177,10 +239,13 @@ public class DbInit implements CommandLineRunner {
         bestellungRepository.deleteAll();
         bestellstatusRepository.deleteAll();
         kundeRepository.deleteAll();
+        fragmentTextRepository.deleteAll();
+        fragmentMapRepository.deleteAll();
         fragmentRepository.deleteAll();
         mandantRepository.deleteAll();
         kategorieRepository.deleteAll();
         bestellartRepository.deleteAll();
+        positionRepository.deleteAll();
         positionRepository.deleteAll();
         layoutRepository.deleteAll();
     }

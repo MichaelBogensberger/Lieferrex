@@ -1,29 +1,26 @@
 <div th:fragment="layoutEINS">
     <div class="row ">
         <div class="col s12 m5 l3  header-div">
-            <div th:replace="baukasten/fragments/modules/text"></div>
+            <div th:replace="'baukasten/fragments/modules/' + ${r1c1.fragmenttype.type}(content=${r1c1})"></div>
         </div>
         <div class="col s12 m7 l9 header-div">
-            <div th:replace="baukasten/fragments/modules/text"></div>
+            <div th:replace="'baukasten/fragments/modules/' + ${r1c2.fragmenttype.type}(content=${r1c2})"></div>
         </div>
     </div>
     
     
     <div class="row">
         <div class="col s12 m7 l9 main-right">
-            <div th:replace="baukasten/fragments/modules/text"></div>
-            <!-- <div th:replace="baukasten/fragments/modules/karte"></div> -->
+            <div th:replace="'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1})"></div>
         </div>
         <div class="col s12 m5 l3 main-right">
-            <div th:replace="baukasten/fragments/modules/text"></div>
-            <!-- <div th:replace="baukasten/fragments/modules/karte"></div> -->
+            <div th:replace="'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2})"></div>
         </div>
     </div>
     
     <div class="row">
         <div class="col s12 m12 l12 main-right">
-            <div th:replace="baukasten/fragments/modules/text"></div>
-            <!-- <div th:replace="baukasten/fragments/modules/karte"></div> -->
+            <div th:replace="'baukasten/fragments/modules/' + ${r3c1.fragmenttype.type}(content=${r3c1})"></div>
         </div>
     </div>
 

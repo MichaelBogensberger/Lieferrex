@@ -5,31 +5,31 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
 import com.htlimst.lieferrex.model.Fragment;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "fragmenttext")
-public class FragmentText {
+@Table(name = "fragmenttype")
+public class FragmentType {
 
 
     @Id
-    @Column(name = "fragmenttext_id")
+    @Column(name = "fragmenttype_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
-    private String text;
+    private String type;
 
-    @NotEmpty
-    private String farbe;
-
-    @OneToOne
-    @JoinColumn(name="fragment_id")
-    private Fragment fragment;
+    @OneToMany(mappedBy = "fragmenttype")
+    private Set<Fragment> fragmente;
 
 }
