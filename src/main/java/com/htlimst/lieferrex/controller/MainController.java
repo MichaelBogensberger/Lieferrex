@@ -15,7 +15,9 @@ import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
 import com.htlimst.lieferrex.service.gericht.GerichtService;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 
+import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,14 @@ public class MainController {
         this.fragmentServiceImpl = fragmentServiceImpl;
         this.fragmenttextServiceImpl = fragmenttextServiceImpl;
         this.fragmentmapServiceImpl = fragmentmapServiceImpl;
+    }
+
+    @GetMapping("/test")
+    public String viewUserAccountForm(@AuthenticationPrincipal UserPrincipal userDetails) {
+        String userEmail = userDetails.getUsername();
+        System.out.println(userEmail);
+
+        return "main/index";
     }
 
     @GetMapping("")

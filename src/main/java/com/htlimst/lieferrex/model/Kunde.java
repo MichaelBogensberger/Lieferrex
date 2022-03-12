@@ -28,16 +28,14 @@ public class Kunde {
     private String email;
     private String passwort;
     private String ort;
-
-    //@Size(min=4,max = 6)
     private int plz;
     private String strasse;
     private String hausnummer;
-    private int telefonnummer;
+    private String telefonnummer;
     private String land;
     private boolean newsletter;
 
-    public Kunde(Long id, String vorname, String nachname, String email, String passwort, String ort, int plz, String strasse, String hausnummer, int telefonnummer, String land, boolean newsletter) {
+    public Kunde(Long id, String vorname, String nachname, String email, String passwort, String ort, int plz, String strasse, String hausnummer, String telefonnummer, String land, boolean newsletter) {
         this.id = id;
         this.vorname = vorname;
         this.nachname = nachname;

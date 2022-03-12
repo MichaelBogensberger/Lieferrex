@@ -28,8 +28,17 @@ public class KundeServiceImpl implements KundeService{
     @Override
     public Kunde save(KundeRegistrationDto registrationDto) {
         Kunde kunde = new Kunde();
-
-
+        kunde.setVorname(registrationDto.getVorname());
+        kunde.setNachname(registrationDto.getNachname());
+        kunde.setEmail(registrationDto.getEmail());
+        kunde.setPasswort(passwordEncoder.encode(registrationDto.getPasswort()));
+        kunde.setOrt(registrationDto.getOrt());
+        kunde.setPlz(registrationDto.getPlz());
+        kunde.setStrasse(registrationDto.getStrasse());
+        kunde.setHausnummer(registrationDto.getHausnummer());
+        kunde.setTelefonnummer(registrationDto.getTelefonnummer());
+        kunde.setLand(registrationDto.getLand());
+        kunde.setNewsletter(registrationDto.isNewsletter());
         return kundeRepository.save(kunde);
     }
 }

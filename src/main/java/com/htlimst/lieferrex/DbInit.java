@@ -183,7 +183,7 @@ public class DbInit implements CommandLineRunner {
         }
 
 
-        Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("123"), "Imst", 12345, "Straße", "1", 430650123, "Österreich", true);
+        Kunde kunde = new Kunde(null, "Vorname", "Nachname", "kunde@gmail.com", this.passwordEncoder.encode("123"), "Imst", 12345, "Straße", "1", "430650123", "Österreich", true);
         this.kundeRepository.save(kunde);
 
 
@@ -225,6 +225,9 @@ public class DbInit implements CommandLineRunner {
 
         Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
         this.seitenaufrufeRepository.save(seitenaufrufe);
+
+
+
     }
 
 

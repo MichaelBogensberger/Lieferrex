@@ -6,16 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @FieldMatch.List({
-        @FieldMatch(first = "password", second = "confirmPassword", message = "Passwörter müssen übereinstimmen"),
+        @FieldMatch(first = "passwort", second = "confirmPasswort", message = "Passwörter müssen übereinstimmen"),
 })
 public class KundeRegistrationDto {
 
@@ -27,22 +25,33 @@ public class KundeRegistrationDto {
     private String email;
 
     @NotEmpty
-    @Size(min = 8, message = "muss mehr als 8 Zeichen lang sein")
+    @Size(min = 8)
     private String passwort;
 
     @NotEmpty
-    @Size(min = 8, message = "muss mehr als 8 Zeichen lang sein")
+    @Size(min = 8)
     private String confirmPasswort;
 
+    @NotEmpty
     private String ort;
 
-    @Size(min=4,max = 6, message = "muss mehr als 8 Zeichen lang sein")
-    private Integer plz;
+    @Min(3)
+    private int plz;
+
+    @NotEmpty
     private String strasse;
+
+    @NotEmpty
     private String hausnummer;
-    private Integer telefonnummer;
+
+    @NotEmpty
+    private String telefonnummer;
+
+    @NotEmpty
     private String land;
-    private boolean newsletter;
+
     private boolean agb;
+
+    private boolean newsletter;
 
 }

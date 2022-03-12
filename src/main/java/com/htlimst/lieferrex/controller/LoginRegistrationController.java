@@ -6,12 +6,15 @@ import com.htlimst.lieferrex.service.security.UserPojo;
 import com.htlimst.lieferrex.service.security.UserPrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class LoginRegistrationController {
@@ -50,13 +53,23 @@ public class LoginRegistrationController {
             result.rejectValue("email", null, "There is already an account registered with that email");
             System.out.println("Schon vorhanden");
         }
-
-        if (result.hasErrors()) {
-            return "registration";
+        if(!registrationDto.isAgb()){
+            System.out.println("agb nicht akzeptiert");
+            return "redirect:/register?error";
         }
-        System.out.println("Registrieren");
+        if (result.hasErrors()) {
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError error : errors ) {
+                System.out.println (error.getField() + " - " + error.getDefaultMessage());
+            }
+            return "redirect:/register?error";
+        }
+
+
+
         kundeService.save(registrationDto);
-        return "redirect:/registration?success";
+        return "redirect:/register?success";
+
     }
 
 }

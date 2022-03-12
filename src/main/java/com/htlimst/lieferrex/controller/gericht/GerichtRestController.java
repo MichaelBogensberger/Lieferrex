@@ -20,7 +20,6 @@ public class GerichtRestController {
 
     @PutMapping("/api/gericht/{id}")
     public Gericht updateUser(@RequestBody Gericht gericht, @PathVariable Long id) {
-
         return gerichtService.apiUpdateGericht(id, gericht);
     }
 

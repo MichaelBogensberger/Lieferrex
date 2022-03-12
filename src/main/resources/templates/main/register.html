@@ -16,91 +16,68 @@
 
 <div id="reg-div">
 
-
-    <div th:if="${param.success}">
-        <div class="alert alert-info">You've successfully registered
-            to our awesome app!
-        </div>
-    </div>
-
-<!--  POST Form  -->
+    <!--  POST Form  -->
     <form class="col s12" id="reg-form" th:action="@{/register}" th:object="${user}" method="post">
+
         <h1 class="login-form-ueb reg-form-ueb">Registrieren</h1>
 
-        <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
-           th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error</p>
-
-
         <ul class="stepper horizontal">
-
             <li class="step active">
-
                 <div class="step-title waves-effect">Essentials</div>
-
-
-
                 <div class="step-content">
 
-
-                    <!--
                     <div class="row">
-
-                      <div class="col s6">
-                        <h1 class="ess-step-ueb">Neu registireren</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
-
-
-                      </div>
-
-                      <div class="col s6">6-columns (one-half)</div>
-                    </div>
-                  -->
-
-
-                    <div class="row">
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6" th:classappend="${#fields.hasErrors('vorname')}? 'has-error':''">
-                                    <i class="material-icons-outlined white-dm  prefix">face</i>
-                                    <input id="vname" type="text" forclass="validate login-inp" placeholder="Vorname" th:field="*{vorname}">
-                                    <p class="error-message" th:each="error: ${#fields.errors('vorname')}" th:text="${error}">Validation error</p>
-                                    <label for="nname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">badge</i>
-                                    <input id="nname" type="text" class="validate login-inp" placeholder="Nachname">
-                                    <label for="nname"></label>
-                                </div>
-
-
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm  prefix">face</i>
+                                <input id="vorname" type="text" forclass="validate login-inp" placeholder="Vorname"
+                                       th:field="*{vorname}">
+                                <!--                                <p class="error-message" th:each="error: ${#fields.errors('vorname')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <label for="vorname"></label>
                             </div>
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m12 l12">
-                                    <i class="material-icons-outlined white-dm prefix">email</i>
-                                    <input id="vname" type="email" class="validate login-inp" placeholder="Email">
-                                    <label for="nname"></label>
-                                </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">badge</i>
+                                <input id="nachname" type="text" class="validate login-inp" placeholder="Nachname"
+                                       th:field="*{nachname}">
+                                <!--                                <p class="error-message" th:each="error: ${#fields.errors('nachname')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <label for="nachname"></label>
                             </div>
+                        </div>
 
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">password</i>
-                                    <input id="vname" type="password" class="validate login-inp" placeholder="Passwort">
-                                    <label for="nname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">replay</i>
-                                    <input id="nname" type="password" class="validate login-inp"
-                                           placeholder="Passwort wiederholen">
-                                    <label for="nname"></label>
-                                </div>
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m12 l12">
+                                <i class="material-icons-outlined white-dm prefix">email</i>
+                                <input id="email" type="email" class="validate login-inp" placeholder="Email"
+                                       th:field="*{email}">
+                                <!--                                <p class="error-message" th:each="error: ${#fields.errors('email')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <label for="email"></label>
                             </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">password</i>
+                                <input id="passwort" type="password" class="validate login-inp" placeholder="Passwort"
+                                       th:field="*{passwort}">
+                                <!--                                <p class="error-message" th:each="error: ${#fields.errors('passwort')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <label for="passwort"></label>
+                            </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">replay</i>
+                                <input id="confirmPasswort" type="password" class="validate login-inp"
+                                       placeholder="Passwort wiederholen"
+                                       th:field="*{confirmPasswort}">
+                                <!--                                <p class="error-message" th:each="error: ${#fields.errors('confirmPasswort')}"-->
+                                <!--                                   th:text="${error}">Validation error</p>-->
+                                <label for="confirmPasswort"></label>
+                            </div>
+                        </div>
 
                     </div>
-
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
@@ -114,34 +91,42 @@
                 <div class="step-title waves-effect">Adresse</div>
                 <div class="step-content">
 
-
                     <div class="row">
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">map</i>
-                                    <input id="ort" type="text" class="validate login-inp" placeholder="Ort">
+                                    <input id="ort" type="text" class="validate login-inp" placeholder="Ort"
+                                           th:field="*{ort}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('ort')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
                                     <label for="ort"></label>
                                 </div>
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">location_city</i>
-                                    <input id="plz" type="text" class="validate login-inp" placeholder="PLZ">
+                                    <input id="plz" type="text" class="validate login-inp" placeholder="PLZ"
+                                           th:field="*{plz}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('plz')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
                                     <label for="plz"></label>
                                 </div>
-
-
                             </div>
-
 
                             <div class="row">
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">home</i>
-                                    <input id="strasse" type="text" class="validate login-inp" placeholder="Straße">
+                                    <input id="strasse" type="text" class="validate login-inp" placeholder="Straße"
+                                           th:field="*{strasse}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('strasse')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
                                     <label for="strasse"></label>
                                 </div>
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                                    <input id="hausnummer" type="text" class="validate login-inp" placeholder="Hausnummer">
+                                    <input id="hausnummer" type="text" class="validate login-inp"
+                                           placeholder="Hausnummer" th:field="*{hausnummer}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('hausnummer')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
                                     <label for="hausnummer"></label>
                                 </div>
                             </div>
@@ -149,20 +134,22 @@
                             <div class="row">
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">call</i>
-                                    <input id="tel" type="tel" class="validate login-inp" placeholder="Telefonnummer">
-                                    <label for="tel"></label>
+                                    <input id="telefonnummer" type="tel" class="validate login-inp"
+                                           placeholder="Telefonnummer"
+                                           th:field="*{telefonnummer}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('telefonnummer')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
+                                    <label for="telefonnummer"></label>
                                 </div>
                                 <div class="input-field login-div-mail col s12 m6 l6">
                                     <i class="material-icons-outlined white-dm prefix">landscape</i>
-                                    <input id="land" type="text" class="validate login-inp" placeholder="Land">
+                                    <input id="land" type="text" class="validate login-inp" placeholder="Land"
+                                           th:field="*{land}">
+                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('land')}"-->
+                                    <!--                                       th:text="${error}">Validation error</p>-->
                                     <label for="land"></label>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
                     </div>
 
@@ -171,6 +158,7 @@
                         <!-- Here goes your actions buttons -->
                         <button class="waves-effect waves-dark btn next-step next-step-btn">CONTINUE</button>
                     </div>
+
                 </div>
             </li>
 
@@ -179,7 +167,6 @@
                 <div class="step-title waves-effect">Accept</div>
                 <div class="step-content">
                     <!-- Your step content goes here (like inputs or so) -->
-
 
                     <div class="row">
                         <div class="col s12 m12 l6">
@@ -190,18 +177,16 @@
                             <div action="#">
                                 <p>
                                     <label>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox" name="agb" th:value="on" th:checked="${user.agb eq 'on'}">
                                         <span>AGB zustimmen</span>
                                     </label>
                                 </p>
-
                                 <p>
                                     <label>
-                                        <input type="checkbox"/>
+                                        <input type="checkbox" name="newsletter" th:value="on" th:checked="${user.newsletter eq 'on'}">
                                         <span>Infos über Mail bekommen</span>
                                     </label>
                                 </p>
-
                             </div>
 
 
@@ -216,10 +201,10 @@
                         </div>
                     </div>
 
-
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
-                        <button type="submit" class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>
+                        <button type="submit" class="btn btn-success">Registrieren</button>
+                        <!--                        <button type="submit" class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>-->
                     </div>
                 </div>
             </li>
@@ -247,10 +232,29 @@
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 
 
-<script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    $(document).ready(function () {
+        let searchParams = new URLSearchParams(window.location.search);
+
+        if (searchParams.has('error')) {
+            var toastHTML = `Eingabe Fehler: Benutzer konnte nicht angelegt werden!`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+        if (searchParams.has('success')) {
+            var toastHTML = `Benutzer erfolgreich angelegt`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+
+
+    });
+
+
     var stepper = document.querySelector('.stepper');
     var stepperInstace = new MStepper(stepper, {
         // options
         firstActive: 0 // this is the default
     })
+    /*]]>*/
 </script>
