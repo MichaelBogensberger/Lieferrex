@@ -3,6 +3,7 @@ package com.htlimst.lieferrex.controller.baukasten;
 import java.util.List;
 
 import com.htlimst.lieferrex.model.Fragment;
+import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
@@ -54,6 +55,9 @@ public class BaukastenController {
         // Alle Fragmente mit Position der VIEW uebergeben
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
+            if (fragment.getFragmenttype().getType().equals("map")) {
+                model.addAttribute("gerichte", mandant.getGerichte());
+            }
         }        
         
         // Layout des Mandanten der VIEW uebergeben

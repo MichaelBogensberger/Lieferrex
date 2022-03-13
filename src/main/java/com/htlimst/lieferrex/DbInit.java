@@ -161,12 +161,12 @@ public class DbInit implements CommandLineRunner {
         // |--------- FragmentTexts
         ArrayList<FragmentText> fragmenttexts = new ArrayList<>();
 
-        fragmenttexts.add(new FragmentText(null, "Cooler Text des ersten Fragments", "#00ff00", fragments.get(0)));
-        fragmenttexts.add(new FragmentText(null, "Cooler Text des dritten Fragments", "#00ff00", fragments.get(2)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "#00ff00", fragments.get(0)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(2)));
 
-        fragmenttexts.add(new FragmentText(null, "Cooler Text des ersten Fragments", "#00ff00", fragments.get(3)));
-        fragmenttexts.add(new FragmentText(null, "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
-        fragmenttexts.add(new FragmentText(null, "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "#00ff00", fragments.get(3)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
+        fragmenttexts.add(new FragmentText(null, "Cooler Titel Vier", "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
         
         for (FragmentText fragmentText : fragmenttexts) {
             fragmentTextRepository.save(fragmentText);

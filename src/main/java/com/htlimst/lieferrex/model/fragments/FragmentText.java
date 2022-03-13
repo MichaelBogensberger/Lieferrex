@@ -22,6 +22,10 @@ public class FragmentText {
     @Column(name = "fragmenttext_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty
+    private String titel;
+
     @NotEmpty
     private String text;
 
