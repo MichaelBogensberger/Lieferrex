@@ -45,24 +45,28 @@ public class BaukastenController {
     @GetMapping("/baukasten/{restaurant}")
     public String showBaukasten(Model model, @PathVariable String restaurant){
 
-
         // Get Mandant ueber Name in der URL
         Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
 
         // Alle Fragmente des Mandaten ueber dessen ID
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
+        // Layout des Mandanten der VIEW uebergeben
+        model.addAttribute("layout", mandant.getLayout().getName());
+
         // Alle Fragmente mit Position der VIEW uebergeben
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
-            if (fragment.getFragmenttype().getType().equals("map")) {
+
+            // Datenermittlung bei Ausgabe von Karte, Kontakt, etc.
+            if (fragment.getFragmenttype().getType().equals("karte")) {
                 model.addAttribute("gerichte", mandant.getGerichte());
+            } else if(fragment.getFragmenttype().getType().equals("kontakt")){
+                // TODO: Kontakte des Mandanten ausgeben
+                model.addAttribute("kontakt", "getKontakt");
             }
-        }        
-        
-        // Layout des Mandanten der VIEW uebergeben
-        model.addAttribute("layout", mandant.getLayout().getName());
-        
+        }
+                
         return "baukasten/frame.html";
     }
 

@@ -1,18 +1,8 @@
 <div th:fragment="text">
-    <!-- <p th:text="${content.fragmenttext.titel}"></p> -->
-    <!-- <p th:text="${content.fragmenttext.text}"></p> -->
-
-    <tr th:each="gericht: ${gerichte}">
-      <td th:text="${gericht.name}" />
-      <td th:text="${gericht.preis}" />
-    </tr>
-
     <div class="card darken-1">
         <div class="card-content black-text">
           <span class="card-title black-text" th:text="${content.fragmenttext.titel}"></span>
           <p th:text="${content.fragmenttext.text}"></p>
         </div>
     </div>
-
-
 </div>
