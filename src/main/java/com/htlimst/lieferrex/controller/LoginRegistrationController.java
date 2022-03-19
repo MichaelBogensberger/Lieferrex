@@ -96,6 +96,7 @@ public class LoginRegistrationController {
         if (existingEmail != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
             System.out.println("Schon vorhanden");
+            return "redirect:/restaurantpartner?error";
         }
         if(!registrationDto.isAgb()){
             System.out.println("agb nicht akzeptiert");

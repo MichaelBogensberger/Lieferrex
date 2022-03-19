@@ -280,7 +280,7 @@
 
 <footer class="footer footer-reg">
     <div class="container">
-        <a href="index.php" class="animsition-link" style="color: #939C9E;">
+        <a href="/" class="animsition-link" style="color: #939C9E;">
             <p class="back-index color-white">Startseite</p>
         </a>
     </div>
@@ -294,6 +294,20 @@
 
 
 <script>
+
+    $(document).ready(function () {
+        let searchParams = new URLSearchParams(window.location.search);
+
+        if (searchParams.has('error')) {
+            var toastHTML = `Eingabe Fehler: Benutzer konnte nicht angelegt werden!`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+        if (searchParams.has('success')) {
+            var toastHTML = `Benutzer erfolgreich angelegt`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+    });
+
     var stepper = document.querySelector('.stepper');
     var stepperInstace = new MStepper(stepper, {
         // options

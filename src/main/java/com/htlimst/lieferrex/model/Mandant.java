@@ -1,9 +1,6 @@
 package com.htlimst.lieferrex.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "mandant")
 public class Mandant {
@@ -45,11 +43,7 @@ public class Mandant {
         private double mindestbestellwert;
         private double lieferkosten;
 
-        /*
-        @ManyToMany
-        @JoinTable(name = "mandant_kategorie", joinColumns = @JoinColumn(name = "mandant_id"), inverseJoinColumns = @JoinColumn(name = "kategorie_id"))
-        private Set<Kategorie> kategorie;
-         */
+
         @ManyToOne
         @JoinColumn(name="kategorie_id")
         private Kategorie kategorie;
