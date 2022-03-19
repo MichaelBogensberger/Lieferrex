@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.w3.org/1999/html">
 <head>
 
     <title>Dashboard</title>
@@ -24,14 +24,14 @@
                     <span aria-hidden="true">&times;</span>
                 </a>
                 <h5 class="modal-title">Zugang hinzufügen</h5>
-                <form action="..." method="...">
+                <form th:action="@{/dashboard/benutzer/create}" method="post" th:object="${angestellter}">
                     <div class="form-group">
                         <label for="zugang-add-firstname" class="required">Vorname</label>
-                        <input type="text" id="zugang-add-firstname" class="form-control" placeholder="Max" required="required">
+                        <input type="text" id="zugang-add-firstname" class="form-control" placeholder="Max" required="required" th:field="*{vorname}">
                     </div>
                     <div class="form-group">
                         <label for="zugang-add-lastname" class="required">Nachname</label>
-                        <input type="text" id="zugang-add-lastname" class="form-control" placeholder="Mustermann" required="required">
+                        <input type="text" id="zugang-add-lastname" class="form-control" placeholder="Mustermann" required="required" th:field="*{nachname}">
                     </div>
 
                     <!--
@@ -43,22 +43,22 @@
 
                     <div class="form-group">
                         <label for="zugang-add-email" class="required">Email</label>
-                        <input type="text" id="zugang-add-email" class="form-control" placeholder="mustermann@gmail.com" required="required">
+                        <input type="text" id="zugang-add-email" class="form-control" placeholder="mustermann@gmail.com" required="required" th:field="*{email}">
                     </div>
 
                     <div class="form-group mb-10">
                         <label for="zugang-add-password" class="required">Passwort</label>
-                        <input type="password" id="zugang-add-password" class="form-control" placeholder="" required="required">
+                        <input type="password" id="zugang-add-password" class="form-control" placeholder="" required="required" th:field="*{passwort}">
                     </div>
 
                     <div class="form-group ">
                         <label for="zugang-add-rolle-admin" class="required mb-0">Rolle</label>
                         <div class="custom-radio">
-                            <input type="radio" name="rolle" id="zugang-add-rolle-ang" value="angestellter" required="required" checked>
+                            <input type="radio" name="rollen" id="zugang-add-rolle-ang" value="angestellter" required="required" checked>
                             <label for="zugang-add-rolle-ang">Angestellter</label>
                         </div>
                         <div class="custom-radio">
-                            <input type="radio" name="rolle" id="zugang-add-rolle-admin" value="admin" required="required">
+                            <input type="radio" name="rollen" id="zugang-add-rolle-admin" value="admin" required="required">
                             <label for="zugang-add-rolle-admin">Administrator</label>
                         </div>
                     </div>
@@ -79,14 +79,15 @@
                     <span aria-hidden="true">&times;</span>
                 </a>
                 <h5 class="modal-title">Zugang bearbeiten</h5>
-                <form action="..." method="...">
+                <form th:action="@{/dashboard/benutzer/save}" method="post" th:object="${angestellter}">
+                    <input type="hidden" id="benutzer-edit-id" th:field="*{id}">
                     <div class="form-group">
                         <label for="zugang-edit-firstname" class="required">Vorname</label>
-                        <input type="text" id="zugang-edit-firstname" class="form-control" value="Max" required="required">
+                        <input type="text" id="zugang-edit-firstname" class="form-control" value="Max" required="required" th:field="*{vorname}">
                     </div>
                     <div class="form-group">
                         <label for="zugang-edit-lastname" class="required">Nachname</label>
-                        <input type="text" id="zugang-edit-lastname" class="form-control" value="Mustermann" required="required">
+                        <input type="text" id="zugang-edit-lastname" class="form-control" value="Mustermann" required="required" th:field="*{nachname}">
                     </div>
 
                     <!--
@@ -100,22 +101,22 @@
 
                     <div class="form-group">
                         <label for="zugang-edit-email" class="required">Email</label>
-                        <input type="text" id="zugang-edit-email" class="form-control" value="mustermann@gmail.com" required="required">
+                        <input type="text" id="zugang-edit-email" class="form-control" value="mustermann@gmail.com" required="required" th:field="*{email}">
                     </div>
 
                     <div class="form-group mb-10">
                         <label for="zugang-edit-password" class="required">Passwort</label>
-                        <input type="password" id="zugang-edit-password" class="form-control" required="required">
+                        <input type="password" id="zugang-edit-password" class="form-control" required="required" th:field="*{passwort}">
                     </div>
 
                     <div class="form-group ">
                         <label for="zugang-edit-rolle-admin" class="required mb-0">Rolle</label>
                         <div class="custom-radio">
-                            <input type="radio" name="rolle" id="zugang-edit-rolle-ang" value="angestellter" required="required" checked>
+                            <input type="radio" name="rollen" id="zugang-edit-rolle-ang" value="angestellter" required="required" checked>
                             <label for="zugang-edit-rolle-ang">Angestellter</label>
                         </div>
                         <div class="custom-radio">
-                            <input type="radio" name="rolle" id="zugang-edit-rolle-admin" value="admin" required="required">
+                            <input type="radio" name="rollen" id="zugang-edit-rolle-admin" value="admin" required="required">
                             <label for="zugang-edit-rolle-admin">Administrator</label>
                         </div>
                     </div>
@@ -328,7 +329,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-users text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">7 Zugänge</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{anzahl} + ' ' + Zugänge"></h2>
                                 </div>
                             </div>
 
@@ -347,7 +348,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-shield text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">1 Administrator</h2>
+                                    <h2 class="card-title font-weight-bold mb-0"th:text="*{admins} + ' ' + Administrator"></h2>
                                 </div>
                             </div>
 
@@ -371,7 +372,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-child text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">6 Angestellte</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${angestellte} + ' ' + Angestellte"></h2>
                                 </div>
                             </div>
 
@@ -395,7 +396,6 @@
                             <div class="content card pt-15 pb-15">
                                 <h2 class="content-title mb-0">Zugänge</h2>
                                 <p class="mb-20 mt-0">Hier können die Zugänge bearbeiter werden</p>
-
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
@@ -408,58 +408,75 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <th:block th:each="angestellter: ${angestellterList}">
+                                        <tr>
+                                            <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">[[${angestellter.email}]]</th>
+                                            <td class="d-none d-md-table-cell">[[*{angestellter.vorname}]]</td>
+                                            <td class="d-none d-md-table-cell">[[*{angestellter.nachname}]]</td>
+                                            <td class="d-none d-md-table-cell">Angestellter</td>
+                                            <td>
+                                                <a th:onclick="angestellterEdit([[${angestellter.id}]])"
+                                                   class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                                   role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="#modal-delete-zugang"
+                                                   class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
+                                                   role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+<!--                                    <tr>-->
+<!--                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">mbogensberger@gmail.com</th>-->
+<!--                                        <td class="d-none d-md-table-cell">Michael</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Bogensberger</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Angestellter</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-edit-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-delete-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
 
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">mbogensberger@gmail.com</th>
-                                        <td class="d-none d-md-table-cell">Michael</td>
-                                        <td class="d-none d-md-table-cell">Bogensberger</td>
-                                        <td class="d-none d-md-table-cell">Angestellter</td>
-                                        <td>
-                                            <a href="#modal-edit-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="#modal-delete-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
 
+<!--                                    <tr>-->
+<!--                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">jmeilinger@aon.at</th>-->
+<!--                                        <td class="d-none d-md-table-cell">Julian</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Meislinger</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Administrator</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-edit-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-delete-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
 
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">jmeilinger@aon.at</th>
-                                        <td class="d-none d-md-table-cell">Julian</td>
-                                        <td class="d-none d-md-table-cell">Meislinger</td>
-                                        <td class="d-none d-md-table-cell">Administrator</td>
-                                        <td>
-                                            <a href="#modal-edit-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="#modal-delete-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">beraslan@dirk.orient</th>
-                                        <td class="d-none d-md-table-cell">Burak</td>
-                                        <td class="d-none d-md-table-cell">Eraslan</td>
-                                        <td class="d-none d-md-table-cell">Angestellter</td>
-                                        <td>
-                                            <a href="#modal-edit-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="#modal-delete-zugang"
-                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">beraslan@dirk.orient</th>-->
+<!--                                        <td class="d-none d-md-table-cell">Burak</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Eraslan</td>-->
+<!--                                        <td class="d-none d-md-table-cell">Angestellter</td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-edit-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a href="#modal-delete-zugang"-->
+<!--                                               class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "-->
+<!--                                               role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
 
 
                                     </tbody>
@@ -528,6 +545,18 @@
 
 <!-- Halfmoon JS -->
 <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+<script>
+    function angestellterEdit(id) {
+        $.get("http://localhost:8080/benutzer/api/" +id, function(data, status){
+            $('#benutzer-edit-id').val(data.id);
+            $('#zugang-edit-firstname').val(data.vorname);
+            $('#zugang-edit-lastname').val(data.nachname);
+            $('#zugang-edit-email').val(data.email);
+        });
+        halfmoon.toggleModal('modal-edit-zugang');
+    }
+</script>
+
 </body>
 
 </html>

@@ -35,6 +35,9 @@ public class GerichtController {
         model.addAttribute("gerichteList", gerichteList);
         model.addAttribute("gerichteListStatusZero", gerichteListStatusZero);
         model.addAttribute("gericht", new Gericht());
+        model.addAttribute("numberDisabled", gerichtService.numberDisabled());
+        model.addAttribute("numberActive", gerichtService.numberActive());
+        model.addAttribute("numberAll", gerichtService.numberAll());
         return "dashboard/gerichte.html";
     }
     @GetMapping(value="{id}")

@@ -99,11 +99,6 @@ public class MainController {
     }
 
 
-    @GetMapping("/dashboard/benutzer")
-    public String showDashboardBenutzer() {
-        return "dashboard/benutzer.html";
-    }
-
     @GetMapping("/dashboard/oeffnungszeiten")
     public String showDashboardOeffnungszeiten() {
         return "dashboard/oeffnungszeiten.html";

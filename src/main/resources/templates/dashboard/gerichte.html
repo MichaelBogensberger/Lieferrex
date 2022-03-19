@@ -419,7 +419,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-cutlery text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">23 Gerichte</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{numberAll} + ' ' + Gerichte"></h2>
                                 </div>
                             </div>
 
@@ -438,7 +438,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-eye text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">19 aktiviert</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{numberActive} + ' ' + aktiviert"></h2>
                                 </div>
                             </div>
 
@@ -462,7 +462,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-eye-slash text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">3 deaktiviert</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{numberDisabled} + ' ' + deaktiviert"></h2>
                                 </div>
                             </div>
 

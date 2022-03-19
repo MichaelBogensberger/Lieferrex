@@ -13,7 +13,11 @@ public interface GerichtService {
 
     Gericht apiUpdateGericht(Long id, Gericht givenGericht);
     public void save(Gericht gericht);
-
     public void savingStatusGericht(Long id);
+
+    public long numberDisabled();
+    public long numberActive();
+    public long numberAll();
+
 
 }

@@ -59,5 +59,20 @@ public class GerichtServiceImpl implements GerichtService{
         gerichtRepo.save(foundGericht.get());
     }
 
+    @Override
+    public long numberDisabled() {
+        return gerichtRepo.countDisabled();
+    }
+
+    @Override
+    public long numberActive() {
+        return gerichtRepo.countActive();
+    }
+
+    @Override
+    public long numberAll() {
+        return gerichtRepo.count();
+    }
+
 
 }
