@@ -64,18 +64,18 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-/*
+
         deleteAll();
 
         // |---------- Layouts
         ArrayList<Layout> layouts = new ArrayList<>();
         ArrayList<Layout> savedLayouts = new ArrayList<>();
-        
+
         layouts.add(new Layout(null, "layoutEINS"));
         layouts.add(new Layout(null, "layoutZWEI"));
         layouts.add(new Layout(null, "layoutDREI"));
         layouts.add(new Layout(null, "layoutVIER"));
-        
+
         for (Layout layout : layouts) {
             layoutRepository.save(layout);
             savedLayouts.add(layout);
@@ -88,26 +88,26 @@ public class DbInit implements CommandLineRunner {
         positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
         positions.add(new Position(null, "r2c1", savedLayouts.get(0), null));
         positions.add(new Position(null, "r2c2", savedLayouts.get(0), null));
-        
+
         // Positions - Layout ZWEI
         positions.add(new Position(null, "r1c1", savedLayouts.get(1), null));
         positions.add(new Position(null, "r2c1", savedLayouts.get(1), null));
         positions.add(new Position(null, "r3c1", savedLayouts.get(1), null));
         positions.add(new Position(null, "r3c2", savedLayouts.get(1), null));
-        
+
         // Positions - Layout DREI
         positions.add(new Position(null, "r1c1", savedLayouts.get(2), null));
         positions.add(new Position(null, "r2c1", savedLayouts.get(2), null));
         positions.add(new Position(null, "r2c2", savedLayouts.get(2), null));
         positions.add(new Position(null, "r3c1", savedLayouts.get(2), null));
-        
+
         // Positions - Layout VIER
         positions.add(new Position(null, "r1c1", savedLayouts.get(3), null));
         positions.add(new Position(null, "r1c2", savedLayouts.get(3), null));
         positions.add(new Position(null, "r2c1", savedLayouts.get(3), null));
         positions.add(new Position(null, "r3c1", savedLayouts.get(3), null));
         positions.add(new Position(null, "r3c2", savedLayouts.get(3), null));
-        
+
         for (Position position : positions) {
             positionRepository.save(position);
         }
@@ -122,33 +122,33 @@ public class DbInit implements CommandLineRunner {
         for (FragmentType fragmentType : fragmentTypes) {
             fragmentTypeRepository.save(fragmentType);
         }
-        
+
         Bestellart bestellart = new Bestellart(null, "Abholung");
         this.bestellartRepository.save(bestellart);
-        
-        
+
+
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", "0650123123", 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0));
         Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", 12345, "Straße", "10", "0650123123", 1234.5, 50000, "mandant1@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
-               
-        
+
+
         Kategorie kategorie = new Kategorie();
         kategorie.setName("Fine Dining");
         kategorieRepository.save(kategorie);
-        
+
         mandant.setKategorie(kategorie);
         mandantRepository.save(mandant);
         mandant2.setKategorie(kategorie);
         mandantRepository.save(mandant2);
-        
-        // |---------- Fragments 
+
+        // |---------- Fragments
         ArrayList<Fragment> fragments = new ArrayList<>();
-        
+
         fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(0), null, null));
         fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null));
         fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null));
-        
+
         fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(0), null, null));
         fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null));
         fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null));
@@ -157,7 +157,7 @@ public class DbInit implements CommandLineRunner {
         for (Fragment fragment : fragments) {
             fragmentRepository.save(fragment);
         }
-        
+
         // |--------- FragmentTexts
         ArrayList<FragmentText> fragmenttexts = new ArrayList<>();
 
@@ -167,7 +167,7 @@ public class DbInit implements CommandLineRunner {
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "#00ff00", fragments.get(3)));
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Vier", "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
-        
+
         for (FragmentText fragmentText : fragmenttexts) {
             fragmentTextRepository.save(fragmentText);
         }
@@ -177,7 +177,7 @@ public class DbInit implements CommandLineRunner {
 
         fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(1)));
         fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(4)));
-        
+
         for (FragmentMap fragmentMap : fragmentmaps) {
             fragmentMapRepository.save(fragmentMap);
         }
@@ -226,7 +226,6 @@ public class DbInit implements CommandLineRunner {
         Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
         this.seitenaufrufeRepository.save(seitenaufrufe);
 
-*/
 
     }
 

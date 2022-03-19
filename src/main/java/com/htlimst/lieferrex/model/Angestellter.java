@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Angestellter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="mandant_id", nullable=false)
     private Mandant mandant;
@@ -31,6 +33,7 @@ public class Angestellter {
     private String email;
     private String passwort;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "angestellter_rolle",
