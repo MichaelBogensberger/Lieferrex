@@ -64,7 +64,7 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
+    /*
         deleteAll();
 
         // |---------- Layouts
@@ -130,7 +130,7 @@ public class DbInit implements CommandLineRunner {
         Set mandantBestellart = new HashSet();
         mandantBestellart.add(bestellart);
         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0));
-        Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
+        Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", 12345, "Straße", "10", 0650123123, 1234.5, 50000, "mandant1@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1));
                
         
         Kategorie kategorie = new Kategorie();
@@ -226,7 +226,7 @@ public class DbInit implements CommandLineRunner {
         Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
         this.seitenaufrufeRepository.save(seitenaufrufe);
 
-
+*/
 
     }
 

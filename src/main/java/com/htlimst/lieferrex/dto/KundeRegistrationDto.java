@@ -17,7 +17,10 @@ import javax.validation.constraints.*;
 })
 public class KundeRegistrationDto {
 
+    @NotEmpty
     private String vorname;
+
+    @NotEmpty
     private String nachname;
 
     @NotEmpty

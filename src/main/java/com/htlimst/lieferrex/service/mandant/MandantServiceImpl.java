@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.service.mandant;
 
+import com.htlimst.lieferrex.dto.MandantRegistrationDto;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.mandant.MandantService;
@@ -50,6 +51,11 @@ public class MandantServiceImpl implements MandantService {
     @Override
     public void save(Mandant mandant) {
         mandantRepository.save(mandant);
+    }
+
+    @Override
+    public Mandant saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
+        return null;
     }
 
 

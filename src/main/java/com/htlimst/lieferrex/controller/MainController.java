@@ -68,10 +68,7 @@ public class MainController {
         return "main/orders.html";
     }
 
-    @GetMapping("/restaurantpartner")
-    public String showRestaurantpartner() {
-        return "main/restaurantpartner.html";
-    }
+
 
 
 

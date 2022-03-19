@@ -1,66 +1,41 @@
 <!doctype html>
-<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Lieferrex - Login</title>
-
     <div th:replace="main/fragments/header"></div>
-
     <!-- Login Style -->
     <link th:href="@{/css/main/login.css}" rel="stylesheet"/>
 
-
 </head>
 <body class="login-body">
+<div id="reg-div">
 
-
-<div id="reg-div" >
-
-
-
-
-
-    <form class="col s12" id="reg-form">
+    <!--  POST Form  -->
+    <form class="col s12" id="reg-form" method="post" th:action="@{/restaurantpartner}" th:object="${mandant}">
         <h1 class="login-form-ueb reg-form-ueb">Partner werden</h1>
-
-
 
         <ul class="stepper horizontal">
             <li class="step active">
                 <div class="step-title waves-effect">Beschreibung</div>
                 <div class="step-content">
-
-
-
                     <div class="row">
 
-                      <div class="col s6">
-                        <h1 class="ess-step-ueb white-dm">Partner werden</h1>
-                        <p class="white-dm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
+                        <div class="col s6">
+                            <h1 class="ess-step-ueb white-dm">Partner werden</h1>
+                            <p class="white-dm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae
+                                ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
+                        </div>
 
+                        <div class="col s6">
+                            <p class="white-dm">1) Beschreibung</p>
+                            <p class="white-dm">2) Grunddaten eingeben (Restaurant bezogen)</p>
+                            <p class="white-dm">3) Standort eingeben</p>
+                            <p class="white-dm">4) Admin Benutzer anlegen</p>
+                            <p class="white-dm">5) Registrieren</p>
 
-                      </div>
-
-                      <div class="col s6">
-                          <p class="white-dm">1) Beschreibung</p>
-                          <p class="white-dm">2) Grunddaten eingeben (Restaurant bezogen)</p>
-                          <p class="white-dm">3) Standort eingeben</p>
-                          <p class="white-dm">4) Admin Benutzer anlegen</p>
-                          <p class="white-dm">5) Registrieren</p>
-
-                      </div>
+                        </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
@@ -68,7 +43,6 @@
                     </div>
                 </div>
             </li>
-
 
 
 
@@ -76,88 +50,49 @@
                 <div class="step-title waves-effect">Essentials</div>
                 <div class="step-content">
 
-
-                    <!--
                     <div class="row">
 
-                      <div class="col s6">
-                        <h1 class="ess-step-ueb">Neu registireren</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque beatae ad accusantium maiores nisi consequatur quas, autem optio. Quas a!</p>
-
-
-                      </div>
-
-                      <div class="col s6">6-columns (one-half)</div>
-                    </div>
-                  -->
-
-
-
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm  prefix">home</i>
-                                    <input id="firmenname" type="text" class="validate login-inp" placeholder="Firmenname">
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm  prefix">home</i>
+                                <input id="firmenname" type="text" class="validate login-inp" placeholder="Firmenname"
+                                       th:field="*{firmenname}">
                                     <label for="firmenname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">email</i>
-                                    <input id="rest-email" type="email" class="validate login-inp" placeholder="Restaurant-Email">
-                                    <label for="rest-email"></label>
-                                </div>
-
-
+                            </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">email</i>
+                                <input id="firmenemail" type="email" class="validate login-inp"
+                                       placeholder="Restaurant-Email"
+                                       th:field="*{firmenemail}">
+                                    <label for="firmenemail"></label>
                             </div>
 
-                            <!--
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m12 l12">
-                                    <i class="material-icons-outlined white-dm prefix">email</i>
-                                    <input id="vname" type="email" class="validate login-inp" placeholder="Email">
-                                    <label for="nname"></label>
-                                </div>
-                            </div>
-                            -->
-
-
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm  prefix">account_balance_wallet</i>
-                                    <input id="mindestbestellwert" type="number" step="any" class="validate login-inp" placeholder="Mindestbestellwert €">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm  prefix">account_balance_wallet</i>
+                                <input id="mindestbestellwert" type="number" step="any" class="validate login-inp"
+                                       placeholder="Mindestbestellwert €"
+                                       th:field="*{mindestbestellwert}">
                                     <label for="mindestbestellwert"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">airport_shuttle</i>
-                                    <input id="lieferkosten" type="number" step="any"  class="validate login-inp" placeholder="Lieferkosten €">
+                            </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">airport_shuttle</i>
+                                <input id="lieferkosten" type="number" step="any" class="validate login-inp"
+                                       placeholder="Lieferkosten €"
+                                       th:field="*{lieferkosten}">
                                     <label for="lieferkosten"></label>
-                                </div>
-
-
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m12 l12">
-                                    <i class="material-icons-outlined white-dm prefix">call</i>
-                                    <input id="vname" type="tel" class="validate login-inp" placeholder="Telefonnummer">
-                                    <label for="nname"></label>
-                                </div>
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m12 l12">
+                                <i class="material-icons-outlined white-dm prefix">call</i>
+                                <input id="telefonnummer" type="tel" class="validate login-inp"
+                                       placeholder="Telefonnummer"
+                                       th:field="*{telefonnummer}">
+                                    <label for="telefonnummer"></label>
                             </div>
-
-
-                        </form>
+                        </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
@@ -165,8 +100,6 @@
                     </div>
                 </div>
             </li>
-
-
 
 
             <li class="step">
@@ -174,62 +107,52 @@
                 <div class="step-content">
 
 
-
-
                     <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">map</i>
-                                    <input id="vname" type="text" class="validate login-inp" placeholder="Ort">
-                                    <label for="nname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">location_city</i>
-                                    <input id="nname" type="text" class="validate login-inp" placeholder="PLZ">
-                                    <label for="nname"></label>
-                                </div>
 
-
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">map</i>
+                                <input id="ort" type="text" class="validate login-inp" placeholder="Ort"
+                                       th:field="*{ort}">
+                                    <label for="ort"></label>
+                            </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">location_city</i>
+                                <input id="plz" type="text" class="validate login-inp" placeholder="PLZ"
+                                       th:field="*{plz}">
+                                    <label for="plz"></label>
                             </div>
 
 
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">home</i>
-                                    <input id="vname" type="text" class="validate login-inp" placeholder="Straße">
-                                    <label for="nname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                                    <input id="nname" type="text" class="validate login-inp" placeholder="Hausnummer">
-                                    <label for="nname"></label>
-                                </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">home</i>
+                                <input id="strasse" type="text" class="validate login-inp" placeholder="Straße"
+                                       th:field="*{strasse}">
+                                    <label for="strasse"></label>
                             </div>
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m12 l12">
-                                    <i class="material-icons-outlined white-dm prefix">landscape</i>
-                                    <input id="nname" type="text" class="validate login-inp" placeholder="Land">
-                                    <label for="nname"></label>
-                                </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
+                                <input id="hausnummer" type="text" class="validate login-inp" placeholder="Hausnummer"
+                                       th:field="*{hausnummer}">
+                                    <label for="hausnummer"></label>
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m12 l12">
+                                <i class="material-icons-outlined white-dm prefix">landscape</i>
+                                <input id="land" type="text" class="validate login-inp" placeholder="Land"
+                                       th:field="*{land}">
+                                    <label for="land"></label>
+                            </div>
+                        </div>
 
 
-
-
-
-
-                        </form>
                     </div>
-
-
-
-
-
-
-
-
 
 
                     <div class="step-actions">
@@ -240,65 +163,52 @@
             </li>
 
 
-
             <li class="step">
                 <div class="step-title waves-effect">Benutzer</div>
                 <div class="step-content">
 
-
                     <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">face</i>
-                                    <input id="b-vname" type="text" class="validate login-inp" placeholder="Vorname">
-                                    <label for="b-nname"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">fingerprint</i>
-                                    <input id="b-nname" type="text" class="validate login-inp" placeholder="Nachname">
-                                    <label for="b-nname"></label>
-                                </div>
-
-
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">face</i>
+                                <input id="vorname" type="text" class="validate login-inp" placeholder="Vorname"
+                                       th:field="*{vorname}">
+                                    <label for="vorname"></label>
                             </div>
-
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">email</i>
-                                    <input id="b-email" type="email" class="validate login-inp" placeholder="Email">
-                                    <label for="b-email"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">vpn_key</i>
-                                    <input id="pwd" type="password" class="validate login-inp" placeholder="Passwort">
-                                    <label for="pwd"></label>
-                                </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">fingerprint</i>
+                                <input id="nachname" type="text" class="validate login-inp" placeholder="Nachname"
+                                       th:field="*{nachname}">
+                                    <label for="nachname"></label>
                             </div>
+                        </div>
 
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m12 l12">
-                                    <i class="material-icons-outlined white-dm prefix">vpn_key</i>
-                                    <input id="pwd-2" type="password" class="validate login-inp" placeholder="Passwort wiederholen">
-                                    <label for="pwd-2"></label>
-                                </div>
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">email</i>
+                                <input id="email" type="email" class="validate login-inp" placeholder="Email"
+                                       th:field="*{email}">
+                                    <label for="email"></label>
                             </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">vpn_key</i>
+                                <input id="passwort" type="password" class="validate login-inp" placeholder="Passwort"
+                                       th:field="*{passwort}">
+                                    <label for="passwort"></label>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m12 l12">
+                                <i class="material-icons-outlined white-dm prefix">vpn_key</i>
+                                <input id="confirmPasswort" type="password" class="validate login-inp"
+                                       placeholder="Passwort wiederholen"
+                                       th:field="*{confirmPasswort}">
+                                <label for="confirmPasswort"></label>
+                            </div>
+                        </div>
 
-
-
-                        </form>
                     </div>
-
-
-
-
-
-
-
-
 
 
                     <div class="step-actions">
@@ -317,24 +227,26 @@
 
                     <div class="row">
                         <div class="col s12 m12 l6">
-                            <p class="white-dm">labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            <p class="white-dm">labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                                sanctus est Lorem ipsum dolor sit amet.</p>
 
-                            <form action="#">
+                            <div action="#">
                                 <p>
                                     <label>
-                                        <input type="checkbox" />
+                                        <input type="checkbox" name="agb" th:value="on"
+                                               th:checked="${mandant.agb eq 'on'}">
                                         <span>AGB zustimmen</span>
                                     </label>
                                 </p>
-
                                 <p>
                                     <label>
-                                        <input type="checkbox" />
+                                        <input type="checkbox" name="newsletter" th:value="on"
+                                               th:checked="${mandant.newsletter eq 'on'}">
                                         <span>Infos über Mail bekommen</span>
                                     </label>
                                 </p>
-
-                            </form>
+                            </div>
 
 
                         </div>
@@ -349,34 +261,18 @@
                     </div>
 
 
-
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
-                        <button class="waves-effect waves-dark btn next-step next-step-btn mob-last-step">Registrieren</button>
+                        <button type="submit" class="btn btn-success">Registrieren</button>
                     </div>
                 </div>
             </li>
 
 
-
-
         </ul>
 
 
-
-
-
-
     </form>
-
-
-
-
-
-
-
-
-
 
 
 </div>
@@ -389,7 +285,6 @@
         </a>
     </div>
 </footer>
-
 
 
 </body>

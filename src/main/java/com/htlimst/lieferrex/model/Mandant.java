@@ -35,7 +35,7 @@ public class Mandant {
 
         private String strasse;
         private String hausnummer;
-        private int telefonnummer;
+        private String telefonnummer;
 
         private double umsatz_summe;
         private int seitenaufrufe_summe;
@@ -80,7 +80,7 @@ public class Mandant {
         private Layout layout;
 
 
-        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, int telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
+        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;
