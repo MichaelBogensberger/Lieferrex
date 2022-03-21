@@ -29,7 +29,7 @@ public class Mandant {
         private String ort;
 
         //@Size(min = 4, max = 6)
-        private int plz;
+        private String plz;
 
         private String strasse;
         private String hausnummer;
@@ -74,7 +74,7 @@ public class Mandant {
         private Layout layout;
 
 
-        public Mandant(Long id, String firmenname, String land, String ort, int plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
+        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;

@@ -39,7 +39,7 @@ public class KundeRegistrationDto {
     private String ort;
 
     @Min(3)
-    private int plz;
+    private String plz;
 
     @NotEmpty
     private String strasse;

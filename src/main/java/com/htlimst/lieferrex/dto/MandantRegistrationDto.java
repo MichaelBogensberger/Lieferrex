@@ -40,7 +40,7 @@ public class MandantRegistrationDto {
     private String ort;
 
 
-    private int plz;
+    private String plz;
 
     @NotEmpty
     private String strasse;
