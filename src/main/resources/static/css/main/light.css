@@ -124,3 +124,22 @@
 .orders-p {
     color: white;
 }
+
+
+.m-r-partner-img {
+    width: 400px;
+    content:url("/css/main/ill/light/upgrade.svg");
+}
+
+.l-adresse-img {
+    content:url("/css/main/ill/light/location.svg");
+}
+
+.m-adresse-img {
+    content:url("/css/main/ill/light/mobile.svg");
+}
+
+.r-adresse-img {
+    content:url("/css/main/ill/light/pay.svg");
+}
+

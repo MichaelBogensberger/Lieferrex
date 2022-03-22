@@ -249,3 +249,23 @@ ul.stepper .step:not(:last-of-type)::after {
 .orders-p {
     color: #ffffff;
 }
+
+
+.m-r-partner-img {
+    width: 400px;
+    content:url("/css/main/ill/dark/upgrade.svg");
+}
+
+
+
+.l-adresse-img {
+    content:url("/css/main/ill/dark/location.svg");
+}
+
+.c-adresse-img {
+    content:url("/css/main/ill/dark/mobile.svg");
+}
+
+.r-adresse-img {
+    content:url("/css/main/ill/dark/pay.svg");
+}
