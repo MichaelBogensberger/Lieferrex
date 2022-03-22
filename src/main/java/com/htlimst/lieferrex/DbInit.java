@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex;
 
+
 import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.model.fragments.FragmentMap;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Service
 public class DbInit implements CommandLineRunner {
