@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,14 +61,14 @@ public class LoginRegistrationController {
             result.rejectValue("email", null, "There is already an account registered with that email");
             System.out.println("Schon vorhanden");
         }
-        if(!registrationDto.isAgb()){
-            System.out.println("agb nicht akzeptiert");
-            return "redirect:/register?error";
-        }
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors ) {
                 System.out.println (error.getField() + " - " + error.getDefaultMessage());
+            }
+            List<ObjectError> globalError = result.getGlobalErrors();
+            for (ObjectError error : globalError){
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
             }
             return "redirect:/register?error";
         }
@@ -98,15 +99,16 @@ public class LoginRegistrationController {
             System.out.println("Schon vorhanden");
             return "redirect:/restaurantpartner?error";
         }
-        if(!registrationDto.isAgb()){
-            System.out.println("agb nicht akzeptiert");
-            return "redirect:/restaurantpartner?error";
-        }
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors ) {
                 System.out.println (error.getField() + " - " + error.getDefaultMessage());
             }
+            List<ObjectError> globalError = result.getGlobalErrors();
+            for (ObjectError error : globalError){
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+
             return "redirect:/restaurantpartner?error";
         }
 

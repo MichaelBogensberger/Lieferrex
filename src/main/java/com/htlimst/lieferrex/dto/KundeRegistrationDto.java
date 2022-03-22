@@ -1,6 +1,7 @@
 package com.htlimst.lieferrex.dto;
 
-import com.htlimst.lieferrex.service.security.constraint.FieldMatch;
+import com.htlimst.lieferrex.constraint.ValidPhoneNumber.ValidPhoneNumber;
+import com.htlimst.lieferrex.constraint.fieldMatch.FieldMatch;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,12 +48,13 @@ public class KundeRegistrationDto {
     @NotEmpty
     private String hausnummer;
 
-    @NotEmpty
+    @ValidPhoneNumber
     private String telefonnummer;
 
     @NotEmpty
     private String land;
 
+    @AssertTrue
     private boolean agb;
 
     private boolean newsletter;

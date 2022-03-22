@@ -43,13 +43,6 @@ public class MainController {
         this.fragmentmapServiceImpl = fragmentmapServiceImpl;
     }
 
-    @GetMapping("/test")
-    public String viewUserAccountForm(@AuthenticationPrincipal UserPrincipal userDetails) {
-        String userEmail = userDetails.getUsername();
-        System.out.println(userEmail);
-
-        return "main/index";
-    }
 
     @GetMapping("")
     public String showIndexPage() {
@@ -65,7 +58,7 @@ public class MainController {
 
     @GetMapping("/orders")
     public String showOrdersPage() {
-        return "main/orders.html";
+        return "main/orders";
     }
 
 

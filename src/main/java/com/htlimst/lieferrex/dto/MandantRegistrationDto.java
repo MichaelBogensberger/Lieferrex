@@ -1,13 +1,14 @@
 package com.htlimst.lieferrex.dto;
 
-import com.htlimst.lieferrex.service.security.constraint.FieldMatch;
+import com.htlimst.lieferrex.constraint.ValidPhoneNumber.ValidPhoneNumber;
+import com.htlimst.lieferrex.constraint.fieldMatch.FieldMatch;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -33,13 +34,13 @@ public class MandantRegistrationDto {
 
     private double lieferkosten;
 
-    @NotEmpty
+    @ValidPhoneNumber
     private String telefonnummer;
 
     @NotEmpty
     private String ort;
 
-
+    @NotEmpty
     private String plz;
 
     @NotEmpty
@@ -69,7 +70,9 @@ public class MandantRegistrationDto {
     @Size(min = 8)
     private String confirmPasswort;
 
+    @AssertTrue
     private boolean agb;
+
     private boolean newsletter;
 
 }
