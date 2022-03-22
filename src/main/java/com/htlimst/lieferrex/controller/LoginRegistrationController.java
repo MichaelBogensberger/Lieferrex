@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,6 +66,10 @@ public class LoginRegistrationController {
             for (FieldError error : errors ) {
                 System.out.println (error.getField() + " - " + error.getDefaultMessage());
             }
+            List<ObjectError> globalError = result.getGlobalErrors();
+            for (ObjectError error : globalError){
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+            }
             return "redirect:/register?error";
         }
 
@@ -99,6 +104,11 @@ public class LoginRegistrationController {
             for (FieldError error : errors ) {
                 System.out.println (error.getField() + " - " + error.getDefaultMessage());
             }
+            List<ObjectError> globalError = result.getGlobalErrors();
+            for (ObjectError error : globalError){
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+
             return "redirect:/restaurantpartner?error";
         }
 
