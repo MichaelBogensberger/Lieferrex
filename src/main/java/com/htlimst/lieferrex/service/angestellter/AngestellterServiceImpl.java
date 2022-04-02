@@ -59,13 +59,13 @@ public class AngestellterServiceImpl implements AngestellterService{
     }
 
     @Override
-    public void saveAngestellter(Angestellter angestellter, String rollen) {
+    public void saveAngestellter(Angestellter angestellter, String rollen, Mandant mandant) {
         if(rollen.equals("angestellter")){
-            angestellter.setRolle(Arrays.asList(rolleRepository.findByRolle("ROLE_MANDANT")));
-        }else if(rollen.equals("admin")){
             angestellter.setRolle(Arrays.asList(rolleRepository.findByRolle("ROLE_ANGESTELLTER")));
+        }else if(rollen.equals("admin")){
+            angestellter.setRolle(Arrays.asList(rolleRepository.findByRolle("ROLE_MANDANT")));
         }
-        angestellter.setMandant(mandantRepository.getById(1L));
+        angestellter.setMandant(mandant);
         angestellter.setPasswort(passwordEncoder.encode(angestellter.getPasswort()));
         angestellterRepository.save(angestellter);
     }

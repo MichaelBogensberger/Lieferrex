@@ -2,9 +2,12 @@ package com.htlimst.lieferrex.controller.benutzerrechte;
 
 
 import com.htlimst.lieferrex.model.Angestellter;
+import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.RolleRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
+import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +41,17 @@ public class BenutzerrechteController {
         return "dashboard/benutzer.html";
     }
     @PostMapping("/save")
-    public String saveAngestellter(Angestellter angestellter, @RequestParam String rollen){
-        angestellterService.saveAngestellter(angestellter, rollen);
+    public String saveAngestellter(Angestellter angestellter, @RequestParam String rollen, @AuthenticationPrincipal UserPrincipal principal){
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
+        angestellterService.saveAngestellter(angestellter, rollen, foundMandant);
         return "redirect:/dashboard/benutzer";
     }
     @PostMapping("/create")
-    public String createAngestellter(Angestellter angestellter, @RequestParam String rollen){
-        angestellterService.saveAngestellter(angestellter, rollen);
+    public String createAngestellter(Angestellter angestellter, @RequestParam String rollen, @AuthenticationPrincipal UserPrincipal principal){
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
+        angestellterService.saveAngestellter(angestellter, rollen, foundMandant);
         return "redirect:/dashboard/benutzer";
     }
 }

@@ -1,6 +1,7 @@
 package com.htlimst.lieferrex.service.angestellter;
 
 import com.htlimst.lieferrex.model.Angestellter;
+import com.htlimst.lieferrex.model.Mandant;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,6 @@ public interface AngestellterService {
     public long countAngestellter();
     public long countAdmins();
     public long countZugang();
-    public void saveAngestellter(Angestellter angestellter, String rollen);
+    public void saveAngestellter(Angestellter angestellter, String rollen, Mandant mandant);
 
 }
