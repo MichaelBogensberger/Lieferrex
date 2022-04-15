@@ -1,0 +1,76 @@
+<div th:fragment="header">
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <li>
+            <div class="user-view">
+                <div class="background">
+    
+                    <img th:src="@{css/baukasten/background.png}"  class="overlayImg">
+                </div>
+                <a href="#user"><img class="circle" src="https://eu.ui-avatars.com/api/?name=John+Doe"></a>
+                <a href="#name"><span class="white-text name">John Doe</span></a>
+                <a href="#email"><span class="white-text email">agen007@gmail.com</span></a>
+            </div>
+        </li>
+    
+        <li><a href="#!" class="waves-effect"><i class="material-icons">arrow_back</i>Zurück zum Dashboard</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">save</i>Webseite speichern</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Layout ändern</a></li>
+    
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Einstellungen</a></li>
+    
+    
+    
+    
+    
+        <div class="row mb-0">
+            <div class="col s1">
+            </div>
+    
+            <div class="input-field col s10">
+    
+                <input id="firmenname" type="text" class="validate" value="Asiamix">
+                <label for="firmenname">Firmenname</label>
+            </div>
+    
+            <div class="col s1">
+            </div>
+    
+        </div>
+    
+    
+    
+        <div class="row mb-0">
+            <div class="col s1">
+            </div>
+    
+            <div class="input-field col s10">
+                <select class="icons">
+                    <option value="" disabled selected>Farbe wählen</option>
+                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=5cdb95">Grün</option>
+                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=EEEEEE">Grau</option>
+                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=212529">Black</option>
+                </select>
+                <label>Akzentfarbe</label>
+            </div>
+    
+            <div class="col s1">
+            </div>
+    
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+</div>

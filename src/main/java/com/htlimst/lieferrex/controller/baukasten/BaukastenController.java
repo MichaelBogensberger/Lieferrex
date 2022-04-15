@@ -26,24 +26,12 @@ public class BaukastenController {
     @Autowired
     FragmentTextServiceImpl fragmentTextServiceImpl;
 
-    // -- Fragments mit Model
-    // fragment_header 	(titel, text, bild)
-    // fragment_text		(titel, text)
-    // fragment_bild		(image)
+    // TODO: Make model an Object, consistency
 
-    // -- Fragments statisch (mit Model???)
-    // fragment_map
-    // fragment_bestellung
-    // fragment_oeffnungszeiten
-    // fragment_kontakt
+    @GetMapping("/restaurant/{restaurant}")
+    public String showRestaurant(Model model, @PathVariable String restaurant){
 
-    // -- Sites
-    // Gallery
-    // Ueber uns
-
-
-    @GetMapping("/baukasten/{restaurant}")
-    public String showBaukasten(Model model, @PathVariable String restaurant){
+        // TODO: Error-Handling
 
         // Get Mandant ueber Name in der URL
         Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
@@ -68,6 +56,39 @@ public class BaukastenController {
         }
                 
         return "baukasten/frame.html";
+    }
+
+    @GetMapping("/baukasten")
+    public String showBaukasten(Model model){
+
+        // TODO: Get Mandant by logged in User
+        // Temporary Set Mandant
+        Mandant mandant = mandantServiceImpl.findMandantByFirmenname("MandantenFirma2").get();
+
+        model.addAttribute("layout", mandant.getLayout().getName());
+        model.addAttribute("edit", true);
+
+        // TODO: Make function, redundancy
+        // Alle Fragmente des Mandaten ueber dessen ID
+        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
+
+        // Layout des Mandanten der VIEW uebergeben
+        model.addAttribute("layout", mandant.getLayout().getName());
+
+        // Alle Fragmente mit Position der VIEW uebergeben
+        for (Fragment fragment : fragments) {
+            model.addAttribute(fragment.getPosition().getName(), fragment);
+
+            // Datenermittlung bei Ausgabe von Karte, Kontakt, etc.
+            if (fragment.getFragmenttype().getType().equals("karte")) {
+                model.addAttribute("gerichte", mandant.getGerichte());
+            } else if(fragment.getFragmenttype().getType().equals("kontakt")){
+                // TODO: Kontakte des Mandanten ausgeben
+                model.addAttribute("kontakt", "getKontakt");
+            }
+        }
+
+        return "baukasten/frame";
     }
 
 }

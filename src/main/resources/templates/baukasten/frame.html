@@ -13,6 +13,8 @@
 
 <body>
 
+    <div th:if="${edit}" th:replace="baukasten/fragments/modals"></div>
+
     <nav class="side-p">
         <div class="nav-wrapper">
 
@@ -35,6 +37,8 @@
                     class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
 
     </ul>
+
+    <div th:replace="${edit} ? ~{baukasten/fragments/sidenav} : ~{}"></div>
 
 <!-- ----------------------------------------- -->
 

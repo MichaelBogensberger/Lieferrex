@@ -9,7 +9,7 @@
     
     <div class="row">
         <div class="col s12 m12 l12 main-right">
-            <div th:replace="'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1})"></div>
+            <div th:replace="${r2c1} ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1})} : (${edit} ? ~{baukasten/fragments/modules/add} : ~{})"></div>
         </div>
     </div>
 
