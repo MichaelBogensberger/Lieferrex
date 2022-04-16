@@ -1,8 +1,4 @@
-<div th:fragment="text">
-    <div class="card darken-1">
-        <div class="card-content black-text">
-          <span class="card-title black-text" th:text="${content.fragmenttext.titel}"></span>
-          <p th:text="${content.fragmenttext.text}"></p>
-        </div>
-    </div>
+<div th:fragment="text" class="fragment-text">
+  <h2 th:text="${content.fragmenttext.titel}"></h2>
+  <p th:text="${content.fragmenttext.text}"></p>
 </div>

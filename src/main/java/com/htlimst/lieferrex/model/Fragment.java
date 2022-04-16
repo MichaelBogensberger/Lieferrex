@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import com.htlimst.lieferrex.model.fragments.FragmentHeader;
 import com.htlimst.lieferrex.model.fragments.FragmentMap;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
@@ -43,6 +44,9 @@ public class Fragment {
 
     @OneToOne(mappedBy = "fragment")
     private FragmentMap fragmentmap;
+
+    @OneToOne(mappedBy = "fragment")
+    private FragmentHeader fragmentheader;
 
 
 }

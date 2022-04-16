@@ -15,7 +15,63 @@ nav {
 }
 
 
+.row {
+    min-height: 20vh;
+}
 
+.fragment-header, .fragment-map, .fragment-text {
+    -webkit-box-shadow: 0px 0px 13px -1px #000000; 
+    box-shadow: 0px 0px 13px -1px #000000;
+}
+
+.fragment-header {
+    /* background-image: url("https://via.placeholder.com/500x500");
+    background-size: cover;
+    background-position: center; */
+
+    margin-top: 2vh;
+    min-height: 40vh;
+
+    display: flex;
+    /* padding-left: 10%;  */
+    
+}
+
+.fragment-header-column {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+}
+
+.fragment-header-column > img {
+    object-fit: contain;
+}
+
+.fragment-header > img {
+    margin-right: 0;
+    position: relative;
+}
+
+.fragment-map {
+    max-height: 60vh;
+    display: flex;
+    justify-content: center;
+}
+
+.fragment-map > img {
+    object-fit: contain;
+}
+
+.fragment-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
 
 
 
@@ -51,13 +107,6 @@ nav {
     margin-bottom: 20px;
 }
 
-.main-right {
-
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20px;
-}
-
 
 .main-left div {
     height: 70vh;
@@ -67,32 +116,11 @@ nav {
     border-radius: 8px;
 }
 
-.main-right div{
-    height: 70vh;
-    background-color: #EBECF0;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    border-radius: 8px;
-}
-
-.main-right div span {
-    margin-top: 30vh;
-    font-size: 100px;
-    color: #BEBEBE;
-}
-
 .main-left div span {
     margin-top: 30vh;
     font-size: 100px;
     color: #BEBEBE;
 
-}
-
-.main-right div span:hover, .main-left div span:hover  {
-    cursor: pointer;
-    opacity: 0.8;
-    transform: scale(1.05);
-    transition: 1s;
 }
 
 

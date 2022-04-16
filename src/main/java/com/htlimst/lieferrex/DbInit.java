@@ -2,6 +2,7 @@ package com.htlimst.lieferrex;
 
 
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.fragments.FragmentHeader;
 import com.htlimst.lieferrex.model.fragments.FragmentMap;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
@@ -60,6 +61,8 @@ public class DbInit implements CommandLineRunner {
     private PositionRepository positionRepository;
     @Autowired
     private FragmentTypeRepository fragmentTypeRepository;
+    @Autowired
+    private FragmentHeaderRepository fragmentHeaderRepository;
 
 
 
@@ -122,6 +125,7 @@ public class DbInit implements CommandLineRunner {
 
         fragmentTypes.add(new FragmentType(null, "text", null));
         fragmentTypes.add(new FragmentType(null, "map", null));
+        fragmentTypes.add(new FragmentType(null, "header", null));
 
         for (FragmentType fragmentType : fragmentTypes) {
             fragmentTypeRepository.save(fragmentType);
@@ -149,14 +153,14 @@ public class DbInit implements CommandLineRunner {
         // |---------- Fragments
         ArrayList<Fragment> fragments = new ArrayList<>();
 
-        fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(0), null, null));
-        fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null));
-        fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null));
+        fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(2), null, null, null));
+        fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null, null));
+        fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null, null));
 
-        fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(0), null, null));
-        fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null));
-        fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null));
-        fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null));
+        fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(2), null, null, null));
+        fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null, null));
+        fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null, null));
+        fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null, null));
 
         for (Fragment fragment : fragments) {
             fragmentRepository.save(fragment);
@@ -165,15 +169,23 @@ public class DbInit implements CommandLineRunner {
         // |--------- FragmentTexts
         ArrayList<FragmentText> fragmenttexts = new ArrayList<>();
 
-        fragmenttexts.add(new FragmentText(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "#00ff00", fragments.get(0)));
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(2)));
 
-        fragmenttexts.add(new FragmentText(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "#00ff00", fragments.get(3)));
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
         fragmenttexts.add(new FragmentText(null, "Cooler Titel Vier", "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
 
         for (FragmentText fragmentText : fragmenttexts) {
             fragmentTextRepository.save(fragmentText);
+        }
+
+        // |--------- FragmentHeaders
+        ArrayList<FragmentHeader> fragmentheaders = new ArrayList<>();
+
+        fragmentheaders.add(new FragmentHeader(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "/restaurant/img1.png", fragments.get(0)));
+        fragmentheaders.add(new FragmentHeader(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "/restaurant/img2.png", fragments.get(3)));
+
+        for (FragmentHeader fragmentHeader : fragmentheaders) {
+            fragmentHeaderRepository.save(fragmentHeader);
         }
 
         // |--------- FragmentMaps
