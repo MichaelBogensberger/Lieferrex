@@ -33,9 +33,11 @@ public class GerichtController {
     }
 
     @GetMapping
-    public String showDashboardGerichte(Model model) {
+    public String showDashboardGerichte(Model model, @AuthenticationPrincipal UserPrincipal principal) {
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
         // Gerichte mit Status 1 oder 2
-        List<Gericht> gerichteList = gerichtService.getGerichtByStatus();
+        List<Gericht> gerichteList = gerichtService.getGerichtByStatus(foundMandant.getId());
         // Gerichte mit Status 0
         List<Gericht> gerichteListStatusZero = gerichtService.getGerichtByStatusZero();
         model.addAttribute("gerichteList", gerichteList);

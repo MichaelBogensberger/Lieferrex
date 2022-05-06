@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.w3.org/1999/html">
 <head>
 
     <title>Dashboard</title>
@@ -228,7 +228,7 @@
                                         <span class="sidebar-icon">
                                             <i class="fa fa-eye text-white-lm" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">22.342</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{seitenaufrufe}"></h2>
                                 </div>
                                 <p class="mt-10 mb-0 font-weight-bold">Seitenaufrufe</p>
                                 <p class="mt-5 mb-0">Anzahl der Seitenaufrufe in diesem Monat</p>
@@ -247,7 +247,7 @@
                                         <span class="sidebar-icon">
                                             <i class="fa fa-credit-card-alt text-white-lm" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">12.300 €</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{umsatz}"></h2>
                                 </div>
                                 <p class="mt-10 mb-0 font-weight-bold">Umsatz</p>
                                 <p class="mt-5 mb-0">Erzielter Umsatz aus diesem Monat</p>
@@ -270,7 +270,7 @@
                                         <span class="sidebar-icon">
                                             <i class="fa fa-cutlery text-white-lm" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">324</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="*{gerichteVerkauft}"></h2>
                                 </div>
                                 <p class="mt-10 mb-0 font-weight-bold">Gerichte</p>
                                 <p class="mt-5 mb-0">Anzahl der verkauften Gerichte</p>

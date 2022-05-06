@@ -71,11 +71,6 @@ public class MainController {
         return "baukasten/one.html";
     }
 
-    @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "dashboard/dashboard.html";
-    }
-
     @GetMapping("/dashboard/bestellungen")
     public String showDashboardBestellungen() {
         return "dashboard/bestellungen.html";

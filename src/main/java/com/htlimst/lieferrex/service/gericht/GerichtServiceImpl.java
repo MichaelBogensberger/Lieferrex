@@ -27,8 +27,8 @@ public class GerichtServiceImpl implements GerichtService{
     }
 
     @Override
-    public List<Gericht> getGerichtByStatus() {
-        return gerichtRepo.getGerichtByEnabled();
+    public List<Gericht> getGerichtByStatus(Long mandantId) {
+        return gerichtRepo.getGerichtByEnabled(mandantId);
     }
 
     @Override
