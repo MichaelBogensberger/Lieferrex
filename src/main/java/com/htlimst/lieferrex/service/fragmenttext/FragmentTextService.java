@@ -6,5 +6,6 @@ import java.util.Optional;
 public interface FragmentTextService {
 
     Optional<FragmentText> findFragmenttextByFragment_id(Long id);
+    void saveFragmentText(FragmentText fragmentText);
 
 }

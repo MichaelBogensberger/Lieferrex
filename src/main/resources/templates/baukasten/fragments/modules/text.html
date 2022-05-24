@@ -1,4 +1,16 @@
-<div th:fragment="text" class="fragment-text">
-  <h2 th:text="${content.fragmenttext.titel}"></h2>
-  <p th:text="${content.fragmenttext.text}"></p>
+<div th:fragment="text(content, edit, position)" class="fragment-text">
+
+  <form th:if="${edit}" th:action="@{/baukasten/fragmenttext/save}" method="post">
+    <!-- <h2 th:name="titel" th:value="${content.fragmenttext.titel}" ></h2>
+    <p th:name="text" th:value="${content.fragmenttext.text}"></p>
+    <p th:name="position" th:value="${position}"></p> -->
+    <p th:field="allah">asd</p>
+    <button type="submit">asd</button>
+  </form>
+
+  <div th:unless="${edit}">
+    <h2 th:text="${content.fragmenttext.titel}"></h2>
+    <p th:text="${content.fragmenttext.text}"></p>
+  </div>
+
 </div>

@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col s12 m12 l12">
             <div th:replace="${r2c1} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit})} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit}, position='r2c1')} 
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add} 
                                     : ~{})"></div>
@@ -30,14 +30,14 @@
     <div class="row">
         <div class="col s12 m7 l9">
             <div th:replace="${r3c1} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r3c1.fragmenttype.type}(content=${r3c1}, edit=${edit})} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r3c1.fragmenttype.type}(content=${r3c1}, edit=${edit}, position='r3c1')} 
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add} 
                                     : ~{})"></div>
         </div>
         <div class="col s12 m5 l3">
             <div th:replace="${r3c2} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r3c2.fragmenttype.type}(content=${r3c2}, edit=${edit})} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r3c2.fragmenttype.type}(content=${r3c2}, edit=${edit}, position='r3c2')} 
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add} 
                                     : ~{})"></div>

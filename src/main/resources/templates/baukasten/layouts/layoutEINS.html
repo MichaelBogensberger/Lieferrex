@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col s12 m7 l9 main-right">
             <div th:replace="${r2c1} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit})} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit}, position='r2c1')}
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add} 
                                     : ~{})"></div>
@@ -29,7 +29,7 @@
         
         <div class="col s12 m5 l3 main-right">
             <div th:replace="${r2c2} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2}, edit=${edit})} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2}, edit=${edit}, position='r2c2')} 
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add} 
                                     : ~{})"></div>

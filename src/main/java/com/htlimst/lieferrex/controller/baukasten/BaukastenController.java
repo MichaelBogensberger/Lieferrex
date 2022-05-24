@@ -5,6 +5,7 @@ import java.util.List;
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
+import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BaukastenController {
@@ -89,6 +93,12 @@ public class BaukastenController {
         }
 
         return "baukasten/frame";
+    }
+
+    @RequestMapping("/baukasten/fragmenttext/save")
+    public String saveFragmentText(@RequestParam String allah) {
+        System.out.println(allah);
+        return "redirect:/baukasten";
     }
 
 }
