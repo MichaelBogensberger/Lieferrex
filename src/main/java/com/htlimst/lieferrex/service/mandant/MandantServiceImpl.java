@@ -59,6 +59,11 @@ public class MandantServiceImpl implements MandantService {
     }
 
     @Override
+    public Optional<Mandant> findMandantByAngestellterEmail(String email){
+        return mandantRepository.findMandantByAngestellte_Email(email);
+    }
+
+    @Override
     public Mandant listAll() {
         return mandantRepository.getById(3L);
     }

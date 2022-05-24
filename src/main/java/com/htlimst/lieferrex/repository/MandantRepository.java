@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MandantRepository extends JpaRepository<Mandant,Long> {
     Optional<Mandant> findMandantByFirmenname(String name);
+    Optional<Mandant> findMandantByAngestellte_Email(String email);
 }

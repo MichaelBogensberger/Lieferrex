@@ -1,15 +1,21 @@
 package com.htlimst.lieferrex.controller.baukasten;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
+import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
+import com.htlimst.lieferrex.repository.PositionRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,10 +101,14 @@ public class BaukastenController {
         return "baukasten/frame";
     }
 
-    @RequestMapping("/baukasten/fragmenttext/save")
-    public String saveFragmentText(@RequestParam String allah) {
-        System.out.println(allah);
-        return "redirect:/baukasten";
-    }
+    // @GetMapping("/baukasten/module/{position}")
+    // public String getModule(Model model, Authentication authentication, @PathVariable String position){
+    //     Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();        
+    //     Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.getId(), position).get();
+
+    //     model.addAttribute("content", fragment);
+
+    //     return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
+    // }
 
 }

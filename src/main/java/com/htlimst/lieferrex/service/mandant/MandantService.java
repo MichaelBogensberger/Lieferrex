@@ -14,6 +14,7 @@ public interface MandantService {
     Mandant mandantMitId(Long id); //throws MandantNichtGefunden
     void mandantLoeschenMitId(Long id);
     Optional<Mandant> findMandantByFirmenname(String name);
+    Optional<Mandant> findMandantByAngestellterEmail(String email);
     Mandant listAll();
     void save(Mandant mandant);
 
