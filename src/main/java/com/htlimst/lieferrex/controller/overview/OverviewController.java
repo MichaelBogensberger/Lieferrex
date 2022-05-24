@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -34,7 +38,7 @@ public class OverviewController {
     }
 
     @GetMapping
-    public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model){
+    public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model, HttpServletResponse response){
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
         Seitenaufrufe seitenaufrufe = overviewService.seitenaufrufe(foundMandant);
@@ -43,6 +47,18 @@ public class OverviewController {
         model.addAttribute("seitenaufrufe", seitenaufrufe.getAufrufe());
         model.addAttribute("umsatz", umsatz.getUmsatz());
         model.addAttribute("gerichteVerkauft", verkaufteGerichte);
+
+
+        // -----------------------
+        // Token in Daterbank und Cookie fuer REST.
+        // -----------------------
+        String token = UUID.randomUUID().toString();
+        response.addCookie(new Cookie("token", token));
+        foundAngestellter.setToken(token);
+        angestellterService.saveAngestellter(foundAngestellter);
+
+
+
         return "dashboard/dashboard.html";
     }
 

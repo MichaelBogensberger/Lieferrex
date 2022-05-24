@@ -33,6 +33,8 @@ public class Angestellter {
     private String email;
     private String passwort;
 
+    private String token;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

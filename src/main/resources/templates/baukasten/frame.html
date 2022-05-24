@@ -44,6 +44,17 @@
 
         <div th:replace="'baukasten/layouts/' + ${layout}"></div>
 
+    <div class="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $.get( "/baukasten/modul/r2c2", function( data ) {
+            $( ".result" ).html( data );
+            alert( "Load was performed." );
+            })
+        });
+        
+    </script>
 
     </body>
     <script type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>

@@ -16,5 +16,7 @@ public interface AngestellterService {
     public long countAdmins();
     public long countZugang();
     public void saveAngestellter(Angestellter angestellter, String rollen, Mandant mandant);
+    public Optional<Angestellter> findAngestellterByToken(String token);
+    public void saveAngestellter(Angestellter angestellter);
 
 }

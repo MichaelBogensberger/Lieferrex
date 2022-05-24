@@ -70,5 +70,14 @@ public class AngestellterServiceImpl implements AngestellterService{
         angestellterRepository.save(angestellter);
     }
 
+    @Override
+    public Optional<Angestellter> findAngestellterByToken(String token) {
+        return angestellterRepository.findAngestellterByToken(token);
+    }
+
+    @Override
+    public void saveAngestellter(Angestellter angestellter) {
+        angestellterRepository.save(angestellter);
+    }
 
 }

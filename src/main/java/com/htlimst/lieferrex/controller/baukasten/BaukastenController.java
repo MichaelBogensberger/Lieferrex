@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Gericht;
@@ -101,14 +103,14 @@ public class BaukastenController {
         return "baukasten/frame";
     }
 
-    // @GetMapping("/baukasten/module/{position}")
-    // public String getModule(Model model, Authentication authentication, @PathVariable String position){
-    //     Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();        
-    //     Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.getId(), position).get();
+    @GetMapping("/baukasten/modul/{position}")
+    public String getModule(Model model, Authentication authentication, @PathVariable String position, HttpSession session){
+        Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();        
+        Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.getId(), position).get();
+        model.addAttribute("content", fragment);
+        model.addAttribute("token", session.getId());
 
-    //     model.addAttribute("content", fragment);
-
-    //     return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
-    // }
+        return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
+    }
 
 }
