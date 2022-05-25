@@ -19,7 +19,7 @@ nav {
     min-height: 20vh;
 }
 
-.fragment-header, .fragment-map, .fragment-text {
+.fragment-header, .fragment-map, .fragment-text, .fragment-add {
     -webkit-box-shadow: 0px 0px 13px -1px #000000; 
     box-shadow: 0px 0px 13px -1px #000000;
 }
@@ -31,6 +31,7 @@ nav {
 
     margin-top: 2vh;
     min-height: 40vh;
+    max-height: 50vh;
 
     display: flex;
     /* padding-left: 10%;  */
@@ -48,11 +49,20 @@ nav {
 
 .fragment-header-column > img {
     object-fit: contain;
-}
-
-.fragment-header > img {
     margin-right: 0;
     position: relative;
+    height: 100%;
+}
+
+.fragment-add {
+    display: flex;
+    justify-content: center;
+}
+
+.fragment-add > i {
+    object-fit: contain;
+    font-size: 15rem;
+    color: #BEBEBE;
 }
 
 .fragment-map {
@@ -77,7 +87,6 @@ nav {
 
 .header-div{
     background-color: #EBECF0;
-
 }
 
 .header-div div {

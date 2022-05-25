@@ -54,6 +54,18 @@ public class BaukastenRestController {
         } else {
             return "Invalid User";
         }
-        
+    }
+
+    @GetMapping("/baukasten/module/save")
+    public String saveModule(@RequestParam String position, @RequestParam String data, @RequestParam String token) {
+        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(token);
+        if(angestellter.isPresent()){
+
+            // TODO: Check Data, generate module, send success
+
+            return "";
+        } else {
+            return "Invalid User";
+        }
     }
 }

@@ -71,17 +71,13 @@ public class BaukastenController {
     }
 
     @GetMapping("/baukasten")
-    public String showBaukasten(Model model){
+    public String showBaukasten(Model model, Authentication authentication){
 
-        // TODO: Get Mandant by logged in User
-        // Temporary Set Mandant
-        Mandant mandant = mandantServiceImpl.findMandantByFirmenname("MandantenFirma2").get();
+        Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();
 
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("edit", true);
 
-        // TODO: Make function, redundancy
-        // Alle Fragmente des Mandaten ueber dessen ID
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
         // Layout des Mandanten der VIEW uebergeben
