@@ -53,5 +53,6 @@ public class Gericht {
         this.status = status;
         this.mandant = mandant;
     }
+
 }
 

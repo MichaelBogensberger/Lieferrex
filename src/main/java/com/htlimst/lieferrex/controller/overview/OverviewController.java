@@ -1,9 +1,6 @@
 package com.htlimst.lieferrex.controller.overview;
 
-import com.htlimst.lieferrex.model.Angestellter;
-import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.model.Seitenaufrufe;
-import com.htlimst.lieferrex.model.Umsatz;
+import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.repository.SeitenaufrufeRepository;
 import com.htlimst.lieferrex.repository.UmsatzRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
@@ -56,9 +53,9 @@ public class OverviewController {
         response.addCookie(new Cookie("token", token));
         foundAngestellter.setToken(token);
         angestellterService.saveAngestellter(foundAngestellter);
-
-
-
+        List<Bestellung> latestBestellungList = overviewService.getLatestBestellungen(foundMandant.getId());
+        model.addAttribute("latestBestellungen", latestBestellungList);
+        model.addAttribute("popular", overviewService.anzahlGeakuft(foundMandant.getId()));
         return "dashboard/dashboard.html";
     }
 

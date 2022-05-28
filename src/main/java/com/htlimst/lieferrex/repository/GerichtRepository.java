@@ -25,5 +25,6 @@ public interface GerichtRepository extends JpaRepository<Gericht,Long> {
     @Query(value = "SELECT COUNT(`status`) FROM gericht WHERE status = 1 OR status = 2", nativeQuery = true)
     public long countActive();
 
+    public List<Gericht> getAllByMandant_Id(long mandantId);
 
 }

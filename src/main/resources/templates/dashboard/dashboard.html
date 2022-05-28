@@ -303,24 +303,18 @@
                                         <th class="text-right">Preis</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody th:each="bestellung: ${latestBestellungen}">
+<!--                                    <tr>-->
+<!--                                        <th>1</th>-->
+<!--                                        <td>Michael Bogensberger</td>-->
+<!--                                        <td class="d-sm-none d-none d-md-block">Abholung</td>-->
+<!--                                        <td class="text-right">12,30 €</td>-->
+<!--                                    </tr>-->
                                     <tr>
                                         <th>1</th>
-                                        <td>Michael Bogensberger</td>
-                                        <td class="d-sm-none d-none d-md-block">Abholung</td>
-                                        <td class="text-right">12,30 €</td>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Schwulian Meilinger</td>
-                                        <td class="d-sm-none d-none d-md-block">Abholung</td>
-                                        <td class="text-right">22,65 €</td>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <td>Niklas Heim</td>
-                                        <td class="d-sm-none d-none d-md-block">Lieferung</td>
-                                        <td class="text-right">33,30 €</td>
+                                        <td>[[${bestellung.kunde.vorname}]] [[${bestellung.kunde.nachname}]]</td>
+                                        <td class="d-sm-none d-none d-md-block">[[${bestellung.bestellart.bestellart}]]</td>
+                                        <td class="text-right">[[${bestellung.gesamtpreis}]] €</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -339,18 +333,18 @@
                                 <p class="mb-20 mt-0">Folgende Gerichte wurden am öfftesten gekauft</p>
 
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <p class="text-truncate mt-0 mb-0">Döner mit Tomaten</p>
-                                        <span class="badge badge-primary badge-pill">1.265</span>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" th:each="gericht: ${popular}">
+                                        <p class="text-truncate mt-0 mb-0">[[${gericht.name}]]</p>
+                                        <span class="badge badge-primary badge-pill">[[${gericht.anzahl_gekauft}]]</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <p class="text-truncate mt-0 mb-0">Wiener Schnitzel</p>
-                                        <span class="badge badge-primary badge-pill">234</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <p class="text-truncate mt-0 mb-0">Burger süß sauer</p>
-                                        <span class="badge badge-primary badge-pill">69</span>
-                                    </li>
+<!--                                    <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--                                        <p class="text-truncate mt-0 mb-0">Wiener Schnitzel</p>-->
+<!--                                        <span class="badge badge-primary badge-pill">234</span>-->
+<!--                                    </li>-->
+<!--                                    <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--                                        <p class="text-truncate mt-0 mb-0">Burger süß sauer</p>-->
+<!--                                        <span class="badge badge-primary badge-pill">69</span>-->
+<!--                                    </li>-->
                                 </ul>
                                 <div class="d-flex justify-content-center">
                                     <button class="btn btn-block" type="button">mehr anzeigen</button>
