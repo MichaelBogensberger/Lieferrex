@@ -21,7 +21,7 @@
             <div th:replace="${r2c1} 
                                  ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit}, position='r2c1')}
                                  : (${edit} 
-                                    ? ~{baukasten/fragments/modules/add} 
+                                    ? ~{baukasten/fragments/modules/add(position='r2c1')} 
                                     : ~{})"></div>
         </div>
         
@@ -31,7 +31,7 @@
             <div th:replace="${r2c2} 
                                  ? ~{'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2}, edit=${edit}, position='r2c2')} 
                                  : (${edit} 
-                                    ? ~{baukasten/fragments/modules/add} 
+                                    ? ~{baukasten/fragments/modules/add(position='r2c2')} 
                                     : ~{})"></div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <div th:fragment="modals">
 
 <!-- ADD PAGE MODAL ---------------------------------->
+
   <div id="addPage" class="modal">
     <div class="modal-content">
       <h4>Seite hinzufügen</h4>
@@ -21,14 +22,9 @@
     </div>
   </div>
 
-  <!----------------------------------------------------->
-
-
-
-
-
-
+<!----------------------------------------------------->
 <!-- Header Div MODAL ---------------------------------->
+
   <div id="headerContent" class="modal">
     <div class="modal-content">
       <h4>Bild und Text hinzufügen</h4>
@@ -83,7 +79,8 @@
 
 
   <!-- Main Left MODAL ---------------------------------->
-  <div id="mainLeft" class="modal">
+
+  <div id="selector" class="modal">
     <div class="modal-content">
       <h4>Element hinzufügen</h4>
       <p>Du musst eines der Folgenden Elemente auswählen:</p>
@@ -91,13 +88,16 @@
       <h5>Empfohlen:</h5>
 
       <div class="collection">
-        <a href="#!" class="collection-item">Bestellformular / Speisekarte</a>
+        <a href="#!" class="collection-item">Speisekarte</a>
+        <a href="#!" id="openAddText" class="collection-item modal-trigger">Titel mit Text</a>
+        <a href="#!" class="collection-item">Bild</a>
+        <a href="#!" class="collection-item">...</a>
       </div>
 
       <h5>Sonstiges:</h5>
       <div class="collection">
         <a href="#!" class="collection-item">Google Maps Standort</a>
-        <a href="#!" class="collection-item">Allgemeiner Text</a>
+        <a href="#!" class="collection-item">...</a>
       </div>
 
 
@@ -108,32 +108,35 @@
     </div>
   </div>
 
+<!-- Text Module Add Modal ---------------------------------->
 <!----------------------------------------------------->
 
-
-  <!-- Main Right MODAL ---------------------------------->
-  <div id="mainRight" class="modal">
+  <div id="addText" class="modal">
     <div class="modal-content">
-      <h4>Element hinzufügen</h4>
-      <p>Du musst eines der Folgenden Elemente auswählen:</p>
+      <h4>Titel mit Text Modul hinzufügen</h4>
 
-      <div class="collection">
-        <a href="#!" class="collection-item">Öffnungszeiten</a>
-        <a href="#!" class="collection-item">Kontaktinformationen</a>
-        <a href="#!" class="collection-item">Allgemeiner Text</a>
+      <div class="row">
+        <div class="input-field">
+          <h5>Titel</h5>
+          <textarea id="addTextTitle" class="materialize-textarea"></textarea>
+        </div>
       </div>
 
+      <div class="row">
+        <div class="input-field">
+          <h5>Text</h5>
+          <textarea id="addTextText" class="materialize-textarea"></textarea>
+        </div>
+      </div>
 
     </div>
     <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
+    <a href="#!" id="saveAddText" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
     </div>
   </div>
 
 <!----------------------------------------------------->
-
-
 
 </div>
 

@@ -7,6 +7,7 @@ import java.util.function.Function;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Mandant;
@@ -19,8 +20,10 @@ import com.htlimst.lieferrex.service.security.HttpSessionConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -56,16 +59,21 @@ public class BaukastenRestController {
         }
     }
 
-    @GetMapping("/baukasten/module/save")
-    public String saveModule(@RequestParam String position, @RequestParam String data, @RequestParam String token) {
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(token);
-        if(angestellter.isPresent()){
+    @PostMapping("/baukasten/module/save")
+    @CrossOrigin("*")
+    public String saveModule(@RequestParam String data) {
+        // Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(token);
+        // if(angestellter.isPresent()){
 
-            // TODO: Check Data, generate module, send success
+        //     // TODO: Check Data, generate module, send success
 
-            return "";
-        } else {
-            return "Invalid User";
-        }
+        //     return "";
+        // } else {
+        //     return "Invalid User";
+        // }
+
+        System.out.println(data);
+
+        return "";
     }
 }
