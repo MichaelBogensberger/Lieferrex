@@ -1,6 +1,8 @@
 package com.htlimst.lieferrex.service.mandant;
 
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
+import com.htlimst.lieferrex.dto.MandantSuchDto;
+import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.Rolle;
@@ -9,10 +11,12 @@ import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.repository.RolleRepository;
 
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -35,31 +39,31 @@ public class MandantServiceImpl implements MandantService {
 
 
     @Override
-    public List<Mandant> alleMandanten(){
+    public List<Mandant> alleMandanten() {
         return null;
     }
 
     @Override
-    public Mandant mandantEinfuegen(Mandant mandant){
+    public Mandant mandantEinfuegen(Mandant mandant) {
         return null;
     }
 
     @Override
-    public Mandant mandantMitId(Long id){
+    public Mandant mandantMitId(Long id) {
         return mandantRepository.getById(id);
     }
 
     @Override
-    public void mandantLoeschenMitId(Long id){
+    public void mandantLoeschenMitId(Long id) {
     }
 
     @Override
-    public Optional<Mandant> findMandantByFirmenname(String name){
+    public Optional<Mandant> findMandantByFirmenname(String name) {
         return mandantRepository.findMandantByFirmenname(name);
     }
 
     @Override
-    public Optional<Mandant> findMandantByAngestellterEmail(String email){
+    public Optional<Mandant> findMandantByAngestellterEmail(String email) {
         return mandantRepository.findMandantByAngestellte_Email(email);
     }
 
@@ -72,7 +76,6 @@ public class MandantServiceImpl implements MandantService {
     public void save(Mandant mandant) {
         mandantRepository.save(mandant);
     }
-
 
 
     @Override
@@ -101,6 +104,28 @@ public class MandantServiceImpl implements MandantService {
         angestellterRepository.save(angestellter);
 
         return null;
+    }
+
+    //throws mandant not found exception
+    public List<MandantSuchDto> findMandantByOrt(String Ort) throws MandantNotFoundException {
+        List<Mandant> mandantenList = mandantRepository.findMandantByOrt(Ort);
+        if (!mandantenList.isEmpty()) {
+            List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
+            for (Mandant mandant: mandantenList) {
+                mandantSuchDtoList.add(new MandantSuchDto().builder()
+                        .firmenname(mandant.getFirmenname())
+                        .ort(mandant.getOrt())
+                        .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
+                        .rating(3)
+                        .build());
+            }
+            return mandantSuchDtoList;
+        }
+        else {
+            System.out.println("test");
+            throw new MandantNotFoundException();
+        }
+
     }
 
 

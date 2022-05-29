@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>Lieferrex - Suche</title>
@@ -15,6 +15,27 @@
 
 
   <div th:replace="main/fragments/modals"></div>
+
+
+  <!-- Modal Structure ÄNDERN -->
+  <div id="aendern-modal" class="modal">
+      <div class="modal-content">
+          <h4 class="aendern-modal-ueb">Adresse ändern</h4>
+
+
+          <div class="row">
+              <div class="input-field col s12">
+                  <input value="Hinterseberweg 12" id="first_name2" type="text" class="validate inp-aendern-modal">
+                  <label class="active" for="first_name2">Adresse</label>
+              </div>
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+      </div>
+  </div>
 
 
     <!--
@@ -65,7 +86,7 @@
         </nav>
 
 
-        <input href="#aendern-modal" disabled  type="text" class="form-control main-search modal-trigger" id="sr-main-inp" name="#" value="Hinterseberweg 12">
+        <input href="#aendern-modal" disabled  type="text" class="form-control main-search modal-trigger" id="sr-main-inp" name="#" th:value="${param.search}">
 
 
 
@@ -120,13 +141,13 @@
 
                        
               
-                        <h1 class="sr-filter-u-ueb">Auswählen</h1>
+                        <h1 class="sr-filter-u-ueb">Lieferkosten</h1>
 
                         <form action="#" class="sr-filter-form">
                             <p  class="sr-filter-auswählen-p">
                               <label>
                                 <input name="group1" type="radio" checked />
-                                <span>Lieferung</span>
+                                  <span>Abholung</span>
                               </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
@@ -137,7 +158,7 @@
                             </p>
                             <p class="sr-filter-auswählen-p">
                               <label>
-                                <input class="with-gap" name="group1" type="radio"  />
+                                <input class="group1" name="group1" type="radio"  />
                                 <span>Im Restaurant essen</span>
                               </label>
                             </p>
@@ -159,7 +180,7 @@
                             </p>
                             <p class="sr-filter-auswählen-p">
                               <label>
-                                <input class="with-gap" name="group1" type="radio"  />
+                                <input class="group1" name="group1" type="radio"  />
                                 <span>€15,00 oder mehr</span>
                               </label>
                             </p>
@@ -184,7 +205,7 @@
                             </p>
                             <p class="sr-filter-auswählen-p">
                               <label>
-                                <input class="with-gap" name="group1" type="radio"  />
+                                <input class="group1" name="group1" type="radio"  />
                                 <span>5 km oder mehr</span>
                               </label>
                             </p>
@@ -217,7 +238,7 @@
 
                     <div id="sr-restaurants-wrapper">
 
-                        <h1 id="sr-filter-mob-ueb" class="hide-desktop">Hinterseberweg 12</h1> 
+                        <h1 id="sr-filter-mob-ueb" class="hide-desktop" th:text="${param.search}">Text</h1>
 
                         <ul class="collapsible hide-desktop">
                             <li>
@@ -226,7 +247,7 @@
 
                               <!-- Filter Body mobile -->  
 
-                                <h1 class="sr-filter-u-ueb">Auswählen</h1>
+                                <h1 class="sr-filter-u-ueb">Bewertung</h1>
 
                                 <form action="#" id="sr-filter-form">
                                     <p  class="sr-filter-auswählen-p">
@@ -324,25 +345,22 @@
 
 
                           <!-- RESTERAUNT CARD -->
-                        <div class="sr-restaurants">
+                        <div class="sr-restaurants" th:each="mandant : ${mandanten}">
                             <div class="col s1 sr-rest-left">
                                 <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Asiamix Imst</h1>
-                              <p class="sr-rest-p">Hinterseberweg 12</p>
+                              <h1 class="sr-rest-ueb" th:text="${mandant.firmenname}">Restaurant Name</h1>
+                              <p class="sr-rest-p" th:text="${mandant.adresse}">Adresse</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                              <span th:each="i : ${#numbers.sequence(1, mandant.rating)}" class="material-icons-outlined sr-rest-star-span">star </span>
+                              <span th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}" class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>
 
@@ -350,102 +368,6 @@
                               <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
                         </div>
-
-
-
-                          <!-- RESTERAUNT CARD 2  -->
-                          <div class="sr-restaurants">
-                            <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=DÖR&background=5cdb95&color=fff">
-
-                            </div>
-
-                            <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Dönerbuden Ali</h1>
-                              <p class="sr-rest-p">Musterstraße 23</p>
-
-                            </div>
-
-                            <div class="col s6  sr-rest-stars hide-tab-rest-stars">
-
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-
-                            </div>
-
-                            <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
-                            </div>
-                        </div>
-
-
-
-                          <!-- RESTERAUNT CARD 3 -->
-                          <div class="sr-restaurants">
-                            <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=VI&background=5cdb95&color=fff">
-
-                            </div>
-
-                            <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Villa Regina</h1>
-                              <p class="sr-rest-p">Kitzsteinhornstraße 1</p>
-
-                            </div>
-
-                            <div class="col s6  sr-rest-stars hide-tab-rest-stars">
-
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-
-                            </div>
-
-                            <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
-                            </div>
-                        </div>                        
-
-
-
-
-
-                           <!-- RESTERAUNT CARD 4 -->
-                           <div class="sr-restaurants">
-                            <div class="col s1 sr-rest-left">
-                              <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=BR&background=5cdb95&color=fff">
-
-                            </div>
-
-                            <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Burgerista</h1>
-                              <p class="sr-rest-p">Ziegelstraße 5</p>
-
-                            </div>
-
-                            <div class="col s6  sr-rest-stars hide-tab-rest-stars">
-
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-
-                            </div>
-
-                            <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
-                            </div>
-                        </div>                       
-
-
-
-
 
                     </div>
 

@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.htlimst.lieferrex.model.Mandant;
@@ -10,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface MandantRepository extends JpaRepository<Mandant,Long> {
     Optional<Mandant> findMandantByFirmenname(String name);
     Optional<Mandant> findMandantByAngestellte_Email(String email);
+
+    List<Mandant> findMandantByOrt(String ort);
 }

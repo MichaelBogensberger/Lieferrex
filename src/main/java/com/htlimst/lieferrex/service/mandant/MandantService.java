@@ -2,6 +2,8 @@ package com.htlimst.lieferrex.service.mandant;
 
 import com.htlimst.lieferrex.dto.KundeRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
+import com.htlimst.lieferrex.dto.MandantSuchDto;
+import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Kunde;
 import com.htlimst.lieferrex.model.Mandant;
 
@@ -17,7 +19,7 @@ public interface MandantService {
     Optional<Mandant> findMandantByAngestellterEmail(String email);
     Mandant listAll();
     void save(Mandant mandant);
-
+    public List<MandantSuchDto> findMandantByOrt(String Ort) throws MandantNotFoundException;
     Mandant saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto);
 
 
