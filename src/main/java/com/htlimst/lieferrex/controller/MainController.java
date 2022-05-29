@@ -61,7 +61,10 @@ public class MainController {
         return "main/orders";
     }
 
-
+    @GetMapping("/checkout")
+    public String showCheckoutPage() {
+        return "main/checkout";
+    }
 
 
 
@@ -91,5 +94,7 @@ public class MainController {
     public String showDashboardOeffnungszeiten() {
         return "dashboard/oeffnungszeiten.html";
     }
+
+
 
 }

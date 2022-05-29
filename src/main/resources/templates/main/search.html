@@ -1,114 +1,86 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>Lieferrex - Suche</title>
+    <meta charset="utf-8">
+    <title>Lieferrex - Suche</title>
 
-  <div th:replace="main/fragments/header"></div>
-
-
-
+    <div th:replace="main/fragments/header"></div>
 
 
 </head>
 <body>
 
 
-  <div th:replace="main/fragments/modals"></div>
+<div th:replace="main/fragments/modals"></div>
 
 
-    <!--
-    <ul class="sidenav" id="mobile-demo">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
-    </ul>
-  -->
-    
+<!--
+<ul class="sidenav" id="mobile-demo">
+  <li><a href="sass.html">Sass</a></li>
+  <li><a href="badges.html">Components</a></li>
+  <li><a href="collapsible.html">Javascript</a></li>
+  <li><a href="mobile.html">Mobile</a></li>
+</ul>
+-->
 
 
+<div class="main_wrapper" id="sr-main-wrapper">
 
 
+    <div class="row main-row">
 
 
-  
-
-
-
-    <div class="main_wrapper" id="sr-main-wrapper">
-        
-    
-
- 
-
-
-     
-        
-        <div class="row main-row">
-
-          
         <nav class="nav-main">
-          <div class="nav-wrapper">
+            <div class="nav-wrapper">
 
-            <a href="/" class="sr-back-arr-a hide-mob"><span class="material-icons-outlined sr-back-arr">arrow_back</span></a>
-            <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
+                <a href="/" class="sr-back-arr-a hide-mob"><span
+                        class="material-icons-outlined sr-back-arr">arrow_back</span></a>
+                <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
 
-          <a href="#aendern-modal" class="waves-effect waves-light btn sr-mob-add-btn hide-desktop btn-light-sec modal-trigger"><i class="material-icons left sr-mob-add-ico-btn">edit</i>ändern</a>
+                <a href="#aendern-modal"
+                   class="waves-effect waves-light btn sr-mob-add-btn hide-desktop btn-light-sec modal-trigger"><i
+                        class="material-icons left sr-mob-add-ico-btn">edit</i>ändern</a>
 
 
-            
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons menu-icon">menu</i></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                        class="material-icons menu-icon">menu</i></a>
 
-            
-          </div>
+
+            </div>
         </nav>
 
 
-        <input href="#aendern-modal" disabled  type="text" class="form-control main-search modal-trigger" id="sr-main-inp" name="#" value="Hinterseberweg 12">
-
-
-
+        <input href="#aendern-modal" disabled type="text" class="form-control main-search modal-trigger"
+               id="sr-main-inp" name="#" value="Hinterseberweg 12">
 
 
         <div id="sr-main-row-mrg">
 
         </div>
 
-        </div>
+    </div>
 
 
-
-
-        <div class="wrapper-bg" id="sr-wrapper-bg">
-
-            </div>
-
-    
-
-
-
-        </div>
-
-
+    <div class="wrapper-bg" id="sr-wrapper-bg">
 
     </div>
 
-   
+
+</div>
+
+
+</div>
 
 
 <div class="sr-main-content ">
 
-    
+
     <div class="row">
         <div class="col  l1 ">
         </div>
 
 
-
         <div class="col  l10 main-mob">
-           
-            
 
 
             <div class="row">
@@ -118,83 +90,74 @@
 
                         <h1 class="sr-filter-ueb">Filter</h1>
 
-                       
-              
+
                         <h1 class="sr-filter-u-ueb">Auswählen</h1>
 
                         <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                <span>Lieferung</span>
-                              </label>
+                            <p class="sr-filter-auswählen-p">
+                                <label>
+                                    <input name="group1" type="radio" checked/>
+                                    <span>Lieferung</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>Abholung</span>
-                              </label>
+                                <label>
+                                    <input name="group1" type="radio"/>
+                                    <span>Abholung</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="with-gap" name="group1" type="radio"  />
-                                <span>Im Restaurant essen</span>
-                              </label>
+                                <label>
+                                    <input class="with-gap" name="group1" type="radio"/>
+                                    <span>Im Restaurant essen</span>
+                                </label>
                             </p>
-                          </form>
+                        </form>
 
-                          <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
-                          <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                <span>Keine Präferenz</span>
-                              </label>
+                        <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
+                        <form action="#" class="sr-filter-form">
+                            <p class="sr-filter-auswählen-p">
+                                <label>
+                                    <input name="group1" type="radio" checked/>
+                                    <span>Keine Präferenz</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>€10,00 oder weniger</span>
-                              </label>
+                                <label>
+                                    <input name="group1" type="radio"/>
+                                    <span>€10,00 oder weniger</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="with-gap" name="group1" type="radio"  />
-                                <span>€15,00 oder mehr</span>
-                              </label>
+                                <label>
+                                    <input class="with-gap" name="group1" type="radio"/>
+                                    <span>€15,00 oder mehr</span>
+                                </label>
                             </p>
-                          </form>
+                        </form>
 
 
-          
-
-                          <h1 class="sr-filter-u-ueb">Standort</h1>
-                          <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                <span>Keine Präferenz</span>
-                              </label>
+                        <h1 class="sr-filter-u-ueb">Standort</h1>
+                        <form action="#" class="sr-filter-form">
+                            <p class="sr-filter-auswählen-p">
+                                <label>
+                                    <input name="group1" type="radio" checked/>
+                                    <span>Keine Präferenz</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>5 km oder weniger</span>
-                              </label>
+                                <label>
+                                    <input name="group1" type="radio"/>
+                                    <span>5 km oder weniger</span>
+                                </label>
                             </p>
                             <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="with-gap" name="group1" type="radio"  />
-                                <span>5 km oder mehr</span>
-                              </label>
+                                <label>
+                                    <input class="with-gap" name="group1" type="radio"/>
+                                    <span>5 km oder mehr</span>
+                                </label>
                             </p>
-                          </form>
-
-
-
-
-
-
+                        </form>
 
 
                     </div>
@@ -203,7 +166,6 @@
                 </div>
 
 
-        
                 <div class="col l9 " id="sr-restaurant-main-div">
                     <div id="sr-chips-div" class="hide-mob">
                         <div class="chip sr-chip sr-chip-active waves-effect">ALLES</div>
@@ -217,96 +179,94 @@
 
                     <div id="sr-restaurants-wrapper">
 
-                        <h1 id="sr-filter-mob-ueb" class="hide-desktop">Hinterseberweg 12</h1> 
+                        <h1 id="sr-filter-mob-ueb" class="hide-desktop">Hinterseberweg 12</h1>
 
                         <ul class="collapsible hide-desktop">
                             <li>
-                              <div class="collapsible-header collapsible-header-first sr-desk-filter"><i class="material-icons">sort</i>Filter</div>
-                              <div class="collapsible-body sr-filter-body-mob">
+                                <div class="collapsible-header collapsible-header-first sr-desk-filter"><i
+                                        class="material-icons">sort</i>Filter
+                                </div>
+                                <div class="collapsible-body sr-filter-body-mob">
 
-                              <!-- Filter Body mobile -->  
+                                    <!-- Filter Body mobile -->
 
-                                <h1 class="sr-filter-u-ueb">Auswählen</h1>
+                                    <h1 class="sr-filter-u-ueb">Auswählen</h1>
 
-                                <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Lieferung</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>Abholung</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>Im Restaurant essen</span>
-                                      </label>
-                                    </p>
-                                  </form>
-        
-                                  <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
-                                  <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Keine Präferenz</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>€10,00 oder weniger</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>€15,00 oder mehr</span>
-                                      </label>
-                                    </p>
-                                  </form>
-        
-        
-                  
-        
-                                  <h1 class="sr-filter-u-ueb">Standort</h1>
-                                  <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Keine Präferenz</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>5 km oder weniger</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>5 km oder mehr</span>
-                                      </label>
-                                    </p>
-                                  </form>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Lieferung</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>Abholung</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>Im Restaurant essen</span>
+                                            </label>
+                                        </p>
+                                    </form>
 
-                                  <button class="btn waves-effect waves-light sr-filter-mob-submit" type="submit" name="action">Übernehmen
-                                    <i class="material-icons right">send</i>
-                                  </button>
-
-                                  <!--- ------------------------------------------------------------------>
+                                    <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Keine Präferenz</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>€10,00 oder weniger</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>€15,00 oder mehr</span>
+                                            </label>
+                                        </p>
+                                    </form>
 
 
+                                    <h1 class="sr-filter-u-ueb">Standort</h1>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Keine Präferenz</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>5 km oder weniger</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>5 km oder mehr</span>
+                                            </label>
+                                        </p>
+                                    </form>
+
+                                    <button class="btn waves-effect waves-light sr-filter-mob-submit" type="submit"
+                                            name="action">Übernehmen
+                                        <i class="material-icons right">send</i>
+                                    </button>
+
+                                    <!--- ------------------------------------------------------------------>
 
 
-
-                              </div>
+                                </div>
                             </li>
                             <!--
                             <li>
@@ -317,194 +277,152 @@
                               <div class="collapsible-header collapsible-header-last "><i class="material-icons"><span class="material-icons-outlined">unfold_more</span></i>Mehr</div>
                               <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                             </li> -->
-                          </ul>
+                        </ul>
 
 
-
-
-
-                          <!-- RESTERAUNT CARD -->
+                        <!-- RESTERAUNT CARD -->
                         <div class="sr-restaurants">
                             <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
+                                <img class="sr-rest-img"
+                                     src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Asiamix Imst</h1>
-                              <p class="sr-rest-p">Hinterseberweg 12</p>
+                                <h1 class="sr-rest-ueb">Asiamix Imst</h1>
+                                <p class="sr-rest-p">Hinterseberweg 12</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
                         </div>
 
 
-
-                          <!-- RESTERAUNT CARD 2  -->
-                          <div class="sr-restaurants">
+                        <!-- RESTERAUNT CARD 2  -->
+                        <div class="sr-restaurants">
                             <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=DÖR&background=5cdb95&color=fff">
+                                <img class="sr-rest-img"
+                                     src="https://eu.ui-avatars.com/api/?name=DÖR&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Dönerbuden Ali</h1>
-                              <p class="sr-rest-p">Musterstraße 23</p>
+                                <h1 class="sr-rest-ueb">Dönerbuden Ali</h1>
+                                <p class="sr-rest-p">Musterstraße 23</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
                         </div>
 
 
-
-                          <!-- RESTERAUNT CARD 3 -->
-                          <div class="sr-restaurants">
+                        <!-- RESTERAUNT CARD 3 -->
+                        <div class="sr-restaurants">
                             <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=VI&background=5cdb95&color=fff">
+                                <img class="sr-rest-img"
+                                     src="https://eu.ui-avatars.com/api/?name=VI&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Villa Regina</h1>
-                              <p class="sr-rest-p">Kitzsteinhornstraße 1</p>
+                                <h1 class="sr-rest-ueb">Villa Regina</h1>
+                                <p class="sr-rest-p">Kitzsteinhornstraße 1</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
-                        </div>                        
+                        </div>
 
 
-
-
-
-                           <!-- RESTERAUNT CARD 4 -->
-                           <div class="sr-restaurants">
+                        <!-- RESTERAUNT CARD 4 -->
+                        <div class="sr-restaurants">
                             <div class="col s1 sr-rest-left">
-                              <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=BR&background=5cdb95&color=fff">
+                                <img class="sr-rest-img"
+                                     src="https://eu.ui-avatars.com/api/?name=BR&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb">Burgerista</h1>
-                              <p class="sr-rest-p">Ziegelstraße 5</p>
+                                <h1 class="sr-rest-ueb">Burgerista</h1>
+                                <p class="sr-rest-p">Ziegelstraße 5</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span class="material-icons-outlined sr-rest-star-span">star </span>
 
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
-                        </div>                       
-
-
-
+                        </div>
 
 
                     </div>
 
 
-
-
-                    
                 </div>
-             </div>
-
-
-
-
-
-
-
-
+            </div>
 
 
         </div>
 
 
-
-
-
         <div class="col l1 ">
-            </div>
+        </div>
 
 
-
-
-     </div>
-
-
-
+    </div>
 
 
 </div>
 
 
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
-
 
 
 </html>

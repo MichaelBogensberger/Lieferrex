@@ -331,3 +331,44 @@ ul.stepper .step.active::before, ul.stepper .step.done::before {
         /* ------------------ */
 
 }
+
+
+
+
+/* Checkout Page  */
+.mb-30-im {
+    margin-bottom: 30px !important;
+}
+
+@media only screen and (max-width: 992px) {
+    .mob-mt-0 {
+        margin-top: 0px !important;
+    }
+
+
+    .fr-mobile {
+        float: right !important;
+    }
+}
+
+.with-auto {
+    width: auto !important;
+}
+
+.float-r {
+    float: right;
+}
+
+.mt-price {
+    margin-top: 32px;
+}
+
+.align-c {
+    text-align: center;
+}
+
+@media only screen and (min-width: 992px) {
+    .ml-30-dek {
+        margin-left: 30px;
+    }
+}
