@@ -306,6 +306,10 @@
             var toastHTML = `Benutzer erfolgreich angelegt`;
             M.toast({html: toastHTML, displayLength: 10000});
         }
+        if (searchParams.has('AdresseNotFound')) {
+            var toastHTML = `Adresse konnte nicht gefunden werden!`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
     });
 
     var stepper = document.querySelector('.stepper');

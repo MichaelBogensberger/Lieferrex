@@ -2,8 +2,10 @@ package com.htlimst.lieferrex.service.mandant;
 
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantSuchDto;
+import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Angestellter;
+import com.htlimst.lieferrex.model.GeoPosition;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.Rolle;
 import com.htlimst.lieferrex.repository.AngestellterRepository;
@@ -11,6 +13,7 @@ import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.repository.RolleRepository;
 
 
+import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +31,9 @@ public class MandantServiceImpl implements MandantService {
     private MandantRepository mandantRepository;
     private RolleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private GeocodingApi geocodingApi;
 
     @Autowired
     public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder) {
@@ -79,7 +85,15 @@ public class MandantServiceImpl implements MandantService {
 
 
     @Override
-    public Mandant saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
+    public boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
+
+        try {
+            GeoPosition geoPosition = geocodingApi.getGeodaten(mandantRegistrationDto.getStrasse(), mandantRegistrationDto.getHausnummer());
+        } catch (AdresseNotFoundException e) {
+            System.out.println("geodaten nicht gefunden");
+            return false;
+        }
+
         Mandant mandant = new Mandant().builder().
                 firmenname(mandantRegistrationDto.getFirmenname()).
                 land(mandantRegistrationDto.getLand()).
@@ -103,8 +117,9 @@ public class MandantServiceImpl implements MandantService {
                 rolle(Arrays.asList(roleRepository.findByRolle("ROLE_MANDANT"))).build();
         angestellterRepository.save(angestellter);
 
-        return null;
+        return true;
     }
+
 
     //throws mandant not found exception
     public List<MandantSuchDto> findMandantByOrt(String Ort) throws MandantNotFoundException {

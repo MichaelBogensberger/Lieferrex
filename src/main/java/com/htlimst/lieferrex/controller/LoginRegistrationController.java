@@ -114,7 +114,11 @@ public class LoginRegistrationController {
             return "redirect:/restaurantpartner?error";
         }
 
-        mandantService.saveRegistrationDto(registrationDto);
+        if (!mandantService.saveRegistrationDto(registrationDto)){
+            return "redirect:/restaurantpartner?AdresseNotFound";
+
+        }
+
         return "redirect:/restaurantpartner?success";
 
     }

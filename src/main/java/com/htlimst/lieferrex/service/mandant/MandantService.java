@@ -20,7 +20,7 @@ public interface MandantService {
     Mandant listAll();
     void save(Mandant mandant);
     public List<MandantSuchDto> findMandantByOrt(String Ort) throws MandantNotFoundException;
-    Mandant saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto);
+    boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto);
 
 
 }
