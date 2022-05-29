@@ -68,13 +68,16 @@ public class Mandant {
         @OneToMany(mappedBy = "mandant")
         private Set<Fragment> fragmente;
 
-
         @ManyToOne
         @JoinColumn(name="layout_id")
         private Layout layout;
 
+        @OneToOne
+        @JoinColumn(name = "geo_position_id", referencedColumnName = "geo_position_id")
+        private GeoPosition geoPosition;
 
-        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout) {
+
+        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout, GeoPosition geoPosition) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;
@@ -91,5 +94,6 @@ public class Mandant {
                 this.kategorie = kategorie;
                 this.bestellart = bestellart;
                 this.layout = layout;
+                this.geoPosition = geoPosition;
         }
 }
