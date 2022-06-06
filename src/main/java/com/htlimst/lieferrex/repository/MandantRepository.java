@@ -13,4 +13,6 @@ public interface MandantRepository extends JpaRepository<Mandant,Long> {
     Optional<Mandant> findMandantByAngestellte_Email(String email);
 
     List<Mandant> findMandantByOrt(String ort);
+    List<Mandant> findMandantByPlz(String plz);
+
 }

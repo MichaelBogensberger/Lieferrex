@@ -7,14 +7,14 @@ import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.GeoPosition;
 import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.model.Rolle;
 import com.htlimst.lieferrex.repository.AngestellterRepository;
+import com.htlimst.lieferrex.repository.GeoPositionRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.repository.RolleRepository;
 
 
 import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
-import org.aspectj.weaver.ast.Or;
+import com.htlimst.lieferrex.service.googleApi.GeocodingApiImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,12 +31,14 @@ public class MandantServiceImpl implements MandantService {
     private MandantRepository mandantRepository;
     private RolleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private GeoPositionRepository geoPositionRepository;
 
     @Autowired
     private GeocodingApi geocodingApi;
 
     @Autowired
-    public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public MandantServiceImpl(GeoPositionRepository geoPositionRepository, AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.geoPositionRepository = geoPositionRepository;
         this.angestellterRepository = angestellterRepository;
         this.mandantRepository = mandantRepository;
         this.roleRepository = roleRepository;
@@ -86,13 +88,17 @@ public class MandantServiceImpl implements MandantService {
 
     @Override
     public boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
+        GeoPosition geoPosition;
 
         try {
-            GeoPosition geoPosition = geocodingApi.getGeodaten(mandantRegistrationDto.getStrasse(), mandantRegistrationDto.getHausnummer());
+            geoPosition = geocodingApi.getGeodaten(mandantRegistrationDto.getLand(), mandantRegistrationDto.getOrt(), mandantRegistrationDto.getPlz(),
+                    mandantRegistrationDto.getStrasse(), mandantRegistrationDto.getHausnummer());
         } catch (AdresseNotFoundException e) {
-            System.out.println("geodaten nicht gefunden");
+            System.out.println("Geodaten nicht gefunden");
             return false;
         }
+
+        geoPositionRepository.save(geoPosition);
 
         Mandant mandant = new Mandant().builder().
                 firmenname(mandantRegistrationDto.getFirmenname()).
@@ -104,7 +110,8 @@ public class MandantServiceImpl implements MandantService {
                 telefonnummer(mandantRegistrationDto.getTelefonnummer()).
                 email(mandantRegistrationDto.getEmail()).
                 mindestbestellwert(mandantRegistrationDto.getMindestbestellwert()).
-                lieferkosten(mandantRegistrationDto.getLieferkosten()).build();
+                lieferkosten(mandantRegistrationDto.getLieferkosten())
+                .geoPosition(geoPosition).build();
         mandantRepository.save(mandant);
 
 
@@ -120,27 +127,55 @@ public class MandantServiceImpl implements MandantService {
         return true;
     }
 
-
     //throws mandant not found exception
-    public List<MandantSuchDto> findMandantByOrt(String Ort) throws MandantNotFoundException {
-        List<Mandant> mandantenList = mandantRepository.findMandantByOrt(Ort);
-        if (!mandantenList.isEmpty()) {
-            List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
-            for (Mandant mandant: mandantenList) {
-                mandantSuchDtoList.add(new MandantSuchDto().builder()
-                        .firmenname(mandant.getFirmenname())
-                        .ort(mandant.getOrt())
-                        .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
-                        .rating(3)
-                        .build());
+    public List<MandantSuchDto> findMandantByAdresse(String Adresse) throws MandantNotFoundException {
+        List<Mandant> mandantenList = mandantRepository.findMandantByOrt(Adresse);
+
+        if (mandantenList.isEmpty()) {
+            String ort = geocodingApi.findOrtByAdresse(Adresse);
+            if (ort.isEmpty()) {
+                System.out.println("No Restaurant found");
+                throw new MandantNotFoundException();
             }
-            return mandantSuchDtoList;
+            mandantenList = mandantRepository.findMandantByOrt(Adresse);
+            if (mandantenList.isEmpty()) {
+                System.out.println("No Restaurant found");
+                throw new MandantNotFoundException();
+            }
         }
-        else {
-            System.out.println("test");
+
+        List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
+        for (Mandant mandant : mandantenList) {
+            mandantSuchDtoList.add(new MandantSuchDto().builder()
+                    .firmenname(mandant.getFirmenname())
+                    .ort(mandant.getOrt())
+                    .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
+                    .rating(3)
+                    .build());
+        }
+        return mandantSuchDtoList;
+
+
+    }
+
+    @Override
+    public List<MandantSuchDto> findMandantByPlz(String Adresse) throws MandantNotFoundException {
+        List<Mandant> mandantenList = mandantRepository.findMandantByPlz(Adresse);
+
+        if (mandantenList.isEmpty()) {
             throw new MandantNotFoundException();
         }
 
+        List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
+        for (Mandant mandant : mandantenList) {
+            mandantSuchDtoList.add(new MandantSuchDto().builder()
+                    .firmenname(mandant.getFirmenname())
+                    .ort(mandant.getOrt())
+                    .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
+                    .rating(3)
+                    .build());
+        }
+        return mandantSuchDtoList;
     }
 
 
