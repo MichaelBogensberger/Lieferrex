@@ -34,27 +34,43 @@ $(document).ready(function(){
     var pos = $(this).attr('name');
     $('#selector').modal('open');
 
+    // Saving Text Fragment
     $("#openAddText").click(function() {
+      $('#selector').modal('close');
       $('#addText').modal('open');
       var type = "text";
       $('#saveAddText').click(function() {
-
-        var data = {
-          "title": $('#addTextTitle').val(),
-          "text": $('#addTextText').val(),
-          "position": pos,
-          "type": type 
-        }
-
-        var json = JSON.stringify(data);
-        alert(data.length);
-        alert(json);
-
-        alert(json);
         $.ajax({
           type: "POST",
-          url: "http://localhost:8080/baukasten/module/save",
-          data: {'data': json},
+          url: "./module/save",
+          data: {'data': JSON.stringify({
+              "title": $('#addTextTitle').val(),
+              "text": $('#addTextText').val(),
+              "position": pos,
+              "type": type 
+            })},
+          success: function(){
+            alert("success")
+          }
+        });
+      })
+    });
+
+    // Saving 
+    $("#openAddImage").click(function() {
+      $('#selector').modal('close');
+      $('#addImage').modal('open');
+      var type = "image";
+      $('#saveAddImage').click(function() {
+        $.ajax({
+          type: "POST",
+          url: "./module/save",
+          data: {'data': JSON.stringify({
+              "title": $('#addImageTitle').val(),
+              "image": $('#addImageFile').val(),
+              "position": pos,
+              "type": type 
+            })},
           success: function(){
             alert("success")
           }
