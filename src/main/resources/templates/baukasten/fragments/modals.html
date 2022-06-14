@@ -88,9 +88,10 @@
       <h5>Empfohlen:</h5>
 
       <div class="collection">
-        <a href="#!" class="collection-item">Speisekarte</a>
         <a href="#!" id="openAddText" class="collection-item modal-trigger">Titel mit Text</a>
-        <a href="#!" id="openAddImage" class="collection-item">Bild</a>
+        <a href="#!" id="openAddImage" class="collection-item">Titel mit Bild</a>
+        <a href="#!" id="openAddContact" class="collection-item">Kontaktinformationen</a>
+        <a href="#!" class="collection-item">Speisekarte</a>
         <a href="#!" class="collection-item">...</a>
       </div>
 
@@ -162,6 +163,35 @@
   <div class="modal-footer">
   <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
   <a href="#!" id="saveAddImage" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
+  </div>
+</div>
+
+<!----------------------------------------------------->
+<!-- Contact Information Module Add Modal ---------------------------------->
+<!----------------------------------------------------->
+
+<div id="addContact" class="modal">
+  <div class="modal-content">
+    <h4>Kontaktinformationen Modul hinzufügen</h4>
+
+    <div class="row">
+      <div class="input-field">
+        <h5>Titel</h5>
+        <textarea id="addContactTitle" class="materialize-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <h5>Text (Optional)</h5>
+        <textarea id="addContactText" class="materialize-textarea"></textarea>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+  <a href="#!" id="saveAddContact" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
   </div>
 </div>
 

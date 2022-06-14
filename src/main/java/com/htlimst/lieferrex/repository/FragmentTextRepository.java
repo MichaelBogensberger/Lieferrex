@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FragmentTextRepository extends JpaRepository<FragmentText, Long> {
     Optional<FragmentText> findFragmenttextByFragment_id(Long id);
+    FragmentText save(FragmentText fragmentText);
 }

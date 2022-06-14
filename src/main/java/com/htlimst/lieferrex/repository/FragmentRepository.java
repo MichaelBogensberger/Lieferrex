@@ -14,4 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface FragmentRepository extends JpaRepository<Fragment, Long> {
     List<Fragment> findFragmentByMandant_id(Long id);
     Optional<Fragment> findFragmentByMandant_idAndPosition_name(Long id, String position);
+    Fragment save(Fragment fragment);
 }

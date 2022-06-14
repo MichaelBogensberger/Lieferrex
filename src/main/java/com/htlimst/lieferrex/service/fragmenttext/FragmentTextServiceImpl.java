@@ -24,4 +24,9 @@ public class FragmentTextServiceImpl implements FragmentTextService {
         fragmenttextRepository.save(fragmentText);        
     }
 
+    @Override
+    public FragmentText save(FragmentText fragmentText) {
+        return fragmenttextRepository.save(fragmentText);
+    }
+
 }

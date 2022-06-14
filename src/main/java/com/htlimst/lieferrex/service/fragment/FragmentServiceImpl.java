@@ -25,4 +25,9 @@ public class FragmentServiceImpl implements FragmentService {
         return fragmentRepository.findFragmentByMandant_idAndPosition_name(id, position);
     }
 
+    @Override
+    public Fragment save(Fragment fragment) {
+        return fragmentRepository.save(fragment);
+    }
+
 }
