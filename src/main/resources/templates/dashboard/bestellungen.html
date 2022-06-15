@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 
 <head>
 
@@ -189,8 +189,8 @@
                         <h2 class="card-title font-weight-bold mb-20">Lieferungen</h2>
 
 
-                        <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
+                        <!--crads-->
+                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0" th:each="bestellung: ${gerichteBestellungsDetail}">
                             <div class="row">
 
                                 <div class="col-2 ">
@@ -199,88 +199,14 @@
                                         </span>
                                 </div>
 
-                                <div class="col-8 ">
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">1x - Schnitzel mit Kebab</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">1x - Dürüm</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">2x - Coca Cola</p>
-
-                                    <div class="sidebar-divider"></div>
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Eingang: 17:30</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Zusatzinfo: extra viele
-                                        Tomaten</p>
-
-                                </div>
-
-                                <div class="col-2 ">
-
-                                    <div class="d-flex align-items-center justify-content-center h-100">
-                                        <div class="d-flex flex-column">
-                                            <a href="#"
-                                               class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
-                            <div class="row">
-
-                                <div class="col-2 ">
-                                        <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">1</h2>
-                                        </span>
-                                </div>
-
-                                <div class="col-8 ">
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">2x - Katzenrollen</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">1x - Coca Cola</p>
+                                <div class="col-8">
+                                    <ul style="list-style-type: none">
+                                        <li class="font-weight-bold mb-0 mt-0 font-size-14" th:each="gericht: ${bestellung.gerichtBestellungModelList}" th:text="${gericht.value} + 'x- ' + ${gericht.key}">1x - Dürüm</li>
+                                    </ul>
 
                                     <div class="sidebar-divider"></div>
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Eingang: 17:30</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Zusatzinfo: extra viele
-                                        Tomaten</p>
-
-                                </div>
-
-                                <div class="col-2 ">
-
-                                    <div class="d-flex align-items-center justify-content-center h-100">
-                                        <div class="d-flex flex-column">
-                                            <a href="#"
-                                               class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
-                            <div class="row">
-
-                                <div class="col-2 ">
-                                        <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">1</h2>
-                                        </span>
-                                </div>
-
-                                <div class="col-8 ">
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">1x - Schnitzel mit Kebab</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">3x - Dürüm</p>
-
-                                    <div class="sidebar-divider"></div>
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Eingang: 17:30</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-12" th:text=" 'Eingang: ' + ${bestellung.timestamp}">Eingang: 17:30</p>
                                     <p class="font-weight-bold mb-0 mt-0 font-size-12">Zusatzinfo: / </p>
 
                                 </div>

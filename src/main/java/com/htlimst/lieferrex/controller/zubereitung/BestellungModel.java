@@ -15,13 +15,13 @@ import java.util.List;
 public class BestellungModel {
 
     HashMap<String, Integer> gerichtBestellungModelList;
-    Timestamp timestamp;
-    String zusatinfos;
+    String timestamp;
+    String zusatzinfos;
 
-    public BestellungModel(HashMap<String, Integer> gerichtBestellungModelList, Timestamp time, String zusatz) {
+    public BestellungModel(HashMap<String, Integer> gerichtBestellungModelList, String time, String zusatz) {
 
         this.gerichtBestellungModelList = gerichtBestellungModelList;
         this.timestamp = time;
-        this.zusatinfos = zusatz;
+        this.zusatzinfos = zusatz;
     }
 }

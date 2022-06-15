@@ -42,48 +42,31 @@ public class ZubereitungsController {
         List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId());
         List<BestellungModel> modeldata = new ArrayList<>();
 
-        Timestamp timestamp = null;
-        String zusatzinfo = "";
+        String timestamp = null;
+        String zusatzinfo = "HALLO";
 
         for (Bestellung bestellung:alleBestellungen) {
           //  gerichtBestellungList.add(bestellung.getGerichteBestellungen());
-            timestamp = bestellung.getBestelldatum();
-            HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
-            for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
-            {
-                if(!gerichtBestellungModelList.containsKey(gerichtBestellung.getGericht().getName()))
+            timestamp = String.valueOf(bestellung.getBestelldatum().getHours()) + ":" + String.valueOf(bestellung.getBestelldatum().getMinutes());
+
+            if(bestellung.getBestellart().getBestellart().equals("Abholung")){
+                HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
+                for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
-                    gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),1);
-                } else
-                {
-                    gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelList.get(gerichtBestellung.getGericht().getName())+1);
+                    if(!gerichtBestellungModelList.containsKey(gerichtBestellung.getGericht().getName()))
+                    {
+                        gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),1);
+                    } else
+                    {
+                        gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelList.get(gerichtBestellung.getGericht().getName())+1);
+                    }
                 }
-                zusatzinfo += gerichtBestellung.getAnmerkung() + ", ";
+                modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo));
             }
-
-            modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo));
         }
-
-        System.out.println(modeldata);
-        System.out.println(modeldata.get(0).getZusatinfos());
 
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         return "dashboard/bestellungen.html";
     }
 
-}
-
-/*
-    Bestellungen holen -> von jeder bestellung die Gerichte in der zwischendabelle solven -> und zum schluss gerichte holen
-
- */
-
-class GerichtPOJO {
-    String gereichtName;
-    Integer gerichtrCount;
-
-    public GerichtPOJO(String gereichtName, Integer gerichtrCount) {
-        this.gereichtName = gereichtName;
-        this.gerichtrCount = gerichtrCount;
-    }
 }
