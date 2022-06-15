@@ -39,49 +39,15 @@ public class ZubereitungsController {
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
 
-        List<GerichtBestellung> gerichtBestellungs = overviewService.gerichtBestellungDetails(foundMandant.getId());
-        model.addAttribute("gerichteDetails", gerichtBestellungs);
-
-        List<String> names = new ArrayList<>();
-        int anzahlDerBestellungen = 0;
-        List<Timestamp> timestamps = new ArrayList<>();
-
-        for (int i = 0; i < gerichtBestellungs.size(); i++) {
-            names.add(gerichtBestellungs.get(i).getGericht().getName() + gerichtBestellungs.get(i).getBestellung().getId());
-            anzahlDerBestellungen++;
-            timestamps.add(gerichtBestellungs.get(i).getBestellung().getBestelldatum());
-        }
-
-        List<Timestamp> timestampsWithoutDuplicates = timestamps.stream()
-                .distinct()
-                .collect(Collectors.toList());
-
-        Map<String, Integer> duplicateCountMap = names
-                .stream()
-                .collect(
-                        Collectors.toMap(Function.identity(), name -> 1, Math::addExact)
-                );
-
-        duplicateCountMap.forEach(
-                (key, value) -> System.out.println("Key : " + key + "\t Count : " + value)
-        );
-
-//        HashMap<String, HashMap<Integer, GerichtDTO>> bestellungNeu = new HashMap<>();
-//
-//        for (GerichtBestellung bestellung: gerichtBestellungs) {
-//            bestellungNeu.put(bestellung.getBestellung().getGerichteBestellungen(), bestellung.getBestellung().getId());
-//            for (GerichtBestellung gericht : gerichtBestellungs){
-//
-//            }
-//        }
         List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId());
-
-
         List<BestellungModel> modeldata = new ArrayList<>();
+
+        Timestamp timestamp = null;
+        String zusatzinfo = "";
 
         for (Bestellung bestellung:alleBestellungen) {
           //  gerichtBestellungList.add(bestellung.getGerichteBestellungen());
-
+            timestamp = bestellung.getBestelldatum();
             HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
             for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
             {
@@ -92,10 +58,14 @@ public class ZubereitungsController {
                 {
                     gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelList.get(gerichtBestellung.getGericht().getName())+1);
                 }
+                zusatzinfo += gerichtBestellung.getAnmerkung() + ", ";
             }
 
-            modeldata.add(new BestellungModel(gerichtBestellungModelList,"jett","Zusatzinfo"));
+            modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo));
         }
+
+        System.out.println(modeldata);
+        System.out.println(modeldata.get(0).getZusatinfos());
 
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         return "dashboard/bestellungen.html";

@@ -15,4 +15,6 @@ public interface BestellungRepository extends JpaRepository<Bestellung,Long> {
     @Query(value = "SELECT * FROM bestellung as b INNER JOIN kunde as k ON b.kunde_id = k.kunde_id INNER JOIN bestellart as ba ON b.bestellart_id = ba.bestellart_id WHERE b.mandant_id = ?1 ORDER BY bestelldatum DESC LIMIT 3  ", nativeQuery = true)
     List<Bestellung> getLatestThreeEntries(long mandantId);
 
+    List<Bestellung> getBestellungByMandant_Id(long mandantId);
+
 }
