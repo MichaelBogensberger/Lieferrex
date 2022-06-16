@@ -133,6 +133,16 @@ public class MainController {
         return "dashboard/oeffnungszeiten.html";
     }
 
+    @GetMapping("/dashboard/bewertungen")
+    public String showDashboardBewertungen() {
+        return "dashboard/bewertungen.html";
+    }
+
+    @GetMapping("/dashboard/zahlungen")
+    public String showDashboardZahlungen() {
+        return "dashboard/zahlungen.html";
+    }
+
 
 
 }
