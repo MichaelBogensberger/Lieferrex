@@ -1,135 +1,113 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>Lieferrex - Suche</title>
+    <meta charset="utf-8">
+    <title>Lieferrex - Suche</title>
 
-  <div th:replace="main/fragments/header"></div>
-
-
-
+    <div th:replace="main/fragments/header"></div>
 
 
 </head>
 <body>
 
 
-  <div th:replace="main/fragments/modals"></div>
+<div th:replace="main/fragments/modals"></div>
 
 
-  <!-- Modal Structure ÄNDERN -->
-  <div id="aendern-modal" class="modal">
-      <div class="modal-content">
-          <h4 class="aendern-modal-ueb">Adresse ändern</h4>
+<!-- Modal Structure ÄNDERN -->
+<div id="aendern-modal" class="modal">
+    <div class="modal-content">
+        <h4 class="aendern-modal-ueb">Adresse ändern</h4>
 
 
-          <div class="row">
-              <div class="input-field col s12">
-                  <input value="Hinterseberweg 12" id="first_name2" type="text" class="validate inp-aendern-modal">
-                  <label class="active" for="first_name2">Adresse</label>
-              </div>
-          </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <form th:action="@{/seach}" method="get">
+                    <input th:if="${param.adresse == null}" th:value="${plz}" th:name="search" id="search" type="text"
+                           class="validate inp-aendern-modal">
+                    <input th:if="${param.adresse != null}" th:value="${param.adresse + ', ' + plz}" th:name="search"
+                           id="search" type="text" class="validate inp-aendern-modal">
+                </form>
+                <label class="active" for="search">Adresse</label>
+            </div>
+        </div>
 
 
-      </div>
-      <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
-      </div>
-  </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+    </div>
+</div>
 
 
-    <!--
-    <ul class="sidenav" id="mobile-demo">
-      <li><a href="sass.html">Sass</a></li>
-      <li><a href="badges.html">Components</a></li>
-      <li><a href="collapsible.html">Javascript</a></li>
-      <li><a href="mobile.html">Mobile</a></li>
-    </ul>
-  -->
-    
+<!--
+<ul class="sidenav" id="mobile-demo">
+  <li><a href="sass.html">Sass</a></li>
+  <li><a href="badges.html">Components</a></li>
+  <li><a href="collapsible.html">Javascript</a></li>
+  <li><a href="mobile.html">Mobile</a></li>
+</ul>
+-->
 
 
+<div class="main_wrapper" id="sr-main-wrapper">
 
 
+    <div class="row main-row">
 
 
-  
-
-
-
-    <div class="main_wrapper" id="sr-main-wrapper">
-        
-    
-
- 
-
-
-     
-        
-        <div class="row main-row">
-
-          
         <nav class="nav-main">
-          <div class="nav-wrapper">
+            <div class="nav-wrapper">
 
-            <a href="/" class="sr-back-arr-a hide-mob"><span class="material-icons-outlined sr-back-arr">arrow_back</span></a>
-            <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
+                <a href="/" class="sr-back-arr-a hide-mob"><span
+                        class="material-icons-outlined sr-back-arr">arrow_back</span></a>
+                <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
 
-          <a href="#aendern-modal" class="waves-effect waves-light btn sr-mob-add-btn hide-desktop btn-light-sec modal-trigger"><i class="material-icons left sr-mob-add-ico-btn">edit</i>ändern</a>
+                <a href="#aendern-modal"
+                   class="waves-effect waves-light btn sr-mob-add-btn hide-desktop btn-light-sec modal-trigger"><i
+                        class="material-icons left sr-mob-add-ico-btn">edit</i>ändern</a>
 
 
-            
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons menu-icon">menu</i></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                        class="material-icons menu-icon">menu</i></a>
 
-            
-          </div>
+
+            </div>
         </nav>
 
 
-        <input href="#aendern-modal" disabled  type="text" class="form-control main-search modal-trigger" id="sr-main-inp" name="#" th:value="${param.search}">
-
-
-
-
+        <input href="#aendern-modal" disabled type="text" class="form-control main-search modal-trigger"
+               id="sr-main-inp" name="#" th:if="${param.adresse == null}" th:value="${plz}">
+        <input href="#aendern-modal" disabled type="text" class="form-control main-search modal-trigger"
+               id="sr-main-inp" name="#" th:if="${param.adresse != null}" th:value="${param.adresse + ', ' + plz}">
 
         <div id="sr-main-row-mrg">
 
         </div>
 
-        </div>
+    </div>
 
 
-
-
-        <div class="wrapper-bg" id="sr-wrapper-bg">
-
-            </div>
-
-    
-
-
-
-        </div>
-
-
+    <div class="wrapper-bg" id="sr-wrapper-bg">
 
     </div>
 
-   
+
+</div>
+
+
+</div>
 
 
 <div class="sr-main-content ">
 
-    
+
     <div class="row">
         <div class="col  l1 ">
         </div>
 
 
-
         <div class="col  l10 main-mob">
-           
-            
 
 
             <div class="row">
@@ -139,83 +117,142 @@
 
                         <h1 class="sr-filter-ueb">Filter</h1>
 
-                       
-              
-                        <h1 class="sr-filter-u-ueb">Lieferkosten</h1>
 
-                        <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                  <span>Abholung</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>Abholung</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="group1" name="group1" type="radio"  />
-                                <span>Im Restaurant essen</span>
-                              </label>
-                            </p>
-                          </form>
+                        <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
+                            <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                   type="hidden">
+                            <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                   type="hidden">
 
-                          <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
-                          <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                <span>Keine Präferenz</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>€10,00 oder weniger</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="group1" name="group1" type="radio"  />
-                                <span>€15,00 oder mehr</span>
-                              </label>
-                            </p>
-                          </form>
+                            <h1 class="sr-filter-u-ueb">Geöffnet</h1>
+                            <div class="switch">
+                                <label>
+
+                                    <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
+                                           type="checkbox" checked>
+                                    <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
+                                           type="checkbox">
+                                    <span class="lever"></span>
+
+                                </label>
+                            </div>
 
 
-          
+                            <h1 class="sr-filter-u-ueb">Lieferkosten</h1>
+                            <div th:if="${param.lieferkosten != null}">
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+                                        <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
+                                               th:value="2.5"
+                                               type="radio" checked/>
+                                        <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
+                                               th:value="2.5"
+                                               type="radio"/>
+                                        <span>€2,50 oder weniger</span>
+                                    </label>
+                                </p>
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
 
-                          <h1 class="sr-filter-u-ueb">Standort</h1>
-                          <form action="#" class="sr-filter-form">
-                            <p  class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" checked />
-                                <span>Keine Präferenz</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input name="group1" type="radio" />
-                                <span>5 km oder weniger</span>
-                              </label>
-                            </p>
-                            <p class="sr-filter-auswählen-p">
-                              <label>
-                                <input class="group1" name="group1" type="radio"  />
-                                <span>5 km oder mehr</span>
-                              </label>
-                            </p>
-                          </form>
+                                        <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
+                                               th:value="5"
+                                               type="radio" checked/>
+                                        <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
+                                               th:value="5"
+                                               type="radio"/>
+
+                                        <span>€5,00 oder weniger</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div th:if="${param.lieferkosten == null}">
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+                                        <input th:name="lieferkosten"
+                                               th:value="2.5"
+                                               type="radio"/>
+                                        <span>€2,50 oder weniger</span>
+                                    </label>
+                                </p>
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+                                        <input th:name="lieferkosten"
+                                               th:value="5"
+                                               type="radio"/>
+                                        <span>€5,00 oder weniger</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
+
+                            <div th:if="${param.mindestbestellwert != null}">
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+
+                                        <input th:if="${param.mindestbestellwert[0] == '10'}"
+                                               th:name="mindestbestellwert"
+                                               th:value="10"
+                                               type="radio" checked/>
+                                        <input th:if="${param.mindestbestellwert[0] != '10'}"
+                                               th:name="mindestbestellwert"
+                                               th:value="10"
+                                               type="radio"/>
+
+                                        <span>€10,00 oder weniger</span>
+                                    </label>
+                                </p>
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+
+                                        <input th:if="${param.mindestbestellwert[0] == '15'}"
+                                               th:name="mindestbestellwert"
+                                               th:value="15"
+                                               type="radio" checked/>
+                                        <input th:if="${param.mindestbestellwert[0] != '15'}"
+                                               th:name="mindestbestellwert"
+                                               th:value="15"
+                                               type="radio"/>
+
+                                        <span>€15,00 oder weniger</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div th:if="${param.mindestbestellwert == null}">
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+                                        <input th:name="mindestbestellwert"
+                                               th:value="10"
+                                               type="radio"/>
+                                        <span>€10,00 oder weniger</span>
+                                    </label>
+                                </p>
+                                <p class="sr-filter-auswählen-p">
+                                    <label>
+                                        <input th:name="mindestbestellwert"
+                                               th:value="15"
+                                               type="radio"/>
+                                        <span>€15,00 oder weniger</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <br>
 
 
+                            <button type="submit" class="btn">Speichern</button>
+                            <br>
 
-
-
-
+                        </form>
+                        <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
+                            <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                   type="hidden">
+                            <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                   type="hidden">
+                            <button type="submit" class="btn">Zurücksetzen</button>
+                        </form>
 
 
                     </div>
@@ -224,110 +261,154 @@
                 </div>
 
 
-        
                 <div class="col l9 " id="sr-restaurant-main-div">
-                    <div id="sr-chips-div" class="hide-mob">
-                        <div class="chip sr-chip sr-chip-active waves-effect">ALLES</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Fine Dining</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Casual Dining</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Family Style</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Fast Food</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Buffet</div>
-                        <div class="chip sr-chip sr-chip-mrg waves-effect">Other</div>
+                    <div id="sr-chips-div" class="hide-mob"
+                         th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                        <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
+
+                            <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                   type="hidden">
+                            <input th:name="geoeffnet" th:if="${param.geoeffnet != null}" th:value="${param.geoeffnet}"
+                                   type="hidden">
+                            <input th:name="lieferkosten" th:if="${param.lieferkosten != null}" th:value="${param.lieferkosten}"
+                                   type="hidden">
+                            <input th:name="mindestbestellwert" th:if="${param.mindestbestellwert != null}" th:value="${param.mindestbestellwert}"
+                                   type="hidden">
+
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="${param.kategorie}==null ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" type="submit" >ALLES</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fineDining') ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="fineDining" type="submit" >Fine Dining</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='casualDining')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+
+                                <button class="kategory-button" th:name="kategorie" th:value="casualDining" type="submit" >Casual Dining</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='familyStyle')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="familyStyle" type="submit" >Family Style</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fastFood')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="fastFood" type="submit" >Fast Food</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='buffet')  ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="buffet" type="submit" >Buffet</button>
+
+                            </div>
+                            <div class="chip sr-chip waves-effect"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='other')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="other" type="submit" >Other</button>
+
+                            </div>
+                        </form>
+
                     </div>
 
                     <div id="sr-restaurants-wrapper">
 
-                        <h1 id="sr-filter-mob-ueb" class="hide-desktop" th:text="${param.search}">Text</h1>
+
+                        <h1 id="sr-filter-mob-ueb" class="hide-desktop" th:if="${param.adresse != null}"
+                            th:text="${param.adresse} + ', ' + ${plz}">Text</h1>
+                        <h1 id="sr-filter-mob-ueb" class="hide-desktop" th:if="${param.adresse == null}"
+                            th:text="${plz}">Text</h1>
 
                         <ul class="collapsible hide-desktop">
                             <li>
-                              <div class="collapsible-header collapsible-header-first sr-desk-filter"><i class="material-icons">sort</i>Filter</div>
-                              <div class="collapsible-body sr-filter-body-mob">
+                                <div class="collapsible-header collapsible-header-first sr-desk-filter"><i
+                                        class="material-icons">sort</i>Filter
+                                </div>
+                                <div class="collapsible-body sr-filter-body-mob">
 
-                              <!-- Filter Body mobile -->  
+                                    <!-- Filter Body mobile -->
 
-                                <h1 class="sr-filter-u-ueb">Bewertung</h1>
+                                    <h1 class="sr-filter-u-ueb">Bewertung</h1>
 
-                                <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Lieferung</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>Abholung</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>Im Restaurant essen</span>
-                                      </label>
-                                    </p>
-                                  </form>
-        
-                                  <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
-                                  <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Keine Präferenz</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>€10,00 oder weniger</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>€15,00 oder mehr</span>
-                                      </label>
-                                    </p>
-                                  </form>
-        
-        
-                  
-        
-                                  <h1 class="sr-filter-u-ueb">Standort</h1>
-                                  <form action="#" id="sr-filter-form">
-                                    <p  class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" checked />
-                                        <span>Keine Präferenz</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input name="group1" type="radio" />
-                                        <span>5 km oder weniger</span>
-                                      </label>
-                                    </p>
-                                    <p class="sr-filter-auswählen-p">
-                                      <label>
-                                        <input class="with-gap" name="group1" type="radio"  />
-                                        <span>5 km oder mehr</span>
-                                      </label>
-                                    </p>
-                                  </form>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Lieferung</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>Abholung</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>Im Restaurant essen</span>
+                                            </label>
+                                        </p>
+                                    </form>
 
-                                  <button class="btn waves-effect waves-light sr-filter-mob-submit" type="submit" name="action">Übernehmen
-                                    <i class="material-icons right">send</i>
-                                  </button>
-
-                                  <!--- ------------------------------------------------------------------>
+                                    <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Keine Präferenz</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>€10,00 oder weniger</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>€15,00 oder mehr</span>
+                                            </label>
+                                        </p>
+                                    </form>
 
 
+                                    <h1 class="sr-filter-u-ueb">Standort</h1>
+                                    <form action="#" id="sr-filter-form">
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio" checked/>
+                                                <span>Keine Präferenz</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input name="group1" type="radio"/>
+                                                <span>5 km oder weniger</span>
+                                            </label>
+                                        </p>
+                                        <p class="sr-filter-auswählen-p">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>5 km oder mehr</span>
+                                            </label>
+                                        </p>
+                                    </form>
+
+                                    <button class="btn waves-effect waves-light sr-filter-mob-submit" type="submit"
+                                            name="action">Übernehmen
+                                        <i class="material-icons right">send</i>
+                                    </button>
+
+                                    <!--- ------------------------------------------------------------------>
 
 
-
-                              </div>
+                                </div>
                             </li>
                             <!--
                             <li>
@@ -338,95 +419,60 @@
                               <div class="collapsible-header collapsible-header-last "><i class="material-icons"><span class="material-icons-outlined">unfold_more</span></i>Mehr</div>
                               <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                             </li> -->
-                          </ul>
+                        </ul>
 
 
-
-
-
-                          <!-- RESTERAUNT CARD -->
+                        <!-- RESTERAUNT CARD -->
                         <div class="sr-restaurants" th:each="mandant : ${mandanten}">
                             <div class="col s1 sr-rest-left">
-                                <img class="sr-rest-img" src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
+                                <img class="sr-rest-img"
+                                     src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
 
                             </div>
 
                             <div class="col s4  sr-rest-right">
-                              <h1 class="sr-rest-ueb" th:text="${mandant.firmenname}">Restaurant Name</h1>
-                              <p class="sr-rest-p" th:text="${mandant.adresse}">Adresse</p>
+                                <h1 class="sr-rest-ueb" th:text="${mandant.firmenname}">Restaurant Name</h1>
+                                <p class="sr-rest-p" th:text="${mandant.adresse}">Adresse</p>
 
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
 
-                              <span th:each="i : ${#numbers.sequence(1, mandant.rating)}" class="material-icons-outlined sr-rest-star-span">star </span>
-                              <span th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}" class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                <span th:each="i : ${#numbers.sequence(1, mandant.rating)}"
+                                      class="material-icons-outlined sr-rest-star-span">star </span>
+                                <span th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}"
+                                      class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                              <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
                             </div>
                         </div>
 
                     </div>
 
 
-
-
-                    
                 </div>
-             </div>
-
-
-
-
-
-
-
-
+            </div>
 
 
         </div>
 
 
-
-
-
         <div class="col l1 ">
-            </div>
+        </div>
 
 
-
-
-     </div>
-
-
-
+    </div>
 
 
 </div>
 
 
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
-
 
 
 </html>

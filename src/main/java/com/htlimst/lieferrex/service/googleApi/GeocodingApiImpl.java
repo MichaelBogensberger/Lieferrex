@@ -24,18 +24,13 @@ public class GeocodingApiImpl implements GeocodingApi{
     @Value("${google.api.key}")
     String apiKey;
 
-    private GeocodingResult[] results = new GeocodingResult[0];
 
-    public GeoPosition getGeodaten(String land, String ort, String plz, String strasse, String hausnummer) throws AdresseNotFoundException {
-
-        GeoPosition geoPosition = new GeoPosition();
+    public GeocodingResult[] geocoede(String adresse) throws AdresseNotFoundException {
+        GeocodingResult[] results = new GeocodingResult[0];
 
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(apiKey)
                 .build();
-
-        String adresse = strasse + " " + hausnummer;
-        System.out.println(adresse);
 
         try {
             results = com.google.maps.GeocodingApi.geocode(context,adresse).components(ComponentFilter.country("Österreich")).region("at").language("de").await();
@@ -50,6 +45,25 @@ public class GeocodingApiImpl implements GeocodingApi{
             throw new AdresseNotFoundException();
         }
 
+        context.shutdown();
+
+        return results;
+    }
+
+    public GeoPosition getGeodaten(String land, String ort, String plz, String strasse, String hausnummer) throws AdresseNotFoundException {
+
+        GeoPosition geoPosition = new GeoPosition();
+
+        String adresse = strasse + " " + hausnummer;
+        System.out.println(adresse);
+
+        GeocodingResult[] results = new GeocodingResult[0];
+        try {
+            results = geocoede(adresse);
+        } catch (AdresseNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String geocodingResults = gson.toJson(results.length);
         System.out.println(geocodingResults);
@@ -58,11 +72,6 @@ public class GeocodingApiImpl implements GeocodingApi{
             throw new AdresseNotFoundException();
         }
 
-        for (int i = 0; i< Integer.parseInt(geocodingResults); i++){
-            System.out.println(gson.toJson(results[i]));
-            System.out.println("-------------------------------------------------------------");
-        }
-        context.shutdown();
 
 
         try {
@@ -86,7 +95,6 @@ public class GeocodingApiImpl implements GeocodingApi{
             equals = equals && foundHausnummer.equals("\"" + hausnummer + "\"");
             equals = equals && foundStrasse.equals("\"" + strasse + "\"");
 
-            System.out.println(equals);
             if(!equals){
                 throw new AdresseNotFoundException();
             }
@@ -100,58 +108,48 @@ public class GeocodingApiImpl implements GeocodingApi{
         return geoPosition;
     }
 
-    public String findOrtByAdresse(String adresse) {
-        return "test";
-    }
 
     @Override
     public String findPlzByAdresse(String adresse) throws AdresseNotFoundException {
         GeoPosition geoPosition = new GeoPosition();
 
-        GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey(apiKey)
-                .build();
 
         System.out.println(adresse);
 
+        GeocodingResult[] results = new GeocodingResult[0];
         try {
-            results = com.google.maps.GeocodingApi.geocode(context,adresse).region("at").language("de").await();
-        } catch (ApiException e) {
+            results = geocoede(adresse);
+        } catch (AdresseNotFoundException e) {
             e.printStackTrace();
-            throw new AdresseNotFoundException();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            throw new AdresseNotFoundException();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new AdresseNotFoundException();
         }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String geocodingResults = gson.toJson(results.length);
         System.out.println(geocodingResults);
         if (results.length == 0){
+            throw new AdresseNotFoundException();
+        }
+
+        for (int i = 0; i < Integer.parseInt(geocodingResults); i++){
+            System.out.println(gson.toJson(results[i]));
+        }
+
+        System.out.println(gson.toJson(results[0].placeId));
+
+        if (gson.toJson(results[0].placeId).equals("\"ChIJfyqdJZsHbUcRr8Hk3XvUEhA\"")){
+
             System.out.println("Adresse nicht vorhanden");
             throw new AdresseNotFoundException();
         }
-        System.out.println("Geodaten-------------------------------------------------------------");
 
-        for (int i = 0; i< Integer.parseInt(geocodingResults); i++){
-            System.out.println(gson.toJson(results[i]));
-        }
-        context.shutdown();
-        System.out.println("-------------------------------------------------------------");
 
         //if "locationType": "APPROXIMATE"
         //then reverse lookup latlng mit postalcode als respnse
-        System.out.println(gson.toJson(results[0].geometry.locationType));
         if (!gson.toJson(results[0].geometry.locationType).equals("\"APPROXIMATE\"")){
             int length = Integer.parseInt(gson.toJson(results[0].addressComponents.length));
-            System.out.println(length);
             String tmp = gson.toJson(results[0].addressComponents[length-1].longName);
             tmp = tmp.substring(1);
             tmp = tmp.substring(0,tmp.length()-1);
-            System.out.println("--------" + tmp);
             return tmp;
         }else {
             double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
@@ -161,6 +159,27 @@ public class GeocodingApiImpl implements GeocodingApi{
             return ort;
         }
 
+    }
+
+    @Override
+    public String findAdresseByPlz(String plz) {
+        GeocodingResult[] results = new GeocodingResult[0];
+        try {
+            results = geocoede(plz);
+        } catch (AdresseNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String geocodingResults = gson.toJson(results.length);
+        System.out.println(geocodingResults);
+
+        for (int i = 0; i < Integer.parseInt(geocodingResults); i++){
+            System.out.println(gson.toJson(results[i]));
+        }
+
+
+        return null;
     }
 
 

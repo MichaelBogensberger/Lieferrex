@@ -1,8 +1,12 @@
 package com.htlimst.lieferrex.controller;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
@@ -23,12 +27,15 @@ import com.htlimst.lieferrex.service.mandant.MandantService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Controller
 public class MainController {
@@ -57,40 +64,54 @@ public class MainController {
     @GetMapping("")
     public String showIndexPage() {
         System.out.println("Index page loaded");
-
-        System.out.println(key);
-
-
         return "main/index";
     }
 
     @GetMapping("/seach")
-    public String search(@RequestParam(value = "search", required = false) String Adresse, Model model) {
+    public String search(@RequestParam(value = "search", required = false) String adresse, Model model, RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
 
-
         try {
-            String plz = geocodingApi.findPlzByAdresse(Adresse);
+            String plz = geocodingApi.findPlzByAdresse(adresse);
 
+            redirectAttrs.addAttribute("adresse", adresse);
             return "redirect:restaurants/" + plz;
 
         } catch (AdresseNotFoundException adresseNotFoundException) {
             System.out.println(adresseNotFoundException.getMessage());
-            return "main/index";
+            return "redirect:/";
         }
 
 
     }
 
+
     @GetMapping("/restaurants/{plz}")
-    public String showRestaurants(@PathVariable String plz, Model model) {
+    public String showRestaurants(@PathVariable String plz, @RequestParam(required = false) String geoeffnet, @RequestParam(required = false) String lieferkosten
+            , @RequestParam(required = false) String mindestbestellwert, @RequestParam(required = false) String kategorie,
+                                  @RequestParam(required = false) String adresse, Model model) {
         //Alle Restaurants der PLZ anzeigen
         System.out.println(plz);
+        System.out.println(Boolean.parseBoolean(geoeffnet));
+        double dLieferKosten = lieferkosten == null ? 0.0 : Double.parseDouble(lieferkosten);
+        System.out.println(dLieferKosten);
+        double dMindestbestellwert = mindestbestellwert == null ? 0.0 : Double.parseDouble(mindestbestellwert);
+        System.out.println(dMindestbestellwert);
+
+        System.out.println(kategorie);
+        System.out.println(adresse);
+        System.out.println("----------------------");
+
+
         try {
-            List<MandantSuchDto> mandanten = mandantService.findMandantByPlz(plz);
+            List<MandantSuchDto> mandanten = mandantService.findMandantByPlz(plz, Boolean.parseBoolean(geoeffnet), dLieferKosten, dMindestbestellwert, kategorie);
+            model.addAttribute("plz", plz);
+            model.addAttribute("adresse", adresse);
             model.addAttribute("mandanten", mandanten);
+
+
             return "main/search";
-        }catch (MandantNotFoundException mandantNotFoundException){
+        } catch (MandantNotFoundException mandantNotFoundException) {
             System.out.println(mandantNotFoundException.getMessage());
             model.addAttribute("error", "Es wurden keine Restaurants in der Umgebung gefunden!");
             return "main/search";
@@ -107,8 +128,6 @@ public class MainController {
     public String showCheckoutPage() {
         return "main/checkout";
     }
-
-
 
 
     @GetMapping("/buildOne")
@@ -142,7 +161,6 @@ public class MainController {
     public String showDashboardZahlungen() {
         return "dashboard/zahlungen.html";
     }
-
 
 
 }

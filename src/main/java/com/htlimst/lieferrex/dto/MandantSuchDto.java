@@ -13,4 +13,7 @@ public class MandantSuchDto {
     private String plz;
     private String adresse;
     private int rating;
+
+
+    private boolean geöffnet;
 }

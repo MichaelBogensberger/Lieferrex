@@ -45,16 +45,10 @@ public class PlacesApiImpl implements PlacesApi {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String geocodingResults = gson.toJson(predictions.length);
-        System.out.println(geocodingResults);
 
         if (geocodingResults.length() == 0){
             System.out.println("User nicht vorhanden");
             throw new AdresseNotFoundException();
-        }
-
-        for (int i = 0; i < Integer.parseInt(geocodingResults); i++) {
-            System.out.println(gson.toJson(predictions[i]));
-            System.out.println("-------------------------------------------------------------");
         }
 
         List<String> adressen = new  ArrayList<String>();

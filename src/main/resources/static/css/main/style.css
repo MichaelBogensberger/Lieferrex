@@ -1135,6 +1135,11 @@ margin-left: 15px;
     height: 220px;
 }
 
+.kategory-button{
+    border: 0px;
+    background-color: transparent;
+    color: white;
+}
 
 .removeButtonStyle {
     background-color: transparent;

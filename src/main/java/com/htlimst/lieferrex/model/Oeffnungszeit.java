@@ -21,7 +21,9 @@ public class Oeffnungszeit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int tag;
+    @Enumerated(EnumType.STRING)
+    private Wochentag tag;
+
     private Time oeffnungszeit;
     private Time startpause;
     private Time endepause;

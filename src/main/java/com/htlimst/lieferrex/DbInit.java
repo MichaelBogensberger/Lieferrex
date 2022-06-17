@@ -152,9 +152,20 @@
 //         Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", "12345", "Brennbichl", "25", "0650123123", 1234.5, 50000, "mandant1@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1), geoPosition2);
 //
 //
-//         Kategorie kategorie = new Kategorie();
-//         kategorie.setName("Fine Dining");
+//         Kategorie kategorie = new Kategorie(null, "fineDining");
 //         kategorieRepository.save(kategorie);
+//         Kategorie kategorie1 = new Kategorie(null, "casualDining");
+//         kategorieRepository.save(kategorie1);
+//         Kategorie kategorie2 = new Kategorie(null, "familyStyle");
+//         kategorieRepository.save(kategorie2);
+//         Kategorie kategorie3 = new Kategorie(null, "fastFood");
+//         kategorieRepository.save(kategorie3);
+//         Kategorie kategorie4 = new Kategorie(null, "buffet");
+//         kategorieRepository.save(kategorie4);
+//         Kategorie kategorie5 = new Kategorie(null, "other");
+//         kategorieRepository.save(kategorie5);
+//
+//
 //
 //         mandant.setKategorie(kategorie);
 //         mandantRepository.save(mandant);
@@ -245,8 +256,18 @@
 //         Angestellter angestellter = new Angestellter(null, mandant, "Vorname", "Nachname", "angestellt@gmail.com", this.passwordEncoder.encode("123"), token , angestellerRollen);
 //         this.angestellterRepository.save(angestellter);
 //
-//         Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, 1, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant);
+//         Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, Wochentag.MONDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant);
 //         this.oeffnungszeitRepository.save(oeffnungszeit);
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.TUESDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.WEDNESDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.THURSDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.FRIDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.SATURDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//         this.oeffnungszeitRepository.save(new Oeffnungszeit(null, Wochentag.SUNDAY, new Time(10, 0, 0), new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant));
+//
+//
+//
+//
 //
 //         Umsatz umsatz = new Umsatz(null, 3, 2022, 22325.50, mandant);
 //         this.umsatzRepository.save(umsatz);

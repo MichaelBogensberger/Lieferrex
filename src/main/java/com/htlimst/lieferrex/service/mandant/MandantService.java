@@ -19,8 +19,7 @@ public interface MandantService {
     Optional<Mandant> findMandantByAngestellterEmail(String email);
     Mandant listAll();
     void save(Mandant mandant);
-    public List<MandantSuchDto> findMandantByAdresse(String Adresse) throws MandantNotFoundException;
-    public List<MandantSuchDto> findMandantByPlz(String Adresse) throws MandantNotFoundException;
+    public List<MandantSuchDto> findMandantByPlz(String Adresse, boolean isGeöffnet, double lieferKosten, double mindestbestellwert, String kategorie) throws MandantNotFoundException;
 
     boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto);
 

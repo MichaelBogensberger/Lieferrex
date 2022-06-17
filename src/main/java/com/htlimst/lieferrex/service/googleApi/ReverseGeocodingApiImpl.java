@@ -47,12 +47,6 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String geocodingResults = gson.toJson(results.length);
-        System.out.println(geocodingResults);
-
-        for (int i = 0; i < Integer.parseInt(geocodingResults); i++) {
-            System.out.println(gson.toJson(results[i]));
-            System.out.println("-------------------------------------------------------------");
-        }
 
         String tmp = gson.toJson(results[0].addressComponents[0].longName);
         tmp = tmp.substring(1);
