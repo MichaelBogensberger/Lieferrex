@@ -88,9 +88,9 @@
       <h5>Empfohlen:</h5>
 
       <div class="collection">
-        <a href="#!" id="openAddText" class="collection-item modal-trigger">Titel mit Text</a>
-        <a href="#!" id="openAddImage" class="collection-item">Titel mit Bild</a>
-        <a href="#!" id="openAddContact" class="collection-item">Kontaktinformationen</a>
+        <a href="#!" name="addText" class="AddFragment collection-item modal-trigger">Titel mit Text</a>
+        <a href="#!" name="addImage" class="AddFragment collection-item">Titel mit Bild</a>
+        <a href="#!" name="addContact" class="AddFragment collection-item">Kontaktinformationen</a>
         <a href="#!" class="collection-item">Speisekarte</a>
         <a href="#!" class="collection-item">...</a>
       </div>
@@ -133,7 +133,7 @@
     </div>
     <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" id="saveAddText" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
+    <a href="#!" id="saveText" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
     </div>
   </div>
 
@@ -155,14 +155,14 @@
     <div class="row">
       <div class="input-field">
         <h5>Bild</h5>
-        <textarea id="addImageFile" class="materialize-textarea"></textarea>
+        <input id="addImageFile" type="file">
       </div>
     </div>
 
   </div>
   <div class="modal-footer">
   <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-  <a href="#!" id="saveAddImage" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
+  <a href="#!" id="saveImage" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
   </div>
 </div>
 
@@ -191,7 +191,7 @@
   </div>
   <div class="modal-footer">
   <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-  <a href="#!" id="saveAddContact" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
+  <a href="#!" id="saveContact" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
   </div>
 </div>
 

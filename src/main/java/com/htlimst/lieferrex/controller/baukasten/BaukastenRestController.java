@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class BaukastenRestController {
@@ -49,63 +50,56 @@ public class BaukastenRestController {
     @Autowired
     FragmentTypeServiceImpl fragmentTypeServiceImpl;
     
-    @GetMapping("/baukasten/module/{position}")
-    public String getModule(Model model, @PathVariable String position, @RequestParam String token){
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(token);
-        if(angestellter.isPresent()){
+    
 
-            Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail()).get();
-            Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.getId(), position).get();
-
-
-            model.addAttribute("content", fragment);
-            return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
-        } else {
-            return "Invalid User";
-        }
-    }
-
-    @PostMapping("/baukasten/module/save")
-    @CrossOrigin("*")
-    public String saveModule(@RequestParam String data) throws JsonMappingException, JsonProcessingException {
+    // @PostMapping("/baukasten/module/save")
+    // @CrossOrigin("*")
+    // public String saveModule(@RequestParam String data, @RequestParam(required = false) MultipartFile image) throws JsonMappingException, JsonProcessingException {
         
-        ObjectMapper objectMapper = new ObjectMapper();
-        HashMap<String, String> result = objectMapper.readValue(data, HashMap.class);
+    //     HashMap<String, String> result = new ObjectMapper().readValue(data, HashMap.class);
 
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(result.get("token"));
-        if(angestellter.isPresent()){
-            Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail());
-            if(mandant.isPresent()){
+    //     Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(result.get("token"));
+    //     if(angestellter.isPresent()){
 
-                Optional<Position> position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
-                Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
-                if(position.isPresent() && fragmenttype.isPresent()){
-                    // new FragmentText(null, "", "", "", null)
-                    
-                    Fragment fragment = fragmentServiceImpl.save(new Fragment(null, 
-                                                                                position.get(), 
-                                                                                mandant.get(), 
-                                                                                fragmenttype.get(), 
-                                                                                null, 
-                                                                                null, 
-                                                                                null));
+    //         Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail());
+    //         if(mandant.isPresent()){
 
-                    System.out.println(fragment.toString());
-                    if(fragmenttype.get().getType().equals("text")){
-                        FragmentText fragmentText = fragmentTextServiceImpl.save(new FragmentText(null, 
-                                                                                                    result.get("title"), 
-                                                                                                    result.get("text"), 
-                                                                                                    "null", 
-                                                                                                    fragment));
-                        System.out.println(fragmentText.toString());
-                    }
-                }
+    //             Optional<Position> position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
+    //             Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
 
-            }
+    //             if(position.isPresent() && fragmenttype.isPresent()){
+    //                 Fragment fragment = fragmentServiceImpl.save(new Fragment(null, 
+    //                                                                             position.get(), 
+    //                                                                             mandant.get(), 
+    //                                                                             fragmenttype.get(), 
+    //                                                                             null, 
+    //                                                                             null, 
+    //                                                                             null,
+    //                                                                             null));
 
-            return "";
-        } else {
-            return "Invalid User";
-        }
-    }
+    //                 System.out.println(fragmenttype.get().getType());
+    //                 switch (fragmenttype.get().getType()) {
+    //                     case "text":
+    //                         FragmentText fragmentText = fragmentTextServiceImpl.save(
+    //                             new FragmentText(null, 
+    //                                 result.get("title"), 
+    //                                 result.get("text"), 
+    //                                 "null", 
+    //                                 fragment));
+    //                         break;
+    //                     case "image":
+    //                         System.out.println(image.getOriginalFilename());
+    //                         break;
+    //                     default:
+    //                         break;
+    //                 }
+    //             }
+
+    //         }
+
+    //         return "6";
+    //     } else {
+    //         return "Invalid User";
+    //     }
+    // }
 }

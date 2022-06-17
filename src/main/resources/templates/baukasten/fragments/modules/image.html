@@ -1,0 +1,8 @@
+<div th:fragment="image(content, edit, position)" class="fragment-image">
+
+  <div>
+    <h2 th:text="${content.fragmentimage.titel}"></h2>
+    <img th:src="'/images/' + ${content.fragmentimage.image}" alt="">
+  </div>
+
+</div>

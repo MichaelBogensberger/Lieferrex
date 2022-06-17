@@ -19,7 +19,7 @@ nav {
     min-height: 20vh;
 }*/
 
-.fragment-header, .fragment-map, .fragment-text, .fragment-add {
+.fragment-header, .fragment-map, .fragment-text, .fragment-add, .fragment-image {
     -webkit-box-shadow: 0px 0px 13px -1px #000000; 
     box-shadow: 0px 0px 13px -1px #000000;
 }
@@ -81,6 +81,18 @@ nav {
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+}
+
+.fragment-image {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.fragment-image > div > img {
+    width: 100%;
 }
 
 

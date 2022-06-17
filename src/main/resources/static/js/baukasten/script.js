@@ -8,6 +8,7 @@ $('#color-picker').spectrum({
     type: "component"
 });
 
+// Helper function to get the token of logged in user
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -24,71 +25,75 @@ function getCookie(cname) {
   return "";
 }
 
-
 $(document).ready(function(){
   $(".fragment-add").off("click").click(function() {
+
+    // Current Position of the added Fragment
     var pos = $(this).attr('name');
+
     $('#selector').modal('open');
 
-    // Saving Text Fragment
-    $("#openAddText").off("click").click(function() {
+    // Open specific modal for fragment 
+    $(".AddFragment").off("click").click(function() {
       $('#selector').modal('close');
-      $('#addText').modal('open');
+      $('#' + $(this).attr('name')).modal('open');
     });
 
-    $('#saveAddText').off("click").click(function() {
-      console.log("dawdwad");
-      $.ajax({
-        type: "POST",
-        url: "./module/save",
-        data: {'data': JSON.stringify({
+    // On button save
+    $('.saveFragment').off("click").click(function() {
+
+      var formData = new FormData();
+
+      // Set data depending on fragment type
+      switch ($(this).attr('id')) {
+        case "saveText":
+          formData.append('data', JSON.stringify({
             "title": $('#addTextTitle').val(),
             "text": $('#addTextText').val(),
             "position": pos,
             "type": "text",
             "token": getCookie("token")
-          })}
-      });
-    })
+          }));
+          break;
 
-    // Saving Image Fragment
-    $("#openAddImage").off("click").click(function() {
-      $('#selector').modal('close');
-      $('#addImage').modal('open');
-    });
-
-    $('#saveAddImage').off("click").click(function() {
-      $.ajax({
-        type: "POST",
-        url: "./module/save",
-        data: {'data': JSON.stringify({
+        case "saveImage":
+          formData.append('data', JSON.stringify({
             "title": $('#addImageTitle').val(),
-            "image": $('#addImageFile').val(),
             "position": pos,
-            "type": "image" 
-          })}
-      });
-    })
-
-    // Saving Contact Informations Fragment
-    $("#openAddContact").off("click").click(function() {
-      $('#selector').modal('close');
-      $('#addContact').modal('open');
-    });
-
-    $('#saveAddContact').off("click").click(function() {
-      $.ajax({
-        type: "POST",
-        url: "./module/save",
-        data: {'data': JSON.stringify({
+            "type": "image",
+            "token": getCookie("token")
+          }));
+          formData.append('image', $('#addImageFile')[0].files[0]);
+          break;
+        
+        case "saveContact":
+          formData.append('data', JSON.stringify({
             "title": $('#addConctactTitle').val(),
             "text": $('#addContactText').val(),
             "position": pos,
-            "type": "contact" 
-          })}
+            "type": "contact",
+            "token": getCookie("token")
+          }));
+          break;
+      }
+
+      // Post
+      
+      $.ajax({
+        type: "POST",
+        url: "./module/save",
+        async: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function ( data ) {
+          $('#' + pos).html(data);
+        }
       });
+      
+      
     })
- 
   });
 });
 
