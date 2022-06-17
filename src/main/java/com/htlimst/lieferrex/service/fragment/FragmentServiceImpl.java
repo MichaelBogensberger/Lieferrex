@@ -30,4 +30,9 @@ public class FragmentServiceImpl implements FragmentService {
         return fragmentRepository.save(fragment);
     }
 
+    @Override
+    public void delete(Fragment fragment) {
+        fragmentRepository.delete(fragment);
+    }
+
 }

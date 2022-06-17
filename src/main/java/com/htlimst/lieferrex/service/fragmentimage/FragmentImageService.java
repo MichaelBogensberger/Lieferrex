@@ -8,5 +8,6 @@ public interface FragmentImageService {
     Optional<FragmentImage> findFragmentimageByFragment_id(Long id);
     void saveFragmentImage(FragmentImage fragmentImage);
     FragmentImage save(FragmentImage fragmentImage);
+    void delete(FragmentImage fragmentImage);
 
 }

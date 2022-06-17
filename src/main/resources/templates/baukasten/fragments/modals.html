@@ -25,30 +25,45 @@
 <!----------------------------------------------------->
 <!-- Header Div MODAL ---------------------------------->
 
-  <div id="headerContent" class="modal">
+  <div id="editHeader" class="modal">
     <div class="modal-content">
       <h4>Bild und Text hinzufügen</h4>
-      <p>Überschrift sowie Hintergrundbild bitte eingeben.
-          <br>
-          Die Überschrift wird vor dem Bild dargestellt.
-      </p>
+      <p>Überschrift, Text sowie Hintergrundbild bitte eingeben.</p>
+      <br>
 
       <div class="row">
       <form class="col l7">
         <div class="row mb-0">
           <div class="input-field col s9">
             <i class="material-icons prefix">title</i>
-            <input id="input_text" type="text" data-length="10">
-            <label for="input_text">Überschrift</label>
+            <input id="editHeaderTitle" type="text" data-length="10" th:value="${r1c1.fragmentheader.titel}">
+            <label for="editHeaderTitle">Überschrift</label>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-0">
+          <div class="input-field col s9">
+            <i class="material-icons prefix">title</i>
+            <input id="editHeaderText" type="text" data-length="10" th:value="${r1c1.fragmentheader.text}">
+            <label for="editHeaderText">Text</label>
+          </div>
+        </div>
+
+        <div class="switch">
+          <label>
+            <span>Neues Bild hinzufügen</span>
+            <input id="headerImageNew" type="checkbox">
+            <span class="lever"></span>
+          </label>
+        </div>
+
+        <div id="newImage" style="margin-bottom: 0 !important;" class="row" hidden>
+            <br>
             <div class="input-field col s9 marg-t-0">
                 <div class="file-field input-field">
                 <div class="btn">
                     <span>Bild</span>
-                    <input type="file" multiple>
+                    <input id="editHeaderImage" type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
@@ -56,20 +71,19 @@
                 </div>
             </div>
         </div>
-
       </form>
     
 
       <div class="col l5">
-            <img th:src="@{css/baukasten/overlayText.png}"  class="overlayImg">
-        </div>
+            <img th:src="@{../css/baukasten/overlayText.png}"  class="overlayImg">
+      </div>
 
       </div>
 
     </div>
     <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Hinzufügen</a>
+    <a href="#!" id="saveHeader" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
     </div>
   </div>
 
@@ -78,7 +92,7 @@
 
 
 
-  <!-- Main Left MODAL ---------------------------------->
+  <!-- Selector MODAL ---------------------------------->
 
   <div id="selector" class="modal">
     <div class="modal-content">
@@ -88,7 +102,7 @@
       <h5>Empfohlen:</h5>
 
       <div class="collection">
-        <a href="#!" name="addText" class="AddFragment collection-item modal-trigger">Titel mit Text</a>
+        <a href="#!" name="addText" class="AddFragment collection-item">Titel mit Text</a>
         <a href="#!" name="addImage" class="AddFragment collection-item">Titel mit Bild</a>
         <a href="#!" name="addContact" class="AddFragment collection-item">Kontaktinformationen</a>
         <a href="#!" class="collection-item">Speisekarte</a>
@@ -116,17 +130,33 @@
     <div class="modal-content">
       <h4>Titel mit Text Modul hinzufügen</h4>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="input-field">
           <h5>Titel</h5>
           <textarea id="addTextTitle" class="materialize-textarea"></textarea>
         </div>
+      </div> -->
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addTextTitle" type="text" data-length="100">
+          <label for="addTextTitle">Überschrift</label>
+        </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="input-field">
           <h5>Text</h5>
           <textarea id="addTextText" class="materialize-textarea"></textarea>
+        </div>
+      </div> -->
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addTextText" type="text" data-length="100">
+          <label for="addTextText">Text</label>
         </div>
       </div>
 
@@ -138,6 +168,20 @@
   </div>
 
 <!----------------------------------------------------->
+<!-- Delete Modal ---------------------------------->
+<!----------------------------------------------------->
+
+<div id="deleteFragment" class="modal">
+  <div class="modal-content">
+    <h4>Wollen Sie das Element wirklick loeschen?</h4>
+  </div>
+  <div class="modal-footer">
+  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+  <a href="#!" id="deleteFragmentConfirm" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
+  </div>
+</div>
+
+<!----------------------------------------------------->
 <!-- Image Module Add Modal ---------------------------------->
 <!----------------------------------------------------->
 
@@ -145,19 +189,27 @@
   <div class="modal-content">
     <h4>Titel und Bild Modul hinzufügen</h4>
 
-    <div class="row">
-      <div class="input-field">
-        <h5>Titel</h5>
-        <textarea id="addImageTitle" class="materialize-textarea"></textarea>
+    <div class="row mb-0">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">title</i>
+        <input id="addImageTitle" type="text" data-length="10">
+        <label for="addImageTitle">Überschrift</label>
       </div>
     </div>
 
     <div class="row">
-      <div class="input-field">
-        <h5>Bild</h5>
-        <input id="addImageFile" type="file">
+      <div class="input-field col s12 marg-t-0">
+          <div class="file-field input-field">
+          <div class="btn">
+              <span>Bild</span>
+              <input id="addImageFile" type="file" multiple>
+          </div>
+          <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
+          </div>
+          </div>
       </div>
-    </div>
+  </div>
 
   </div>
   <div class="modal-footer">

@@ -29,4 +29,9 @@ public class FragmentImageServiceImpl implements FragmentImageService {
         return fragmentimageRepository.save(fragmentImage);
     }
 
+    @Override
+    public void delete(FragmentImage fragmentImage) {
+        fragmentimageRepository.delete(fragmentImage);
+    }
+
 }

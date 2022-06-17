@@ -20,13 +20,15 @@ public class FragmentTextServiceImpl implements FragmentTextService {
     }
 
     @Override
-    public void saveFragmentText(FragmentText fragmentText) {
-        fragmenttextRepository.save(fragmentText);        
-    }
-
-    @Override
     public FragmentText save(FragmentText fragmentText) {
         return fragmenttextRepository.save(fragmentText);
     }
+
+    @Override
+    public void delete(FragmentText fragmentText) {
+        fragmenttextRepository.delete(fragmentText);        
+    }
+
+    
 
 }

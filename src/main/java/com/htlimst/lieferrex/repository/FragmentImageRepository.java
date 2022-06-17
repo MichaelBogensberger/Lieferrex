@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FragmentImageRepository extends JpaRepository<FragmentImage, Long> {
     Optional<FragmentImage> findFragmentimageByFragment_id(Long id);
     FragmentImage save(FragmentImage fragmentImage);
+    void delete(FragmentImage fragmentImage);
 }

@@ -30,7 +30,7 @@ public class FragmentHeader {
     private String text;
 
     @NotEmpty
-    private String image_path;
+    private String image;
 
     @OneToOne
     @JoinColumn(name="fragment_id")

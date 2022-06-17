@@ -22,19 +22,35 @@ nav {
 .fragment-header, .fragment-map, .fragment-text, .fragment-add, .fragment-image {
     -webkit-box-shadow: 0px 0px 13px -1px #000000; 
     box-shadow: 0px 0px 13px -1px #000000;
+    position: relative;
+}
+
+.fragment-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    cursor: pointer;
+    font-size: 4em !important;
+    z-index: 2;
+}
+
+.fragment-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: orange;
+    cursor: pointer;
+    font-size: 4em !important;
+    z-index: 2;
 }
 
 .fragment-header {
-    /* background-image: url("https://via.placeholder.com/500x500");
-    background-size: cover;
-    background-position: center; */
-
     margin-top: 2vh;
     min-height: 40vh;
     max-height: 50vh;
 
     display: flex;
-    /* padding-left: 10%;  */
     
 }
 
@@ -45,18 +61,20 @@ nav {
     flex-wrap: wrap;
     align-items: center;
     width: 50%;
+    overflow:hidden
 }
 
 .fragment-header-column > img {
     object-fit: contain;
     margin-right: 0;
     position: relative;
-    height: 100%;
+    width: 100%;
 }
 
 .fragment-add {
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
 
 .fragment-add > i {
@@ -121,7 +139,7 @@ nav {
 
 
 
-.main-left {
+/* .main-left {
 
     padding-left: 20px;
     padding-right: 20px;
@@ -142,7 +160,7 @@ nav {
     font-size: 100px;
     color: #BEBEBE;
 
-}
+} */
 
 
 
@@ -150,6 +168,14 @@ nav {
 @media only screen and (max-width: 992px) {
     .header-div{
         height: 40vh;
+    }
+
+    .layoutBody, .side-p {
+        padding-left: 0 !important;
+    }
+
+    .col {
+        padding-bottom: 20px !important;
     }
 
     .menu-icon {

@@ -1,5 +1,7 @@
 <div th:fragment="image(content, edit, position)" class="fragment-image">
 
+  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}" class="fragment-delete material-icons">delete_forever</i>
+
   <div>
     <h2 th:text="${content.fragmentimage.titel}"></h2>
     <img th:src="'/images/' + ${content.fragmentimage.image}" alt="">
