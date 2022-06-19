@@ -135,7 +135,9 @@
 //         }
 //
 //         Bestellart bestellart = new Bestellart(null, "Abholung");
+//         Bestellart bestellart1 = new Bestellart(null, "Lieferung");
 //         this.bestellartRepository.save(bestellart);
+//         this.bestellartRepository.save(bestellart1);
 //
 //         GeoPosition geoPosition = new GeoPosition(null, 47.2340197, 10.7398698);
 //

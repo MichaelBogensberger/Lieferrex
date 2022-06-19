@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -41,18 +43,23 @@ public class ZubereitungsController {
 
         List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId());
         List<BestellungModel> modeldata = new ArrayList<>();
-
-        String timestamp = null;
-        String zusatzinfo = "HALLO";
+        List<BestellungModel> modeldataLieferung = new ArrayList<>();
 
         for (Bestellung bestellung:alleBestellungen) {
-          //  gerichtBestellungList.add(bestellung.getGerichteBestellungen());
-            timestamp = String.valueOf(bestellung.getBestelldatum().getHours()) + ":" + String.valueOf(bestellung.getBestelldatum().getMinutes());
+            String timestamp = null;
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+            timestamp = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
+            String zusatzinfo = "";
 
+            System.out.println( "Bestellung: " + bestellung.getBestellart().getBestellart());
             if(bestellung.getBestellart().getBestellart().equals("Abholung")){
                 HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
+                    if (gerichtBestellung.getAnmerkung() != null){
+                        zusatzinfo += gerichtBestellung.getAnmerkung() + ", ";
+                    }
+
                     if(!gerichtBestellungModelList.containsKey(gerichtBestellung.getGericht().getName()))
                     {
                         gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),1);
@@ -61,11 +68,46 @@ public class ZubereitungsController {
                         gerichtBestellungModelList.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelList.get(gerichtBestellung.getGericht().getName())+1);
                     }
                 }
+
+                if(!zusatzinfo.isEmpty()){
+                    zusatzinfo = zusatzinfo.substring(0, zusatzinfo.length()-2);
+                }
+
                 modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo));
             }
+
+            if(bestellung.getBestellart().getBestellart().equals("Lieferung")){
+                System.out.println(bestellung.getBestellart().getBestellart() + "asdasdasdasd");
+                HashMap<String, Integer> gerichtBestellungModelListLieferung = new HashMap<>();
+                for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
+                {
+                    if (gerichtBestellung.getAnmerkung() != null){
+                        zusatzinfo += gerichtBestellung.getAnmerkung() + ", ";
+                    }
+
+                    if(!gerichtBestellungModelListLieferung.containsKey(gerichtBestellung.getGericht().getName()))
+                    {
+                        gerichtBestellungModelListLieferung.put(gerichtBestellung.getGericht().getName(),1);
+                    } else
+                    {
+                        gerichtBestellungModelListLieferung.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelListLieferung.get(gerichtBestellung.getGericht().getName())+1);
+                    }
+                }
+
+                if(!zusatzinfo.isEmpty()){
+                    zusatzinfo = zusatzinfo.substring(0, zusatzinfo.length()-2);
+                }
+                modeldataLieferung.add(new BestellungModel(gerichtBestellungModelListLieferung,timestamp,zusatzinfo));
+            }
+
+
         }
 
+
+        System.out.println(modeldataLieferung);
+
         model.addAttribute("gerichteBestellungsDetail", modeldata);
+        model.addAttribute("gerichteBestellungsDetailLieferung", modeldataLieferung);
         return "dashboard/bestellungen.html";
     }
 
