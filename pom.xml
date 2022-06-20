@@ -101,6 +101,13 @@
             <version>1.1.1</version>
         </dependency>
 
+        <!-- fürs testen für Heroku -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
