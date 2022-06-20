@@ -6,9 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class LieferrexApplicationTests {
 
-    
+    /*
     @Test
     void contextLoads() {
     } 
+    */
 
 }
