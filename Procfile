@@ -1,1 +1,1 @@
-web: java $JAVA_TOOL_OPTIONS -jar target/lieferrex-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+web: java $JAVA_TOOL_OPTIONS -jar target/lieferrex-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod --spring.datasource.url="jdbc:mysql://${MYSQL_HOST:lieferrex.ddns.net}:3307/lieferrex" --spring.datasource.username=${{ secrets.MYSQL_USERNAME }} --spring.datasource.password=${{ secrets.MYSQL_PASSWORD }}
