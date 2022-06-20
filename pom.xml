@@ -100,13 +100,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-<<<<<<< HEAD
                     <source>1.8</source>
                     <target>1.8</target>
-=======
-                    <source>16</source>
-                    <target>16</target>
->>>>>>> 23cf6842b5bf0d80b14c8d10e2984fe823617f3b
                 </configuration>
             </plugin>
         </plugins>
