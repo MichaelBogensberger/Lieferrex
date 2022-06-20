@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class MandantSuchDto {
+    private Long id;
     private String firmenname;
     private String ort;
     private String plz;

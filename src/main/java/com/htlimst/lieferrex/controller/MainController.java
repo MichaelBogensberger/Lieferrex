@@ -71,6 +71,11 @@ public class MainController {
     public String search(@RequestParam(value = "search", required = false) String adresse, Model model, RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
 
+        List<Mandant> mandanten = mandantRepository.findMandantByPlz(adresse);
+        if (!mandanten.isEmpty()){
+            return "redirect:restaurants/" + adresse;
+        }
+
         try {
             String plz = geocodingApi.findPlzByAdresse(adresse);
 
@@ -122,11 +127,6 @@ public class MainController {
     @GetMapping("/orders")
     public String showOrdersPage() {
         return "main/orders";
-    }
-
-    @GetMapping("/checkout")
-    public String showCheckoutPage() {
-        return "main/checkout";
     }
 
 

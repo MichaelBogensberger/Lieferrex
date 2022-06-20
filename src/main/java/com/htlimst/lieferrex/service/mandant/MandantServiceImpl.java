@@ -4,19 +4,15 @@ import com.htlimst.lieferrex.dto.MandantRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
-import com.htlimst.lieferrex.exceptions.OeffnungszeitNotFoundException;
 import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.repository.*;
 
 
 import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
-import com.htlimst.lieferrex.service.googleApi.GeocodingApiImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -36,9 +32,10 @@ public class MandantServiceImpl implements MandantService {
     private GeoPositionRepository geoPositionRepository;
     private OeffnungszeitRepository oeffnungszeitRepository;
     private GeocodingApi geocodingApi;
+    private KategorieRepository kategorieRepository;
 
     @Autowired
-    public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository, OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi) {
+    public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository, OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi, KategorieRepository kategorieRepository) {
         this.angestellterRepository = angestellterRepository;
         this.mandantRepository = mandantRepository;
         this.roleRepository = roleRepository;
@@ -46,6 +43,7 @@ public class MandantServiceImpl implements MandantService {
         this.geoPositionRepository = geoPositionRepository;
         this.oeffnungszeitRepository = oeffnungszeitRepository;
         this.geocodingApi = geocodingApi;
+        this.kategorieRepository = kategorieRepository;
     }
 
     @Override
@@ -115,7 +113,8 @@ public class MandantServiceImpl implements MandantService {
                 lieferkosten(mandantRegistrationDto.getLieferkosten())
                 .seitenaufrufe_summe(0)
                 .umsatz_summe(0.0)
-                .geoPosition(geoPosition).build();
+                .geoPosition(geoPosition).
+                kategorie(kategorieRepository.getById(6L)).build();
         mandantRepository.save(mandant);
 
 
@@ -154,43 +153,37 @@ public class MandantServiceImpl implements MandantService {
         List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
         for (Mandant mandant : mandantenList) {
             boolean open = true;
-            Oeffnungszeit heutigeOeffungszeit = null;
-            try {
-                heutigeOeffungszeit = oeffnungszeitRepository.findOeffnungszeitsByMandantAndTag(mandant, currentDay);
-            } catch (OeffnungszeitNotFoundException e) {
+            Optional<Oeffnungszeit> optHeutigeOeffungszeit = null;
+
+            optHeutigeOeffungszeit = oeffnungszeitRepository.findOeffnungszeitsByMandantAndTag(mandant, currentDay);
+            if (optHeutigeOeffungszeit.isPresent()) {
+                Oeffnungszeit heutigeOeffungszeit = optHeutigeOeffungszeit.get();
+
+                open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
+                System.out.println(open + " Is open");
+
+                System.out.println(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
+                System.out.println(currentTime);
+                open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
+                System.out.println(open + " Is open");
+
+
+                if (heutigeOeffungszeit.getStartpause() != null && heutigeOeffungszeit.getStartpause() != null) {
+                    open = open && (currentTime.isBefore(heutigeOeffungszeit.getStartpause().toLocalTime()) || currentTime.isAfter(heutigeOeffungszeit.getEndepause().toLocalTime()));
+                    System.out.println(open + " Is open");
+
+                }
+            } else {
                 System.out.println("tag nicht gefunden");
                 open = false;
             }
 
 
-
-
-            //if heutige Ö
-            open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
-            System.out.println(open + " Is open");
-
-            System.out.println(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
-            System.out.println(currentTime);
-            open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
-            System.out.println(open + " Is open");
-
-
-            if (heutigeOeffungszeit.getStartpause() != null && heutigeOeffungszeit.getStartpause() != null){
-                open = open && (currentTime.isBefore(heutigeOeffungszeit.getStartpause().toLocalTime()) || currentTime.isAfter(heutigeOeffungszeit.getEndepause().toLocalTime()));
-                System.out.println(open + " Is open");
-
-            }
-
-            //-------------------------------------------------------------------------------------------
-
-
-
-
-            if (lieferKosten != 0.0 && lieferKosten <= mandant.getLieferkosten()) {
+            if (lieferKosten != 0.0 && lieferKosten < mandant.getLieferkosten()) {
                 System.out.println(mandant.getFirmenname() + " liefer----");
                 continue;
             }
-            if (mindestbestellwert != 0.0 && mindestbestellwert <= mandant.getMindestbestellwert()) {
+            if (mindestbestellwert != 0.0 && mindestbestellwert < mandant.getMindestbestellwert()) {
                 System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }
@@ -198,11 +191,12 @@ public class MandantServiceImpl implements MandantService {
                 System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }
-            if (isGeöffnet && !open){
+            if (isGeöffnet && !open) {
                 continue;
             }
 
             mandantSuchDtoList.add(new MandantSuchDto().builder()
+                    .id(mandant.getId())
                     .firmenname(mandant.getFirmenname())
                     .ort(mandant.getOrt())
                     .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())

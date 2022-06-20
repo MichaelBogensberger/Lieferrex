@@ -18,25 +18,26 @@
 <div id="aendern-modal" class="modal">
     <div class="modal-content">
         <h4 class="aendern-modal-ueb">Adresse ändern</h4>
+        <form th:action="@{/seach}" method="get">
 
 
-        <div class="row">
-            <div class="input-field col s12">
-                <form th:action="@{/seach}" method="get">
+            <div class="row">
+                <div class="input-field col s12">
                     <input th:if="${param.adresse == null}" th:value="${plz}" th:name="search" id="search" type="text"
                            class="validate inp-aendern-modal">
                     <input th:if="${param.adresse != null}" th:value="${param.adresse + ', ' + plz}" th:name="search"
                            id="search" type="text" class="validate inp-aendern-modal">
-                </form>
-                <label class="active" for="search">Adresse</label>
+                    <label class="active" for="search">Adresse</label>
+                </div>
             </div>
-        </div>
 
 
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Submit</a>
+        <button type="submit" class="btn">Submit</button>
     </div>
+    </form>
+
 </div>
 
 
@@ -270,45 +271,59 @@
                                    type="hidden">
                             <input th:name="geoeffnet" th:if="${param.geoeffnet != null}" th:value="${param.geoeffnet}"
                                    type="hidden">
-                            <input th:name="lieferkosten" th:if="${param.lieferkosten != null}" th:value="${param.lieferkosten}"
+                            <input th:name="lieferkosten" th:if="${param.lieferkosten != null}"
+                                   th:value="${param.lieferkosten}"
                                    type="hidden">
-                            <input th:name="mindestbestellwert" th:if="${param.mindestbestellwert != null}" th:value="${param.mindestbestellwert}"
+                            <input th:name="mindestbestellwert" th:if="${param.mindestbestellwert != null}"
+                                   th:value="${param.mindestbestellwert}"
                                    type="hidden">
 
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="${param.kategorie}==null ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" type="submit" >ALLES</button>
+                                <button class="kategory-button" type="submit">ALLES</button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fineDining') ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="fineDining" type="submit" >Fine Dining</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="fineDining" type="submit">
+                                    Fine Dining
+                                </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='casualDining')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
 
-                                <button class="kategory-button" th:name="kategorie" th:value="casualDining" type="submit" >Casual Dining</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="casualDining"
+                                        type="submit">Casual Dining
+                                </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='familyStyle')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="familyStyle" type="submit" >Family Style</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="familyStyle"
+                                        type="submit">Family Style
+                                </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fastFood')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="fastFood" type="submit" >Fast Food</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="fastFood" type="submit">
+                                    Fast Food
+                                </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='buffet')  ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="buffet" type="submit" >Buffet</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="buffet" type="submit">
+                                    Buffet
+                                </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='other')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="other" type="submit" >Other</button>
+                                <button class="kategory-button" th:name="kategorie" th:value="other" type="submit">
+                                    Other
+                                </button>
 
                             </div>
                         </form>
@@ -446,7 +461,8 @@
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                                <span class="material-icons-outlined sr-rest-enter-ico">arrow_forward</span>
+                                <span class="material-icons-outlined sr-rest-enter-ico"> <a style="color: white"
+                                                                                            th:href="@{'/restaurant/' + ${mandant.id}}">arrow_forward</a></span>
                             </div>
                         </div>
 
