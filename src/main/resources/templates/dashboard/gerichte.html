@@ -629,7 +629,8 @@
     function gerichtInfo(id) {
         //alert(id);
 
-        $.get("http://localhost:8080/api/gericht/" +id, function(data, status){
+        $.get("./api/gericht/" +id, function(data, status){
+            alert([[${rest.api.url}]]);
             console.log(data)
             //alert("Data: " + data + "\nStatus: " + status);
 
@@ -664,7 +665,7 @@
 
 
 
-        $.get("http://localhost:8080/api/gericht/" +id, function(data, status){
+        $.get("./api/gericht/" +id, function(data, status){
 
             $('#gericht-edit-name').val(data.name);
             $('#gericht-edit-desc').val(data.beschreibung);
