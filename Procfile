@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.datasource.password=$PASS $JAVA_TOOL_OPTIONS -jar target/lieferrex-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+web: java -Dserver.port=$PORT -Dpaypal.client.id=$PAYPALCID -Dpaypal.client.secret=$PAYPALCS -Dgoogle.api.key=$GOOGLE -Dspring.datasource.password=$PASS $JAVA_TOOL_OPTIONS -jar target/lieferrex-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
