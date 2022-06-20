@@ -280,7 +280,7 @@ nav {
 .main-search-icon {
     font-size: 50px;
     margin-left: 10px;
-    transform: translateY(40%);
+    transform: translateY(35%);
     color: white;
 
 }
@@ -1135,3 +1135,31 @@ margin-left: 15px;
     height: 220px;
 }
 
+.kategory-button{
+    border: 0px;
+    background-color: transparent;
+    color: white;
+}
+
+.removeButtonStyle {
+    background-color: transparent;
+    border: 0px;
+}
+
+.removeButtonStyle:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icon-search {
+    font-size: 50px;
+    color: white;
+}
+
+.fs-28 {
+    font-size: 28px;
+}
+
+.font-size-30 {
+    font-size: 30px !important;
+}

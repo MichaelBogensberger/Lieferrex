@@ -1,23 +1,18 @@
-<div th:fragment="layoutEINS">
+<div class="layoutBody" th:fragment="layoutEINS" th:style="${edit == true ? 'padding-left: 300px' : ''}">
     <div class="row ">
-        <div class="col l12 m12 s12 main-right">
-            <div class="fragment-header">
-                <div class="fragment-header-column">
-                    <h1 th:text="${r1c1.fragmentheader.titel}"></h1>
-                    <p th:text="${r1c1.fragmentheader.text}"></p>
-                    <p th:text="${r1c1.fragmentheader.image_path}"></p>
-                </div>
-                <div class="fragment-header-column">
-                    <img src="https://picsum.photos/500/300" alt="">
-                </div>
-            </div>
+        <div id="r1c1" class="col l12 m12 s12">
+            <div th:replace="${r1c1} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r1c1.fragmenttype.type}(content=${r1c1}, edit=${edit}, position='r2c1')}
+                                 : (${edit} 
+                                    ? ~{baukasten/fragments/modules/add(position='r1c1')} 
+                                    : ~{})"></div>
         </div>
     </div>
     
     
     
     <div class="row">
-        <div class="col s12 m7 l9 main-right">
+        <div id="r2c1" class="col s12 m12 l7">
             <div th:replace="${r2c1} 
                                  ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit}, position='r2c1')}
                                  : (${edit} 
@@ -27,7 +22,7 @@
         
         
         
-        <div class="col s12 m5 l3 main-right">
+        <div id="r2c2" class="col s12 m12 l5">
             <div th:replace="${r2c2} 
                                  ? ~{'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2}, edit=${edit}, position='r2c2')} 
                                  : (${edit} 

@@ -10,6 +10,10 @@ import lombok.*;
 public class MandantSuchDto {
     private String firmenname;
     private String ort;
+    private String plz;
     private String adresse;
     private int rating;
+
+
+    private boolean geöffnet;
 }

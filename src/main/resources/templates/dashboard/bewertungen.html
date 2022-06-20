@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="de" xmlns:th="http://www.w3.org/1999/html">
+<head>
+
+    <title>Dashboard</title>
+    <div th:replace="dashboard/fragments/header"></div>
+
+</head>
+
+<body class="with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true"
+      data-sidebar-shortcut-enabled="true" data-set-preferred-mode-onload="true">
+<!-- Modals go here -->
+<!-- Reference: https://www.gethalfmoon.com/docs/modal -->
+
+<!-- Page wrapper start -->
+<div class="page-wrapper with-navbar with-sidebar ">
+
+    <!-- Sticky alerts (toasts), empty container -->
+    <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
+    <div class="sticky-alerts"></div>
+
+
+   
+
+
+
+
+    <!-- Navbar start -->
+    <nav class="navbar">
+
+        <div class="navbar-content"> <!--  d-sm-none d-none d-md-block -->
+            <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Navbar brand -->
+        <a href="#" class="navbar-brand">
+            <!-- <img src="..." alt="..."> -->
+            Asiamix Imst
+        </a>
+
+        <!-- text-monospace = font-family shifted to monospace -->
+        <!-- Navbar nav -->
+
+        <!-- Navbar form (inline form) -->
+        <div class="form-inline d-none d-md-flex ml-auto">
+            <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()">
+                <i class="fa fa-moon-o" aria-hidden="true"></i>
+                <span class="sr-only">Toggle dark mode</span>
+            </button>
+            <button class="btn btn-primary">Logout</button>
+        </div>
+
+        <!-- Navbar content (with the dropdown menu) -->
+        <div class="navbar-content d-md-none ml-auto">
+            <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
+            <button class="btn btn-action mr-5" type="button" onclick="halfmoon.toggleDarkMode()">
+                <i class="fa fa-moon-o" aria-hidden="true"></i>
+                <span class="sr-only">Toggle dark mode</span>
+            </button>
+
+        </div>
+
+
+
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Sidebar start -->
+    <div class="sidebar">
+
+
+
+        <div class="sidebar-menu">
+            <!-- Sidebar brand -->
+            <div class="sidebar-brand">
+                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
+                Michael B
+            </div>
+            <!-- Sidebar content with the search box -->
+            <div class="sidebar-content">
+            </div>
+
+            <!-- Sidebar links (with icons) and titles -->
+            <h5 class="sidebar-title">Hauptregister</h5>
+            <div class="sidebar-divider"></div>
+            <a href="/dashboard" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                Overview
+            </a>
+            <a href="/dashboard/bestellungen" class="sidebar-link sidebar-link-with-icon">
+                    <span class="sidebar-icon">
+                        <i class="fa fa-fire " aria-hidden="true"></i>
+                    </span>
+                Zubereitung
+            </a>
+            <a href="/dashboard/zustellungen" class="sidebar-link sidebar-link-with-icon">
+                    <span class="sidebar-icon">
+                        <i class="fa fa-truck" aria-hidden="true"></i>
+                    </span>
+                Zustellung
+            </a>
+
+            <br />
+
+            <h5 class="sidebar-title">Verwaltung</h5>
+            <div class="sidebar-divider"></div>
+
+            <a href="#" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-folder" aria-hidden="true"></i>
+                        </span>
+                Webseite
+            </a>
+
+            <a href="/dashboard/gerichte" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-cutlery" aria-hidden="true"></i>
+                        </span>
+                Gerichte
+            </a>
+
+
+            <a href="/dashboard/bewertungen" class="sidebar-link sidebar-link-with-icon active">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        </span>
+                Bewertungen
+            </a>
+            <a href="/dashboard/benutzer" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </span>
+                Benutzerrechte
+            </a>
+            <a href="/dashboard/zahlungen" class="sidebar-link sidebar-link-with-icon">
+                <span class="sidebar-icon">
+                    <i class="fa fa-paypal" aria-hidden="true"></i>
+                </span>
+        Zahlungen
+    </a>
+            <a href="/dashboard/mandant" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
+                        </span>
+                Mandant
+            </a>
+            <a href="#" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                Suchmaschiene
+            </a>
+
+            <a href="/dashboard/oeffnungszeiten" class="sidebar-link sidebar-link-with-icon">
+                    <span class="sidebar-icon">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </span>
+                Öffnungszeiten
+            </a>
+
+            <a href="/dashboard/kategorien" class="sidebar-link sidebar-link-with-icon">
+                        <span class="sidebar-icon">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        </span>
+                Resterauntkategorien
+            </a>
+
+        </div>
+
+
+
+    </div>
+    <!-- Sidebar end -->
+
+    <!-- Content wrapper start -->
+    <div class="content-wrapper">
+
+
+        <div class="container-fluid">
+            <div class="row row-eq-spacing-lg pl-0 pr-0 mt-0">
+                <div class="col-lg-12">
+
+
+
+                    <!-- First row (equally spaced) -->
+                    <div class="row row-eq-spacing-lg pl-0 pr-0 ml-0">
+
+                        <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12 ">
+
+
+                            <div class="card pt-15 pb-15 first-card">
+                                <div class="sidebar-link-with-icon">
+                                        <span class="sidebar-icon w-50 h-50">
+                                            <i class="fa fa-star text-white-lm font-size-35" aria-hidden="true"></i>
+                                        </span>
+                                    <h2 class="card-title font-weight-bold mb-0" >233 Bewertungen</h2>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <!-- <div class="v-spacer d-xl-none"></div> -->
+
+                        <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12">
+
+
+
+                            <div class="card pt-15 pb-15 second-card">
+                                <div class="sidebar-link-with-icon">
+                                        <span class="sidebar-icon w-50 h-50">
+                                            <i class="fa fa-bar-chart text-white-lm font-size-35" aria-hidden="true"></i>
+                                        </span>
+                                    <h2 class="card-title font-weight-bold mb-0">4,2 Durchschnitt</h2>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <!-- Overflow occurs here on large screens (and down) -->
+                        <!-- Therefore, a v-spacer is added at this point -->
+                        <!-- <div class="v-spacer d-xl-none"></div> -->
+                        <!-- d-xl-none = display: none only on extra large screens (> 1200px) -->
+
+
+
+                        <div class="col-lg-6 col-xl-4 col-md-12 col-sm-12">
+
+
+                            <div class="card pt-15 pb-15 third-card">
+                                <div class="sidebar-link-with-icon">
+                                        <span class="sidebar-icon w-50 h-50">
+                                            <i class="fa fa-calculator text-white-lm font-size-35" aria-hidden="true"></i>
+                                        </span>
+                                    <h2 class="card-title font-weight-bold mb-0">4 Median</h2>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+                    <!-- Second row (equally spaced on large screens and up) -->
+
+
+
+
+
+                    <!-- Third row (equally spaced on large screens and up) -->
+                    <div class="row row-eq-spacing-lg pl-0 pr-0">
+                        <div class="col-lg-9 order-last order-lg-first">
+                            <div class="content card pt-15 pb-15">
+                                <div class="d-flex align-items-start">
+                                    <h2 class="content-title mb-0">Letzten Bewertungen</h2>
+                                    
+                                </div>
+                                    <p class="mb-20 mt-0">Hier können Sie Bewertungen von Kunden einsehen</p>
+
+
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Kunde</th>
+                                            <th class="d-md-table-cell">Bewertung</th>
+                                            <th class="d-none d-md-table-cell">Bestelldatum</th>
+                                            <th class="d-none d-md-table-cell">Bestellzeit</th>
+                                            <th class="d-none d-md-table-cell">Bestellart</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+
+                                                <td class=" d-md-table-cell">
+                                                    Niklas G.
+                                                </td>
+                                                <td class=" d-md-table-cell">
+                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
+                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
+                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
+                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i>
+                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i> 
+                                                    
+                                                </td>
+                                                <td class="d-none d-md-table-cell">
+                                                    16.06.2022
+                                                </td>
+                                                <td class="d-none d-md-table-cell">
+                                                    13:30
+                                                </td>
+                                                <td class="d-none d-md-table-cell">
+                                                    Abholung
+                                                </td>
+
+
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+          
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="col-lg-3 order-first order-lg-last">
+
+
+                            <div class="content card pt-15 pb-15 mb-20">
+                                <h2 class="content-title mb-0 text-center font-weight-bold fs-28">Bewertungen</h2>
+                                <!-- <p class="mb-0 mt-0">Hier sehen Sie die Verteilung der Bewertungen</p>-->
+
+
+
+                                <div class="">
+                                    <div class="text-center m-b-30">
+                                        <h1 class="font-weight-semi-bold mt-10 mb-20">4.3<small>/5</small></h1>
+
+
+
+
+
+                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
+                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
+                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o font-size-35" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o font-size-35" aria-hidden="true"></i>
+
+                                    <div class="text-muted">2,145 ratings</div>
+                                    </div>
+
+                                    <div class="progress-group mb-5">
+                                        <span class="progress-group-label">
+                                            5
+                                            <i class="fa fa-star text-white-lm" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="progress">
+                                          <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="progress-group-label">1.952</span>
+                                    </div>
+
+                                    <div class="progress-group mb-5">
+                                        <span class="progress-group-label">
+                                            4
+                                            <i class="fa fa-star text-white-lm" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="progress">
+                                          <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="progress-group-label">394</span>
+                                    </div>
+
+                                    <div class="progress-group mb-5">
+                                        <span class="progress-group-label">
+                                            3
+                                            <i class="fa fa-star text-white-lm" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="progress">
+                                          <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="progress-group-label">482</span>
+                                    </div>
+
+                                    <div class="progress-group mb-5">
+                                        <span class="progress-group-label">
+                                            2
+                                            <i class="fa fa-star text-white-lm" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="progress">
+                                          <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="progress-group-label">153</span>
+                                    </div>
+
+
+                                    <div class="progress-group mb-5">
+                                        <span class="progress-group-label">
+                                            1
+                                            <i class="fa fa-star text-white-lm" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="progress">
+                                          <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <span class="progress-group-label">394</span>
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- Content wrapper end -->
+
+
+
+
+</div>
+
+
+<!-- Page wrapper end -->
+
+<!-- Halfmoon JS -->
+<script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
+
+
+
+</body>
+
+
+
+</html>

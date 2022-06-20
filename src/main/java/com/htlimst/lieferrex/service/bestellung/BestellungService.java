@@ -1,5 +1,9 @@
 package com.htlimst.lieferrex.service.bestellung;
 
-public interface BestellungService {
+import com.htlimst.lieferrex.model.Bestellung;
 
+import java.util.List;
+
+public interface BestellungService {
+    public List<Bestellung> alleBestellungen(Long mandantId);
 }

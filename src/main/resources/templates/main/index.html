@@ -79,10 +79,14 @@
             <h1 class="main-ueb">Zeit, Essen zu bestellen</h1>
             <p class="main-p">Jetzt Restaurants in Deiner <br> Umgebung finden</p>
 
-            <form th:action="@{/search}" method="get">
+            <form th:action="@{/seach}" method="get">
                 <input type="text" class="form-control main-search" th:name="search" id="search" placeholder="Straße 123" required>
-                <span class="material-icons main-search-icon"><button type="submit"> <i class="material-icons">search</i></button></span>
+                <span class="material-icons main-search-icon"><button class="removeButtonStyle" type="submit"> <i class="material-icons icon-search">search</i></button></span>
+
             </form>
+            <div id="adressen">
+
+            </div>
 
         </div>
 
@@ -287,6 +291,7 @@
 </body>
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/main/autocomplete.js}"></script>
 
 
 </html>

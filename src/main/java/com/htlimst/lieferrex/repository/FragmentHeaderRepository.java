@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FragmentHeaderRepository extends JpaRepository<FragmentHeader, Long> {
     Optional<FragmentHeader> findFragmentheaderByFragment_id(Long id);
+    FragmentHeader save(FragmentHeader fragmentHeader);
 }
