@@ -11,7 +11,7 @@
     <a href="https://github.com/MichaelBogensberger/Lieferrex/tree/main/documentation"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="http://lieferrex.ddns.net/">View Demo</a>
+    <a href="https://lieferrex.herokuapp.com/">View</a>
     ·
     <a href="https://github.com/MichaelBogensberger/Lieferrex/projects">Kanbans</a>
     ·
