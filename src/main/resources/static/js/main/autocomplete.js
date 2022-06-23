@@ -1,6 +1,6 @@
 let timer; // Timer identifier
 const waitTime = 500; // Wait time in milliseconds
-const api_url = "http://localhost:8080/seach/restaurant/";
+const api_url = "../seach/restaurant/";
 
 // Search function
 // Defining async function
