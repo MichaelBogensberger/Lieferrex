@@ -643,6 +643,26 @@ body {
 
 }
 
+.sr-filter-u-ueb-m {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+
+}
+
+.sr-filter-ueb-m {
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0px;
+    padding-top: 0px;
+    padding-left: 20px;
+
+}
+
+
+
 .sr-filter-form {
 margin-left: 15px;
 
@@ -1135,11 +1155,15 @@ margin-left: 15px;
     height: 220px;
 }
 
-.kategory-button{
+.kategory-button, .kategory-button:focus{
     border: 0px;
     background-color: transparent;
     color: white;
 }
+.kategory-button:hover {
+    cursor: pointer;
+}
+
 
 .removeButtonStyle {
     background-color: transparent;
@@ -1162,4 +1186,58 @@ margin-left: 15px;
 
 .font-size-30 {
     font-size: 30px !important;
+}
+
+
+.btn-filter {
+    margin:0 auto;
+    display:block;
+   width: 80%;
+}
+
+.mt--10 {
+    margin-top: -10px;
+}
+
+.mt-130 {
+    margin-top: 130px;
+}
+
+.ml-30 {
+    margin-left: 30px !important;
+}
+
+
+.btn-inline-search {
+    background-color: white;
+    padding: 10px;
+    border: 0px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    width: 40%;
+    text-align: left;
+    font-weight: 500;
+}
+
+.btn-inline-search:hover {
+    cursor: pointer;
+}
+
+.btn-inline-search:focus {
+    background-color: white;
+}
+
+
+.fade-in {
+	animation: fadeIn 0.3s;
+  	opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+  	opacity: 0;
+  }
+  to {
+ 	opacity: 1;
+  }
 }

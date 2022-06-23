@@ -125,49 +125,57 @@
                             <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
                                    type="hidden">
 
-                            <h1 class="sr-filter-u-ueb">Geöffnet</h1>
-                            <div class="switch">
-                                <label>
+                            <div class="row">
+                            <div class="input-field col s3">
+                                <h1 class="sr-filter-u-ueb-m">Geöffnet</h1>
+                            </div>
+                            <div class="input-field col s6">
+                                <div class="switch">
+                                    <label>
+    
+                                        <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
+                                               type="checkbox" checked>
+                                        <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
+                                               type="checkbox">
+                                        <span class="lever"></span>
+    
+                                    </label>
+                                </div>
+                            </div>
+                            </div>
+ 
 
-                                    <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
-                                           type="checkbox" checked>
-                                    <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
-                                           type="checkbox">
-                                    <span class="lever"></span>
+                            <h1 class="sr-filter-u-ueb-m">Lieferkosten</h1>
+                            <div  th:if="${param.lieferkosten != null}">
+                                <div class="ml-30">
+                                    <p class="sr-filter-auswählen-p">
+                                        <label>
+                                            <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
+                                                th:value="2.5"
+                                                type="radio" checked/>
+                                            <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
+                                                th:value="2.5"
+                                                type="radio"/>
+                                            <span>€2,50 oder weniger</span>
+                                        </label>
+                                    </p>
+                                    <p class="sr-filter-auswählen-p">
+                                        <label>
 
-                                </label>
+                                            <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
+                                                th:value="5"
+                                                type="radio" checked/>
+                                            <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
+                                                th:value="5"
+                                                type="radio"/>
+
+                                            <span>€5,00 oder weniger</span>
+                                        </label>
+                                    </p>
+                                </div>
                             </div>
 
-
-                            <h1 class="sr-filter-u-ueb">Lieferkosten</h1>
-                            <div th:if="${param.lieferkosten != null}">
-                                <p class="sr-filter-auswählen-p">
-                                    <label>
-                                        <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
-                                               th:value="2.5"
-                                               type="radio" checked/>
-                                        <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
-                                               th:value="2.5"
-                                               type="radio"/>
-                                        <span>€2,50 oder weniger</span>
-                                    </label>
-                                </p>
-                                <p class="sr-filter-auswählen-p">
-                                    <label>
-
-                                        <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
-                                               th:value="5"
-                                               type="radio" checked/>
-                                        <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
-                                               th:value="5"
-                                               type="radio"/>
-
-                                        <span>€5,00 oder weniger</span>
-                                    </label>
-                                </p>
-                            </div>
-
-                            <div th:if="${param.lieferkosten == null}">
+                            <div th:if="${param.lieferkosten == null}" class="ml-30" >
                                 <p class="sr-filter-auswählen-p">
                                     <label>
                                         <input th:name="lieferkosten"
@@ -188,7 +196,7 @@
 
                             <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
 
-                            <div th:if="${param.mindestbestellwert != null}">
+                            <div th:if="${param.mindestbestellwert != null}" class="ml-30">
                                 <p class="sr-filter-auswählen-p">
                                     <label>
 
@@ -221,7 +229,7 @@
                                 </p>
                             </div>
 
-                            <div th:if="${param.mindestbestellwert == null}">
+                            <div th:if="${param.mindestbestellwert == null}" class="ml-30">
                                 <p class="sr-filter-auswählen-p">
                                     <label>
                                         <input th:name="mindestbestellwert"
@@ -243,7 +251,7 @@
                             <br>
 
 
-                            <button type="submit" class="btn">Speichern</button>
+                            <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">Anwenden</button>
                             <br>
 
                         </form>
@@ -252,7 +260,7 @@
                                    type="hidden">
                             <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
                                    type="hidden">
-                            <button type="submit" class="btn">Zurücksetzen</button>
+                            <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">Zurücksetzen</button>
                         </form>
 
 

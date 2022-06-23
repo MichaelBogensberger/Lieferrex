@@ -40,7 +40,7 @@ function show(data) {
     // Loop to access all rows
     for (let r of data) {
         tab += `<form action="/seach" method="get">
-                    <button name="search" value="${r}" type="submit"> ${r} </button>
+                    <button class="btn-inline-search fade-in" name="search" value="${r}" type="submit"> ${r} </button>
                 </form>
                 `;
     }
