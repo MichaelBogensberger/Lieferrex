@@ -280,3 +280,10 @@ ul.stepper .step:not(:last-of-type)::after {
 .restaurant-chip-arrow {
     color: white;
 }
+
+.partner-link {
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}

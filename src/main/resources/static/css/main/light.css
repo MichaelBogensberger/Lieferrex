@@ -158,3 +158,11 @@
 .restaurant-chip-arrow {
     color: #379683;
 }
+
+
+.partner-link {
+    color: #379683;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
