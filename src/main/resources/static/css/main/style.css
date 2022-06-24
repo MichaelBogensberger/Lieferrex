@@ -1241,3 +1241,8 @@ margin-left: 15px;
  	opacity: 1;
   }
 }
+
+
+.mw-c {
+    width: max-content;height: max-content;
+}

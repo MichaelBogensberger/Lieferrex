@@ -45,6 +45,9 @@ body {
     padding-right: 20px;
 }
 
+
+
+
 .login-form-ueb {
     text-align: center;
     font-weight: 500;
@@ -275,6 +278,9 @@ ul.stepper .step.active::before, ul.stepper .step.done::before {
     height: 70vh !important;
 }
 
+#change-address-form {
+    margin-top: 12vh !important;
+}
 
 }
 
@@ -371,4 +377,25 @@ ul.stepper .step.active::before, ul.stepper .step.done::before {
     .ml-30-dek {
         margin-left: 30px;
     }
+}
+
+
+#change-address-form {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 650px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#change-password-form {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
 }

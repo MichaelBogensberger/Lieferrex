@@ -177,14 +177,14 @@
 //         // |---------- Fragments
 //         ArrayList<Fragment> fragments = new ArrayList<>();
 //
-//         fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(2), null, null, null));
-//         fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null, null));
-//         fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null, null));
+//         fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(2), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null, null, null));
 //
-//         fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(2), null, null, null));
-//         fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null, null));
-//         fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null, null));
-//         fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null, null));
+//         fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(2), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null, null, null));
 //
 //         for (Fragment fragment : fragments) {
 //             fragmentRepository.save(fragment);

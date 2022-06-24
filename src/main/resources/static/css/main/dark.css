@@ -170,6 +170,10 @@ body {
     color: #042e57;
 }
 
+.sr-chip-active button, .sr-chip-active button:focus  {
+    color: black;
+}
+
 
 .collapsible-body {
     background-color: var(--dark-main);
@@ -271,4 +275,8 @@ ul.stepper .step:not(:last-of-type)::after {
 
 .r-adresse-img {
     content:url("/css/main/ill/dark/pay.svg");
+}
+
+.restaurant-chip-arrow {
+    color: white;
 }

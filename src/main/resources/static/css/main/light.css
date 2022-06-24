@@ -143,3 +143,18 @@
     content:url("/css/main/ill/light/pay.svg");
 }
 
+
+
+.sr-chip button, .sr-chip button:focus  {
+    color: #379683;
+}
+
+
+.sr-chip-active button, .sr-chip-active button:focus  {
+    color: white !important;
+}
+
+
+.restaurant-chip-arrow {
+    color: #379683;
+}

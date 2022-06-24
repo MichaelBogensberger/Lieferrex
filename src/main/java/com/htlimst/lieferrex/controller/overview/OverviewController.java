@@ -36,8 +36,11 @@ public class OverviewController {
 
     @GetMapping
     public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model, HttpServletResponse response){
+        System.out.println("load dashboard");
+        
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
+        System.out.println(foundMandant.getEmail());
         Seitenaufrufe seitenaufrufe = overviewService.seitenaufrufe(foundMandant);
         Umsatz umsatz = overviewService.umsatz(foundMandant);
         long verkaufteGerichte = overviewService.getVerkaufteGerichte(foundMandant.getId());

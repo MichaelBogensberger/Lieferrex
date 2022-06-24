@@ -163,4 +163,17 @@ public class MainController {
     }
 
 
+    @GetMapping("/changeAddress")
+    public String showChangeAddressPage() {
+        return "main/changeaddress.html";
+    }
+
+    @GetMapping("/changePassword")
+    public String showChangePasswordPage() {
+        return "main/changepassword.html";
+    }
+
+
+    
+
 }
