@@ -195,7 +195,7 @@
 
                                 <div class="col-2 ">
                                         <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">1</h2>
+                                            <h2 class="card-title font-weight-bold mb-0" th:text="${bestellung.counter}">1</h2>
                                         </span>
                                 </div>
 
@@ -239,7 +239,7 @@
 
 
                         <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
+                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0" th:each="bestellung: ${gerichteBestellungsDetailLieferung}">
                             <div class="row">
 
                                 <div class="col-2 ">
@@ -250,15 +250,13 @@
 
                                 <div class="col-8 ">
                                     <ul style="list-style-type: none">
-                                        <li class="font-weight-bold mb-0 mt-0 font-size-14">1x - Dürüm</li>
+                                        <li class="font-weight-bold mb-0 mt-0 font-size-14" th:each="gericht: ${bestellung.gerichtBestellungModelList}" th:text="${gericht.value} + 'x- ' + ${gericht.key}">1x - Dürüm</li>
                                     </ul>
 
                                     <div class="sidebar-divider"></div>
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Eingang: 17:30</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">Zusatzinfo: extra viele
-                                        Tomaten</p>
-
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-12" th:text=" 'Eingang: ' + ${bestellung.timestamp}">Eingang: 17:30</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-12" th:text=" 'Zusatzinfo: ' + ${bestellung.zusatzinfos}">Zusatzinfo: / </p>
                                 </div>
 
                                 <div class="col-2 ">
