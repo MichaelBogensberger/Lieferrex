@@ -177,7 +177,7 @@
 //         // |---------- Fragments
 //         ArrayList<Fragment> fragments = new ArrayList<>();
 //
-//         fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(2), null, null, null, null));
+//         fragments.add(new Fragment(null, positions.get(0),mandant,fragmentTypes.get(0), null, null, null, null));
 //         fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null, null, null));
 //         fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null, null, null));
 //

@@ -44,14 +44,16 @@ public class ZubereitungsController {
         List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId());
         List<BestellungModel> modeldata = new ArrayList<>();
         List<BestellungModel> modeldataLieferung = new ArrayList<>();
+        int abholung = 0;
+        int lieferung = 0;
 
         for (Bestellung bestellung:alleBestellungen) {
-            String timestamp = null;
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-            timestamp = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            String timestamp = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
             String zusatzinfo = "";
+            String timestampAbholung = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
+            String zusatzinfoAbholung = "";
 
-            System.out.println( "Bestellung: " + bestellung.getBestellart().getBestellart());
             if(bestellung.getBestellart().getBestellart().equals("Abholung")){
                 HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
@@ -72,39 +74,36 @@ public class ZubereitungsController {
                 if(!zusatzinfo.isEmpty()){
                     zusatzinfo = zusatzinfo.substring(0, zusatzinfo.length()-2);
                 }
-
-                modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo));
+                abholung += 1;
+                modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo,abholung));
             }
 
-            if(bestellung.getBestellart().getBestellart().equals("Lieferung")){
-                System.out.println(bestellung.getBestellart().getBestellart() + "asdasdasdasd");
-                HashMap<String, Integer> gerichtBestellungModelListLieferung = new HashMap<>();
+            if(bestellung.getBestellart().getBestellart().trim().equals("Lieferung")){
+                HashMap<String, Integer> gerichtBestellungModelListAbholung = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
                     if (gerichtBestellung.getAnmerkung() != null){
-                        zusatzinfo += gerichtBestellung.getAnmerkung() + ", ";
+                        zusatzinfoAbholung += gerichtBestellung.getAnmerkung() + ", ";
                     }
 
-                    if(!gerichtBestellungModelListLieferung.containsKey(gerichtBestellung.getGericht().getName()))
+                    if(!gerichtBestellungModelListAbholung.containsKey(gerichtBestellung.getGericht().getName()))
                     {
-                        gerichtBestellungModelListLieferung.put(gerichtBestellung.getGericht().getName(),1);
+                        gerichtBestellungModelListAbholung.put(gerichtBestellung.getGericht().getName(),1);
                     } else
                     {
-                        gerichtBestellungModelListLieferung.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelListLieferung.get(gerichtBestellung.getGericht().getName())+1);
+                        gerichtBestellungModelListAbholung.put(gerichtBestellung.getGericht().getName(),gerichtBestellungModelListAbholung.get(gerichtBestellung.getGericht().getName())+1);
                     }
                 }
 
-                if(!zusatzinfo.isEmpty()){
-                    zusatzinfo = zusatzinfo.substring(0, zusatzinfo.length()-2);
+                if(!zusatzinfoAbholung.isEmpty()){
+                    zusatzinfoAbholung = zusatzinfoAbholung.substring(0, zusatzinfoAbholung.length()-2);
                 }
-                modeldataLieferung.add(new BestellungModel(gerichtBestellungModelListLieferung,timestamp,zusatzinfo));
+                lieferung += 1;
+                modeldataLieferung.add(new BestellungModel(gerichtBestellungModelListAbholung, timestampAbholung, zusatzinfoAbholung, lieferung));
             }
 
 
         }
-
-
-        System.out.println(modeldataLieferung);
 
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         model.addAttribute("gerichteBestellungsDetailLieferung", modeldataLieferung);
