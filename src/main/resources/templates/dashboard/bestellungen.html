@@ -169,6 +169,7 @@
     </div>
     <!-- Sidebar end -->
 
+    
     <!-- Content wrapper start -->
     <div class="content-wrapper">
 
@@ -176,6 +177,7 @@
 
 
         <div class="container-fluid">
+            <form th:action="@{/dashboard/bestellungen}" method="post" >
             <div class="row row-eq-spacing-lg pl-0 pr-0 mt-0">
 
 
@@ -257,15 +259,16 @@
 
                                     <p class="font-weight-bold mb-0 mt-0 font-size-12" th:text=" 'Eingang: ' + ${bestellung.timestamp}">Eingang: 17:30</p>
                                     <p class="font-weight-bold mb-0 mt-0 font-size-12" th:text=" 'Zusatzinfo: ' + ${bestellung.zusatzinfos}">Zusatzinfo: / </p>
+                                    <p hidden name="bestellungsid" value="${bestellung.id}">asdasdasda</p>
                                 </div>
 
                                 <div class="col-2 ">
 
                                     <div class="d-flex align-items-center justify-content-center h-100">
                                         <div class="d-flex flex-column">
-                                            <a href="#"
+                                            <button type="submit"
                                                class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
@@ -280,15 +283,15 @@
 
 
             </div>
-
+        </form>
 
 
 
 
 
         </div>
+        
     </div>
-
 
 
 

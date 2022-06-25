@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
@@ -76,7 +77,7 @@ public class ZubereitungsController {
                     zusatzinfo = zusatzinfo.substring(0, zusatzinfo.length()-2);
                 }
                 abholung += 1;
-                modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo,abholung));
+                modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo,abholung,bestellung.getId()));
             }
 
             if(bestellung.getBestellart().getBestellart() == BestellartEnum.LIEFERUNG){
@@ -100,14 +101,22 @@ public class ZubereitungsController {
                     zusatzinfoAbholung = zusatzinfoAbholung.substring(0, zusatzinfoAbholung.length()-2);
                 }
                 lieferung += 1;
-                modeldataLieferung.add(new BestellungModel(gerichtBestellungModelListAbholung, timestampAbholung, zusatzinfoAbholung, lieferung));
+                modeldataLieferung.add(new BestellungModel(gerichtBestellungModelListAbholung, timestampAbholung, zusatzinfoAbholung, lieferung, bestellung.getId()));
             }
 
 
         }
-
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         model.addAttribute("gerichteBestellungsDetailLieferung", modeldataLieferung);
+        return "dashboard/bestellungen.html";
+    }
+
+    @PostMapping
+    public String checkingLieferungAndAbholung(@AuthenticationPrincipal UserPrincipal principal, Model model){
+        seitenAufruf(principal, model);
+
+
+
         return "dashboard/bestellungen.html";
     }
 
