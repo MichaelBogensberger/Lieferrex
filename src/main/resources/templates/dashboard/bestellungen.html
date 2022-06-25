@@ -217,9 +217,9 @@
 
                                     <div class="d-flex align-items-center justify-content-center h-100">
                                         <div class="d-flex flex-column">
-                                            <a href="#"
+                                            <button type="submit" th:value="${bestellung.id}" name="lieferungChangeToFertigZumAbholen"
                                                class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
@@ -265,7 +265,7 @@
 
                                     <div class="d-flex align-items-center justify-content-center h-100">
                                         <div class="d-flex flex-column">
-                                            <button type="submit" th:value="${bestellung.id}" name="changeToAbgeschlossen"
+                                            <button type="submit" th:value="${bestellung.id}" name="abholungChangeToFertigZumAbholen"
                                                class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                role="button"><i class="fa fa-check" aria-hidden="true"></i></button>
 
