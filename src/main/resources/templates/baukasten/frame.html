@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Vorlage 1</title>
+    <title th:text="${restaurantName}"></title>
 
     <link th:href="@{/css/baukasten/baukasten.css}" rel="stylesheet" />
 
@@ -18,7 +18,7 @@
     <nav class="side-p">
         <div class="nav-wrapper">
 
-            <a href="#" class="brand-logo brand-logo-js brand-logo-mob">ASIAMIX</a>
+            <a href="#" class="brand-logo brand-logo-js brand-logo-mob" th:text="${restaurantName}"></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
                     class="material-icons menu-icon">menu</i></a>
 
@@ -32,7 +32,7 @@
     </nav>
 
     <ul class="sidenav nav-mob" id="mobile-demo">
-        <h1 class="side-line-menu">ASIAMIX</h1>
+        <h1 class="side-line-menu" th:text="${restaurantName}"></h1>
         <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
                     class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
 
@@ -42,7 +42,7 @@
 
 <!-- ----------------------------------------- -->
 
-        <div th:replace="'baukasten/layouts/' + ${layout}"></div>
+    <div th:replace="'baukasten/layouts/' + ${layout}"></div>
 
     <div class="result"></div>
 

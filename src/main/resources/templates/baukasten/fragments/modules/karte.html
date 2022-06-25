@@ -1,9 +1,32 @@
-<div th:fragment="karte">
-    <ul>
-        <li>Pizza</li>
-        <li>Lasagne</li>
-        <li>Schnitzel</li>
-        <li>Eis</li>
-        <li>Schokolade</li>
-    </ul>
-</div>
+<div th:fragment="karte(content, edit, position)" class="fragment-karte row">
+
+    <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}" class="fragment-delete material-icons">delete_forever</i>
+
+  
+    <div th:each="gericht: ${gerichte}" class="col s12 m12 l6">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4 th:text="${gericht.name}"></h4></li>
+            <li class="collection-item">
+                <div th:text="${gericht.beschreibung}">
+                    <a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                </div>
+            </li>
+            <li class="collection-item">
+                <div class="input-field">
+                    <input value="Alvin" id="anmerkung" type="text" class="validate">
+                    <label class="active" for="anmerkung">Anmerkung</label>
+                </div>
+                <div class="input-field">
+                    <input type="number" id="tentacles" name="anzahl" min="1" max="100">
+                    <label class="active" for="anzahl">Anzahl</label>
+                </div>
+            </li>
+            <li class="collection-item" style="padding-bottom: 50px;">
+                <h6 th:text="${'Preis: ' + gericht.preis}" class="left"></h6>
+                <a class="waves-effect waves-light btn right">Hinzufügen</a>
+            </li>
+          </ul>
+    </div>
+    
+  
+  </div>

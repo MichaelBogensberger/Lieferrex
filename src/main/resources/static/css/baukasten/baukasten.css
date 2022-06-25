@@ -82,6 +82,8 @@ nav {
     color: #BEBEBE;
 }
 
+
+
 .fragment-map {
     max-height: 60vh;
     display: flex;
@@ -98,6 +100,10 @@ nav {
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+}
+
+.fragment-karte {
+    position: relative;
 }
 
 .fragment-image {
@@ -136,7 +142,30 @@ nav {
     transition: 1s;
 }
 
+.layoutImages > figure > img {
+    max-width: 100%;
+    height: 100%;
+    opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
 
+.layoutImages figure {
+    background: #5cdb95;
+    margin: 0 1em;
+    overflow: hidden;
+}
+
+
+.layoutImages figure:hover img {
+    opacity: .5;
+    cursor: pointer;
+}
+
+.layoutImages {
+    display: flex;
+    justify-content: center;
+}
 
 /* .main-left {
 

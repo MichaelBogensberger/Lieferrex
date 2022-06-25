@@ -38,6 +38,8 @@ public class Mandant {
         private double umsatz_summe;
         private int seitenaufrufe_summe;
 
+        private String akzentFarbe;
+
         // @Email
         private String email;
 

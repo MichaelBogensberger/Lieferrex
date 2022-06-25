@@ -248,6 +248,35 @@
 </div>
 
 <!----------------------------------------------------->
+<!-- Change Layout Modal ---------------------------------->
+<!----------------------------------------------------->
 
+<div id="changeLayout" class="modal">
+  <div class="modal-content">
+    <h4>Layout ändern</h4>
+
+    <div class="row layoutImages">
+      <figure><img name="layoutEINS" class="setLayout" th:src="@{/images/baukasten/layout-1.png}" alt=""></figure>
+      <figure><img name="layoutZWEI" class="setLayout" th:src="@{/images/baukasten/layout-2.png}" alt=""></figure>
+    </div>
+    <div class="row layoutImages">
+      <figure><img name="layoutDREI" class="setLayout" th:src="@{/images/baukasten/layout-3.png}" alt=""></figure>
+      <figure><img name="layoutVIER" class="setLayout" th:src="@{/images/baukasten/layout-4.png}" alt=""></figure>
+    </div>
+  </div>
 </div>
+
+<div id="warningLayout" class="modal">
+  <div class="modal-content">
+    <h4>Wollen Sie das Layout wirklich ändern?</h4>
+    <p>Achtung! Es werden alle bereits bestehenden Fragmente gelöscht.</p>
+  </div>
+  <div class="modal-footer">
+  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+  <a href="#!" id="saveLayout" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
+  </div>
+</div>
+
+<!----------------------------------------------------->
+
 

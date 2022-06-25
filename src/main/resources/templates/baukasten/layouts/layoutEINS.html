@@ -2,7 +2,7 @@
     <div class="row ">
         <div id="r1c1" class="col l12 m12 s12">
             <div th:replace="${r1c1} 
-                                 ? ~{'baukasten/fragments/modules/' + ${r1c1.fragmenttype.type}(content=${r1c1}, edit=${edit}, position='r2c1')}
+                                 ? ~{baukasten/fragments/modules/header-1(content=${r1c1}, edit=${edit}, position='r1c1')}
                                  : (${edit} 
                                     ? ~{baukasten/fragments/modules/add(position='r1c1')} 
                                     : ~{})"></div>

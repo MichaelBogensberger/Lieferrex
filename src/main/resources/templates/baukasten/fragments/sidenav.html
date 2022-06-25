@@ -13,8 +13,8 @@
         </li>
     
         <li><a href="#!" class="waves-effect"><i class="material-icons">arrow_back</i>Zurück zum Dashboard</a></li>
-        <li><a href="#!" class="waves-effect"><i class="material-icons">save</i>Webseite speichern</a></li>
-        <li><a href="#!" class="waves-effect"><i class="material-icons">autorenew</i>Layout ändern</a></li>
+        <li><a href="#!" class="saveSettings waves-effect"><i class="material-icons">save</i>Webseite speichern</a></li>
+        <li><a href="#!" class="layout-change waves-effect"><i class="material-icons">autorenew</i>Layout ändern</a></li>
     
         <li>
             <div class="divider"></div>
@@ -31,7 +31,7 @@
     
             <div class="input-field col s10">
     
-                <input id="firmenname" type="text" class="validate" value="Asiamix">
+                <input id="firmenname" type="text" class="validate" th:value="${restaurantName}">
                 <label for="firmenname">Firmenname</label>
             </div>
     
@@ -47,11 +47,11 @@
             </div>
     
             <div class="input-field col s10">
-                <select class="icons">
+                <select id="color" class="icons">
                     <option value="" disabled selected>Farbe wählen</option>
-                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=5cdb95">Grün</option>
-                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=EEEEEE">Grau</option>
-                    <option value="" data-icon="https://eu.ui-avatars.com/api/?name=&background=212529">Black</option>
+                    <option value="#5cdb95" data-icon="https://eu.ui-avatars.com/api/?name=&background=5cdb95">Grün</option>
+                    <option value="#EEEEEE" data-icon="https://eu.ui-avatars.com/api/?name=&background=EEEEEE">Grau</option>
+                    <option value="#212529" data-icon="https://eu.ui-avatars.com/api/?name=&background=212529">Black</option>
                 </select>
                 <label>Akzentfarbe</label>
             </div>

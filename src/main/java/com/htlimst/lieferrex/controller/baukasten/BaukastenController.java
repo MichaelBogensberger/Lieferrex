@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Fragment;
 import com.htlimst.lieferrex.model.Gericht;
+import com.htlimst.lieferrex.model.Layout;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.Position;
 import com.htlimst.lieferrex.model.fragments.FragmentHeader;
@@ -27,6 +28,7 @@ import com.htlimst.lieferrex.service.fragmentheader.FragmentHeaderServiceImpl;
 import com.htlimst.lieferrex.service.fragmentimage.FragmentImageServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttype.FragmentTypeServiceImpl;
+import com.htlimst.lieferrex.service.layout.LayoutServiceImpl;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 import com.htlimst.lieferrex.service.position.PositionServiceImpl;
 
@@ -72,6 +74,9 @@ public class BaukastenController {
     @Autowired
     FragmentHeaderServiceImpl fragmentHeaderServiceImpl;
 
+    @Autowired
+    LayoutServiceImpl layoutServiceImpl;
+
     // TODO: Make model an Object, consistency
 
     @GetMapping("/restaurant/{restaurant}")
@@ -107,6 +112,7 @@ public class BaukastenController {
 
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("edit", true);
+        model.addAttribute("restaurantName", mandant.getFirmenname());
 
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
         model.addAttribute("layout", mandant.getLayout().getName());
@@ -114,7 +120,6 @@ public class BaukastenController {
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
 
-            // Datenermittlung bei Ausgabe von Karte, Kontakt, etc.
             if (fragment.getFragmenttype().getType().equals("karte")) {
                 model.addAttribute("gerichte", mandant.getGerichte());
             } else if(fragment.getFragmenttype().getType().equals("kontakt")){
@@ -127,131 +132,162 @@ public class BaukastenController {
     }
 
     @GetMapping("/baukasten/module/{position}")
-    public String getModule(Model model, @PathVariable String position, @RequestParam String token){
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(token);
-        if(angestellter.isPresent()){
+    public String getModule(Authentication authentication, Model model, @PathVariable String position, @RequestParam String token){
 
-            Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail()).get();
-            Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.getId(), position).get();
+        Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
+        Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position).get();
 
-            model.addAttribute("content", fragment);
-            return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
-        } else {
-            return "Invalid User";
-        }
+        model.addAttribute("content", fragment);
+        return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
     }
 
     @PostMapping("/baukasten/module/save")
-    public String saveModule(Model model, @RequestParam String data, @RequestParam Optional<MultipartFile> image) throws IOException {
+    public String saveModule(Authentication authentication, Model model, @RequestParam String data, @RequestParam Optional<MultipartFile> image) throws IOException {
         
         Fragment fragment = null;
         Optional<Position> position = null;
         String imageName;
         HashMap<String, String> result = new ObjectMapper().readValue(data, HashMap.class);
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(result.get("token"));
 
-        if(angestellter.isPresent()){
+        Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
+        if(mandant.isPresent()){
 
-            Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail());
-            if(mandant.isPresent()){
+            position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
+            Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
 
-                position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
-                Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
+            if(position.isPresent() && fragmenttype.isPresent()){
 
-                if(position.isPresent() && fragmenttype.isPresent()){
+                // Fragment wether editing Header or adding new Fragment -----------------------------------------------------
+                if(!fragmenttype.get().getType().contains("header")){
+                    fragment = fragmentServiceImpl.save(
+                        new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null));    
+                }
+                // Fragment wether editing Header or adding new Fragment -----------------------------------------------------
 
-                    if(!fragmenttype.get().getType().equals("header")){
-                        fragment = fragmentServiceImpl.save(
-                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null));    
-                    }
 
-                    switch (fragmenttype.get().getType()) {
-                        case "text":
-                            FragmentText fragmentText = fragmentTextServiceImpl.save(
-                                new FragmentText(null, result.get("title"), result.get("text"), "null", fragment));
-                                
-                            fragment.setFragmenttext(fragmentText);
-                            break;
+                // Switch Depending on FragmentType
+                switch (fragmenttype.get().getType()) {
+                    case "text":
+                        FragmentText fragmentText = fragmentTextServiceImpl.save(
+                            new FragmentText(null, result.get("title"), result.get("text"), "null", fragment));
+                            
+                        fragment.setFragmenttext(fragmentText);
+                        fragmentServiceImpl.save(fragment);
+                        break;
+                        
+                    case "image":
+                        imageName = mandant.get().getFirmenname() + "-" + mandant.get().getId() + "-" + position.get().getName() + "." + image.get().getOriginalFilename().substring(image.get().getOriginalFilename().lastIndexOf(".") + 1);
+                        Util.saveFile("src/main/resources/static/images/", imageName, image.get());
+                        
+                        FragmentImage fragmentImage = fragmentImageServiceImpl.save(
+                            new FragmentImage(null, result.get("title"), imageName, fragment)
+                            );
+                            
+                        fragment.setFragmentimage(fragmentImage);
+                        fragmentServiceImpl.save(fragment);
+                        break;
 
-                        case "image":
+                    case "header-1":
+
+                        fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName()).get();
+                        FragmentHeader fragmentHeader = fragmentHeaderServiceImpl.findFragmentheaderByFragment_id(fragment.getId()).get();
+                        fragmentHeader.setTitel(result.get("title"));
+                        fragmentHeader.setText(result.get("text"));
+                        
+                        if(image.isPresent()) {
                             imageName = mandant.get().getFirmenname() + "-" + mandant.get().getId() + "-" + position.get().getName() + "." + image.get().getOriginalFilename().substring(image.get().getOriginalFilename().lastIndexOf(".") + 1);
                             Util.saveFile("src/main/resources/static/images/", imageName, image.get());
+                            fragmentHeader.setImage(imageName);
+                        }
+                        fragmentHeaderServiceImpl.save(fragmentHeader);
+                        break;
 
-                            FragmentImage fragmentImage = fragmentImageServiceImpl.save(
-                                new FragmentImage(null, result.get("title"), imageName, fragment)
-                            );
-                            fragment.setFragmentimage(fragmentImage);
-                            break;
-
-                        case "header":
-
-                            fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName()).get();
-                            FragmentHeader fragmentHeader = fragmentHeaderServiceImpl.findFragmentheaderByFragment_id(fragment.getId()).get();
-                            fragmentHeader.setTitel(result.get("title"));
-                            fragmentHeader.setText(result.get("text"));
-                            
-                            if(image.isPresent()) {
-                                imageName = mandant.get().getFirmenname() + "-" + mandant.get().getId() + "-" + position.get().getName() + "." + image.get().getOriginalFilename().substring(image.get().getOriginalFilename().lastIndexOf(".") + 1);
-                                Util.saveFile("src/main/resources/static/images/", imageName, image.get());
-                                fragmentHeader.setImage(imageName);
-                            }
-                            fragmentHeaderServiceImpl.save(fragmentHeader);
-
-                            break;
-
-                        default:
-                            break;
-                    }
+                    default:
+                        break;
                 }
-
             }
 
+        }
+
+            // Returning new Fragment
             model.addAttribute("content", fragment);
             model.addAttribute("edit", true);
             model.addAttribute("position", position.get().getName());
             return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
-
-        } else {
-            return "Invalid User";
-        }
     }
 
     @PostMapping("baukasten/module/delete")
-    public String deleteModule(Model model, @RequestParam String data) throws JsonMappingException, JsonProcessingException {
+    public String deleteModule(Authentication authentication, Model model, @RequestParam String data) throws JsonMappingException, JsonProcessingException {
         HashMap<String, String> result = new ObjectMapper().readValue(data, HashMap.class);
-        Optional<Angestellter> angestellter = angestellterRepository.findAngestellterByToken(result.get("token"));
 
-        if(angestellter.isPresent()) {
-            Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(angestellter.get().getEmail());
-            if(mandant.isPresent()) {
-                Optional<Position> position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
-                Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
+        Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
+        if(mandant.isPresent()) {
+            Optional<Position> position = positionServiceImpl.findPostitionByNameAndLayout(result.get("position"), mandant.get().getLayout());
+            Optional<FragmentType> fragmenttype = fragmentTypeServiceImpl.findFragmentTypeByType(result.get("type"));
 
-                if(position.isPresent() && fragmenttype.isPresent()) {
+            if(position.isPresent() && fragmenttype.isPresent()) {
 
-                    Optional<Fragment> fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName());
+                Optional<Fragment> fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName());
 
-                    switch (fragmenttype.get().getType()) {
-                        case "text":
-                            Optional<FragmentText> fragmentText = fragmentTextServiceImpl.findFragmenttextByFragment_id(fragment.get().getId());
-                            fragmentTextServiceImpl.delete(fragmentText.get());
-                            break;
-                        
-                        case "image":
-                            Optional<FragmentImage> fragmentImage = fragmentImageServiceImpl.findFragmentimageByFragment_id(fragment.get().getId());
-                            fragmentImageServiceImpl.delete(fragmentImage.get());
-                            break;
-                    }
-
-                    fragmentServiceImpl.delete(fragment.get());
-                    model.addAttribute("position", position.get().getName());
-                    return "baukasten/fragments/modules/add";
+                switch (fragmenttype.get().getType()) {
+                    case "text":
+                        Optional<FragmentText> fragmentText = fragmentTextServiceImpl.findFragmenttextByFragment_id(fragment.get().getId());
+                        fragmentTextServiceImpl.delete(fragmentText.get());
+                        break;
+                    
+                    case "image":
+                        Optional<FragmentImage> fragmentImage = fragmentImageServiceImpl.findFragmentimageByFragment_id(fragment.get().getId());
+                        fragmentImageServiceImpl.delete(fragmentImage.get());
+                        break;
                 }
+
+                fragmentServiceImpl.delete(fragment.get());
+                model.addAttribute("position", position.get().getName());
+                return "baukasten/fragments/modules/add";
             }
         }
 
-
         return "";
+    }
+
+    @PostMapping("/baukasten/update")
+    public String updatePage(Authentication authentication, Model model, @RequestParam String data) throws JsonMappingException, JsonProcessingException {
+        HashMap<String, String> result = new ObjectMapper().readValue(data, HashMap.class);
+        
+        Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
+        if(mandant.isPresent()) {
+            
+            if(!result.get("color").isEmpty()){
+                mandant.get().setAkzentFarbe(result.get("color"));
+            }
+
+            if(!result.get("restaurantName").isEmpty()){
+                mandant.get().setFirmenname((result.get("restaurantName")));
+            }
+
+            Optional<Layout> layout = layoutServiceImpl.findLayoutByName(result.get("layout"));
+            if(layout.isPresent()){
+                mandant.get().setLayout(layout.get());
+            }
+
+            mandantServiceImpl.save(mandant.get());
+            
+            if(layout.isPresent()){
+                mandant.get().getFragmente().stream().forEach(item -> {
+                    if(item.getFragmenttype().getType().equals("text")) {fragmentTextServiceImpl.delete(item.getFragmenttext());}
+                    if(item.getFragmenttype().getType().equals("image")) {fragmentImageServiceImpl.delete(item.getFragmentimage());}
+                    
+                    if(!item.getFragmenttype().getType().contains("header")) {
+                        fragmentServiceImpl.delete(item);
+                    }
+                });
+                
+                System.out.println("Done");
+            }
+
+        }
+
+        return showBaukasten(model, authentication);
     }
 
 }

@@ -8,28 +8,13 @@ $('#color-picker').spectrum({
     type: "component"
 });
 
-// Helper function to get the token of logged in user
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 
 $(document).ready(function(){
 
+  var layout;
+
   // Fragment Add and Delete
-  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit", function() {
+  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit, .layout-change, .saveSettings", function() {
 
     // Check if Add or Delete
     if($(this).attr("class").indexOf("fragment-add") >= 0){
@@ -59,8 +44,7 @@ $(document).ready(function(){
               "title": $('#addTextTitle').val(),
               "text": $('#addTextText').val(),
               "position": pos,
-              "type": "text",
-              "token": getCookie("token")
+              "type": "text"
             }));
             break;
 
@@ -68,8 +52,7 @@ $(document).ready(function(){
             formData.append('data', JSON.stringify({
               "title": $(name + " > .modal-content div:nth-child(2) > div > input").val(),
               "position": pos,
-              "type": "image",
-              "token": getCookie("token")
+              "type": "image"
             }));
             formData.append('image', $(name + " > .modal-content div:nth-child(3) > div > div .btn > input")[0].files[0]);
             break;
@@ -79,8 +62,7 @@ $(document).ready(function(){
               "title": $('#addConctactTitle').val(),
               "text": $('#addContactText').val(),
               "position": pos,
-              "type": "contact",
-              "token": getCookie("token")
+              "type": "contact"
             }));
             break;
         }
@@ -107,7 +89,7 @@ $(document).ready(function(){
 
     } else if ($(this).attr("class").indexOf("fragment-delete") >= 0) {
 
-      // Delete ---------------------------------------------------------------------------
+      // Delete -------------------------------------------------------------------------------------------
 
       $('#selector').modal('close');
       $('#deleteFragment').modal('open');
@@ -121,8 +103,7 @@ $(document).ready(function(){
     
         formData.append('data', JSON.stringify({
           "position": pos,
-          "type": type,
-          "token": getCookie("token")
+          "type": type
         }));
   
   
@@ -143,7 +124,57 @@ $(document).ready(function(){
           }
         });
       });
+    } else if ($(this).attr("class").indexOf("layout-change") >= 0) {
+
+      // Change Layout Var ----------------------------------------------------------------------------------------
+
+      $('#changeLayout').modal('open');
+
+      $('.setLayout').off("click").click(function() {
+        $('#changeLayout').modal('close');
+        $('#warningLayout').modal('open');
+
+        var tmp = $(this).attr("name");
+
+        $('#saveLayout').off("click").click(function() {
+          layout = tmp;
+        })
+      })
+
+    } else if ($(this).attr("class").indexOf("saveSettings") >= 0) {
+
+      // Edit Settings -------------------------------------------------------------------------------------------
+
+      var formData = new FormData();
+
+      console.log(layout);
+
+      formData.append('data', JSON.stringify({
+        "restaurantName": $("#firmenname").val(),
+        "color": ($("#color").val() || ""),
+        "layout": (layout || "")
+      }));
+
+      $.ajax({
+        type: "POST",
+        url: "./update",
+        async: false,
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function ( data ) {
+          setTimeout(
+            function () {
+              location.reload();
+            }, 1000
+          )
+        }
+      });
+
     } else {
+
+      // Edit Header -------------------------------------------------------------------------------------------
+
       $('#selector').modal('close');
       $('#editHeader').modal('open');
 
@@ -154,8 +185,7 @@ $(document).ready(function(){
           "title": $('#editHeaderTitle').val(),
           "text": $('#editHeaderText').val(),
           "position": "r1c1",
-          "type": "header",
-          "token": getCookie("token")
+          "type": $(".fragment-header").attr("name")
         }));
   
         if ($('#headerImageNew').is(":checked")) {
