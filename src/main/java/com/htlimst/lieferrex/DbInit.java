@@ -229,9 +229,8 @@
 //         this.kundeRepository.save(kunde);
 //
 //
-//         Bestellstatus bestellstatus = new Bestellstatus(null, BestellstatusEnum.EINGEGANGEN,null);
+//         Bestellstatus bestellstatus = new Bestellstatus(null, BestellstatusEnum.IN_ZUBEREITUNG,null);
 //         this.bestellstatusRepository.save(bestellstatus);
-//         this.bestellstatusRepository.save(new Bestellstatus(null, BestellstatusEnum.IN_ZUBEREITUNG, null));
 //         this.bestellstatusRepository.save(new Bestellstatus(null, BestellstatusEnum.FERTIG_ZUM_ABHOLEN,null));
 //         this.bestellstatusRepository.save(new Bestellstatus(null, BestellstatusEnum.IN_AUSLIEFERUNG, null));
 //         this.bestellstatusRepository.save(new Bestellstatus(null, BestellstatusEnum.ABGESCHLOSSEN, null));

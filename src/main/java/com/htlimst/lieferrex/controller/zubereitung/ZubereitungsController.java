@@ -3,10 +3,8 @@ package com.htlimst.lieferrex.controller.zubereitung;
 import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.model.enums.BestellartEnum;
 import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
-import com.htlimst.lieferrex.repository.BestellungRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
 import com.htlimst.lieferrex.service.bestellung.BestellungService;
-import com.htlimst.lieferrex.service.bestellung.BestellungServiceImpl;
 import com.htlimst.lieferrex.service.overview.OverviewService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
+import javax.swing.text.html.Option;
+import javax.validation.constraints.AssertTrue;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard/bestellungen")
@@ -45,7 +41,7 @@ public class ZubereitungsController {
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
 
-        List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId());
+        List<Bestellung> alleBestellungen = bestellungService.alleBestellungen(foundMandant.getId(), bestellungService.bestellstatusAnzeigen(BestellstatusEnum.IN_ZUBEREITUNG));
         List<BestellungModel> modeldata = new ArrayList<>();
         List<BestellungModel> modeldataLieferung = new ArrayList<>();
         int abholung = 0;
@@ -58,7 +54,7 @@ public class ZubereitungsController {
             String timestampAbholung = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
             String zusatzinfoAbholung = "";
 
-            if(bestellung.getBestellart().getBestellart() == BestellartEnum.ABHOLUNG){
+            if(bestellung.getBestellart().getBestellart() == BestellartEnum.LIEFERUNG){
                 HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
@@ -82,7 +78,7 @@ public class ZubereitungsController {
                 modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo,abholung,bestellung.getId()));
             }
 
-            if(bestellung.getBestellart().getBestellart() == BestellartEnum.LIEFERUNG){
+            if(bestellung.getBestellart().getBestellart() == BestellartEnum.ABHOLUNG){
                 HashMap<String, Integer> gerichtBestellungModelListAbholung = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
@@ -115,13 +111,18 @@ public class ZubereitungsController {
     }
 
     @PostMapping
-    public String checkingLieferungAndAbholung(@AuthenticationPrincipal UserPrincipal principal, Model model, @RequestParam Optional<Long> changeToAbgeschlossen){
+    public String checkingLieferungAndAbholung(@AuthenticationPrincipal UserPrincipal principal, Model model, @RequestParam Optional<Long> abholungChangeToFertigZumAbholen, @RequestParam Optional<Long> lieferungChangeToFertigZumAbholen){
         seitenAufruf(principal, model);
-        if (changeToAbgeschlossen.isPresent()){
-            bestellungService.bestellungByIdAnzeigen(changeToAbgeschlossen.get()).setBestellstatus(bestellungService.bestellstatusAnzeigen(BestellstatusEnum.IN_AUSLIEFERUNG));
+        if(abholungChangeToFertigZumAbholen.isPresent()){
+            Bestellung bestellung =  bestellungService.bestellungByIdAnzeigen(abholungChangeToFertigZumAbholen.get());
+            bestellung.setBestellstatus(bestellungService.bestellstatusAnzeigen(BestellstatusEnum.FERTIG_ZUM_ABHOLEN));
+            bestellungService.save(bestellung);
+        } else if (lieferungChangeToFertigZumAbholen.isPresent()){
+            Bestellung bestellung = bestellungService.bestellungByIdAnzeigen(lieferungChangeToFertigZumAbholen.get());
+            bestellung.setBestellstatus(bestellungService.bestellstatusAnzeigen(BestellstatusEnum.IN_AUSLIEFERUNG));
+            bestellungService.save(bestellung);
         }
-
-        return "dashboard/bestellungen.html";
+        return "redirect:/dashboard/bestellungen";
     }
 
 }

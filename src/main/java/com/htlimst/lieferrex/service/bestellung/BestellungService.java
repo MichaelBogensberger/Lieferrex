@@ -9,7 +9,7 @@ import com.htlimst.lieferrex.service.security.UserPrincipal;
 import java.util.List;
 
 public interface BestellungService {
-    public List<Bestellung> alleBestellungen(Long mandantId);
+    public List<Bestellung> alleBestellungen(Long mandantId, Bestellstatus bestellstatus);
     public void makeBestellung(EinkaufswagenDto einkaufswegenDtoString, UserPrincipal userPrincipal);
     public EinkaufswagenDto deserializeEinkaufswagen(String einkaufswagen);
     public Bestellung bestellungByIdAnzeigen(long bestellid);

@@ -31,15 +31,15 @@ public class BestellungServiceImpl implements BestellungService{
 
     @Autowired
     public BestellungServiceImpl(BestellungRepository bestellungRepository, KundeRepository kundeRepository, MandantRepository mandantRepository, BestellstatusRepository bestellstatusRepository) {
-        this.bestellungRepository = bestellungRepository;
         this.kundeRepository = kundeRepository;
         this.mandantRepository = mandantRepository;
         this.bestellungRepository = bestellungRepository;
+        this.bestellstatusRepository = bestellstatusRepository;
     }
 
     @Override
-    public List<Bestellung> alleBestellungen(Long mandantId) {
-        return bestellungRepository.getBestellungByMandant_Id(mandantId);
+    public List<Bestellung> alleBestellungen(Long mandantId, Bestellstatus bestellstatus) {
+        return bestellungRepository.getBestellungByMandant_IdAndBestellstatus(mandantId, bestellstatus);
     }
 
     @Override
