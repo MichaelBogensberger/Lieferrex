@@ -112,6 +112,8 @@ public class MandantServiceImpl implements MandantService {
                 lieferkosten(mandantRegistrationDto.getLieferkosten())
                 .seitenaufrufe_summe(0)
                 .umsatz_summe(0.0)
+                .durchschnittsAbholZeit(15)
+                .durchschnittsLieferZeit(30)
                 .geoPosition(geoPosition).
                 kategorie(kategorieRepository.getById(6L)).build();
         mandantRepository.save(mandant);

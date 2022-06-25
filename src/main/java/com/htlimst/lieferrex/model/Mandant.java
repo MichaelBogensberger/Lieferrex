@@ -40,8 +40,13 @@ public class Mandant {
 
         // @Email
         private String email;
+
+
         private double mindestbestellwert;
         private double lieferkosten;
+        private int durchschnittsLieferZeit;
+        private int durchschnittsAbholZeit;
+
 
 
         @ManyToOne
@@ -77,7 +82,7 @@ public class Mandant {
         private GeoPosition geoPosition;
 
 
-        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout, GeoPosition geoPosition) {
+        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, int durchschnittsAbholZeit, int durchschnittsLieferZeit, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout, GeoPosition geoPosition) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;
@@ -88,6 +93,8 @@ public class Mandant {
                 this.telefonnummer = telefonnummer;
                 this.umsatz_summe = umsatz_summe;
                 this.seitenaufrufe_summe = seitenaufrufe_summe;
+                this.durchschnittsAbholZeit = durchschnittsAbholZeit;
+                this.durchschnittsLieferZeit = durchschnittsLieferZeit;
                 this.email = email;
                 this.mindestbestellwert = mindestbestellwert;
                 this.lieferkosten = lieferkosten;

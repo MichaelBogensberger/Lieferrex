@@ -154,8 +154,8 @@
 //
 //         Set<Bestellart> mandantBestellart = new HashSet<Bestellart>();
 //         mandantBestellart.add(bestellart);
-//         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", "6460", "Hinterseberweg", "12", "0650123123", 1234.5, 50000, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0), geoPosition);
-//         Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", "12345", "Brennbichl", "25", "0650123123", 1234.5, 50000, "mandant1@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1), geoPosition2);
+//         Mandant mandant = new Mandant(null, "MandantenFirma", "Österreich", "Imst", "6460", "Hinterseberweg", "12", "0650123123", 1234.5, 50000, 15, 30, "mandant@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(0), geoPosition);
+//         Mandant mandant2 = new Mandant(null, "MandantenFirma2", "Österreich", "Imst", "12345", "Brennbichl", "25", "0650123123", 1234.5, 50000,15, 30, "mandant1@gmail.com", 7.5, 3.5, null, mandantBestellart, layouts.get(1), geoPosition2);
 //
 //
 //         Kategorie kategorie = new Kategorie(null, KategorieEnum.FINE_DINING);
