@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.htlimst.lieferrex.exceptions.ClientsideMandantPaymentException;
+import com.htlimst.lieferrex.exceptions.ServersideMandantPaymentException;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -80,7 +82,7 @@ public class PaypalServiceImpl implements PaypalService {
 
 
     @Override
-    public void payMandant(Double total, String email, String emailMessage, String mandantName, String bestellNr) {
+    public void payMandant(Double total, String email, String emailMessage, String mandantName, String bestellNr) throws ClientsideMandantPaymentException, ServersideMandantPaymentException {
         // Construct a request object and set desired parameters
         // Here, CreatePayoutRequest() creates a POST request to /v1/payments/payouts
         total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -109,11 +111,13 @@ public class PaypalServiceImpl implements PaypalService {
             if (ioe instanceof HttpException) {
                 // Something went wrong server-side
                 HttpException he = (HttpException) ioe;
+                System.out.println("cool");
                 System.out.println(he.getMessage());
-                he.headers().forEach(x -> System.out.println(x + " :" + he.headers().header(x)));
+                //he.headers().forEach(x -> System.out.println(x + " :" + he.headers().header(x)));
+                throw new ServersideMandantPaymentException();
             } else {
                 // Something went wrong client-side
-                System.out.println("Mandant konnte nicht gezahlt werden");
+                throw new ClientsideMandantPaymentException();
             }
         }
     }

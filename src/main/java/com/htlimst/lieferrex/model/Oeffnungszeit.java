@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.model;
 
+import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class Oeffnungszeit {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Wochentag tag;
+    private WochentagEnum tag;
 
     private Time oeffnungszeit;
     private Time startpause;

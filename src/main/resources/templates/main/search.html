@@ -132,18 +132,18 @@
                             <div class="input-field col s6">
                                 <div class="switch">
                                     <label>
-    
+
                                         <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
                                                type="checkbox" checked>
                                         <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
                                                type="checkbox">
                                         <span class="lever"></span>
-    
+
                                     </label>
                                 </div>
                             </div>
                             </div>
- 
+
 
                             <h1 class="sr-filter-u-ueb-m">Lieferkosten</h1>
                             <div  th:if="${param.lieferkosten != null}">
@@ -292,44 +292,44 @@
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fineDining') ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="fineDining" type="submit">
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='FINE_DINING') ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="FINE_DINING" type="submit">
                                     Fine Dining
                                 </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='casualDining')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='CASUAL_DINING')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
 
-                                <button class="kategory-button" th:name="kategorie" th:value="casualDining"
+                                <button class="kategory-button" th:name="kategorie" th:value="CASUAL_DINING"
                                         type="submit">Casual Dining
                                 </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='familyStyle')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="familyStyle"
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='FAMILY_STYLE')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="FAMILY_STYLE"
                                         type="submit">Family Style
                                 </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='fastFood')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="fastFood" type="submit">
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='FAST_FOOD')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="FAST_FOOD" type="submit">
                                     Fast Food
                                 </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='buffet')  ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="buffet" type="submit">
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='BUFFET')  ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="BUFFET" type="submit">
                                     Buffet
                                 </button>
 
                             </div>
                             <div class="chip sr-chip waves-effect"
-                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='other')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="other" type="submit">
+                                 th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='OTHER')   ? 'sr-chip-active'  : 'sr-chip-mrg'">
+                                <button class="kategory-button" th:name="kategorie" th:value="OTHER" type="submit">
                                     Other
                                 </button>
 
@@ -355,78 +355,149 @@
 
                                     <!-- Filter Body mobile -->
 
-                                    <h1 class="sr-filter-u-ueb">Bewertung</h1>
+                                    <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
+                                        <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                               type="hidden">
+                                        <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                               type="hidden">
 
-                                    <form action="#" id="sr-filter-form">
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio" checked/>
-                                                <span>Lieferung</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio"/>
-                                                <span>Abholung</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input class="with-gap" name="group1" type="radio"/>
-                                                <span>Im Restaurant essen</span>
-                                            </label>
-                                        </p>
+                                        <div class="row">
+                                            <div class="input-field col s3">
+                                                <h1 class="sr-filter-u-ueb-m">Geöffnet</h1>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <div class="switch">
+                                                    <label>
+
+                                                        <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
+                                                               type="checkbox" checked>
+                                                        <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
+                                                               type="checkbox">
+                                                        <span class="lever"></span>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <h1 class="sr-filter-u-ueb-m">Lieferkosten</h1>
+                                        <div  th:if="${param.lieferkosten != null}">
+                                            <div class="ml-30">
+                                                <p class="sr-filter-auswählen-p">
+                                                    <label>
+                                                        <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
+                                                               th:value="2.5"
+                                                               type="radio" checked/>
+                                                        <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
+                                                               th:value="2.5"
+                                                               type="radio"/>
+                                                        <span>€2,50 oder weniger</span>
+                                                    </label>
+                                                </p>
+                                                <p class="sr-filter-auswählen-p">
+                                                    <label>
+
+                                                        <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
+                                                               th:value="5"
+                                                               type="radio" checked/>
+                                                        <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
+                                                               th:value="5"
+                                                               type="radio"/>
+
+                                                        <span>€5,00 oder weniger</span>
+                                                    </label>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div th:if="${param.lieferkosten == null}" class="ml-30" >
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+                                                    <input th:name="lieferkosten"
+                                                           th:value="2.5"
+                                                           type="radio"/>
+                                                    <span>€2,50 oder weniger</span>
+                                                </label>
+                                            </p>
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+                                                    <input th:name="lieferkosten"
+                                                           th:value="5"
+                                                           type="radio"/>
+                                                    <span>€5,00 oder weniger</span>
+                                                </label>
+                                            </p>
+                                        </div>
+
+                                        <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
+
+                                        <div th:if="${param.mindestbestellwert != null}" class="ml-30">
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+
+                                                    <input th:if="${param.mindestbestellwert[0] == '10'}"
+                                                           th:name="mindestbestellwert"
+                                                           th:value="10"
+                                                           type="radio" checked/>
+                                                    <input th:if="${param.mindestbestellwert[0] != '10'}"
+                                                           th:name="mindestbestellwert"
+                                                           th:value="10"
+                                                           type="radio"/>
+
+                                                    <span>€10,00 oder weniger</span>
+                                                </label>
+                                            </p>
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+
+                                                    <input th:if="${param.mindestbestellwert[0] == '15'}"
+                                                           th:name="mindestbestellwert"
+                                                           th:value="15"
+                                                           type="radio" checked/>
+                                                    <input th:if="${param.mindestbestellwert[0] != '15'}"
+                                                           th:name="mindestbestellwert"
+                                                           th:value="15"
+                                                           type="radio"/>
+
+                                                    <span>€15,00 oder weniger</span>
+                                                </label>
+                                            </p>
+                                        </div>
+
+                                        <div th:if="${param.mindestbestellwert == null}" class="ml-30">
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+                                                    <input th:name="mindestbestellwert"
+                                                           th:value="10"
+                                                           type="radio"/>
+                                                    <span>€10,00 oder weniger</span>
+                                                </label>
+                                            </p>
+                                            <p class="sr-filter-auswählen-p">
+                                                <label>
+                                                    <input th:name="mindestbestellwert"
+                                                           th:value="15"
+                                                           type="radio"/>
+                                                    <span>€15,00 oder weniger</span>
+                                                </label>
+                                            </p>
+                                        </div>
+
+                                        <br>
+
+
+                                        <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">Anwenden</button>
+                                        <br>
+
                                     </form>
-
-                                    <h1 class="sr-filter-u-ueb">Mindestbestellwert</h1>
-                                    <form action="#" id="sr-filter-form">
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio" checked/>
-                                                <span>Keine Präferenz</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio"/>
-                                                <span>€10,00 oder weniger</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input class="with-gap" name="group1" type="radio"/>
-                                                <span>€15,00 oder mehr</span>
-                                            </label>
-                                        </p>
+                                    <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
+                                        <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                               type="hidden">
+                                        <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                               type="hidden">
+                                        <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">Zurücksetzen</button>
                                     </form>
-
-
-                                    <h1 class="sr-filter-u-ueb">Standort</h1>
-                                    <form action="#" id="sr-filter-form">
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio" checked/>
-                                                <span>Keine Präferenz</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input name="group1" type="radio"/>
-                                                <span>5 km oder weniger</span>
-                                            </label>
-                                        </p>
-                                        <p class="sr-filter-auswählen-p">
-                                            <label>
-                                                <input class="with-gap" name="group1" type="radio"/>
-                                                <span>5 km oder mehr</span>
-                                            </label>
-                                        </p>
-                                    </form>
-
-                                    <button class="btn waves-effect waves-light sr-filter-mob-submit" type="submit"
-                                            name="action">Übernehmen
-                                        <i class="material-icons right">send</i>
-                                    </button>
 
                                     <!--- ------------------------------------------------------------------>
 

@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.model;
 
+import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ public class Bestellstatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String bestellstatus;
+    @Enumerated(EnumType.STRING)
+    private BestellstatusEnum bestellstatus;
 
 
 

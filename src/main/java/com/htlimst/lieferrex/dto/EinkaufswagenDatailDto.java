@@ -1,11 +1,16 @@
 package com.htlimst.lieferrex.dto;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class EinkaufswagenDatailDto {
 
-
-    int gerichtID;
+    long gerichtID;
     String anmerkung;
     int anzahl;
-
 
 }

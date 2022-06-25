@@ -1,6 +1,7 @@
 package com.htlimst.lieferrex.controller.zubereitung;
 
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.enums.BestellartEnum;
 import com.htlimst.lieferrex.repository.BestellungRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
 import com.htlimst.lieferrex.service.bestellung.BestellungService;
@@ -54,7 +55,7 @@ public class ZubereitungsController {
             String timestampAbholung = sdf.format(new Date(bestellung.getBestelldatum().getTime()));
             String zusatzinfoAbholung = "";
 
-            if(bestellung.getBestellart().getBestellart().equals("Abholung")){
+            if(bestellung.getBestellart().getBestellart() == BestellartEnum.ABHOLUNG){
                 HashMap<String, Integer> gerichtBestellungModelList = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {
@@ -78,7 +79,7 @@ public class ZubereitungsController {
                 modeldata.add(new BestellungModel(gerichtBestellungModelList,timestamp,zusatzinfo,abholung));
             }
 
-            if(bestellung.getBestellart().getBestellart().trim().equals("Lieferung")){
+            if(bestellung.getBestellart().getBestellart() == BestellartEnum.LIEFERUNG){
                 HashMap<String, Integer> gerichtBestellungModelListAbholung = new HashMap<>();
                 for(GerichtBestellung gerichtBestellung : bestellung.getGerichteBestellungen())
                 {

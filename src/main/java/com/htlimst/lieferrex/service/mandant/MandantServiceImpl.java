@@ -5,6 +5,7 @@ import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import com.htlimst.lieferrex.repository.*;
 
 
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Service
@@ -89,6 +87,7 @@ public class MandantServiceImpl implements MandantService {
     @Override
     public boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
         GeoPosition geoPosition;
+        mandantRegistrationDto.setHausnummer(mandantRegistrationDto.getHausnummer().toUpperCase());
 
         try {
             geoPosition = geocodingApi.getGeodaten(mandantRegistrationDto.getLand(), mandantRegistrationDto.getOrt(), mandantRegistrationDto.getPlz(),
@@ -143,7 +142,7 @@ public class MandantServiceImpl implements MandantService {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDate currentDate = LocalDate.now();
-        Wochentag currentDay = Wochentag.valueOf(String.valueOf(currentDate.getDayOfWeek()));
+        WochentagEnum currentDay = WochentagEnum.valueOf(String.valueOf(currentDate.getDayOfWeek()));
 
         long now = System.currentTimeMillis();
         LocalTime currentTime = LocalTime.now();
@@ -187,7 +186,7 @@ public class MandantServiceImpl implements MandantService {
                 System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }
-            if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName())) {
+            if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName().toString())) {
                 System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }

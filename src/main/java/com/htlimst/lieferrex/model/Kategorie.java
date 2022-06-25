@@ -1,6 +1,8 @@
 package com.htlimst.lieferrex.model;
 
 
+import com.htlimst.lieferrex.model.enums.KategorieEnum;
+import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,22 +26,16 @@ public class Kategorie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // There are following types of categories:
-    // --> Fine Dining
-    // --> Casual Dining
-    // --> Family Style
-    // --> Fast Food
-    // --> Buffet
-    // --> other
-    @NotEmpty
-    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private KategorieEnum name;
 
 
     @OneToMany(mappedBy = "kategorie")
     private Set<Mandant> mandanten;
 
 
-    public Kategorie(Long id, String name) {
+    public Kategorie(Long id, KategorieEnum name) {
         this.id = id;
         this.name = name;
     }

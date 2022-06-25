@@ -30,7 +30,6 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
                 .apiKey(apiKey)
                 .build();
 
-        String land = "Österreich";
 
 
         try {

@@ -1,6 +1,7 @@
 package com.htlimst.lieferrex.model;
 
 
+import com.htlimst.lieferrex.model.enums.BestellartEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,14 +23,15 @@ public class Bestellart {
     @Column(name = "bestellart_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
-    private String bestellart;
+
+    @Enumerated(EnumType.STRING)
+    private BestellartEnum bestellart;
 
     @OneToMany(mappedBy="bestellart")
     private Set<Bestellung> bestellungen;
 
 
-    public Bestellart(Long id, String bestellart) {
+    public Bestellart(Long id, BestellartEnum bestellart) {
         this.id = id;
         this.bestellart = bestellart;
     }

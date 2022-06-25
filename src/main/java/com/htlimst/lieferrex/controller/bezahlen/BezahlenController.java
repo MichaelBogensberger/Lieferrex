@@ -1,7 +1,17 @@
 package com.htlimst.lieferrex.controller.bezahlen;
 
 import com.htlimst.lieferrex.dto.BezahlDto;
+import com.htlimst.lieferrex.dto.EinkaufswagenDatailDto;
+import com.htlimst.lieferrex.dto.EinkaufswagenDto;
+import com.htlimst.lieferrex.exceptions.ClientsideMandantPaymentException;
+import com.htlimst.lieferrex.exceptions.ServersideMandantPaymentException;
+import com.htlimst.lieferrex.model.Angestellter;
+import com.htlimst.lieferrex.model.Kunde;
+import com.htlimst.lieferrex.service.angestellter.AngestellterService;
+import com.htlimst.lieferrex.service.bestellung.BestellungService;
 import com.htlimst.lieferrex.service.paypal.PaypalService;
+import com.htlimst.lieferrex.service.security.UserPrincipal;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +21,27 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/restaurant")
 public class BezahlenController {
 
-    PaypalService paypalService;
+    public PaypalService paypalService;
+    public BestellungService bestellungService;
+    public AngestellterService angestellterService;
 
     @Autowired
-    public BezahlenController(PaypalService paypalService) {
+    public BezahlenController(PaypalService paypalService, BestellungService bestellungService, AngestellterService angestellterService) {
         this.paypalService = paypalService;
+        this.bestellungService = bestellungService;
+        this.angestellterService = angestellterService;
     }
+
+
+
 
     public static final String SUCCESS_URL = "success";
     public static final String CANCEL_URL = "cancel";
@@ -63,7 +84,7 @@ public class BezahlenController {
     }
 
     @GetMapping("/{id}/checkout/success")
-    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    public String successPay(@AuthenticationPrincipal UserPrincipal principal, @RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
 
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
@@ -71,12 +92,23 @@ public class BezahlenController {
             if (payment.getState().equals("approved")) {
                 System.out.println("Ich bezahlt ---------------------------");
                 paypalService.payMandant(9.55, "mandant4@business.example.com", "2x Pizza | 2x Döner", "Pizz World", "012");
-                return "main/success";
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
+            return "redirect:/";
+        } catch (ServersideMandantPaymentException e) {
+            System.out.println(e.getMessage());
+            return "redirect:/";
+        } catch (ClientsideMandantPaymentException e) {
+            System.out.println(e.getMessage());
+            return "redirect:/";
         }
-        return "redirect:/";
+
+        List<EinkaufswagenDatailDto> einkaufswagenDtoList = new ArrayList<>();
+
+        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
+        bestellungService.makeBestellung(einkaufswagenDto, principal);
+        return "main/success";
     }
 
 }
