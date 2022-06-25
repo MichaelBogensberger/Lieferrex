@@ -1,15 +1,13 @@
-
-if(Cookies.get("dark-mode") == null) {
+if (Cookies.get("dark-mode") == null) {
   toDark();
-  $('#switch-dm-js').attr('Checked','Checked');
+  $("#switch-dm-js").attr("Checked", "Checked");
 } else if (Cookies.get("dark-mode") == "on") {
-  $('#switch-dm-js').attr('Checked','Checked');
+  $("#switch-dm-js").attr("Checked", "Checked");
   toDark();
 } else if (Cookies.get("dark-mode") == "off") {
-  $('#switch-dm-js').removeAttr('Checked'); 
+  $("#switch-dm-js").removeAttr("Checked");
   toLight();
 }
-
 
 function toDark() {
   var stylesheet = $("<link>", {
@@ -18,7 +16,6 @@ function toDark() {
     href: "/css/main/dark.css",
   });
   stylesheet.appendTo("body");
-
   $().ready(function () {
     $("body").css({ display: "block" });
   });
@@ -31,14 +28,10 @@ function toLight() {
     href: "/css/main/light.css",
   });
   stylesheet.appendTo("body");
-  //Tolight();
-  //document.getElementById("switch-dm-js").checked = 0;
-
   $().ready(function () {
     $("body").css({ display: "block" });
   });
 }
-
 
 /*
 // Check to see if Media-Queries are supported
