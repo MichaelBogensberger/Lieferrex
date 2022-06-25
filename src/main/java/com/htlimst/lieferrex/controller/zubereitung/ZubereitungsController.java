@@ -2,6 +2,7 @@ package com.htlimst.lieferrex.controller.zubereitung;
 
 import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.model.enums.BestellartEnum;
+import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
 import com.htlimst.lieferrex.repository.BestellungRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
 import com.htlimst.lieferrex.service.bestellung.BestellungService;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -106,16 +108,18 @@ public class ZubereitungsController {
 
 
         }
+
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         model.addAttribute("gerichteBestellungsDetailLieferung", modeldataLieferung);
         return "dashboard/bestellungen.html";
     }
 
     @PostMapping
-    public String checkingLieferungAndAbholung(@AuthenticationPrincipal UserPrincipal principal, Model model){
+    public String checkingLieferungAndAbholung(@AuthenticationPrincipal UserPrincipal principal, Model model, @RequestParam Optional<Long> changeToAbgeschlossen){
         seitenAufruf(principal, model);
-
-
+        if (changeToAbgeschlossen.isPresent()){
+            bestellungService.bestellungByIdAnzeigen(changeToAbgeschlossen.get()).setBestellstatus(bestellungService.bestellstatusAnzeigen(BestellstatusEnum.IN_AUSLIEFERUNG));
+        }
 
         return "dashboard/bestellungen.html";
     }

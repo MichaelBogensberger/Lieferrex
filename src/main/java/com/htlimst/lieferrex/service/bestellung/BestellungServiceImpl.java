@@ -3,8 +3,11 @@ package com.htlimst.lieferrex.service.bestellung;
 import com.htlimst.lieferrex.dto.EinkaufswagenDatailDto;
 import com.htlimst.lieferrex.dto.EinkaufswagenDto;
 import com.htlimst.lieferrex.model.Bestellart;
+import com.htlimst.lieferrex.model.Bestellstatus;
 import com.htlimst.lieferrex.model.Bestellung;
 import com.htlimst.lieferrex.model.Kunde;
+import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
+import com.htlimst.lieferrex.repository.BestellstatusRepository;
 import com.htlimst.lieferrex.repository.BestellungRepository;
 import com.htlimst.lieferrex.repository.KundeRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
@@ -24,12 +27,14 @@ public class BestellungServiceImpl implements BestellungService{
     private BestellungRepository bestellungRepository;
     private KundeRepository kundeRepository;
     private MandantRepository mandantRepository;
+    private BestellstatusRepository bestellstatusRepository;
 
     @Autowired
-    public BestellungServiceImpl(BestellungRepository bestellungRepository, KundeRepository kundeRepository, MandantRepository mandantRepository) {
+    public BestellungServiceImpl(BestellungRepository bestellungRepository, KundeRepository kundeRepository, MandantRepository mandantRepository, BestellstatusRepository bestellstatusRepository) {
         this.bestellungRepository = bestellungRepository;
         this.kundeRepository = kundeRepository;
         this.mandantRepository = mandantRepository;
+        this.bestellungRepository = bestellungRepository;
     }
 
     @Override
@@ -63,6 +68,21 @@ public class BestellungServiceImpl implements BestellungService{
         EinkaufswagenDto einkaufswagenDto = new EinkaufswagenDto().builder().mandantId(1L).einkaufswagenDatails(einkaufswagenDatailDtoList).build();
 
         return einkaufswagenDto;
+    }
+
+    @Override
+    public Bestellung bestellungByIdAnzeigen(long bestellid) {
+        return bestellungRepository.getBestellungById(bestellid);
+    }
+
+    @Override
+    public Bestellstatus bestellstatusAnzeigen(BestellstatusEnum bestellstatusEnum) {
+        return bestellstatusRepository.getBestellstatusByBestellstatus(bestellstatusEnum);
+    }
+
+    @Override
+    public void save(Bestellung bestellung) {
+        bestellungRepository.save(bestellung);
     }
 
 

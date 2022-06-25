@@ -26,6 +26,8 @@ public class Bestellstatus {
     @Enumerated(EnumType.STRING)
     private BestellstatusEnum bestellstatus;
 
+    @OneToMany(mappedBy = "bestellstatus")
+    private Set<Bestellung> bestellung;
 
 
 }

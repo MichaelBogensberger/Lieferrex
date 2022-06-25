@@ -17,4 +17,7 @@ public interface BestellungRepository extends JpaRepository<Bestellung,Long> {
 
     List<Bestellung> getBestellungByMandant_Id(long mandantId);
 
+
+    Bestellung getBestellungById(long bestellId);
+
 }

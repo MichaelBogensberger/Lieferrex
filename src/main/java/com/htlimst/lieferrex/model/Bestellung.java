@@ -45,14 +45,11 @@ public class Bestellung {
     @OneToMany(mappedBy="bestellung")
     private Set<GerichtBestellung> gerichteBestellungen;
 
-    @ManyToMany
-    @JoinTable(
-            name = "bestellung_bestellstatus",
-            joinColumns = @JoinColumn(name = "bestellung_id"),
-            inverseJoinColumns = @JoinColumn(name = "bestellstatus_id"))
-    private Set<Bestellstatus> bestellstatus;
+    @ManyToOne()
+    @JoinColumn(name="bestellstatus_id", nullable = false)
+    private Bestellstatus bestellstatus;
 
-    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Set<Bestellstatus> bestellstatus) {
+    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus) {
         this.id = id;
         this.dauer = dauer;
         this.bestelldatum = bestelldatum;
