@@ -1,4 +1,4 @@
-package com.htlimst.lieferrex.controller;
+package com.htlimst.lieferrex.controller.LoginRegistration;
 
 import com.htlimst.lieferrex.dto.KundeRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;

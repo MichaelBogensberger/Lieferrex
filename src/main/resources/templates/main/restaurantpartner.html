@@ -103,6 +103,12 @@
             </li>
 
 
+
+
+
+
+
+
             <li class="step">
                 <div class="step-title waves-effect">Adresse</div>
                 <div class="step-content">
@@ -110,47 +116,26 @@
 
                     <div class="row">
 
-                        <div class="row">
-                            <div class="input-field login-div-mail col s12 m6 l6">
-                                <i class="material-icons-outlined white-dm prefix">map</i>
-                                <input id="ort" type="text" class="validate login-inp" placeholder="Ort"
-                                       th:field="*{ort}">
-                                    <label for="ort"></label>
-                            </div>
-                            <div class="input-field login-div-mail col s12 m6 l6">
-                                <i class="material-icons-outlined white-dm prefix">location_city</i>
-                                <input id="plz" type="text" class="validate login-inp" placeholder="PLZ"
-                                       th:field="*{plz}">
-                                    <label for="plz"></label>
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="input-field login-div-mail col s12 m6 l6">
-                                <i class="material-icons-outlined white-dm prefix">home</i>
-                                <input id="strasse" type="text" class="validate login-inp" placeholder="Straße"
-                                       th:field="*{strasse}">
-                                    <label for="strasse"></label>
-                            </div>
-                            <div class="input-field login-div-mail col s12 m6 l6">
-                                <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                                <input id="hausnummer" type="text" class="validate login-inp" placeholder="Hausnummer"
-                                       th:field="*{hausnummer}">
-                                    <label for="hausnummer"></label>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="input-field login-div-mail col s12 m12 l12">
-                                <i class="material-icons-outlined white-dm prefix">landscape</i>
-                                <input id="land" type="text" class="validate login-inp" placeholder="Land"
-                                       th:field="*{land}">
-                                    <label for="land"></label>
+                                <i class="material-icons-outlined white-dm prefix">home</i>
+                                <input id="adresse" type="text" class="validate login-inp" placeholder="Adresse"
+                                       th:field="*{adresse}">
+                                    <label for="adresse"></label>
                             </div>
                         </div>
+
+                        <div class="row" id="adressen">
+
+                        </div>
+                        <input th:name="ort" id="ort" type="hidden">
+                        <input th:name="strasse" id="strasse" type="hidden">
+                        <input th:name="land" id="land" type="hidden">
+                        <input th:name="hausnummer" id="hausnummer" type="hidden">
+                        <input th:name="placeId" id="placeId" type="hidden">
+
+
 
 
                     </div>
@@ -162,6 +147,12 @@
                     </div>
                 </div>
             </li>
+
+
+
+
+
+
 
 
             <li class="step">
@@ -290,7 +281,7 @@
 
 </body>
 
-
+<script type="text/javascript" th:src="@{/js/main/autocompleteAdressen.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
 

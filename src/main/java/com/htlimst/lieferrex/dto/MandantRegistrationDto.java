@@ -37,10 +37,12 @@ public class MandantRegistrationDto {
     @ValidPhoneNumber
     private String telefonnummer;
 
+    private String adresse;
+
+    //from Adresse
     @NotEmpty
     private String ort;
 
-    @NotEmpty
     private String plz;
 
     @NotEmpty
@@ -51,6 +53,9 @@ public class MandantRegistrationDto {
 
     @NotEmpty
     private String land;
+
+    @NotEmpty
+    private String placeId;
 
     @NotEmpty
     private String vorname;

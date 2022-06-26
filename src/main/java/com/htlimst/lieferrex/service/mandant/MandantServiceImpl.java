@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.service.mandant;
 
+import com.htlimst.lieferrex.dto.GeoPositionDto;
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
@@ -100,16 +101,21 @@ public class MandantServiceImpl implements MandantService {
 
     @Override
     public boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto) {
-        GeoPosition geoPosition;
+        GeoPositionDto geoPositionDto;
+        GeoPosition geoPosition = new GeoPosition();
         mandantRegistrationDto.setHausnummer(mandantRegistrationDto.getHausnummer().toUpperCase());
 
         try {
-            geoPosition = geocodingApi.getGeodaten(mandantRegistrationDto.getLand(), mandantRegistrationDto.getOrt(), mandantRegistrationDto.getPlz(),
-                    mandantRegistrationDto.getStrasse(), mandantRegistrationDto.getHausnummer());
+            geoPositionDto = geocodingApi.getGeodaten(mandantRegistrationDto.getPlaceId());
         } catch (AdresseNotFoundException e) {
             System.out.println("Geodaten nicht gefunden");
             return false;
         }
+
+        mandantRegistrationDto.setPlz(geoPositionDto.getPlz());
+
+        geoPosition.setGeoLng(geoPositionDto.getLng());
+        geoPosition.setGeoLat(geoPositionDto.getLat());
 
         geoPositionRepository.save(geoPosition);
 

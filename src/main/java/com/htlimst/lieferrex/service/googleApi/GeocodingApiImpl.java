@@ -7,6 +7,7 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.ComponentFilter;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
+import com.htlimst.lieferrex.dto.GeoPositionDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.model.GeoPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class GeocodingApiImpl implements GeocodingApi{
 
 
     public GeocodingResult[] geocoede(String adresse) throws AdresseNotFoundException {
-        GeocodingResult[] results = new GeocodingResult[0];
+        GeocodingResult[] results;
 
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(apiKey)
@@ -50,17 +51,25 @@ public class GeocodingApiImpl implements GeocodingApi{
         return results;
     }
 
-    public GeoPosition getGeodaten(String land, String ort, String plz, String strasse, String hausnummer) throws AdresseNotFoundException {
+    public GeoPositionDto getGeodaten(String placeId) throws AdresseNotFoundException {
 
-        GeoPosition geoPosition = new GeoPosition();
+        GeoPositionDto geoPosition = new GeoPositionDto();
 
-        String adresse = strasse + " " + hausnummer;
-        System.out.println(adresse);
+        System.out.println(placeId);
 
         GeocodingResult[] results = new GeocodingResult[0];
+
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey(apiKey)
+                .build();
+
         try {
-            results = geocoede(adresse);
-        } catch (AdresseNotFoundException e) {
+            results = com.google.maps.GeocodingApi.newRequest(context).place(placeId).await();
+        } catch (ApiException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -72,47 +81,9 @@ public class GeocodingApiImpl implements GeocodingApi{
             throw new AdresseNotFoundException();
         }
 
-
-
-        try {
-            String foundLand = gson.toJson(results[0].addressComponents[5].longName);
-            System.out.println(foundLand);
-
-            String foundStadtInLong = gson.toJson(results[0].addressComponents[2].longName);
-            System.out.println(foundStadtInLong);
-            String foundStadtInShort = gson.toJson(results[0].addressComponents[2].shortName);
-            System.out.println(foundStadtInShort);
-
-            String foundPlz =  gson.toJson(results[0].addressComponents[6].longName);
-            System.out.println(foundPlz);
-            String foundHausnummer = gson.toJson(results[0].addressComponents[0].longName);
-
-            String foundShortStrasse = gson.toJson(results[0].addressComponents[1].shortName);
-            System.out.println(foundShortStrasse);
-
-            String foundLongStrasse = gson.toJson(results[0].addressComponents[1].longName);
-            System.out.println(foundLongStrasse);
-
-
-            boolean equals;
-            equals = foundPlz.equals("\"" + plz + "\"");
-            System.out.println(equals + " PLZ");
-            equals = equals && foundHausnummer.equals("\"" + hausnummer + "\"");
-            System.out.println(equals + " Hausnummer");
-
-            equals = equals && (foundShortStrasse.equals("\"" + strasse + "\"") || foundLongStrasse.equals("\"" + strasse + "\""));
-            System.out.println(equals + " Strasse");
-
-
-            if(!equals){
-                throw new AdresseNotFoundException();
-            }
-        }catch (IndexOutOfBoundsException indexOutOfBoundsException){
-            throw new AdresseNotFoundException();
-        }
-
-        geoPosition.setGeoLat(Double.parseDouble(gson.toJson(results[0].geometry.location.lat)));
-        geoPosition.setGeoLng(Double.parseDouble(gson.toJson(results[0].geometry.location.lng)));
+        geoPosition.setLat(Double.parseDouble(gson.toJson(results[0].geometry.location.lat)));
+        geoPosition.setLng(Double.parseDouble(gson.toJson(results[0].geometry.location.lng)));
+        geoPosition.setPlz(gson.toJson(results[0].addressComponents[6].shortName).replace("\"", ""));
 
         return geoPosition;
     }
