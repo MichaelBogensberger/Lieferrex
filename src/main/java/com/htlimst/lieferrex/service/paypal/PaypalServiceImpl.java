@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.htlimst.lieferrex.dto.BezahlDto;
 import com.htlimst.lieferrex.exceptions.ClientsideMandantPaymentException;
 import com.htlimst.lieferrex.exceptions.ServersideMandantPaymentException;
 import com.paypal.api.payments.*;
@@ -38,7 +39,7 @@ public class PaypalServiceImpl implements PaypalService {
 
 
     @Override
-    public Payment createPayment(Double total, String method, String intent, String description, String cancelUrl, String successUrl) throws PayPalRESTException {
+    public Payment createPayment(Double total, String description, String cancelUrl, String successUrl) throws PayPalRESTException {
 
         Amount amount = new Amount();
         amount.setCurrency("EUR");
@@ -54,10 +55,10 @@ public class PaypalServiceImpl implements PaypalService {
         transactions.add(transaction);
 
         Payer payer = new Payer();
-        payer.setPaymentMethod(method.toString());
+        payer.setPaymentMethod("paypal");
 
         Payment payment = new Payment();
-        payment.setIntent(intent.toString());
+        payment.setIntent("ORDER");
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
@@ -82,19 +83,19 @@ public class PaypalServiceImpl implements PaypalService {
 
 
     @Override
-    public void payMandant(Double total, String email, String emailMessage, String mandantName, String bestellNr) throws ClientsideMandantPaymentException, ServersideMandantPaymentException {
+    public void payMandant(BezahlDto bezahlDto) throws ClientsideMandantPaymentException, ServersideMandantPaymentException {
         // Construct a request object and set desired parameters
         // Here, CreatePayoutRequest() creates a POST request to /v1/payments/payouts
-        total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        double preis = new BigDecimal(bezahlDto.getPreis()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         List<com.paypal.payouts.PayoutItem> items = new ArrayList<com.paypal.payouts.PayoutItem>();
         items.add(new com.paypal.payouts.PayoutItem().senderItemId("")
-                .note("").receiver(email)
-                .amount(new Currency().currency("EUR").value(String.valueOf(total))));
+                .note("").receiver(bezahlDto.getMandantEmail())
+                .amount(new Currency().currency("EUR").value(String.valueOf(preis))));
 
         CreatePayoutRequest request = new CreatePayoutRequest()
                 .senderBatchHeader(new SenderBatchHeader()
-                        .senderBatchId(bestellNr).emailMessage(emailMessage)
+                        .senderBatchId(bezahlDto.getBestellNr()).emailMessage(bezahlDto.getMandantNachricht())
                         .emailSubject("Eingehende Lieferrex bestellung").note("Beste Grüße dein Lieferrex-Team").recipientType("EMAIL")).items(items);
 
         try {

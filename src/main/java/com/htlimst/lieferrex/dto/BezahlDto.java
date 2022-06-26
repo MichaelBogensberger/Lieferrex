@@ -9,9 +9,11 @@ import lombok.*;
 @Builder
 public class BezahlDto {
 
-    private double price;
-    private String method;
-    private String intent;
-    private String description;
+    private double preis;
+    private String kundenNachricht;
+    private String mandantEmail;
+    private String mandantNachricht;
+    private String mandantName;
+    private String bestellNr;
 
 }

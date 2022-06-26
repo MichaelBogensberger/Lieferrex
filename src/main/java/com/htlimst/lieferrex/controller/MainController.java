@@ -12,9 +12,11 @@ import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Fragment;
+import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Mandant;
+import com.htlimst.lieferrex.repository.BestellstatusRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentmap.FragmentMapServiceImpl;
@@ -46,6 +48,7 @@ public class MainController {
     private FragmentMapServiceImpl fragmentmapServiceImpl;
     private MandantService mandantService;
     private GeocodingApi geocodingApi;
+
 
     @Autowired
     public MainController(MandantRepository mandantRepository, FragmentServiceImpl fragmentServiceImpl, FragmentTextServiceImpl fragmenttextServiceImpl, FragmentMapServiceImpl fragmentmapServiceImpl, MandantService mandantService, GeocodingApi geocodingApi) {

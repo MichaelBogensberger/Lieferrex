@@ -29,5 +29,8 @@ public class Bestellstatus {
     @OneToMany(mappedBy = "bestellstatus")
     private Set<Bestellung> bestellung;
 
-
+    public Bestellstatus(Long id, BestellstatusEnum bestellstatus) {
+        this.id = id;
+        this.bestellstatus = bestellstatus;
+    }
 }

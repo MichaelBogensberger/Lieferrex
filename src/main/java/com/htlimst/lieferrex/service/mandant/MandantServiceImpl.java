@@ -31,9 +31,14 @@ public class MandantServiceImpl implements MandantService {
     private OeffnungszeitRepository oeffnungszeitRepository;
     private GeocodingApi geocodingApi;
     private KategorieRepository kategorieRepository;
+    private SeitenaufrufeRepository seitenaufrufeRepository;
+    private UmsatzRepository umsatzRepository;
 
     @Autowired
-    public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository, RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository, OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi, KategorieRepository kategorieRepository) {
+    public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository,
+                              RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository,
+                              OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi, KategorieRepository kategorieRepository,
+                              SeitenaufrufeRepository seitenaufrufeRepository, UmsatzRepository umsatzRepository) {
         this.angestellterRepository = angestellterRepository;
         this.mandantRepository = mandantRepository;
         this.roleRepository = roleRepository;
@@ -42,7 +47,10 @@ public class MandantServiceImpl implements MandantService {
         this.oeffnungszeitRepository = oeffnungszeitRepository;
         this.geocodingApi = geocodingApi;
         this.kategorieRepository = kategorieRepository;
+        this.seitenaufrufeRepository = seitenaufrufeRepository;
+        this.umsatzRepository = umsatzRepository;
     }
+
 
     @Override
     public List<Mandant> alleMandanten() {
@@ -127,6 +135,18 @@ public class MandantServiceImpl implements MandantService {
                 passwort(passwordEncoder.encode(mandantRegistrationDto.getPasswort())).
                 rolle(Arrays.asList(roleRepository.findByRolle("ROLE_MANDANT"))).build();
         angestellterRepository.save(angestellter);
+
+
+        LocalDate current_date = LocalDate.now();
+        int current_Year = current_date.getYear();
+        int current_Month = current_date.getMonthValue();
+
+        Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, current_Month, current_Year, 0, mandant);
+        seitenaufrufeRepository.save(seitenaufrufe);
+
+        Umsatz umsatz = new Umsatz(null, current_Month, current_Year, 0, mandant);
+        umsatzRepository.save(umsatz);
+
 
         return true;
     }

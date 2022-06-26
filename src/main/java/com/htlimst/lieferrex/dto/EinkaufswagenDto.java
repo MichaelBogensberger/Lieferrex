@@ -12,4 +12,5 @@ import java.util.List;
 public class EinkaufswagenDto {
     List<EinkaufswagenDatailDto> einkaufswagenDatails;
     long mandantId;
+    String bestellArt;
 }

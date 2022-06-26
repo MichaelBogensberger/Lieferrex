@@ -54,15 +54,13 @@ public class BezahlenController {
 
 
     @PostMapping("/{id}/checkout")
-    public String payment(@PathVariable String id, @ModelAttribute("order") BezahlDto bezahlDto) {
+    public String payment(@PathVariable String id) {
         System.out.println(id);
-        bezahlDto.setPrice(10.657);
-        bezahlDto.setMethod("paypal");
-        bezahlDto.setIntent("ORDER");
-        bezahlDto.setDescription("Bestell Nr. 001");
+        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
+        BezahlDto bezahlDto = bestellungService.getBezahlDto(einkaufswagenDto);
+
         try {
-            Payment payment = paypalService.createPayment(bezahlDto.getPrice(), bezahlDto.getMethod(),
-                    bezahlDto.getIntent(), bezahlDto.getDescription(), "http://localhost:8080/restaurant/"+ id+ "/checkout/cancel",
+            Payment payment = paypalService.createPayment(bezahlDto.getPreis(), bezahlDto.getKundenNachricht(),"http://localhost:8080/restaurant/"+ id+ "/checkout/cancel",
                     "http://localhost:8080/restaurant/" + id+ "/checkout/success");
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
@@ -84,14 +82,22 @@ public class BezahlenController {
     }
 
     @GetMapping("/{id}/checkout/success")
-    public String successPay(@AuthenticationPrincipal UserPrincipal principal, @RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    public String successPay(@AuthenticationPrincipal UserPrincipal principal, @RequestParam(name="paymentId", required = false) String paymentId, @RequestParam(name="PayerID", required = false) String payerId) {
+        if (payerId==null || paymentId==null){
+            return "redirect:/";
+        }
+
+        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
 
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
+
             if (payment.getState().equals("approved")) {
-                System.out.println("Ich bezahlt ---------------------------");
-                paypalService.payMandant(9.55, "mandant4@business.example.com", "2x Pizza | 2x Döner", "Pizz World", "012");
+                BezahlDto bezahlInfos = bestellungService.getBezahlDto(einkaufswagenDto);
+                paypalService.payMandant(bezahlInfos);
+                bestellungService.bestellungAufgeben(einkaufswagenDto, principal, bezahlInfos);
+
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
@@ -104,10 +110,7 @@ public class BezahlenController {
             return "redirect:/";
         }
 
-        List<EinkaufswagenDatailDto> einkaufswagenDtoList = new ArrayList<>();
 
-        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
-        bestellungService.makeBestellung(einkaufswagenDto, principal);
         return "main/success";
     }
 

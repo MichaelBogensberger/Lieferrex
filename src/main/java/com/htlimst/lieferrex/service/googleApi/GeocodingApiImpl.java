@@ -33,7 +33,7 @@ public class GeocodingApiImpl implements GeocodingApi{
                 .build();
 
         try {
-            results = com.google.maps.GeocodingApi.geocode(context,adresse).components(ComponentFilter.country("Österreich")).region("at").language("de").await();
+            results = com.google.maps.GeocodingApi.geocode(context,adresse).components(ComponentFilter.country("Österreich")).language("de").await();
         } catch (ApiException e) {
             e.printStackTrace();
             throw new AdresseNotFoundException();
@@ -86,14 +86,23 @@ public class GeocodingApiImpl implements GeocodingApi{
             String foundPlz =  gson.toJson(results[0].addressComponents[6].longName);
             System.out.println(foundPlz);
             String foundHausnummer = gson.toJson(results[0].addressComponents[0].longName);
-            System.out.println(foundHausnummer);
-            String foundStrasse = gson.toJson(results[0].addressComponents[1].longName);
-            System.out.println(foundStrasse);
+
+            String foundShortStrasse = gson.toJson(results[0].addressComponents[1].shortName);
+            System.out.println(foundShortStrasse);
+
+            String foundLongStrasse = gson.toJson(results[0].addressComponents[1].longName);
+            System.out.println(foundLongStrasse);
+
 
             boolean equals;
             equals = foundPlz.equals("\"" + plz + "\"");
+            System.out.println(equals + " PLZ");
             equals = equals && foundHausnummer.equals("\"" + hausnummer + "\"");
-            equals = equals && foundStrasse.equals("\"" + strasse + "\"");
+            System.out.println(equals + " Hausnummer");
+
+            equals = equals && (foundShortStrasse.equals("\"" + strasse + "\"") || foundLongStrasse.equals("\"" + strasse + "\""));
+            System.out.println(equals + " Strasse");
+
 
             if(!equals){
                 throw new AdresseNotFoundException();

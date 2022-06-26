@@ -7,6 +7,7 @@ import com.google.maps.PlaceAutocompleteRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
 import com.google.maps.model.ComponentFilter;
+import com.google.maps.model.PlaceType;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
