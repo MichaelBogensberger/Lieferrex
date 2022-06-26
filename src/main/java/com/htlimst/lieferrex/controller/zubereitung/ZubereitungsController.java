@@ -105,6 +105,7 @@ public class ZubereitungsController {
 
         }
 
+
         model.addAttribute("gerichteBestellungsDetail", modeldata);
         model.addAttribute("gerichteBestellungsDetailLieferung", modeldataLieferung);
         return "dashboard/bestellungen.html";

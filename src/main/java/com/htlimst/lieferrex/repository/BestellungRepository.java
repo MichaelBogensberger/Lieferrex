@@ -20,6 +20,5 @@ public interface BestellungRepository extends JpaRepository<Bestellung,Long> {
     Bestellung getBestellungById(long bestellId);
 
     Optional<Bestellung> findTopByOrderByIdDesc();
-
-
+    List<Bestellung> getBestellungByMandant_Id(long mandantId);
 }

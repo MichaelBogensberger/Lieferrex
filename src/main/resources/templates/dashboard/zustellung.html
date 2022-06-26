@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
 
 <head>
 
@@ -176,6 +176,7 @@
 
 
         <div class="container-fluid">
+            <form th:action="@{/dashboard/zustellungen}" method="post" >
             <div class="row row-eq-spacing-lg pl-0 pr-0 mt-0">
 
 
@@ -190,26 +191,25 @@
 
 
                         <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
+                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0" th:each="bestellung: ${zustellungLieferungDetail}">
                             <div class="row">
 
                                 <div class="col-2 ">
                                         <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">3</h2>
+                                            <h2 class="card-title font-weight-bold mb-0" th:text="${bestellung.counter}">3</h2>
                                         </span>
                                 </div>
 
                                 <div class="col-8 ">
-
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Max Mustermann</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Hinterseberweg 12</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">6064 Imst</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.vorname} + ' ' + ${bestellung.kunde.nachname}">Max Mustermann</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.strasse} + ' ' + ${bestellung.kunde.hausnummer}">Hinterseberweg 12</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.plz} + ' ' + ${bestellung.kunde.ort}">6064 Imst</p>
 
                                     <div class="sidebar-divider"></div>
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Schnitzel mit Kebab</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Dürüm</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Coca Cola</p>
+                                    <ul style="list-style-type: none">
+                                        <li class="font-weight-bold mb-0 mt-0 font-size-12" th:each="gericht: ${bestellung.gerichtBestellungModelList}" th:text="${gericht.value} + 'x- ' + ${gericht.key}">1x - Dürüm</li>
+                                    </ul>
 
                                 </div>
 
@@ -217,9 +217,9 @@
 
                                     <div class="d-flex align-items-center justify-content-center h-100">
                                         <div class="d-flex flex-column">
-                                            <a href="#"
+                                            <button type="submit" th:value="${bestellung.id}" name="lieferungChangeToFertigZumAbholen"
                                                class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
@@ -243,26 +243,26 @@
 
 
                         <!-- CARDS -->
-                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0">
+                        <div class="content card pt-15 pb-15 pl-15 pr-15 mb-10 mt-0 ml-0 mr-0" th:each="bestellung: ${zustellungAbholungDetail}">
                             <div class="row">
 
                                 <div class="col-2 ">
                                         <span class="sidebar-icon">
-                                            <h2 class="card-title font-weight-bold mb-0">6</h2>
+                                            <h2 class="card-title font-weight-bold mb-0" th:text="${bestellung.counter}">6</h2>
                                         </span>
                                 </div>
 
                                 <div class="col-8 ">
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Max Mustermann</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">Ziegelstadelstraße 22b</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-14">5026 Salzburg</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.vorname} + ' ' + ${bestellung.kunde.nachname}">Max Mustermann</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.strasse} + ' ' + ${bestellung.kunde.hausnummer}">Ziegelstadelstraße 22b</p>
+                                    <p class="font-weight-bold mb-0 mt-0 font-size-14" th:text="${bestellung.kunde.plz} + ' ' + ${bestellung.kunde.ort}">5026 Salzburg</p>
 
                                     <div class="sidebar-divider"></div>
 
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Dürm</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">1x - Burger</p>
-                                    <p class="font-weight-bold mb-0 mt-0 font-size-12">2x - Fanta</p>
+                                    <ul style="list-style-type: none">
+                                        <li class="font-weight-bold mb-0 mt-0 font-size-12" th:each="gericht: ${bestellung.gerichtBestellungModelList}" th:text="${gericht.value} + 'x- ' + ${gericht.key}">1x - Dürüm</li>
+                                    </ul>
 
                                 </div>
 
@@ -270,9 +270,9 @@
 
                                     <div class="d-flex align-items-center justify-content-center h-100">
                                         <div class="d-flex flex-column">
-                                            <a href="#"
+                                            <button type="submit" th:value="${bestellung.id}" name="abholungChangeToFertigZumAbholen"
                                                class="btn btn-lg btn-square btn-primary rounded-circle mt-0 mb-0 "
-                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                               role="button"><i class="fa fa-check" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
@@ -292,7 +292,7 @@
 
 
             </div>
-
+            </form>
 
 
 
