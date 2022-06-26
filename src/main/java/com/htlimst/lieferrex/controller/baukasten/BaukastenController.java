@@ -1,12 +1,20 @@
 package com.htlimst.lieferrex.controller.baukasten;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.security.Principal;
+import java.sql.Blob;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
+import javax.swing.ImageIcon;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -35,7 +43,10 @@ import com.htlimst.lieferrex.service.position.PositionServiceImpl;
 import com.htlimst.lieferrex.service.Util;
 
 import org.apache.tomcat.util.http.fileupload.FileUpload;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -77,14 +88,10 @@ public class BaukastenController {
     @Autowired
     LayoutServiceImpl layoutServiceImpl;
 
-    // TODO: Make model an Object, consistency
-
     @GetMapping("/restaurant/{restaurant}")
-    public String showRestaurant(Model model, @PathVariable String restaurant){
+    public String showRestaurant(Model model, @PathVariable Long restaurant){
 
-        // TODO: Error-Handling
-
-        Mandant mandant = mandantServiceImpl.findMandantByFirmenname(restaurant).get();
+        Mandant mandant = mandantServiceImpl.findMandantById(restaurant).get();
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
         // Layout des Mandanten der VIEW uebergeben
@@ -106,7 +113,7 @@ public class BaukastenController {
     }
 
     @GetMapping("/baukasten")
-    public String showBaukasten(Model model, Authentication authentication){
+    public String showBaukasten(Model model, Authentication authentication) {
 
         Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();
 
@@ -119,12 +126,16 @@ public class BaukastenController {
 
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
-
+            
             if (fragment.getFragmenttype().getType().equals("karte")) {
                 model.addAttribute("gerichte", mandant.getGerichte());
-            } else if(fragment.getFragmenttype().getType().equals("kontakt")){
+            } else if (fragment.getFragmenttype().getType().equals("kontakt")){
                 // TODO: Kontakte des Mandanten ausgeben
                 model.addAttribute("kontakt", "getKontakt");
+            } else if (fragment.getFragmenttype().getType().equals("image")) {
+                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentimage().getImageBlob()));
+            } else if (fragment.getFragmenttype().getType().contains("header")) {
+                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentheader().getImageBlob()));
             }
         }
 
@@ -136,6 +147,8 @@ public class BaukastenController {
 
         Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
         Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position).get();
+
+        System.out.println("HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
         model.addAttribute("content", fragment);
         return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
@@ -175,19 +188,17 @@ public class BaukastenController {
                         fragmentServiceImpl.save(fragment);
                         break;
                         
-                    case "image":
-                        imageName = mandant.get().getFirmenname() + "-" + mandant.get().getId() + "-" + position.get().getName() + "." + image.get().getOriginalFilename().substring(image.get().getOriginalFilename().lastIndexOf(".") + 1);
-                        Util.saveFile("src/main/resources/static/images/", imageName, image.get());
-                        
+                    case "image":                  
                         FragmentImage fragmentImage = fragmentImageServiceImpl.save(
-                            new FragmentImage(null, result.get("title"), imageName, fragment)
-                            );
+                            new FragmentImage(null, result.get("title"), Base64.getEncoder().encode(image.get().getBytes()), fragment)
+                        );
                             
                         fragment.setFragmentimage(fragmentImage);
                         fragmentServiceImpl.save(fragment);
                         break;
 
                     case "header-1":
+                    case "header-2":
 
                         fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName()).get();
                         FragmentHeader fragmentHeader = fragmentHeaderServiceImpl.findFragmentheaderByFragment_id(fragment.getId()).get();
@@ -195,9 +206,7 @@ public class BaukastenController {
                         fragmentHeader.setText(result.get("text"));
                         
                         if(image.isPresent()) {
-                            imageName = mandant.get().getFirmenname() + "-" + mandant.get().getId() + "-" + position.get().getName() + "." + image.get().getOriginalFilename().substring(image.get().getOriginalFilename().lastIndexOf(".") + 1);
-                            Util.saveFile("src/main/resources/static/images/", imageName, image.get());
-                            fragmentHeader.setImage(imageName);
+                            fragmentHeader.setImageBlob(Base64.getEncoder().encode(image.get().getBytes()));
                         }
                         fragmentHeaderServiceImpl.save(fragmentHeader);
                         break;
@@ -209,11 +218,14 @@ public class BaukastenController {
 
         }
 
-            // Returning new Fragment
-            model.addAttribute("content", fragment);
-            model.addAttribute("edit", true);
-            model.addAttribute("position", position.get().getName());
-            return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
+        System.out.println(fragment.getFragmenttype().getType());
+        System.out.println(result.get("type"));
+
+        // Returning new Fragment
+        model.addAttribute("content", fragment);
+        model.addAttribute("edit", true);
+        model.addAttribute("position", position.get().getName());
+        return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
     }
 
     @PostMapping("baukasten/module/delete")
@@ -268,7 +280,12 @@ public class BaukastenController {
             Optional<Layout> layout = layoutServiceImpl.findLayoutByName(result.get("layout"));
             if(layout.isPresent()){
                 mandant.get().setLayout(layout.get());
+                Optional<Fragment> fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), "r1c1");
+                fragment.get().setFragmenttype(fragmentTypeServiceImpl.findFragmentTypeByType("header-" + layout.get().getId()).get());
+                fragmentServiceImpl.save(fragment.get());
             }
+
+
 
             mandantServiceImpl.save(mandant.get());
             
@@ -281,8 +298,6 @@ public class BaukastenController {
                         fragmentServiceImpl.delete(item);
                     }
                 });
-                
-                System.out.println("Done");
             }
 
         }

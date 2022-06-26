@@ -1,13 +1,13 @@
 <div th:fragment="header(content, edit, position)" class="fragment-header" name="header-1">
 
-    <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}" class="fragment-edit material-icons">edit</i>
+    <i th:if="${edit}" th:name="${position + '-header-1'}" class="fragment-edit material-icons">edit</i>
 
     <div class="fragment-header-column">
         <h1 th:text="${content.fragmentheader.titel}"></h1>
         <p th:text="${content.fragmentheader.text}"></p>
     </div>
     <div class="fragment-header-column">
-        <img th:src="'/images/' + ${content.fragmentheader.image}" alt="">
+        <img th:src="${'data:image/png;base64,'+ __${position + 'image'}__}" />
     </div>
   
   </div>

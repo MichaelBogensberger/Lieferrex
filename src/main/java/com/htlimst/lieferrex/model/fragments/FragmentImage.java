@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Blob;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import com.htlimst.lieferrex.model.Fragment;
@@ -26,8 +29,8 @@ public class FragmentImage {
     @NotEmpty
     private String titel;
 
-    @NotEmpty
-    private String image;
+    @Lob
+    private byte[] imageBlob;
 
     @OneToOne
     @JoinColumn(name="fragment_id")

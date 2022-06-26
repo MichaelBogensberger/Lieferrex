@@ -82,6 +82,12 @@ public class MandantServiceImpl implements MandantService {
     }
 
     @Override
+    public Optional<Mandant> findMandantById(Long id) {
+        return mandantRepository.findMandantById(id);
+    }
+
+
+    @Override
     public Mandant listAll() {
         return mandantRepository.getById(3L);
     }

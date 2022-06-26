@@ -17,6 +17,7 @@ public interface MandantService {
     void mandantLoeschenMitId(Long id);
     Optional<Mandant> findMandantByFirmenname(String name);
     Optional<Mandant> findMandantByAngestellterEmail(String email);
+    Optional<Mandant> findMandantById(Long id);
     Mandant listAll();
     void save(Mandant mandant);
     public List<MandantSuchDto> findMandantByPlz(String Adresse, boolean isGeöffnet, double lieferKosten, double mindestbestellwert, String kategorie) throws MandantNotFoundException;

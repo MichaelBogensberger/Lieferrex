@@ -4,7 +4,8 @@
 
   <div>
     <h2 th:text="${content.fragmentimage.titel}"></h2>
-    <img th:src="'/images/' + ${content.fragmentimage.image}" alt="">
+    <img th:src="${'data:image/png;base64,'+ __${position + 'image'}__}" />
+    
   </div>
 
 </div>
