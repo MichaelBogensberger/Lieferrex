@@ -59,10 +59,26 @@ $(document).ready(function(){
           
           case "saveContact":
             formData.append('data', JSON.stringify({
-              "title": $('#addConctactTitle').val(),
-              "text": $('#addContactText').val(),
               "position": pos,
-              "type": "contact"
+              "type": "kontakt"
+            }));
+            break;
+          case "saveZeiten":
+            formData.append('data', JSON.stringify({
+              "position": pos,
+              "type": "zeiten"
+            }));
+            break;
+          case "saveKarte":
+            formData.append('data', JSON.stringify({
+              "position": pos,
+              "type": "karte"
+            }));
+            break;
+          case "saveMap":
+            formData.append('data', JSON.stringify({
+              "position": pos,
+              "type": "map"
             }));
             break;
         }

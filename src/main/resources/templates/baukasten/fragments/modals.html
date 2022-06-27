@@ -1,6 +1,6 @@
 <div th:fragment="modals">
 
-<!-- ADD PAGE MODAL ---------------------------------->
+  <!-- ADD PAGE MODAL ---------------------------------->
 
   <div id="addPage" class="modal">
     <div class="modal-content">
@@ -17,13 +17,13 @@
 
     </div>
     <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
     </div>
   </div>
 
-<!----------------------------------------------------->
-<!-- Header Div MODAL ---------------------------------->
+  <!----------------------------------------------------->
+  <!-- Header Div MODAL ---------------------------------->
 
   <div id="editHeader" class="modal">
     <div class="modal-content">
@@ -32,58 +32,58 @@
       <br>
 
       <div class="row">
-      <form class="col l7">
-        <div class="row mb-0">
-          <div class="input-field col s9">
-            <i class="material-icons prefix">title</i>
-            <input id="editHeaderTitle" type="text" data-length="10" th:value="${r1c1.fragmentheader.titel}">
-            <label for="editHeaderTitle">Überschrift</label>
+        <form class="col l7">
+          <div class="row mb-0">
+            <div class="input-field col s9">
+              <i class="material-icons prefix">title</i>
+              <input id="editHeaderTitle" type="text" data-length="10" th:value="${r1c1.fragmentheader.titel}">
+              <label for="editHeaderTitle">Überschrift</label>
+            </div>
           </div>
-        </div>
 
-        <div class="row mb-0">
-          <div class="input-field col s9">
-            <i class="material-icons prefix">title</i>
-            <input id="editHeaderText" type="text" data-length="10" th:value="${r1c1.fragmentheader.text}">
-            <label for="editHeaderText">Text</label>
+          <div class="row mb-0">
+            <div class="input-field col s9">
+              <i class="material-icons prefix">title</i>
+              <input id="editHeaderText" type="text" data-length="10" th:value="${r1c1.fragmentheader.text}">
+              <label for="editHeaderText">Text</label>
+            </div>
           </div>
-        </div>
 
-        <div class="switch">
-          <label>
-            <span>Neues Bild hinzufügen</span>
-            <input id="headerImageNew" type="checkbox">
-            <span class="lever"></span>
-          </label>
-        </div>
+          <div class="switch">
+            <label>
+              <span>Neues Bild hinzufügen</span>
+              <input id="headerImageNew" type="checkbox">
+              <span class="lever"></span>
+            </label>
+          </div>
 
-        <div id="newImage" style="margin-bottom: 0 !important;" class="row" hidden>
+          <div id="newImage" style="margin-bottom: 0 !important;" class="row" hidden>
             <br>
             <div class="input-field col s9 marg-t-0">
-                <div class="file-field input-field">
+              <div class="file-field input-field">
                 <div class="btn">
-                    <span>Bild</span>
-                    <input id="editHeaderImage" type="file" multiple>
+                  <span>Bild</span>
+                  <input id="editHeaderImage" type="file" multiple>
                 </div>
                 <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
+                  <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
                 </div>
-                </div>
+              </div>
             </div>
-        </div>
-      </form>
-    
+          </div>
+        </form>
 
-      <div class="col l5">
-            <img th:src="@{../css/baukasten/overlayText.png}"  class="overlayImg">
-      </div>
+
+        <div class="col l5">
+          <img th:src="@{../css/baukasten/overlayText.png}" class="overlayImg">
+        </div>
 
       </div>
 
     </div>
     <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" id="saveHeader" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveHeader" class="modal-close waves-effect waves-green btn-flat">Speichern</a>
     </div>
   </div>
 
@@ -97,45 +97,34 @@
   <div id="selector" class="modal">
     <div class="modal-content">
       <h4>Element hinzufügen</h4>
-      <p>Du musst eines der Folgenden Elemente auswählen:</p>
+      <p>Wählen Sie eines dieser Elemente aus.</p>
 
       <h5>Empfohlen:</h5>
 
       <div class="collection">
+        <a href="#!" name="addKarte" class="AddFragment collection-item">Speisekarte</a>
         <a href="#!" name="addText" class="AddFragment collection-item">Titel mit Text</a>
         <a href="#!" name="addImage" class="AddFragment collection-item">Titel mit Bild</a>
-        <a href="#!" name="addContact" class="AddFragment collection-item">Kontaktinformationen</a>
-        <a href="#!" class="collection-item">Speisekarte</a>
-        <a href="#!" class="collection-item">...</a>
       </div>
 
       <h5>Sonstiges:</h5>
       <div class="collection">
-        <a href="#!" class="collection-item">Google Maps Standort</a>
-        <a href="#!" class="collection-item">...</a>
+        <a href="#!" name="addContact" class="AddFragment collection-item">Kontaktinformationen</a>
+        <a href="#!" name="addZeiten" class="AddFragment collection-item">Öffnungszeiten</a>
+        <a href="#!" name="addMap" class="AddFragment collection-item">Google-Map</a>
       </div>
 
 
     </div>
-    <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
-    </div>
+    <div class="modal-footer" style="height: 0;"></div>
   </div>
 
-<!-- Text Module Add Modal ---------------------------------->
-<!----------------------------------------------------->
+  <!-- Text Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
 
   <div id="addText" class="modal">
     <div class="modal-content">
       <h4>Titel mit Text Modul hinzufügen</h4>
-
-      <!-- <div class="row">
-        <div class="input-field">
-          <h5>Titel</h5>
-          <textarea id="addTextTitle" class="materialize-textarea"></textarea>
-        </div>
-      </div> -->
 
       <div class="row mb-0">
         <div class="input-field col s12">
@@ -144,13 +133,6 @@
           <label for="addTextTitle">Überschrift</label>
         </div>
       </div>
-
-      <!-- <div class="row">
-        <div class="input-field">
-          <h5>Text</h5>
-          <textarea id="addTextText" class="materialize-textarea"></textarea>
-        </div>
-      </div> -->
 
       <div class="row mb-0">
         <div class="input-field col s12">
@@ -162,121 +144,146 @@
 
     </div>
     <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-    <a href="#!" id="saveText" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveText" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
     </div>
   </div>
 
-<!----------------------------------------------------->
-<!-- Delete Modal ---------------------------------->
-<!----------------------------------------------------->
+  <!----------------------------------------------------->
+  <!-- Delete Modal ---------------------------------->
+  <!----------------------------------------------------->
 
-<div id="deleteFragment" class="modal">
-  <div class="modal-content">
-    <h4>Wollen Sie das Element wirklick loeschen?</h4>
+  <div id="deleteFragment" class="modal">
+    <div class="modal-content">
+      <h4>Wollen Sie das Element wirklick loeschen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+      <a href="#!" id="deleteFragmentConfirm" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
+    </div>
   </div>
-  <div class="modal-footer">
-  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
-  <a href="#!" id="deleteFragmentConfirm" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
-  </div>
-</div>
 
-<!----------------------------------------------------->
-<!-- Image Module Add Modal ---------------------------------->
-<!----------------------------------------------------->
+  <!----------------------------------------------------->
+  <!-- Image Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
 
-<div id="addImage" class="modal">
-  <div class="modal-content">
-    <h4>Titel und Bild Modul hinzufügen</h4>
+  <div id="addImage" class="modal">
+    <div class="modal-content">
+      <h4>Titel und Bild Modul hinzufügen</h4>
 
-    <div class="row mb-0">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">title</i>
-        <input id="addImageTitle" type="text" data-length="10">
-        <label for="addImageTitle">Überschrift</label>
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addImageTitle" type="text" data-length="10">
+          <label for="addImageTitle">Überschrift</label>
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="input-field col s12 marg-t-0">
+      <div class="row">
+        <div class="input-field col s12 marg-t-0">
           <div class="file-field input-field">
-          <div class="btn">
+            <div class="btn">
               <span>Bild</span>
               <input id="addImageFile" type="file" multiple>
-          </div>
-          <div class="file-path-wrapper">
+            </div>
+            <div class="file-path-wrapper">
               <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
+            </div>
           </div>
-          </div>
+        </div>
       </div>
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveImage" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
   </div>
 
+  <!----------------------------------------------------->
+  <!-- Contact Information Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="addContact" class="modal">
+    <div class="modal-content">
+      <h4>Kontaktinformationen hinzufügen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveContact" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
   </div>
-  <div class="modal-footer">
-  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-  <a href="#!" id="saveImage" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+
+  <!----------------------------------------------------->
+  <!-- Speisekarte Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="addKarte" class="modal">
+    <div class="modal-content">
+      <h4>Speisekarte hinzufügen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveKarte" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
   </div>
-</div>
 
-<!----------------------------------------------------->
-<!-- Contact Information Module Add Modal ---------------------------------->
-<!----------------------------------------------------->
+  <!----------------------------------------------------->
+  <!-- Zeiten Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
 
-<div id="addContact" class="modal">
-  <div class="modal-content">
-    <h4>Kontaktinformationen Modul hinzufügen</h4>
+  <div id="addZeiten" class="modal">
+    <div class="modal-content">
+      <h4>Öffnungszeiten hinzufügen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveZeiten" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
+  </div>
 
-    <div class="row">
-      <div class="input-field">
-        <h5>Titel</h5>
-        <textarea id="addContactTitle" class="materialize-textarea"></textarea>
+  <!----------------------------------------------------->
+  <!-- Map Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="addMap" class="modal">
+    <div class="modal-content">
+      <h4>Google-Map hinzufügen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveMap" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+  <!-- Change Layout Modal ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="changeLayout" class="modal">
+    <div class="modal-content">
+      <h4>Layout ändern</h4>
+
+      <div class="row layoutImages">
+        <figure><img name="layoutEINS" class="setLayout" th:src="@{/images/baukasten/layout-1.png}" alt=""></figure>
+        <figure><img name="layoutZWEI" class="setLayout" th:src="@{/images/baukasten/layout-2.png}" alt=""></figure>
+      </div>
+      <div class="row layoutImages">
+        <figure><img name="layoutDREI" class="setLayout" th:src="@{/images/baukasten/layout-3.png}" alt=""></figure>
+        <figure><img name="layoutVIER" class="setLayout" th:src="@{/images/baukasten/layout-4.png}" alt=""></figure>
       </div>
     </div>
-
-    <div class="row">
-      <div class="input-field">
-        <h5>Text (Optional)</h5>
-        <textarea id="addContactText" class="materialize-textarea"></textarea>
-      </div>
-    </div>
-
   </div>
-  <div class="modal-footer">
-  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-  <a href="#!" id="saveContact" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
-  </div>
-</div>
 
-<!----------------------------------------------------->
-<!-- Change Layout Modal ---------------------------------->
-<!----------------------------------------------------->
-
-<div id="changeLayout" class="modal">
-  <div class="modal-content">
-    <h4>Layout ändern</h4>
-
-    <div class="row layoutImages">
-      <figure><img name="layoutEINS" class="setLayout" th:src="@{/images/baukasten/layout-1.png}" alt=""></figure>
-      <figure><img name="layoutZWEI" class="setLayout" th:src="@{/images/baukasten/layout-2.png}" alt=""></figure>
+  <div id="warningLayout" class="modal">
+    <div class="modal-content">
+      <h4>Wollen Sie das Layout wirklich ändern?</h4>
+      <p>Achtung! Es werden alle bereits bestehenden Fragmente gelöscht.</p>
     </div>
-    <div class="row layoutImages">
-      <figure><img name="layoutDREI" class="setLayout" th:src="@{/images/baukasten/layout-3.png}" alt=""></figure>
-      <figure><img name="layoutVIER" class="setLayout" th:src="@{/images/baukasten/layout-4.png}" alt=""></figure>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+      <a href="#!" id="saveLayout" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
     </div>
   </div>
-</div>
 
-<div id="warningLayout" class="modal">
-  <div class="modal-content">
-    <h4>Wollen Sie das Layout wirklich ändern?</h4>
-    <p>Achtung! Es werden alle bereits bestehenden Fragmente gelöscht.</p>
-  </div>
-  <div class="modal-footer">
-  <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
-  <a href="#!" id="saveLayout" class="saveFragment modal-close waves-effect waves-green btn-flat">Ja</a>
-  </div>
-</div>
-
-<!----------------------------------------------------->
-
-
+  <!----------------------------------------------------->

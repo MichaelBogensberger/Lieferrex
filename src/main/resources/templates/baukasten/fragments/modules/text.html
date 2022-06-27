@@ -1,13 +1,9 @@
 <div th:fragment="text(content, edit, position)" class="fragment-text">
 
-  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}" class="fragment-delete material-icons">delete_forever</i>
+  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}"
+    class="fragment-delete material-icons">delete_forever</i>
 
-  <div th:if="${edit}">
-    <h2 th:text="${content.fragmenttext.titel}"></h2>
-    <p th:text="${content.fragmenttext.text}"></p>
-  </div>
-
-  <div th:unless="${edit}">
+  <div>
     <h2 th:text="${content.fragmenttext.titel}"></h2>
     <p th:text="${content.fragmenttext.text}"></p>
   </div>

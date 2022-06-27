@@ -99,23 +99,24 @@
 //          // Positions - Layout EINS
 //          positions.add(new Position(null, "r1c1", savedLayouts.get(0), null));
 //          positions.add(new Position(null, "r2c1", savedLayouts.get(0), null));
-//          positions.add(new Position(null, "r2c2", savedLayouts.get(0), null));
+//          positions.add(new Position(null, "r3c1", savedLayouts.get(0), null));
+//          positions.add(new Position(null, "r3c2", savedLayouts.get(0), null));
 
 //          // Positions - Layout ZWEI
 //          positions.add(new Position(null, "r1c1", savedLayouts.get(1), null));
 //          positions.add(new Position(null, "r2c1", savedLayouts.get(1), null));
+//          positions.add(new Position(null, "r2c2", savedLayouts.get(1), null));
 //          positions.add(new Position(null, "r3c1", savedLayouts.get(1), null));
-//          positions.add(new Position(null, "r3c2", savedLayouts.get(1), null));
 
 //          // Positions - Layout DREI
 //          positions.add(new Position(null, "r1c1", savedLayouts.get(2), null));
+//          positions.add(new Position(null, "r1c2", savedLayouts.get(2), null));
 //          positions.add(new Position(null, "r2c1", savedLayouts.get(2), null));
-//          positions.add(new Position(null, "r2c2", savedLayouts.get(2), null));
 //          positions.add(new Position(null, "r3c1", savedLayouts.get(2), null));
+//          positions.add(new Position(null, "r3c2", savedLayouts.get(2), null));
 
 //          // Positions - Layout VIER
 //          positions.add(new Position(null, "r1c1", savedLayouts.get(3), null));
-//          positions.add(new Position(null, "r1c2", savedLayouts.get(3), null));
 //          positions.add(new Position(null, "r2c1", savedLayouts.get(3), null));
 //          positions.add(new Position(null, "r3c1", savedLayouts.get(3), null));
 //          positions.add(new Position(null, "r3c2", savedLayouts.get(3), null));
@@ -130,7 +131,14 @@
 
 //          fragmentTypes.add(new FragmentType(null, "text", null));
 //          fragmentTypes.add(new FragmentType(null, "map", null));
-//          fragmentTypes.add(new FragmentType(null, "header", null));
+//          fragmentTypes.add(new FragmentType(null, "karte", null));
+//          fragmentTypes.add(new FragmentType(null, "image", null));
+//          fragmentTypes.add(new FragmentType(null, "zeiten", null));
+//          fragmentTypes.add(new FragmentType(null, "kontakt", null));
+//          fragmentTypes.add(new FragmentType(null, "header-1", null));
+//          fragmentTypes.add(new FragmentType(null, "header-2", null));
+//          fragmentTypes.add(new FragmentType(null, "header-3", null));
+//          fragmentTypes.add(new FragmentType(null, "header-4", null));
 
 //          for (FragmentType fragmentType : fragmentTypes) {
 //              fragmentTypeRepository.save(fragmentType);
@@ -177,51 +185,24 @@
 //          mandantRepository.save(mandant2);
 
 //          // |---------- Fragments
+
+//          // HIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRRHIERRRRRRRR
+
 //          ArrayList<Fragment> fragments = new ArrayList<>();
 
-//          fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(2), null, null, null,null));
-//          fragments.add(new Fragment(null, positions.get(1), mandant, fragmentTypes.get(1), null, null, null,null));
-//          fragments.add(new Fragment(null, positions.get(2), mandant, fragmentTypes.get(0), null, null, null,null));
-
-//          fragments.add(new Fragment(null, positions.get(3), mandant2, fragmentTypes.get(2), null, null, null,null));
-//          fragments.add(new Fragment(null, positions.get(4), mandant2, fragmentTypes.get(1), null, null, null,null));
-//          fragments.add(new Fragment(null, positions.get(5), mandant2, fragmentTypes.get(0), null, null, null,null));
-//          fragments.add(new Fragment(null, positions.get(6), mandant2, fragmentTypes.get(0), null, null, null,null));
+//          fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(6), null, null, null,null));
 
 //          for (Fragment fragment : fragments) {
 //              fragmentRepository.save(fragment);
 //          }
 
-//          // |--------- FragmentTexts
-//          ArrayList<FragmentText> fragmenttexts = new ArrayList<>();
-
-//          fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(2)));
-
-//          fragmenttexts.add(new FragmentText(null, "Cooler Titel Drei", "Cooler Text des dritten Fragments", "#00ff00", fragments.get(5)));
-//          fragmenttexts.add(new FragmentText(null, "Cooler Titel Vier", "Cooler Text des vierten Fragments", "#00ff00", fragments.get(6)));
-
-//          for (FragmentText fragmentText : fragmenttexts) {
-//              fragmentTextRepository.save(fragmentText);
-//          }
-
 //          // |--------- FragmentHeaders
 //          ArrayList<FragmentHeader> fragmentheaders = new ArrayList<>();
 
-//          fragmentheaders.add(new FragmentHeader(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "/restaurant/img1.png", fragments.get(0)));
-//          fragmentheaders.add(new FragmentHeader(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", "/restaurant/img2.png", fragments.get(3)));
+//          fragmentheaders.add(new FragmentHeader(null, "Cooler Titel Eins", "Cooler Text des ersten Fragments", null, fragments.get(0)));
 
 //          for (FragmentHeader fragmentHeader : fragmentheaders) {
 //              fragmentHeaderRepository.save(fragmentHeader);
-//          }
-
-//          // |--------- FragmentMaps
-//          ArrayList<FragmentMap> fragmentmaps = new ArrayList<>();
-
-//          fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(1)));
-//          fragmentmaps.add(new FragmentMap(null, "123456", "987654", fragments.get(4)));
-
-//          for (FragmentMap fragmentMap : fragmentmaps) {
-//              fragmentMapRepository.save(fragmentMap);
 //          }
 
 

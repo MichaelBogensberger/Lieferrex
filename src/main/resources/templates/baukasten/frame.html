@@ -6,7 +6,7 @@
     <title th:text="${restaurantName}"></title>
 
     <link th:href="@{/css/baukasten/baukasten.css}" rel="stylesheet" />
-
+    <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script>
     <div th:replace="baukasten/fragments/header"></div>
 
 </head>
@@ -40,12 +40,13 @@
 
     <div th:replace="${edit} ? ~{baukasten/fragments/sidenav} : ~{}"></div>
 
-<!-- ----------------------------------------- -->
+    <!-- ----------------------------------------- -->
 
     <div th:replace="'baukasten/layouts/' + ${layout}"></div>
 
     <div class="result"></div>
 
-    </body>
-    <script type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>
+</body>
+<script th:if="${edit}" type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>
+
 </html>

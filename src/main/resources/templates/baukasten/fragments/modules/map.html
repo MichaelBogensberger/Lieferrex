@@ -1,11 +1,19 @@
-<div th:fragment="maps(content, edit, position)" class="fragment-map">
-  <img src="https://via.placeholder.com/900x900">
-  <h1 th:text="${token}"></h1>
+<div th:fragment="map(content, edit, position)" class="fragment-text">
+
+  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}"
+    class="fragment-delete material-icons">delete_forever</i>
+
+  <div class="row">
+    <h1>Unser Standort</h1>
+  </div>
+  <div class="row center" style="width: 100%;">
+    <div class="mapouter">
+      <div class="gmap_canvas center"><iframe id="gmap_canvas" style="height: 20em; width: 100%;"
+          th:src="${'https://maps.google.com/maps?q=' + lat + ',' + long + '&t=&z=17&ie=UTF8&iwloc=&output=embed'}"
+          frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+          href="https://putlocker-is.org"></a>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-    <!-- <p>Karte Location</p>
-    <img src="https://via.placeholder.com/150" alt="">
-    <p th:text="${content.fragmentmap.longitude}"></p>
-    <p th:text="${content.fragmentmap.latitude}"></p> -->
-
-    <!-- <p th:text="|${content.fragmentmap.longitude} + ${content.fragmentmap.latitude}|"></p> -->

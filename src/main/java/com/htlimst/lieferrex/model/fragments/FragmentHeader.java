@@ -29,7 +29,6 @@ public class FragmentHeader {
     @NotEmpty
     private String text;
 
-    @NotEmpty
     @Lob
     private byte[] imageBlob;
 

@@ -1,27 +1,41 @@
-<div th:fragment="layoutEINS">
+<div class="layoutBody" th:fragment="layoutVIER" th:style="${edit == true ? 'padding-left: 300px' : ''}">
     <div class="row ">
-        <div class="col s12 m5 l3  header-div">
-            <div th:replace="'baukasten/fragments/modules/' + ${r1c1.fragmenttype.type}(content=${r1c1})"></div>
-        </div>
-        <div class="col s12 m7 l9 header-div">
-            <div th:replace="'baukasten/fragments/modules/' + ${r1c2.fragmenttype.type}(content=${r1c2})"></div>
-        </div>
-    </div>
-    
-    
-    <div class="row">
-        <div class="col s12 m7 l9 main-right">
-            <div th:replace="'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1})"></div>
-        </div>
-        <div class="col s12 m5 l3 main-right">
-            <div th:replace="'baukasten/fragments/modules/' + ${r2c2.fragmenttype.type}(content=${r2c2})"></div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col s12 m12 l12 main-right">
-            <div th:replace="'baukasten/fragments/modules/' + ${r3c1.fragmenttype.type}(content=${r3c1})"></div>
+        <div id="r1c1" class="col s12 m12 l12">
+            <div th:replace="${r1c1} 
+                                 ? ~{baukasten/fragments/modules/header-4(content=${r1c1}, edit=${edit}, position='r1c1')}
+                                 : (${edit} 
+                                    ? ~{baukasten/fragments/modules/add(position='r1c1')} 
+                                    : ~{})"></div>
         </div>
     </div>
 
+    <div class="row">
+        <div id="r2c1" class="col s12 m12 l12">
+            <div th:replace="${r2c1} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r2c1.fragmenttype.type}(content=${r2c1}, edit=${edit}, position='r2c1')}
+                                 : (${edit} 
+                                    ? ~{baukasten/fragments/modules/add(position='r2c1')} 
+                                    : ~{})"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="r3c1" class="col s12 m12 l7">
+            <div th:replace="${r3c1} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r3c1.fragmenttype.type}(content=${r3c1}, edit=${edit}, position='r3c1')}
+                                 : (${edit} 
+                                    ? ~{baukasten/fragments/modules/add(position='r3c1')} 
+                                    : ~{})"></div>
+        </div>
+
+
+
+        <div id="r3c2" class="col s12 m12 l5">
+            <div th:replace="${r3c2} 
+                                 ? ~{'baukasten/fragments/modules/' + ${r3c2.fragmenttype.type}(content=${r3c2}, edit=${edit}, position='r3c2')} 
+                                 : (${edit} 
+                                    ? ~{baukasten/fragments/modules/add(position='r3c2')} 
+                                    : ~{})"></div>
+        </div>
+    </div>
 </div>

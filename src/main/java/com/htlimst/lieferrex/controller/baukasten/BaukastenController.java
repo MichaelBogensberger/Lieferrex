@@ -30,6 +30,7 @@ import com.htlimst.lieferrex.model.fragments.FragmentImage;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
 import com.htlimst.lieferrex.repository.AngestellterRepository;
+import com.htlimst.lieferrex.repository.OeffnungszeitRepository;
 import com.htlimst.lieferrex.repository.PositionRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentheader.FragmentHeaderServiceImpl;
@@ -88,6 +89,36 @@ public class BaukastenController {
     @Autowired
     LayoutServiceImpl layoutServiceImpl;
 
+    @Autowired
+    OeffnungszeitRepository oeffnungszeitRepository;
+
+    public void allFragments(List<Fragment> fragments, Model model, Mandant mandant){
+        for (Fragment fragment : fragments) {
+            model.addAttribute(fragment.getPosition().getName(), fragment);
+            
+            if (fragment.getFragmenttype().getType().equals("karte")) {
+                model.addAttribute("gerichte", mandant.getGerichte());
+            } else if (fragment.getFragmenttype().getType().equals("kontakt")){
+                model.addAttribute("kontaktstrasse", mandant.getStrasse());
+                model.addAttribute("kontaktnummer", mandant.getHausnummer());
+                model.addAttribute("kontaktort", mandant.getOrt());
+                model.addAttribute("kontaktplz", mandant.getPlz());
+                model.addAttribute("kontaktmail", mandant.getEmail());
+                model.addAttribute("kontakttelefon", mandant.getTelefonnummer());
+            } else if (fragment.getFragmenttype().getType().equals("image")) {
+                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentimage().getImageBlob()));
+            } else if (fragment.getFragmenttype().getType().contains("header")) {
+                byte[] bytes = fragment.getFragmentheader().getImageBlob();
+                if(bytes != null){ model.addAttribute(fragment.getPosition().getName() + "image", new String((fragment.getFragmentheader().getImageBlob()))); }
+            } else if (fragment.getFragmenttype().getType().contains("zeiten")) {
+                model.addAttribute("zeiten", oeffnungszeitRepository.findOeffnungszeitByMandant(mandant));
+            } else if (fragment.getFragmenttype().getType().contains("map")) {
+                model.addAttribute("lat", mandant.getGeoPosition().getGeoLat());
+                model.addAttribute("long", mandant.getGeoPosition().getGeoLng());
+            }
+        }
+    }
+
     @GetMapping("/restaurant/{restaurant}")
     public String showRestaurant(Model model, @PathVariable Long restaurant){
 
@@ -96,18 +127,9 @@ public class BaukastenController {
 
         // Layout des Mandanten der VIEW uebergeben
         model.addAttribute("layout", mandant.getLayout().getName());
+        model.addAttribute("restaurantName", mandant.getFirmenname());
 
-        for (Fragment fragment : fragments) {
-            model.addAttribute(fragment.getPosition().getName(), fragment);
-
-            // Datenermittlung bei Ausgabe von Karte, Kontakt, etc.
-            if (fragment.getFragmenttype().getType().equals("karte")) {
-                model.addAttribute("gerichte", mandant.getGerichte());
-            } else if(fragment.getFragmenttype().getType().equals("kontakt")){
-                // TODO: Kontakte des Mandanten ausgeben
-                model.addAttribute("kontakt", "getKontakt");
-            }
-        }
+        allFragments(fragments, model, mandant);
                 
         return "baukasten/frame";
     }
@@ -116,43 +138,28 @@ public class BaukastenController {
     public String showBaukasten(Model model, Authentication authentication) {
 
         Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();
+        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("edit", true);
         model.addAttribute("restaurantName", mandant.getFirmenname());
 
-        List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
-        model.addAttribute("layout", mandant.getLayout().getName());
-
-        for (Fragment fragment : fragments) {
-            model.addAttribute(fragment.getPosition().getName(), fragment);
-            
-            if (fragment.getFragmenttype().getType().equals("karte")) {
-                model.addAttribute("gerichte", mandant.getGerichte());
-            } else if (fragment.getFragmenttype().getType().equals("kontakt")){
-                // TODO: Kontakte des Mandanten ausgeben
-                model.addAttribute("kontakt", "getKontakt");
-            } else if (fragment.getFragmenttype().getType().equals("image")) {
-                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentimage().getImageBlob()));
-            } else if (fragment.getFragmenttype().getType().contains("header")) {
-                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentheader().getImageBlob()));
-            }
-        }
+        allFragments(fragments, model, mandant);
 
         return "baukasten/frame";
     }
 
-    @GetMapping("/baukasten/module/{position}")
-    public String getModule(Authentication authentication, Model model, @PathVariable String position, @RequestParam String token){
+    // @GetMapping("/baukasten/module/{position}")
+    // public String getModule(Authentication authentication, Model model, @PathVariable String position, @RequestParam String token){
 
-        Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
-        Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position).get();
+    //     Optional<Mandant> mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName());
+    //     Fragment fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position).get();
 
-        System.out.println("HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //     System.out.println("HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-        model.addAttribute("content", fragment);
-        return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
-    }
+    //     model.addAttribute("content", fragment);
+    //     return "baukasten/fragments/modules/" + fragment.getFragmenttype().getType();
+    // }
 
     @PostMapping("/baukasten/module/save")
     public String saveModule(Authentication authentication, Model model, @RequestParam String data, @RequestParam Optional<MultipartFile> image) throws IOException {
@@ -171,9 +178,13 @@ public class BaukastenController {
             if(position.isPresent() && fragmenttype.isPresent()){
 
                 // Fragment wether editing Header or adding new Fragment -----------------------------------------------------
-                if(!fragmenttype.get().getType().contains("header")){
+                if(!(fragmenttype.get().getType().contains("header") 
+                    || fragmenttype.get().getType().contains("kontakt") 
+                    || fragmenttype.get().getType().contains("zeiten")
+                    || fragmenttype.get().getType().contains("karte")
+                    || fragmenttype.get().getType().contains("map"))){
                     fragment = fragmentServiceImpl.save(
-                        new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null));    
+                        new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null));
                 }
                 // Fragment wether editing Header or adding new Fragment -----------------------------------------------------
 
@@ -192,6 +203,8 @@ public class BaukastenController {
                         FragmentImage fragmentImage = fragmentImageServiceImpl.save(
                             new FragmentImage(null, result.get("title"), Base64.getEncoder().encode(image.get().getBytes()), fragment)
                         );
+
+                        model.addAttribute(fragment.getPosition().getName() + "image", new String(fragmentImage.getImageBlob()));
                             
                         fragment.setFragmentimage(fragmentImage);
                         fragmentServiceImpl.save(fragment);
@@ -199,6 +212,8 @@ public class BaukastenController {
 
                     case "header-1":
                     case "header-2":
+                    case "header-3":
+                    case "header-4":
 
                         fragment = fragmentServiceImpl.findFragmentByMandant_idAndPosition_name(mandant.get().getId(), position.get().getName()).get();
                         FragmentHeader fragmentHeader = fragmentHeaderServiceImpl.findFragmentheaderByFragment_id(fragment.getId()).get();
@@ -207,8 +222,46 @@ public class BaukastenController {
                         
                         if(image.isPresent()) {
                             fragmentHeader.setImageBlob(Base64.getEncoder().encode(image.get().getBytes()));
+                            model.addAttribute(fragment.getPosition().getName() + "image", new String(fragmentHeader.getImageBlob()));
                         }
                         fragmentHeaderServiceImpl.save(fragmentHeader);
+                        break;
+                    
+                    case "kontakt":
+                        fragment = fragmentServiceImpl.save(
+                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null)
+                        );
+
+                        model.addAttribute("kontaktstrasse", mandant.get().getStrasse());
+                        model.addAttribute("kontaktnummer", mandant.get().getHausnummer());
+                        model.addAttribute("kontaktort", mandant.get().getOrt());
+                        model.addAttribute("kontaktplz", mandant.get().getPlz());
+                        model.addAttribute("kontaktmail", mandant.get().getEmail());
+                        model.addAttribute("kontakttelefon", mandant.get().getTelefonnummer());
+
+                        break;
+
+                    case "zeiten":
+                        fragment = fragmentServiceImpl.save(
+                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null)
+                        );
+
+                        model.addAttribute("zeiten", oeffnungszeitRepository.findOeffnungszeitByMandant(mandant.get()));
+                        break;
+                    case "karte":
+                        fragment = fragmentServiceImpl.save(
+                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null)
+                        );
+
+                        model.addAttribute("gerichte", mandant.get().getGerichte());
+                        break;
+                    case "map":
+                        fragment = fragmentServiceImpl.save(
+                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null, null)
+                        );
+
+                        model.addAttribute("lat", mandant.get().getGeoPosition().getGeoLat());
+                        model.addAttribute("long", mandant.get().getGeoPosition().getGeoLng());
                         break;
 
                     default:
@@ -217,9 +270,6 @@ public class BaukastenController {
             }
 
         }
-
-        System.out.println(fragment.getFragmenttype().getType());
-        System.out.println(result.get("type"));
 
         // Returning new Fragment
         model.addAttribute("content", fragment);
@@ -251,6 +301,7 @@ public class BaukastenController {
                         Optional<FragmentImage> fragmentImage = fragmentImageServiceImpl.findFragmentimageByFragment_id(fragment.get().getId());
                         fragmentImageServiceImpl.delete(fragmentImage.get());
                         break;
+                    
                 }
 
                 fragmentServiceImpl.delete(fragment.get());
@@ -284,8 +335,6 @@ public class BaukastenController {
                 fragment.get().setFragmenttype(fragmentTypeServiceImpl.findFragmentTypeByType("header-" + layout.get().getId()).get());
                 fragmentServiceImpl.save(fragment.get());
             }
-
-
 
             mandantServiceImpl.save(mandant.get());
             
