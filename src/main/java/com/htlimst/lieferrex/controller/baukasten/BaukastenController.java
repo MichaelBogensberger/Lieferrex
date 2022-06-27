@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
+//import java.net.http.HttpHeaders;
 import java.security.Principal;
 import java.sql.Blob;
 import java.util.Base64;
