@@ -1,27 +1,15 @@
 package com.htlimst.lieferrex.controller.baukasten;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-//import java.net.http.HttpHeaders;
-import java.security.Principal;
-import java.sql.Blob;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
-import javax.swing.ImageIcon;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.htlimst.lieferrex.model.Angestellter;
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Gericht;
 import com.htlimst.lieferrex.model.Layout;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.Position;
@@ -31,7 +19,6 @@ import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
 import com.htlimst.lieferrex.repository.AngestellterRepository;
 import com.htlimst.lieferrex.repository.OeffnungszeitRepository;
-import com.htlimst.lieferrex.repository.PositionRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentheader.FragmentHeaderServiceImpl;
 import com.htlimst.lieferrex.service.fragmentimage.FragmentImageServiceImpl;
@@ -41,21 +28,14 @@ import com.htlimst.lieferrex.service.layout.LayoutServiceImpl;
 import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 import com.htlimst.lieferrex.service.position.PositionServiceImpl;
 
-import com.htlimst.lieferrex.service.Util;
 
-import org.apache.tomcat.util.http.fileupload.FileUpload;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,10 +86,9 @@ public class BaukastenController {
                 model.addAttribute("kontaktmail", mandant.getEmail());
                 model.addAttribute("kontakttelefon", mandant.getTelefonnummer());
             } else if (fragment.getFragmenttype().getType().equals("image")) {
-                model.addAttribute(fragment.getPosition().getName() + "image", new String(fragment.getFragmentimage().getImageBlob()));
+                if (fragment.getFragmentimage().getImageBlob() != null) { model.addAttribute(fragment.getPosition().getName() + "image", new String((fragment.getFragmentimage().getImageBlob()))); }
             } else if (fragment.getFragmenttype().getType().contains("header")) {
-                byte[] bytes = fragment.getFragmentheader().getImageBlob();
-                if(bytes != null){ model.addAttribute(fragment.getPosition().getName() + "image", new String((fragment.getFragmentheader().getImageBlob()))); }
+                if (fragment.getFragmentheader().getImageBlob() != null){ model.addAttribute(fragment.getPosition().getName() + "image", new String((fragment.getFragmentheader().getImageBlob()))); }
             } else if (fragment.getFragmenttype().getType().contains("zeiten")) {
                 model.addAttribute("zeiten", oeffnungszeitRepository.findOeffnungszeitByMandant(mandant));
             } else if (fragment.getFragmenttype().getType().contains("map")) {
