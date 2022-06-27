@@ -155,11 +155,6 @@ public class MainController {
         return "dashboard/bewertungen.html";
     }
 
-    @GetMapping("/dashboard/zahlungen")
-    public String showDashboardZahlungen() {
-        return "dashboard/zahlungen.html";
-    }
-
 
     @GetMapping("/changeAddress")
     public String showChangeAddressPage() {

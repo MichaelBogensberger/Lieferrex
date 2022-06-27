@@ -200,7 +200,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-credit-card  text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0" >8.923 Zahlungen</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${zahlung.zahlungen} + ' Zahlungen'">8.923 Zahlungen</h2>
                                 </div>
                             </div>
 
@@ -219,7 +219,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-shopping-cart text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">13,2€ pro Bestellung</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${zahlung.proBestellung} + '€ pro Bestellung'">13,2€ pro Bestellung</h2>
                                 </div>
                             </div>
 
@@ -243,7 +243,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-money  text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">329€ diesen Monat</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${zahlung.diesenMonat} + ' diesen Monat'">329€ diesen Monat</h2>
                                 </div>
                             </div>
 
@@ -305,15 +305,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <ul class="list-group">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Umsatz:</p>
-                                                <span class="badge badge-primary badge-pill">230 €</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.umsatzImMonat} + ' €'">230 €</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Zahlungen:</p>
-                                                <span class="badge badge-primary badge-pill">32 orders</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.anzahlAnOrdersImMonat} + ' orders'">32 orders</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Ø pro Bestellung:</p>
-                                                <span class="badge badge-primary badge-pill">21,3 €</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.durschnittProBestellungImMonat} + ' €'">21,3 €</span>
                                             </li>
                                         </ul>
                                         </div>
@@ -330,15 +330,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <ul class="list-group">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Umsatz:</p>
-                                                <span class="badge badge-primary badge-pill">20.351 €</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.umsatzImJahr} + ' €'">20.351 €</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Zahlungen:</p>
-                                                <span class="badge badge-primary badge-pill">1.954 orders</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.anzahlAnOrdersImJahr} + ' orders'">1.954 orders</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Ø pro Bestellung:</p>
-                                                <span class="badge badge-primary badge-pill">12,3 €</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.durchschnittProBestellungImJahr} + ' €'">12,3 €</span>
                                             </li>
                                         </ul>
                                         </div>
@@ -365,41 +365,18 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                                 <th class="d-none d-md-table-cell">Datum</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody th:each="bestellung : ${zahlung.kunde}">
                                                 <tr>
-                                                    <td class=" d-md-table-cell">
+                                                    <td class=" d-md-table-cell" th:text="${bestellung.bestellung.kunde.vorname} + ' ' + ${bestellung.bestellung.kunde.nachname}">
                                                         Niklas G.
                                                     </td>
-                                                    <td class="d-none d-md-table-cell">
+                                                    <td class="d-none d-md-table-cell" th:text="${bestellung.bestellung.gesamtpreis} + ' €'">
                                                         12,30 €
                                                     </td>
-                                                    <td class="d-none d-md-table-cell">
+                                                    <td class="d-none d-md-table-cell" th:text="${bestellung.datum}">
                                                         16.06.2022
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class=" d-md-table-cell">
-                                                        julian M.
-                                                    </td>
-                                                    <td class="d-none d-md-table-cell">
-                                                        32,20 €
-                                                    </td>
-                                                    <td class="d-none d-md-table-cell">
-                                                        13.02.2022
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class=" d-md-table-cell">
-                                                        Michael B.
-                                                    </td>
-                                                    <td class="d-none d-md-table-cell">
-                                                        33,30 €
-                                                    </td>
-                                                    <td class="d-none d-md-table-cell">
-                                                        02.06.2021
-                                                    </td>
-                                                </tr>
-
 
                                             </tbody>
                                         </table>
