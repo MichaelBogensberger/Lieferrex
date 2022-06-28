@@ -104,7 +104,8 @@ public class ZahlungController {
             proBestellung += bestellung.getGesamtpreis();
 
         }
-        if(durschnittProBestellungImMonat != 0.0 && durchschnittProBestellungImJahr != 0.0){
+
+        if(diesenMonat != 0.0 && jahresUmsatz != 0.0){
             proBestellung = proBestellung/(alleBestellungenList.size());
             durschnittProBestellungImMonat = diesenMonat / anzahlAnOrdersImMonat;
             durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImMonat;
