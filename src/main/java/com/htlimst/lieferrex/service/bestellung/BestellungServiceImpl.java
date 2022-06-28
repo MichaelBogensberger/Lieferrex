@@ -31,10 +31,10 @@ public class BestellungServiceImpl implements BestellungService{
     private GerichtRepository gerichtRepository;
     private BestellartRepository bestellartRepository;
     private GerichtBestellungRepository gerichtBestellungRepository;
+    private UmsatzRepository umsatzRepository;
 
     @Autowired
-    public BestellungServiceImpl(BestellungRepository bestellungRepository, KundeRepository kundeRepository, MandantRepository mandantRepository,
-                                 BestellstatusRepository bestellstatusRepository, GerichtRepository gerichtRepository, BestellartRepository bestellartRepository, GerichtBestellungRepository gerichtBestellungRepository) {
+    public BestellungServiceImpl(BestellungRepository bestellungRepository, KundeRepository kundeRepository, MandantRepository mandantRepository, BestellstatusRepository bestellstatusRepository, GerichtRepository gerichtRepository, BestellartRepository bestellartRepository, GerichtBestellungRepository gerichtBestellungRepository, UmsatzRepository umsatzRepository) {
         this.bestellungRepository = bestellungRepository;
         this.kundeRepository = kundeRepository;
         this.mandantRepository = mandantRepository;
@@ -42,11 +42,8 @@ public class BestellungServiceImpl implements BestellungService{
         this.gerichtRepository = gerichtRepository;
         this.bestellartRepository = bestellartRepository;
         this.gerichtBestellungRepository = gerichtBestellungRepository;
+        this.umsatzRepository = umsatzRepository;
     }
-
-
-
-
 
     @Override
     public List<Bestellung> alleBestellungen(Long mandantId, Bestellstatus bestellstatus) {
@@ -141,6 +138,12 @@ public class BestellungServiceImpl implements BestellungService{
 
         return null;
     }
+
+    @Override
+    public List<Bestellung> alleBestellungenByMandant(long mandantid) {
+        return bestellungRepository.getBestellungByMandant_Id(mandantid);
+    }
+
 
     @Override
     public Bestellung bestellungByIdAnzeigen(long bestellid) {

@@ -19,5 +19,5 @@ public interface BestellungService {
     void save(Bestellung bestellung);
     BezahlDto getBezahlDto(EinkaufswagenDto einkaufswagenDto);
     BestellDto getBestellDto(String KundenEmail);
-
+    public List<Bestellung> alleBestellungenByMandant(long mandantid);
 }

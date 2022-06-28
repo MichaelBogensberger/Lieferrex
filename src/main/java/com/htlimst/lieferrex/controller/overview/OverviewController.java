@@ -1,9 +1,14 @@
 package com.htlimst.lieferrex.controller.overview;
 
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.enums.BestellartEnum;
+import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
+import com.htlimst.lieferrex.repository.BestellungRepository;
 import com.htlimst.lieferrex.repository.SeitenaufrufeRepository;
 import com.htlimst.lieferrex.repository.UmsatzRepository;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
+import com.htlimst.lieferrex.service.bestellung.BestellungService;
+import com.htlimst.lieferrex.service.bestellung.BestellungServiceImpl;
 import com.htlimst.lieferrex.service.gericht.GerichtService;
 import com.htlimst.lieferrex.service.mandant.MandantService;
 import com.htlimst.lieferrex.service.overview.OverviewService;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,25 +33,38 @@ public class OverviewController {
 
     public OverviewService overviewService;
     public AngestellterService angestellterService;
+    public BestellungService bestellungService;
 
     @Autowired
-    public OverviewController(OverviewService overviewService, AngestellterService angestellterService) {
+    public OverviewController(OverviewService overviewService, AngestellterService angestellterService, BestellungService bestellungService) {
         this.overviewService = overviewService;
         this.angestellterService = angestellterService;
+        this.bestellungService = bestellungService;
     }
+
 
     @GetMapping
     public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model, HttpServletResponse response){
-        System.out.println("load dashboard");
-        
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
-        System.out.println(foundMandant.getEmail());
+
         Seitenaufrufe seitenaufrufe = overviewService.seitenaufrufe(foundMandant);
-        Umsatz umsatz = overviewService.umsatz(foundMandant);
         long verkaufteGerichte = overviewService.getVerkaufteGerichte(foundMandant.getId());
+
+        List<Umsatz> alleUmsaetzeByMandant = overviewService.alleUmsaetzeByMandant(foundMandant);
+        double umsatzSumme = 0.0;
+
+        if(overviewService.checkIfUmsatzImMonatVorhanden(foundMandant)){
+            for (Umsatz umsatz : alleUmsaetzeByMandant){
+                if (umsatz.getMonat() == LocalDateTime.now().getMonthValue()){
+                    umsatzSumme += umsatz.getUmsatz();
+                }
+            }
+        }
+
+
         model.addAttribute("seitenaufrufe", seitenaufrufe.getAufrufe());
-        model.addAttribute("umsatz", umsatz.getUmsatz());
+        model.addAttribute("umsatz", umsatzSumme);
         model.addAttribute("gerichteVerkauft", verkaufteGerichte);
 
 

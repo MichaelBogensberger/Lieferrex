@@ -243,7 +243,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-money  text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0" th:text="${zahlung.diesenMonat} + ' diesen Monat'">329€ diesen Monat</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${umsatzGesamt} + ' € Umsatz ges.'">329€ diesen Monat</h2>
                                 </div>
                             </div>
 
@@ -305,7 +305,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                         <ul class="list-group">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Umsatz:</p>
-                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.umsatzImMonat} + ' €'">230 €</span>
+                                                <span class="badge badge-primary badge-pill" th:text="${zahlung.diesenMonat} + ' €'">230 €</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="text-truncate mt-0 mb-0">Zahlungen:</p>
@@ -445,10 +445,31 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <!-- Halfmoon JS -->
 <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var datumUmsatz = /*[[${datumUmsatz}]]*/ null;
+    var valueUmsatz = /*[[${valueUmsatz}]]*/ null;
+    var bestellungenImJahr = /*[[${bestellungenImJahr}]]*/ null;
+    /*]]>*/
+    var datumBestellung = [];
+    var valueBestellung = [];
+
+    Object.entries(bestellungenImJahr).forEach(([key, value]) => {
+        datumBestellung.push(key);
+        valueBestellung.push(value);
+    })
+    console.log(datumBestellung);
+    console.log(valueBestellung);
+
+</script>
+
+
+
 <script>
-    var xValues = ['Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-    var yValues = [null, 700,800,485,900,900,901,1120,121,142,144,825];
-    
+    var xValues = datumUmsatz;
+    var yValues = valueUmsatz;
+
     new Chart("umsatzChart", {
       type: "line",
       data: {
@@ -497,8 +518,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
 
-        var xValuesBar =  ['Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-        var yValuesBar = [null, 22, 33, 55, 49, 44, 24, 15, 32, 21, 32, 33];
+        var xValuesBar =  datumBestellung;
+        var yValuesBar = valueBestellung;
         var barColorsBar = ["red", "green","blue","orange","brown"];
 
         new Chart("bestellungenChart", {

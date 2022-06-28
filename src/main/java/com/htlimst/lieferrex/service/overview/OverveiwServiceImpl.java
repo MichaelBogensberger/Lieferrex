@@ -7,6 +7,7 @@ import com.htlimst.lieferrex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -55,6 +56,23 @@ public class OverveiwServiceImpl implements OverviewService {
     @Override
     public List<Gericht> anzahlGeakuft(long mandantId) {
         return gerichtRepository.getAllByMandant_Id(mandantId);
+    }
+
+    @Override
+    public List<Umsatz> alleUmsaetzeByMandant(Mandant mandant) {
+        return this.umsatzRepository.getAllByMandant(mandant);
+    }
+
+    @Override
+    public boolean checkIfUmsatzImMonatVorhanden(Mandant mandant) {
+
+        Umsatz umsatz = umsatzRepository.findFirstByMandantOrderByJahrDescMonatDesc(mandant);
+
+        if(umsatz.getMonat() != LocalDateTime.now().getMonthValue()){
+            umsatzRepository.save(new Umsatz(null, LocalDateTime.now().getMonthValue(), LocalDateTime.now().getYear(), 0, mandant));
+            return false;
+        }
+        return true;
     }
 
 

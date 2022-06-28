@@ -9,6 +9,7 @@ import com.htlimst.lieferrex.service.bestellung.BestellungService;
 import com.htlimst.lieferrex.service.overview.OverviewService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import com.htlimst.lieferrex.service.zahlung.ZahlungService;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.util.*;
+import java.util.function.DoubleBinaryOperator;
 
 @Controller
 @RequestMapping("/dashboard/zahlungen")
@@ -33,11 +36,13 @@ public class ZahlungController {
 
     private ZahlungService zahlungService;
     private AngestellterService angestellterService;
+    private OverviewService overviewService;
 
     @Autowired
-    public ZahlungController(ZahlungService zahlungService, AngestellterService angestellterService) {
+    public ZahlungController(ZahlungService zahlungService, AngestellterService angestellterService, OverviewService overviewService) {
         this.zahlungService = zahlungService;
         this.angestellterService = angestellterService;
+        this.overviewService = overviewService;
     }
 
     @GetMapping
@@ -65,23 +70,34 @@ public class ZahlungController {
         List<Bestellung> letztenDreiBestellungen = zahlungService.letztenDreiBestellungne(foundMandant.getId());
         List<KundeUndDatumModel> kunde = new ArrayList<>();
 
+        List<Umsatz> umsatzList = overviewService.alleUmsaetzeByMandant(foundMandant);
+
         for (Bestellung bestellung : letztenDreiBestellungen){
             kunde.add(new KundeUndDatumModel(bestellung, bestellung.getBestelldatum().toLocalDateTime().getDayOfMonth() + "." + bestellung.getBestelldatum().toLocalDateTime().getMonthValue() + "." + bestellung.getBestelldatum().toLocalDateTime().getYear()));
+        }
+
+        if (overviewService.checkIfUmsatzImMonatVorhanden(foundMandant)){
+            for (Umsatz umsatz : umsatzList){
+                if (LocalDateTime.now().getMonthValue() == umsatz.getMonat() && LocalDateTime.now().getYear() == umsatz.getJahr()){
+                    diesenMonat += umsatz.getUmsatz();
+                }
+                if (LocalDateTime.now().getYear() == umsatz.getJahr()){
+                    jahresUmsatz += umsatz.getUmsatz();
+                }
+            }
         }
 
         for (Bestellung bestellung : alleBestellungenList){
             monatsZeit = bestellung.getBestelldatum().toLocalDateTime();
             jahresZeit = bestellung.getBestelldatum().toLocalDateTime();
             // Monatsberechnung
-            if(LocalDateTime.now().getMonthValue() == monatsZeit.getMonthValue()){
-                diesenMonat += bestellung.getGesamtpreis();
-                umsatzImMonat = diesenMonat;
+            if(LocalDateTime.now().getMonthValue() == monatsZeit.getMonthValue() && LocalDateTime.now().getYear() == jahresZeit.getYear()){
+                umsatzImMonat = bestellung.getGesamtpreis();
                 anzahlAnOrdersImMonat++;
             }
             // Jahresberechnung
             if(LocalDateTime.now().getYear() == jahresZeit.getYear()){
-                jahresUmsatz += bestellung.getGesamtpreis();
-                umsatzImJahr = jahresUmsatz;
+                umsatzImJahr = bestellung.getGesamtpreis();;
                 anzahlAnOrdersImJahr++;
             }
             // Einnahmen Pro bestellung
@@ -103,8 +119,37 @@ public class ZahlungController {
 
         }
 
-        ZahlungModel zahlungModel = new ZahlungModel(zahlungen, proBestellung, diesenMonat, umsatzImMonat, anzahlAnOrdersImMonat, durschnittProBestellungImMonat, umsatzImJahr, anzahlAnOrdersImJahr, durchschnittProBestellungImJahr, letztenDreiBestellungen, kunde);
+        ZahlungModel zahlungModel = new ZahlungModel(zahlungen, proBestellung, diesenMonat, umsatzImMonat, anzahlAnOrdersImMonat, durschnittProBestellungImMonat, jahresUmsatz, anzahlAnOrdersImJahr, durchschnittProBestellungImJahr, letztenDreiBestellungen, kunde);
 
+        List<String> datumUmstaz = new ArrayList<>();
+        List<Double> valueUmsatz = new ArrayList<>();
+
+        for (Umsatz umsatz : alleUmsaetze){
+            if(LocalDateTime.now().getYear() == umsatz.getJahr()){
+                datumUmstaz.add(LocalDateTime.of(umsatz.getJahr(), umsatz.getMonat(), 1, 0, 0).getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN));
+                valueUmsatz.add(umsatz.getUmsatz());
+            }
+        }
+
+        model.addAttribute("datumUmsatz", datumUmstaz);
+        model.addAttribute("valueUmsatz", valueUmsatz);
+
+        Map<String, Integer> bestellungenImJahr = new HashedMap();
+
+        for (Bestellung bestellung: alleBestellungenList){
+            if(LocalDateTime.now().getYear() == bestellung.getBestelldatum().toLocalDateTime().getYear()){
+                if(!bestellungenImJahr.containsKey(bestellung.getBestelldatum().toLocalDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN))){
+                    bestellungenImJahr.put(bestellung.getBestelldatum().toLocalDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN), 1);
+                } else {
+                    bestellungenImJahr.put(bestellung.getBestelldatum().toLocalDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN), bestellungenImJahr.get(bestellung.getBestelldatum().toLocalDateTime().getMonth().getDisplayName(TextStyle.FULL, Locale.GERMAN))+1);
+                }
+            }
+        }
+
+        model.addAttribute("bestellungenImJahr", bestellungenImJahr);
+
+
+        model.addAttribute("umsatzGesamt", foundMandant.getUmsatz_summe());
         model.addAttribute("zahlung" ,zahlungModel);
         return "/dashboard/zahlungen.html";
     }

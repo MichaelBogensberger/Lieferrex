@@ -10,4 +10,5 @@ import java.util.List;
 public interface UmsatzRepository extends JpaRepository<Umsatz,Long> {
     public Umsatz getUmsatzByMandant(Mandant mandant);
     public List<Umsatz> getAllByMandant(Mandant mandant);
+    Umsatz findFirstByMandantOrderByJahrDescMonatDesc(Mandant mandant);
 }
