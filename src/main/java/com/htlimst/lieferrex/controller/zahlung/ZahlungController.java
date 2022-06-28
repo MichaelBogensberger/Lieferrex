@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -85,10 +88,20 @@ public class ZahlungController {
             proBestellung += bestellung.getGesamtpreis();
 
         }
-        proBestellung = proBestellung/(alleBestellungenList.size());
-        durschnittProBestellungImMonat = diesenMonat / anzahlAnOrdersImMonat;
-        durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImMonat;
+        if(durschnittProBestellungImMonat != 0.0 && durchschnittProBestellungImJahr != 0.0){
+            proBestellung = proBestellung/(alleBestellungenList.size());
+            durschnittProBestellungImMonat = diesenMonat / anzahlAnOrdersImMonat;
+            durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImMonat;
 
+            BigDecimal proBestellungBD = new BigDecimal(proBestellung).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal durschnittProBestellungImMonatBD = new BigDecimal(durschnittProBestellungImMonat).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal durchschnittProBestellungImJahrBD = new BigDecimal(durchschnittProBestellungImJahr).setScale(2, RoundingMode.HALF_UP);
+
+            proBestellung = proBestellungBD.doubleValue();
+            durschnittProBestellungImMonat = durschnittProBestellungImMonatBD.doubleValue();
+            durchschnittProBestellungImJahr = durchschnittProBestellungImJahrBD.doubleValue();
+
+        }
 
         ZahlungModel zahlungModel = new ZahlungModel(zahlungen, proBestellung, diesenMonat, umsatzImMonat, anzahlAnOrdersImMonat, durschnittProBestellungImMonat, umsatzImJahr, anzahlAnOrdersImJahr, durchschnittProBestellungImJahr, letztenDreiBestellungen, kunde);
 
