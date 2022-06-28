@@ -1,35 +1,27 @@
 package com.htlimst.lieferrex.controller;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
 
+
+import com.htlimst.lieferrex.dto.KundenIndexDto;
 import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
-import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
-import com.htlimst.lieferrex.model.fragments.FragmentText;
-import com.htlimst.lieferrex.model.Gericht;
+
+import com.htlimst.lieferrex.model.Kunde;
 import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.repository.BestellstatusRepository;
+import com.htlimst.lieferrex.repository.KundeRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentmap.FragmentMapServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
-import com.htlimst.lieferrex.service.gericht.GerichtService;
 import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
-import com.htlimst.lieferrex.service.mandant.MandantServiceImpl;
 import com.htlimst.lieferrex.service.mandant.MandantService;
 
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +29,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Controller
 public class MainController {
@@ -48,30 +39,47 @@ public class MainController {
     private FragmentMapServiceImpl fragmentmapServiceImpl;
     private MandantService mandantService;
     private GeocodingApi geocodingApi;
-
+    KundeRepository kundeRepository;
 
     @Autowired
-    public MainController(MandantRepository mandantRepository, FragmentServiceImpl fragmentServiceImpl, FragmentTextServiceImpl fragmenttextServiceImpl, FragmentMapServiceImpl fragmentmapServiceImpl, MandantService mandantService, GeocodingApi geocodingApi) {
+    public MainController(MandantRepository mandantRepository, FragmentServiceImpl fragmentServiceImpl, FragmentTextServiceImpl fragmenttextServiceImpl, FragmentMapServiceImpl fragmentmapServiceImpl, MandantService mandantService, GeocodingApi geocodingApi, KundeRepository kundeRepository) {
         this.mandantRepository = mandantRepository;
         this.fragmentServiceImpl = fragmentServiceImpl;
         this.fragmenttextServiceImpl = fragmenttextServiceImpl;
         this.fragmentmapServiceImpl = fragmentmapServiceImpl;
         this.mandantService = mandantService;
         this.geocodingApi = geocodingApi;
+        this.kundeRepository = kundeRepository;
     }
+
+
 
     @Value("${google.api.key}")
     String key;
 
 
     @GetMapping("")
-    public String showIndexPage() {
-        System.out.println("Index page loaded");
-        return "main/index";
+    public String showIndexPage(@AuthenticationPrincipal UserPrincipal principal, Model model) {
+        if (principal == null){
+            System.out.println("Index page loaded");
+            return "main/index";
+        }else {
+            model.addAttribute("login", true);
+            Kunde kunde = kundeRepository.findByEmail(principal.getUsername());
+            KundenIndexDto kundenIndexDto = new KundenIndexDto().builder()
+                    .kundenid(kunde.getId())
+                    .kundenname(kunde.getVorname())
+                    .StrasseHausnummer(kunde.getStrasse() + " " + kunde.getHausnummer())
+                    .PlzOrt(kunde.getPlz() + " " + kunde.getOrt()).build();
+            model.addAttribute("kunde", kundenIndexDto);
+            return "main/index";
+        }
+
+
     }
 
     @GetMapping("/seach")
-    public String search(@RequestParam(value = "search", required = false) String adresse, Model model, RedirectAttributes redirectAttrs) {
+    public String search(@RequestParam(value = "search", required = false) String adresse, RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
 
         List<Mandant> mandanten = mandantRepository.findMandantByPlz(adresse);
@@ -127,10 +135,7 @@ public class MainController {
 
     }
 
-    @GetMapping("/orders")
-    public String showOrdersPage() {
-        return "main/orders";
-    }
+
 
 
     @GetMapping("/buildOne")

@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.service.bestellung;
 
+import com.htlimst.lieferrex.dto.BestellDto;
 import com.htlimst.lieferrex.dto.BezahlDto;
 import com.htlimst.lieferrex.dto.EinkaufswagenDatailDto;
 import com.htlimst.lieferrex.dto.EinkaufswagenDto;
@@ -127,6 +128,18 @@ public class BestellungServiceImpl implements BestellungService{
                 .bestellNr(bestellnummer).build();
 
         return bezahlDto;
+    }
+
+    @Override
+    public BestellDto getBestellDto(String kundenEmail) {
+        Kunde kunde = kundeRepository.findByEmail(kundenEmail);
+        List<Bestellung> bestellungList = bestellungRepository.getBestellungByKunde(kunde);
+
+        for (Bestellung bestellung: bestellungList) {
+            System.out.println(bestellung.getBestellstatus());
+        }
+
+        return null;
     }
 
     @Override

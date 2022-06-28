@@ -38,8 +38,8 @@
 
         <nav class="nav-main">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">LIEFERREX</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                <a href="/" class="brand-logo">LIEFERREX</a>
+                <a href="/" data-target="mobile-demo" class="sidenav-trigger"><i
                         class="material-icons menu-icon">menu</i></a>
 
 
@@ -47,9 +47,10 @@
                     <!-- <a href="#!" class="menu-item"><span class="material-icons menu-icon"> menu</span></a>
                     -->
 
-                    <li><a href="#prof-modal" id="prof-modal" class="modal-trigger">Profil</a></li>
-                    <li><a href="/login">Einloggen</a></li>
+                    <li th:if="${login}"><a href="#prof-modal" id="prof-modal" class="modal-trigger">Profil</a></li>
+                    <li th:if="${login}"><a href="/logout">Ausloggen</a></li>
                     <!-- <li><a href="#">About</a></li> -->
+                    <li th:unless="${login}"><a href="/login">Einloggen</a></li>
 
 
                 </ul>
@@ -80,8 +81,10 @@
             <p class="main-p">Jetzt Restaurants in Deiner <br> Umgebung finden</p>
 
             <form th:action="@{/seach}" method="get">
-                <input type="text" class="form-control main-search" th:name="search" id="search" placeholder="Straße 123" required>
-                <span class="material-icons main-search-icon"><button class="removeButtonStyle" type="submit"> <i class="material-icons icon-search">search</i></button></span>
+                <input type="text" class="form-control main-search" th:name="search" id="search"
+                       placeholder="Straße 123" required>
+                <span class="material-icons main-search-icon"><button class="removeButtonStyle" type="submit"> <i
+                        class="material-icons icon-search">search</i></button></span>
 
             </form>
             <div id="adressen">
@@ -93,16 +96,27 @@
 
         <div class="col l5 center-align main-mob-1">
 
-            <a href="/restaurantpartner" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp">RestaurantPARTNER
+            <a th:unless="${login}" href="/restaurantpartner"
+               class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp">RestaurantPARTNER
                 WERDEN</a>
 
-            <div class="lg-panel">
+            <div th:unless="${login}" class="lg-panel">
                 <h1 class="main-ueb l-main-ueb">GAST</h1>
                 <span class="material-icons acc-icon-card">person</span>
 
-                <h1 class="acc-card-txt">Speichere Deine Daten<br>Schnelleres Bestellen<br>Schnelleres Bestellen</h1>
+                <h1 class="acc-card-txt">Speichere deine Daten<br>Schneller Bestellen<br>Schneller Essen</h1>
                 <a href="/register"
                    class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-kp">Registrieren</a>
+
+            </div>
+
+            <div th:if="${login}" class="lg-panel">
+                <h1 class="main-ueb l-main-ueb" th:text="'Hallo ' + ${kunde.kundenname}">Value</h1>
+                <span class="material-icons acc-icon-card">person</span>
+
+                <h1 class="acc-card-txt"><br>Wähle aus den besten Restaurants aus deiner Umgebung</h1>
+                <a href="/orders"
+                   class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-kp">Deine Bestellungen</a>
 
             </div>
 
@@ -218,9 +232,9 @@
                 Willst du deine eigene Webseite gestalten? Willst du deine <br>
                 Bestellungen und Abholungen ganz einfach managen? Du kannst <br>
                 dich ganz einfach bei uns Registrieren und innerhalb von nur wenigen Minuten <br>
-                 unseren Dienst nutzen und das auch noch vollkommen kostenlos. Klicke <br> 
-                 einfach nur hier drauf: 
-                 <a class="partner-link" href="/restaurantpartner">Mitglied werden!</a>
+                unseren Dienst nutzen und das auch noch vollkommen kostenlos. Klicke <br>
+                einfach nur hier drauf:
+                <a class="partner-link" href="/restaurantpartner">Mitglied werden!</a>
             </p>
         </div>
         <div class="col s12 m4 l3 hide-mob">
@@ -242,7 +256,10 @@
                 <div class="col l6 s12">
                     <h5 class="white-text footer-main">Lieferrex</h5>
                     <p class="grey-text text-lighten-4 fw-500">
-                        Durch unser entwickeltes System ist es einem Restaurant oder beispielsweise einem Schnell-Imbiss möglich, sich rasch eine Internetpräsenz mit Bestell- sowie Abholfunktionen aufzubauen. Sie können sich schnell und ohne Vorkenntnisse eine eigens konfigurierte Webseite nach ihren eigenen Designvorstellungen erstellen.
+                        Durch unser entwickeltes System ist es einem Restaurant oder beispielsweise einem Schnell-Imbiss
+                        möglich, sich rasch eine Internetpräsenz mit Bestell- sowie Abholfunktionen aufzubauen. Sie
+                        können sich schnell und ohne Vorkenntnisse eine eigens konfigurierte Webseite nach ihren eigenen
+                        Designvorstellungen erstellen.
                     </p>
 
 
@@ -272,7 +289,8 @@
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Impressum</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Copyright</a></li>
-                        <li><a class="grey-text text-lighten-3" href="https://github.com/MichaelBogensberger/Lieferrex">GitHub Repo</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://github.com/MichaelBogensberger/Lieferrex">GitHub
+                            Repo</a></li>
                     </ul>
                 </div>
             </div>
@@ -291,10 +309,21 @@
 
 </body>
 
+<script>
+    $(document).ready(function () {
+
+        let searchParams = new URLSearchParams(window.location.search);
+
+        if (searchParams.get('login') == 'success') {
+            M.toast({html: 'Erfolgreich Angemeldet', displayLength: '4000'});
+        }
+
+    });
+</script>
+
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/autocomplete.js}"></script>
-
 
 
 </html>

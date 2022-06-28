@@ -41,9 +41,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/baukasten").hasRole("ANGESTELLTER")
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/login").permitAll().defaultSuccessUrl("/successLogin")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .and().csrf().disable();
 
     }
