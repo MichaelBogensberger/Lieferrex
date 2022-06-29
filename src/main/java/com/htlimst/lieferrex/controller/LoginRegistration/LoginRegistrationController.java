@@ -87,7 +87,8 @@ public class LoginRegistrationController {
         if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_KUNDE"))) {
             redirectAttrs.addAttribute("login", "success");
             return "redirect:/";
-        } else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANGESTELLTER")) || principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLLE_MANDANT"))) {
+        } else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANGESTELLTER")) || principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANDANT"))) {
+            System.out.println("test");
             return "redirect:/dashboard";
         }
         else {

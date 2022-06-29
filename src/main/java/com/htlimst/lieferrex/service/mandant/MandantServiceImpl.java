@@ -6,6 +6,7 @@ import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.*;
+import com.htlimst.lieferrex.model.enums.KategorieEnum;
 import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import com.htlimst.lieferrex.repository.*;
 
@@ -135,7 +136,7 @@ public class MandantServiceImpl implements MandantService {
                 .durchschnittsAbholZeit(15)
                 .durchschnittsLieferZeit(30)
                 .geoPosition(geoPosition).
-                kategorie(kategorieRepository.getById(6L)).build();
+                kategorie(kategorieRepository.getKategorieByName(KategorieEnum.OTHER)).build();
         mandantRepository.save(mandant);
 
 
