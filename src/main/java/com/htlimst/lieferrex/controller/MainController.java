@@ -146,6 +146,7 @@ public class MainController {
 
     @GetMapping("/dashboard/kategorien")
     public String showDashboardKategorien() {
+
         return "dashboard/kategorien.html";
     }
 

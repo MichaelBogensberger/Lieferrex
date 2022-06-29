@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -73,6 +74,7 @@ public class BenutzerrechteController {
     public String createAngestellter(Angestellter angestellter, @RequestParam String rollen, @AuthenticationPrincipal UserPrincipal principal){
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
+        angestellter.setToken(UUID.randomUUID().toString());
         angestellterService.saveAngestellter(angestellter, rollen, foundMandant);
         return "redirect:/dashboard/benutzer";
     }

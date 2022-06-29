@@ -46,7 +46,7 @@ public class BewertungController {
         List<Bestellung> bestellungen = new ArrayList<>();
 
         Map<Integer, Integer> bewertungAnzahl = new HashMap<>();
-        Map<Integer, Integer> valueNow = new HashMap<>();
+        Map<Integer, Double> valueNow = new HashMap<>();
 
         for (Bestellung bestellung : alleBestellungenMitNull){
             if(bestellung.getBewertung() != null){
@@ -62,7 +62,7 @@ public class BewertungController {
 
         for (int i = 1; i <= 5; i++) {
             bewertungAnzahl.put(i,0);
-            valueNow.put(i,0);
+            valueNow.put(i,0.0);
         }
 
 
@@ -82,34 +82,31 @@ public class BewertungController {
 
         Integer sum = 0;
 
+        double median = 0.0;
+        if (numArray.length != 0 && numArray.length % 2 == 0){
+            median = ((double)numArray[numArray.length/2] + (double)numArray[numArray.length/2 - 1])/2;
+        }else if (numArray.length != 0 && numArray.length % 2 == 1){
+            median = (double) numArray[numArray.length/2];
+        }
+
+
         for (Map.Entry<Integer, Integer> entry : bewertungAnzahl.entrySet()){
             Integer key = entry.getKey();
             Integer value = entry.getValue();
             sum += entry.getValue();
         }
 
-        for (Map.Entry<Integer, Integer> entry : valueNow.entrySet()){
+        for (Map.Entry<Integer, Double> entry : valueNow.entrySet()){
             if(entry.getValue() != 0){
                 BigDecimal proBestellungBD = new BigDecimal((entry.getValue()/sum) *100 ).setScale(2, RoundingMode.HALF_UP);
-                entry.setValue(proBestellungBD.intValue());
+                entry.setValue(proBestellungBD.doubleValue());
             }
         }
-
-        System.out.println(bewertungAnzahl);
-        System.out.println(valueNow);
 
         if(durchschnittBewertung != 0.0){
             durchschnittBewertung = durchschnittBewertung / alleBestellungen.size();
         }
 
-
-
-        double median = 0.0;
-        if (numArray.length != 0 && numArray.length % 2 == 0){
-            median = ((double)numArray[numArray.length/2] + (double)numArray[numArray.length/2 - 1])/2;
-        }else{
-            median = (double) numArray[numArray.length/2];
-        }
 
         List<BewertungUndDatumModel> bewertungUndDatumModels = new ArrayList<>();
 
