@@ -152,7 +152,7 @@ public class ZahlungController {
 
         model.addAttribute("umsatzGesamt", foundMandant.getUmsatz_summe());
         model.addAttribute("zahlung" ,zahlungModel);
-        return "/dashboard/zahlungen.html";
+        return "dashboard/zahlungen.html";
     }
 
 }

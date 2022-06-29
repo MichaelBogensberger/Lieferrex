@@ -355,3 +355,35 @@ header, main, footer {
     color: #379683 !important;
     font-weight: 500;
 } */
+
+
+.br-16 {
+    border-radius: 16px;
+}
+
+.p-10{
+    padding: 10px;
+}
+
+
+
+@media only screen and (max-width: 992px) {
+
+    .mob-text-mod {
+        font-size: 22px !important;
+    }
+
+    .mob-d-none {
+        display: none;
+    }
+
+    .head-text {
+        width: 100%;
+        font-size: 7px;
+        text-align: center;
+    }
+    .font-size-frag-3 {
+        font-size: 25px !important;
+    }
+
+}
