@@ -146,6 +146,7 @@ public class MainController {
 
     @GetMapping("/dashboard/kategorien")
     public String showDashboardKategorien() {
+
         return "dashboard/kategorien.html";
     }
 
@@ -153,11 +154,6 @@ public class MainController {
     @GetMapping("/dashboard/oeffnungszeiten")
     public String showDashboardOeffnungszeiten() {
         return "dashboard/oeffnungszeiten.html";
-    }
-
-    @GetMapping("/dashboard/bewertungen")
-    public String showDashboardBewertungen() {
-        return "dashboard/bewertungen.html";
     }
 
 

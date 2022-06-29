@@ -1,10 +1,9 @@
 package com.htlimst.lieferrex.model;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -27,6 +26,7 @@ public class Bestellung {
     private Timestamp bestelldatum;
     private double gesamtpreis;
     private double trinkgeld;
+    private Integer bewertung;
 
 
     @ManyToOne
@@ -49,7 +49,7 @@ public class Bestellung {
     @JoinColumn(name="bestellstatus_id", nullable = false)
     private Bestellstatus bestellstatus;
 
-    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus) {
+    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus, int bewertung) {
         this.id = id;
         this.dauer = dauer;
         this.bestelldatum = bestelldatum;
@@ -59,6 +59,7 @@ public class Bestellung {
         this.kunde = kunde;
         this.mandant = mandant;
         this.bestellstatus = bestellstatus;
+        this.bewertung = bewertung;
     }
 }
 
