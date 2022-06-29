@@ -6,7 +6,7 @@
     <title th:text="${restaurantName}"></title>
 
     <link th:href="@{/css/baukasten/baukasten.css}" rel="stylesheet" />
-    <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script>
+    
     <div th:replace="baukasten/fragments/header"></div>
 
 </head>
@@ -15,7 +15,21 @@
 
     <div th:if="${edit}" th:replace="baukasten/fragments/modals"></div>
 
-    <nav class="side-p">
+    <style th:text="${'
+        :root { --light-main: ' + color + ' !important; }
+        .btn {background-color: ' + color + ' !important;}
+        input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid ' + color + ' !important;
+            -webkit-box-shadow: 0 1px 0 0 ' + color + ' !important;
+            box-shadow: 0 1px 0 0 ' + color + ' !important;
+        }
+        input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+            color: ' + color + ' !important;
+        }
+    '}">
+    </style>
+
+    <nav class="side-p" th:style="${edit != null ? 'padding-left: 300px' : 'padding-left: 0;'}" >
         <div class="nav-wrapper">
 
             <a href="#" class="brand-logo brand-logo-js brand-logo-mob" th:text="${restaurantName}"></a>
@@ -24,8 +38,7 @@
 
 
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">HOME</a></li>
-                <li><a href="#addPage" class="modal-trigger">ADD PAGE</a></li>
+                <li><a href="#addPage" class="site-add">Zusätzliche Seite erstellen</a></li>
 
             </ul>
         </div>
@@ -34,7 +47,13 @@
     <ul class="sidenav nav-mob" id="mobile-demo">
         <h1 class="side-line-menu" th:text="${restaurantName}"></h1>
         <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
-                    class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
+                    class="material-icons icon-menu nav-mob-ico">local_dining</i>Startseite</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">image</i>Gallery</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">info</i>Über uns</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">home</i>Zurück zu Lieferrex</a></li>
 
     </ul>
 
@@ -47,6 +66,9 @@
     <div class="result"></div>
 
 </body>
+<script>
+    M.AutoInit();
+</script>
 <script th:if="${edit}" type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>
-
+<!-- <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script> -->
 </html>

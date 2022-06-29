@@ -1,28 +1,4 @@
 <div th:fragment="modals">
-
-  <!-- ADD PAGE MODAL ---------------------------------->
-
-  <div id="addPage" class="modal">
-    <div class="modal-content">
-      <h4>Seite hinzufügen</h4>
-      <p>Du musst eine der Folgenden Seiten wählen:</p>
-
-
-      <div class="collection">
-        <a href="#!" class="collection-item">Kontankt und Öffnungszeiten</a>
-        <a href="#!" class="collection-item">Über uns</a>
-        <a href="#!" class="collection-item">Fotos</a>
-      </div>
-
-
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Weiter</a>
-    </div>
-  </div>
-
-  <!----------------------------------------------------->
   <!-- Header Div MODAL ---------------------------------->
 
   <div id="editHeader" class="modal">
@@ -287,3 +263,62 @@
   </div>
 
   <!----------------------------------------------------->
+  <!-- ADD PAGE MODAL ---------------------------------->
+
+  <div id="addPage" class="modal">
+    <div class="modal-content">
+      <h4>Seite hinzufügen</h4>
+      <p>Wählen Sie eine der folgenden Seiten:</p>
+
+
+      <div class="collection">
+        <a href="#!" name="addContactSite" class="AddSite collection-item">Kontankt und Öffnungszeiten</a>
+        <a href="#!" name="addAboutUsSite" class="AddSite collection-item">Über uns</a>
+        <a href="#!" name="addGallerySite" class="AddSite collection-item">Fotos</a>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+  <!-- Image Module Add Modal ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="addGallerySite" class="modal">
+    <div class="modal-content">
+      <h4>Bildergalerie erstellen</h4>
+      <p></p>
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addImageTitle" type="text" data-length="10">
+          <label for="addImageTitle">Überschrift</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 marg-t-0">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Bild</span>
+              <input id="addImageFile" type="file" multiple>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveImage" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+
+</div>

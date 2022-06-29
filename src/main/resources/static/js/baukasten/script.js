@@ -1,5 +1,3 @@
-M.AutoInit();
-
 $(document).ready(function(){
     $('.modal').modal();
 });
@@ -14,7 +12,7 @@ $(document).ready(function(){
   var layout;
 
   // Fragment Add and Delete
-  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit, .layout-change, .saveSettings", function() {
+  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit, .layout-change, .saveSettings, .site-add", function() {
 
     // Check if Add or Delete
     if($(this).attr("class").indexOf("fragment-add") >= 0){
@@ -85,7 +83,7 @@ $(document).ready(function(){
 
         $.ajax({
           type: "POST",
-          url: "./module/save",
+          url: "baukasten/module/save",
           async: false,
           enctype: 'multipart/form-data',
           processData: false,
@@ -126,7 +124,7 @@ $(document).ready(function(){
     
         $.ajax({
           type: "POST",
-          url: "./module/delete",
+          url: "baukasten/module/delete",
           async: false,
           processData: false,
           contentType: false,
@@ -173,7 +171,7 @@ $(document).ready(function(){
 
       $.ajax({
         type: "POST",
-        url: "./update",
+        url: "baukasten/update",
         async: false,
         processData: false,
         contentType: false,
@@ -187,6 +185,16 @@ $(document).ready(function(){
         }
       });
 
+    } else if ($(this).attr("class").indexOf("site-add") >= 0) {
+      // ADD Site
+
+      $('#addPage').modal('open');
+
+      $(".AddSite").off("click").click(function() {
+        $('#addPage').modal('close');
+        name = '#' + $(this).attr('name')
+        $('#' + $(this).attr('name')).modal('open');
+      });
     } else {
 
       // Edit Header -------------------------------------------------------------------------------------------
@@ -210,7 +218,7 @@ $(document).ready(function(){
         
         $.ajax({
           type: "POST",
-          url: "./module/save",
+          url: "baukasten/module/save",
           async: false,
           enctype: 'multipart/form-data',
           processData: false,

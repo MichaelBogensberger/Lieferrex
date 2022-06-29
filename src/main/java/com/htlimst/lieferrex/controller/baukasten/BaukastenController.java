@@ -107,6 +107,7 @@ public class BaukastenController {
         // Layout des Mandanten der VIEW uebergeben
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("restaurantName", mandant.getFirmenname());
+        model.addAttribute("color", mandant.getAkzentFarbe());
 
         allFragments(fragments, model, mandant);
                 
@@ -122,6 +123,7 @@ public class BaukastenController {
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("edit", true);
         model.addAttribute("restaurantName", mandant.getFirmenname());
+        model.addAttribute("color", mandant.getAkzentFarbe());
 
         allFragments(fragments, model, mandant);
 
