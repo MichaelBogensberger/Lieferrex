@@ -1,10 +1,10 @@
-<div th:fragment="zeiten(content, edit, position)" class="fragment-text">
+<div th:fragment="zeiten(content, edit, position)" class="fragment-text br-16">
 
     <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}"
         class="fragment-delete material-icons">delete_forever</i>
 
     <div class="row">
-        <h1>Öffnungszeiten</h1>
+        <h1 class="mob-text-mod">Öffnungszeiten</h1>
     </div>
 
     <div class="row center" style="width: 100%; padding: 0 2em;">
