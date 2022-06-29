@@ -6,14 +6,16 @@
     <title th:text="${restaurantName}"></title>
 
     <link th:href="@{/css/baukasten/baukasten.css}" rel="stylesheet" />
-    
+
     <div th:replace="baukasten/fragments/header"></div>
 
 </head>
 
 <body>
 
-    <div th:if="${edit}" th:replace="baukasten/fragments/modals"></div>
+    <div th:if="${edit}">
+        <div th:replace="baukasten/fragments/modals"></div>
+    </div>
 
     <style th:if="${color}" th:text="${'
         :root { --light-main: ' + color + ' !important; }
@@ -29,32 +31,62 @@
     '}">
     </style>
 
-    <nav class="side-p" th:style="${edit != null ? 'padding-left: 300px' : 'padding-left: 0;'}" >
+    <nav class="side-p" th:style="${edit != null ? 'padding-left: 300px' : 'padding-left: 0;'}">
         <div class="nav-wrapper">
 
-            <a href="#" class="brand-logo brand-logo-js brand-logo-mob" th:text="${restaurantName}"></a>
+            <a th:href="${backLink != null ? backLink : '#'}" class="brand-logo brand-logo-js brand-logo-mob"
+                th:text="${restaurantName}"></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
                     class="material-icons menu-icon">menu</i></a>
 
-
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#addPage" class="site-add">Zusätzliche Seite erstellen</a></li>
-
+            <ul class=" right hide-on-med-and-down">
+                <li><a href="../../../../">Zurück zu Lieferrex</a></li>
             </ul>
+
+            <ul th:if="${AboutUs == null and edit == true}" class="right hide-on-med-and-down">
+                <li><a href="#" name="addPageAboutUs" class="site-add">Über uns hinzufügen</a></li>
+            </ul>
+            <ul th:if="${Gallery == null and edit == true}" class=" right hide-on-med-and-down">
+                <li><a href="#" name="addPageGallery" class="site-add">Fotosammlung hinzufügen</a></li>
+            </ul>
+
+
+            <ul th:if="${AboutUs == true and edit == true}" class="right hide-on-med-and-down">
+                <li><a href="#" name="deletePageAboutUs" class="site-remove">Über uns entfernen</a></li>
+            </ul>
+            <ul th:if="${Gallery != null and edit == true}" class=" right hide-on-med-and-down">
+                <li><a href="#" name="deletePageGallery" class="site-remove">Fotosammlung entfernen</a></li>
+            </ul>
+
+
+
+            <ul th:if="${AboutUs != null and edit == null}" class="right hide-on-med-and-down">
+                <li><a th:href="${AboutUsLink != null ? AboutUsLink : './AboutUs/'}">Über uns</a></li>
+            </ul>
+            <ul th:if="${Gallery != null and edit == null}" class="right hide-on-med-and-down">
+                <li><a th:href="${GalleryLink != null ? GalleryLink : './Gallery/'}">Fotosammlung</a></li>
+            </ul>
+
+
         </div>
     </nav>
 
     <ul class="sidenav nav-mob" id="mobile-demo">
         <h1 class="side-line-menu" th:text="${restaurantName}"></h1>
-        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+        <li class="marg-t-20 marg-b-8"><a th:href="${backLink != null ? backLink : '#'}"
+                class="waves-effect waves-light f-z-20 nav-mob-a"><i
                     class="material-icons icon-menu nav-mob-ico">local_dining</i>Startseite</a></li>
-        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
-                    class="material-icons icon-menu nav-mob-ico">image</i>Gallery</a></li>
-        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
-                    class="material-icons icon-menu nav-mob-ico">info</i>Über uns</a></li>
-        <li class="marg-t-20 marg-b-8"><a href="index.php" class="waves-effect waves-light f-z-20 nav-mob-a"><i
-                    class="material-icons icon-menu nav-mob-ico">home</i>Zurück zu Lieferrex</a></li>
+        <li th:if="${Gallery != null}" class="marg-t-20 marg-b-8"><a
+                th:href="${GalleryLink != null ? GalleryLink : './Gallery/'}"
+                class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">image</i>Fotosammlung</a></li>
 
+        <li th:if="${AboutUs != null}" class="marg-t-20 marg-b-8"><a
+                th:href="${AboutUsLink != null ? AboutUsLink : './AboutUs/'}"
+                class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">info</i>Über uns</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="../../../../" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                    class="material-icons icon-menu nav-mob-ico">home</i>Zurück zu Lieferrex</a></li>
     </ul>
 
     <div th:replace="${edit} ? ~{baukasten/fragments/sidenav} : ~{}"></div>
@@ -71,4 +103,5 @@
 </script>
 <script th:if="${edit}" type="text/javascript" th:src="@{/js/baukasten/script.js}"></script>
 <!-- <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script> -->
+
 </html>

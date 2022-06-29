@@ -1,0 +1,28 @@
+<div class="layoutBody" th:fragment="AboutUs" th:style="${edit == true ? 'padding-left: 300px' : ''}">
+
+    <div class="row center">
+        <div class="col s12 m12 l12">
+            <h1 th:text="${title}"></h1>
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s12 m6 l6 frag" style="padding: 0 0.75rem !important;">
+            <p th:text="${textOne}"></p>
+        </div>
+        <div class="col s12 m6 l6 frag" style="padding: 0 0.75rem !important;">
+            <img class="br-16 p-10" th:src="${'data:image/png;base64,'+ imageOne}" style="max-width: 100%;" />
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col s12 m6 l6 frag" style="padding: 0 0.75rem !important;">
+            <img class="br-16 p-10" th:src="${'data:image/png;base64,'+ imageTwo}" style="max-width: 100%;" />
+        </div>
+        <div class="col s12 m6 l6 frag" style="padding: 0 0.75rem !important;">
+            <p th:text="${textTwo}"></p>
+        </div>
+    </div>
+
+
+</div>

@@ -272,7 +272,6 @@
 
 
       <div class="collection">
-        <a href="#!" name="addContactSite" class="AddSite collection-item">Kontankt und Öffnungszeiten</a>
         <a href="#!" name="addAboutUsSite" class="AddSite collection-item">Über uns</a>
         <a href="#!" name="addGallerySite" class="AddSite collection-item">Fotos</a>
       </div>
@@ -282,10 +281,78 @@
   </div>
 
   <!----------------------------------------------------->
-  <!-- Image Module Add Modal ---------------------------------->
+  <!-- About Us Site Add ---------------------------------->
   <!----------------------------------------------------->
 
-  <div id="addGallerySite" class="modal">
+  <div id="addPageAboutUs" class="modal">
+    <div class="modal-content">
+      <h4>Über uns erstellen</h4>
+      <p></p>
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addAboutUsTitle" type="text" data-length="10">
+          <label for="addAboutUsTitle">Überschrift</label>
+        </div>
+      </div>
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addAboutUsTextOne" type="text" data-length="10">
+          <label for="addAboutUsTextOne">Text 1</label>
+        </div>
+      </div>
+
+      <div class="row mb-0">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">title</i>
+          <input id="addAboutUsTextTwo" type="text" data-length="10">
+          <label for="addAboutUsTextTwo">Text 2</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 marg-t-0">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Bild 1</span>
+              <input id="addAboutUsImageOne" type="file" multiple>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Bild uploaden">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 marg-t-0">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Bild 2</span>
+              <input id="addAboutUsImageTwo" type="file" multiple>
+            </div>
+            <div class="file-path-wrapper">
+              <input id="addAboutUsImageTwo" class="file-path validate" type="text" placeholder="Bild uploaden">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
+      <a href="#!" id="saveAboutUsSite" class="saveSite modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+  <!-- Gallery Site Add ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="addPageGallery" class="modal">
     <div class="modal-content">
       <h4>Bildergalerie erstellen</h4>
       <p></p>
@@ -298,12 +365,14 @@
         </div>
       </div>
 
+      <h5>Wählen Sie bitte fünf Bilder aus</h5>
+
       <div class="row">
         <div class="input-field col s12 marg-t-0">
           <div class="file-field input-field">
             <div class="btn">
               <span>Bild</span>
-              <input id="addImageFile" type="file" multiple>
+              <input id="addGalleryImages" type="file" multiple>
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text" placeholder="Hintergrundbild uploaden">
@@ -315,7 +384,35 @@
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-red btn-flat">Abbrechen</a>
-      <a href="#!" id="saveImage" class="saveFragment modal-close waves-effect waves-green btn-flat">Speichern</a>
+      <a href="#!" id="saveGallerySite" class="saveSite modal-close waves-effect waves-green btn-flat">Speichern</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+  <!-- Delete Subsite AboutUs ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="deletePageAboutUs" class="modal">
+    <div class="modal-content">
+      <h4>Wollen Sie die Über uns Seite wirklick loeschen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+      <a href="#!" id="deletePageAboutUsConfirm" class="removeSite modal-close waves-effect waves-green btn-flat">Ja</a>
+    </div>
+  </div>
+
+  <!----------------------------------------------------->
+  <!-- Delete Subsite Gallery ---------------------------------->
+  <!----------------------------------------------------->
+
+  <div id="deletePageGallery" class="modal">
+    <div class="modal-content">
+      <h4>Wollen Sie die Fotosammlung wirklick loeschen?</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-red btn-flat">Nein</a>
+      <a href="#!" id="deletePageGalleryConfirm" class="removeSite modal-close waves-effect waves-green btn-flat">Ja</a>
     </div>
   </div>
 

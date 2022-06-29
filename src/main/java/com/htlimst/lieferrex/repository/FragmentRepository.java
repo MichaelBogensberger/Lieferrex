@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.model.Position;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

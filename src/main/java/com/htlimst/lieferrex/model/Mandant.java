@@ -28,7 +28,7 @@ public class Mandant {
         @NotEmpty
         private String ort;
 
-        //@Size(min = 4, max = 6)
+        // @Size(min = 4, max = 6)
         private String plz;
 
         private String strasse;
@@ -43,18 +43,14 @@ public class Mandant {
         // @Email
         private String email;
 
-
         private double mindestbestellwert;
         private double lieferkosten;
         private int durchschnittsLieferZeit;
         private int durchschnittsAbholZeit;
 
-
-
         @ManyToOne
-        @JoinColumn(name="kategorie_id")
+        @JoinColumn(name = "kategorie_id")
         private Kategorie kategorie;
-
 
         @ManyToMany
         @JoinTable(name = "mandant_bestellart", joinColumns = @JoinColumn(name = "mandant_id"), inverseJoinColumns = @JoinColumn(name = "bestellart_id"))
@@ -76,15 +72,24 @@ public class Mandant {
         private Set<Fragment> fragmente;
 
         @ManyToOne
-        @JoinColumn(name="layout_id")
+        @JoinColumn(name = "layout_id")
         private Layout layout;
+
+        @OneToOne(mappedBy = "mandant")
+        private AboutUs aboutus;
+
+        @OneToOne(mappedBy = "mandant")
+        private Gallery gallery;
 
         @OneToOne
         @JoinColumn(name = "geo_position_id", referencedColumnName = "geo_position_id")
         private GeoPosition geoPosition;
 
-
-        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse, String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe, int durchschnittsAbholZeit, int durchschnittsLieferZeit, String email, double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart, Layout layout, GeoPosition geoPosition) {
+        public Mandant(Long id, String firmenname, String land, String ort, String plz, String strasse,
+                        String hausnummer, String telefonnummer, double umsatz_summe, int seitenaufrufe_summe,
+                        int durchschnittsAbholZeit, int durchschnittsLieferZeit, String email,
+                        double mindestbestellwert, double lieferkosten, Kategorie kategorie, Set<Bestellart> bestellart,
+                        Layout layout, GeoPosition geoPosition) {
                 this.id = id;
                 this.firmenname = firmenname;
                 this.land = land;

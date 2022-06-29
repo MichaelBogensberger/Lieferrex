@@ -12,7 +12,7 @@ $(document).ready(function(){
   var layout;
 
   // Fragment Add and Delete
-  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit, .layout-change, .saveSettings, .site-add", function() {
+  $(document).off("click").on("click", ".fragment-add, .fragment-delete, .fragment-edit, .layout-change, .saveSettings, .site-add, .site-remove", function() {
 
     // Check if Add or Delete
     if($(this).attr("class").indexOf("fragment-add") >= 0){
@@ -83,7 +83,7 @@ $(document).ready(function(){
 
         $.ajax({
           type: "POST",
-          url: "baukasten/module/save",
+          url: "./module/save",
           async: false,
           enctype: 'multipart/form-data',
           processData: false,
@@ -124,7 +124,7 @@ $(document).ready(function(){
     
         $.ajax({
           type: "POST",
-          url: "baukasten/module/delete",
+          url: "./module/delete",
           async: false,
           processData: false,
           contentType: false,
@@ -161,8 +161,6 @@ $(document).ready(function(){
 
       var formData = new FormData();
 
-      console.log(layout);
-
       formData.append('data', JSON.stringify({
         "restaurantName": $("#firmenname").val(),
         "color": ($("#color").val() || ""),
@@ -171,7 +169,7 @@ $(document).ready(function(){
 
       $.ajax({
         type: "POST",
-        url: "baukasten/update",
+        url: "./update",
         async: false,
         processData: false,
         contentType: false,
@@ -186,15 +184,107 @@ $(document).ready(function(){
       });
 
     } else if ($(this).attr("class").indexOf("site-add") >= 0) {
-      // ADD Site
 
-      $('#addPage').modal('open');
+      // ADD Subsite
 
-      $(".AddSite").off("click").click(function() {
-        $('#addPage').modal('close');
-        name = '#' + $(this).attr('name')
-        $('#' + $(this).attr('name')).modal('open');
-      });
+      name = '#' + $(this).attr('name')
+      $('#' + $(this).attr('name')).modal('open');
+
+      $('.saveSite').off("click").click(function() {
+        
+        console.log($(this).attr('id'))
+        var formData = new FormData();
+
+        switch ($(this).attr('id')) {
+          case "saveAboutUsSite":
+            formData.append('data', JSON.stringify({
+              "title": $('#addAboutUsTitle').val(),
+              "textOne": $('#addAboutUsTextOne').val(),
+              "textTwo": $('#addAboutUsTextTwo').val(),
+              "type": "AboutUs"
+            }));
+            formData.append('image', $("#addAboutUsImageOne")[0].files[0]);
+            formData.append('image', $("#addAboutUsImageTwo")[0].files[0]);
+            break;
+
+          case "saveGallerySite":
+            formData.append('data', JSON.stringify({
+              "title": $('#addGalleryTitle').val(),
+              "type": "Gallery"
+            }));
+            formData.append('image', $("#addGalleryImages")[0].files[0]);
+            formData.append('image', $("#addGalleryImages")[0].files[1]);
+            formData.append('image', $("#addGalleryImages")[0].files[2]);
+            formData.append('image', $("#addGalleryImages")[0].files[3]);
+            formData.append('image', $("#addGalleryImages")[0].files[4]);
+            break;
+
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "./site/add",
+          async: false,
+          enctype: 'multipart/form-data',
+          processData: false,
+          contentType: false,
+          data: formData,
+          success: function ( data ) {
+            setTimeout(
+              function () {
+                location.reload();
+              }, 1000
+            )
+          }
+        });
+
+      })
+
+
+
+    } else if ($(this).attr("class").indexOf("site-remove") >= 0) {
+
+      // Remove Subsite
+
+      name = '#' + $(this).attr('name')
+      $('#' + $(this).attr('name')).modal('open');
+
+      $('.removeSite').off("click").click(function() {
+        
+        var formData = new FormData();
+
+        switch ($(this).attr('id')) {
+          case "deletePageGalleryConfirm":
+            formData.append('data', JSON.stringify({
+              "type": "Gallery"
+            }));
+            break;
+          case "deletePageAboutUsConfirm":
+            formData.append('data', JSON.stringify({
+              "type": "AboutUs"
+            }));
+            break;
+
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "./site/delete",
+          async: false,
+          processData: false,
+          contentType: false,
+          data: formData,
+          success: function ( data ) {
+            setTimeout(
+              function () {
+                location.reload();
+              }, 1000
+            )
+          }
+        });
+
+      })
+
     } else {
 
       // Edit Header -------------------------------------------------------------------------------------------
@@ -218,7 +308,7 @@ $(document).ready(function(){
         
         $.ajax({
           type: "POST",
-          url: "baukasten/module/save",
+          url: "./module/save",
           async: false,
           enctype: 'multipart/form-data',
           processData: false,
