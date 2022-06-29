@@ -313,7 +313,7 @@ public class DbInit implements CommandLineRunner {
         this.seitenaufrufeRepository.save(seitenaufrufe);
         Seitenaufrufe seitenaufrufe1 = new Seitenaufrufe(null, 3, 2022, 5410, mandant2);
         this.seitenaufrufeRepository.save(seitenaufrufe1);
-    }
+    
 
     }
 
@@ -341,3 +341,5 @@ public class DbInit implements CommandLineRunner {
         bestellstatusRepository.deleteAll();
         geoPositionRepository.deleteAll();
     }
+
+}
