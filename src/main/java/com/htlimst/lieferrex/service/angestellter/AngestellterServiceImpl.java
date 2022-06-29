@@ -34,8 +34,8 @@ public class AngestellterServiceImpl implements AngestellterService{
     }
 
     @Override
-    public List<Angestellter> alleAngestellen() {
-        return angestellterRepository.findAll();
+    public List<Angestellter> alleAngestellen(Long mandantId) {
+        return angestellterRepository.getAllByMandant_Id(mandantId);
     }
 
     @Override
@@ -44,13 +44,13 @@ public class AngestellterServiceImpl implements AngestellterService{
     }
 
     @Override
-    public long countAngestellter() {
-        return angestellterRepository.countAngestellte();
+    public long countAngestellter(long mandantId) {
+        return angestellterRepository.countAngestellte(mandantId);
     }
 
     @Override
-    public long countAdmins() {
-        return angestellterRepository.countAdmins();
+    public long countAdmins(long mandantId) {
+        return angestellterRepository.countAdmins(mandantId);
     }
 
     @Override

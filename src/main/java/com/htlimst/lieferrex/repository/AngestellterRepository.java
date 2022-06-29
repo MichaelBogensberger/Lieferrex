@@ -15,10 +15,11 @@ public interface AngestellterRepository extends JpaRepository<Angestellter,Long>
     Angestellter findByEmail(String email);
     List<Angestellter> getAllByEmail(String email);
     void deleteAllByEmail(String s);
-    @Query(value = "SELECT COUNT(angestellter_rolle.angestellter_id) FROM angestellter_rolle INNER JOIN rolle ON angestellter_rolle.rolle_id = rolle.rolle_id WHERE rolle.rolle_id = 2 ", nativeQuery = true)
-    public long countAdmins();
-    @Query(value = "SELECT COUNT(angestellter_rolle.angestellter_id) FROM angestellter_rolle INNER JOIN rolle ON angestellter_rolle.rolle_id = rolle.rolle_id WHERE rolle.rolle_id = 3 ", nativeQuery = true)
-    public long countAngestellte();
-
+    @Query(value = "SELECT COUNT(angestellter_rolle.angestellter_id) FROM angestellter_rolle INNER JOIN rolle ON angestellter_rolle.rolle_id = rolle.rolle_id INNER JOIN angestellter ON angestellter.angestellter_id = angestellter_rolle.angestellter_id  WHERE rolle.rolle_id = 2 AND mandant_id = ?1", nativeQuery = true)
+    public long countAdmins(long mandantId);
+    @Query(value = "SELECT COUNT(angestellter_rolle.angestellter_id) FROM angestellter_rolle INNER JOIN rolle ON angestellter_rolle.rolle_id = rolle.rolle_id INNER JOIN angestellter ON angestellter.angestellter_id = angestellter_rolle.angestellter_id  WHERE rolle.rolle_id = 3 AND mandant_id = ?1", nativeQuery = true)
+    public long countAngestellte(long mandantId);
     Optional<Angestellter> findAngestellterByToken(String token);
+    List<Angestellter> getAllByMandant_Id(Long mandanid);
+
 }

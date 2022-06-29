@@ -39,13 +39,13 @@ public class GerichtController {
         // Gerichte mit Status 1 oder 2
         List<Gericht> gerichteList = gerichtService.getGerichtByStatus(foundMandant.getId());
         // Gerichte mit Status 0
-        List<Gericht> gerichteListStatusZero = gerichtService.getGerichtByStatusZero();
+        List<Gericht> gerichteListStatusZero = gerichtService.getGerichtByStatusZero(foundMandant.getId());
         model.addAttribute("gerichteList", gerichteList);
         model.addAttribute("gerichteListStatusZero", gerichteListStatusZero);
         model.addAttribute("gericht", new Gericht());
-        model.addAttribute("numberDisabled", gerichtService.numberDisabled());
-        model.addAttribute("numberActive", gerichtService.numberActive());
-        model.addAttribute("numberAll", gerichtService.numberAll());
+        model.addAttribute("numberDisabled", gerichteListStatusZero.size());
+        model.addAttribute("numberActive", gerichteList.size());
+        model.addAttribute("numberAll", gerichteListStatusZero.size() + gerichteList.size());
         return "dashboard/gerichte.html";
     }
     @GetMapping(value="{id}")

@@ -10,10 +10,10 @@ public interface AngestellterService {
 
     Angestellter findByEmail(String email);
 
-    public List<Angestellter> alleAngestellen();
+    public List<Angestellter> alleAngestellen(Long mandantId);
     public Optional<Angestellter> apiGetAngestellterById(Long id);
-    public long countAngestellter();
-    public long countAdmins();
+    public long countAngestellter(long mandantId);
+    public long countAdmins(long mandantId);
     public long countZugang();
     public void saveAngestellter(Angestellter angestellter, String rollen, Mandant mandant);
     public Optional<Angestellter> findAngestellterByToken(String token);

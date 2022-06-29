@@ -1,10 +1,9 @@
 package com.htlimst.lieferrex.model;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class Bestellung {
     private Timestamp bestelldatum;
     private double gesamtpreis;
     private double trinkgeld;
-    private int bewertung;
+    private Integer bewertung;
 
 
     @ManyToOne

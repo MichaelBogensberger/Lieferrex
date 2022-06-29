@@ -408,14 +408,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <th:block th:each="angestellter: ${angestellterList}">
+                                    <th:block th:each="list: ${angestellterList}">
                                         <tr>
-                                            <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">[[${angestellter.email}]]</th>
-                                            <td class="d-none d-md-table-cell">[[*{angestellter.vorname}]]</td>
-                                            <td class="d-none d-md-table-cell">[[*{angestellter.nachname}]]</td>
-                                            <td class="d-none d-md-table-cell">Angestellter</td>
+                                            <th class="text-truncate max-width-on-md-140 max-width-on-sm-100">[[${list.angestellter.email}]]</th>
+                                            <td class="d-none d-md-table-cell">[[*{list.angestellter.vorname}]]</td>
+                                            <td class="d-none d-md-table-cell">[[*{list.angestellter.nachname}]]</td>
+                                            <td class="d-none d-md-table-cell">[[*{list.rolle}]]</td>
                                             <td>
-                                                <a th:onclick="angestellterEdit([[${angestellter.id}]])"
+                                                <a th:onclick="angestellterEdit([[${list.angestellter.id}]])"
                                                    class="btn btn-square btn-primary rounded-circle mt-0 mb-0 "
                                                    role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                             </td>
