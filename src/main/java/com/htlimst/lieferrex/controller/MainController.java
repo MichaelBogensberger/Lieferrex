@@ -155,11 +155,6 @@ public class MainController {
         return "dashboard/oeffnungszeiten.html";
     }
 
-    @GetMapping("/dashboard/bewertungen")
-    public String showDashboardBewertungen() {
-        return "dashboard/bewertungen.html";
-    }
-
 
     @GetMapping("/changeAddress")
     public String showChangeAddressPage() {

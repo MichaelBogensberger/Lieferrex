@@ -27,6 +27,7 @@ public class Bestellung {
     private Timestamp bestelldatum;
     private double gesamtpreis;
     private double trinkgeld;
+    private int bewertung;
 
 
     @ManyToOne
@@ -49,7 +50,7 @@ public class Bestellung {
     @JoinColumn(name="bestellstatus_id", nullable = false)
     private Bestellstatus bestellstatus;
 
-    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus) {
+    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus, int bewertung) {
         this.id = id;
         this.dauer = dauer;
         this.bestelldatum = bestelldatum;
@@ -59,6 +60,7 @@ public class Bestellung {
         this.kunde = kunde;
         this.mandant = mandant;
         this.bestellstatus = bestellstatus;
+        this.bewertung = bewertung;
     }
 }
 

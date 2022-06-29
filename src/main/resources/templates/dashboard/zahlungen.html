@@ -459,8 +459,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         datumBestellung.push(key);
         valueBestellung.push(value);
     })
-    console.log(datumBestellung);
-    console.log(valueBestellung);
+
+    datumUmsatz = datumUmsatz.reverse();
+    valueUmsatz = valueUmsatz.reverse();
+
+    var umsatzMax = Math.trunc(Math.max(...valueUmsatz));
+    var umsatzMin = Math.trunc(Math.min(...valueUmsatz));
+    var bestellungMax = Math.trunc(Math.max(...valueBestellung));
 
 </script>
 
@@ -486,13 +491,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         legend: {display: false},
         scales: {
           yAxes: [
-              {ticks: {min: 30, max:1500,
-                fontColor: darkModeOn() ? 'white' : 'black'
+              {ticks: {min: umsatzMin, max:umsatzMax,
+                fontColor: darkModeOn() ? 'black' : 'white'
                 }}
             ],
             xAxes: [
               {ticks: {
-                    fontColor: darkModeOn() ? 'white' : 'black'
+                    fontColor: darkModeOn() ? 'black' : 'white'
                 }}
             ],
         }
@@ -539,13 +544,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
             scales: {
                 yAxes: [
-                    {ticks: {min: 5, max:80,
-                        fontColor: darkModeOn() ? 'white' : 'black'
+                    {ticks: {min: 0, max:bestellungMax,
+                        fontColor: darkModeOn() ? 'black' : 'white'
                         }}
                     ],
                     xAxes: [
                     {ticks: {
-                            fontColor: darkModeOn() ? 'white' : 'black'
+                            fontColor: darkModeOn() ? 'black' : 'white'
                         }}
                     ],
             }

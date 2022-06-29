@@ -197,7 +197,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-star text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0" >233 Bewertungen</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${bewertungen} + ' Bewertungen'">233 Bewertungen</h2>
                                 </div>
                             </div>
 
@@ -216,7 +216,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-bar-chart text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">4,2 Durchschnitt</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${durchschnitt} + ' Durchschnitt'">4,2 Durchschnitt</h2>
                                 </div>
                             </div>
 
@@ -240,7 +240,7 @@
                                         <span class="sidebar-icon w-50 h-50">
                                             <i class="fa fa-calculator text-white-lm font-size-35" aria-hidden="true"></i>
                                         </span>
-                                    <h2 class="card-title font-weight-bold mb-0">4 Median</h2>
+                                    <h2 class="card-title font-weight-bold mb-0" th:text="${median} + ' Median'">4 Median</h2>
                                 </div>
                             </div>
 
@@ -280,27 +280,34 @@
                                             <th class="d-none d-md-table-cell">Bestellart</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody th:each="entry : ${alleBewertungen}">
                                             <tr>
 
-                                                <td class=" d-md-table-cell">
+                                                <td class=" d-md-table-cell" th:text="${entry.bestellung.kunde.vorname} + ' ' + ${entry.bestellung.kunde.nachname}">
                                                     Niklas G.
                                                 </td>
                                                 <td class=" d-md-table-cell">
-                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
-                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
-                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i>
-                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i> 
-                                                    
+                                                    <i th:each="i : ${#numbers.sequence(1, entry.bestellung.bewertung)}"
+                                                          class="fa fa-star  font-size-30" aria-hidden="true"></i>
+
+                                                    <i th:if="${entry.bestellung.bewertung < 5}" th:each="i : ${#numbers.sequence(1, 5-entry.bestellung.bewertung)}"
+                                                          class="fa fa-star-o  font-size-30" aria-hidden="true"></i>
+
+
+<!--                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>-->
+<!--                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>-->
+<!--                                                    <i class="fa fa-star  font-size-30" aria-hidden="true"></i>-->
+<!--                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i>-->
+<!--                                                    <i class="fa fa-star-o  font-size-30" aria-hidden="true"></i>-->
                                                 </td>
-                                                <td class="d-none d-md-table-cell">
+
+                                                <td class="d-none d-md-table-cell" th:text="${entry.datum}">
                                                     16.06.2022
                                                 </td>
-                                                <td class="d-none d-md-table-cell">
+                                                <td class="d-none d-md-table-cell" th:text="${entry.zeit}">
                                                     13:30
                                                 </td>
-                                                <td class="d-none d-md-table-cell">
+                                                <td class="d-none d-md-table-cell" th:text="${entry.bestellung.bestellart.bestellart}">
                                                     Abholung
                                                 </td>
 
@@ -348,7 +355,7 @@
                                         <i class="fa fa-star-half-o font-size-35" aria-hidden="true"></i>
                                         <i class="fa fa-star-o font-size-35" aria-hidden="true"></i>
 
-                                    <div class="text-muted">2,145 ratings</div>
+                                    <div class="text-muted" th:text="${bewertungen} + ' ratings'">2,145 ratings</div>
                                     </div>
 
                                     <div class="progress-group mb-5">
