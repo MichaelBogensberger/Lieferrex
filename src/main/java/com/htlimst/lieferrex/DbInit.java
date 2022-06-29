@@ -242,9 +242,10 @@ public class DbInit implements CommandLineRunner {
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
                 Bestellung bestellung = new Bestellung(null, 10, timestamp, 15.5, 2.5, bestellart, kunde, mandant,
-                                bestellstatus);
-                Bestellung bestellung2 = new Bestellung(null, 20, timestamp, 20.5, 0, bestellart1, kunde, mandant,
-                                bestellstatus);
+                                bestellstatus, 1);
+                Bestellung bestellung2 = new Bestellung(null, 20, timestamp, 20.5, 0, bestellart, kunde, mandant,
+                                bestellstatus, 1);
+
                 this.bestellungRepository.save(bestellung);
                 this.bestellungRepository.save(bestellung2);
 
