@@ -150,10 +150,4 @@ public class MainController {
         return "dashboard/kategorien.html";
     }
 
-
-    @GetMapping("/dashboard/oeffnungszeiten")
-    public String showDashboardOeffnungszeiten() {
-        return "dashboard/oeffnungszeiten.html";
-    }
-
 }
