@@ -49,7 +49,7 @@ public class Bestellung {
     @JoinColumn(name="bestellstatus_id", nullable = false)
     private Bestellstatus bestellstatus;
 
-    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus, int bewertung) {
+    public Bestellung(Long id, int dauer, Timestamp bestelldatum, double gesamtpreis, double trinkgeld, Bestellart bestellart, Kunde kunde, Mandant mandant, Bestellstatus bestellstatus, Integer bewertung) {
         this.id = id;
         this.dauer = dauer;
         this.bestelldatum = bestelldatum;

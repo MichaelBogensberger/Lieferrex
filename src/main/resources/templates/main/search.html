@@ -534,7 +534,7 @@
 
                                 <span th:each="i : ${#numbers.sequence(1, mandant.rating)}"
                                       class="material-icons-outlined sr-rest-star-span">star </span>
-                                <span th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}"
+                                <span th:unless="${mandant.rating}==5" th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}"
                                       class="material-icons-outlined sr-rest-star-span">star_rate </span>
 
                             </div>

@@ -1,9 +1,11 @@
 package com.htlimst.lieferrex.service.kunde;
 
 import com.htlimst.lieferrex.dto.KundeRegistrationDto;
+import com.htlimst.lieferrex.dto.PasswortAendernDto;
 import com.htlimst.lieferrex.model.Kunde;
 import com.htlimst.lieferrex.repository.KundeRepository;
 import com.htlimst.lieferrex.repository.RolleRepository;
+import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,13 +16,18 @@ public class KundeServiceImpl implements KundeService{
     private KundeRepository kundeRepository;
     private BCryptPasswordEncoder passwordEncoder;
     private RolleRepository rolleRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Autowired
-    public KundeServiceImpl(KundeRepository kundeRepository, BCryptPasswordEncoder passwordEncoder, RolleRepository rolleRepository) {
+    public KundeServiceImpl(KundeRepository kundeRepository, BCryptPasswordEncoder passwordEncoder, RolleRepository rolleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.kundeRepository = kundeRepository;
         this.passwordEncoder = passwordEncoder;
         this.rolleRepository = rolleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+
+
 
 
 
@@ -41,4 +48,24 @@ public class KundeServiceImpl implements KundeService{
         kunde.setNewsletter(registrationDto.isNewsletter());
         return kundeRepository.save(kunde);
     }
+
+    @Override
+    public boolean passwortAendern(PasswortAendernDto passwortAendernDto, UserPrincipal principal) {
+
+        Kunde kunde = kundeRepository.findByEmail(principal.getUsername());
+        String passwort = kunde.getPasswort();
+
+        if (!passwordEncoder.matches(passwortAendernDto.getAltesPasswort(), passwort)){
+            return false;
+        }
+
+        kunde.setPasswort(bCryptPasswordEncoder.encode(passwortAendernDto.getPasswort()));
+        kundeRepository.save(kunde);
+
+
+        return true;
+    }
+
+
+
 }

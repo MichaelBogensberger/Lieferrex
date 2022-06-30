@@ -8,6 +8,7 @@ import com.htlimst.lieferrex.model.Bestellung;
 import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface BestellungService {
@@ -18,6 +19,7 @@ public interface BestellungService {
     Bestellstatus bestellstatusAnzeigen(BestellstatusEnum bestellstatusEnum);
     void save(Bestellung bestellung);
     BezahlDto getBezahlDto(EinkaufswagenDto einkaufswagenDto);
-    BestellDto getBestellDto(String KundenEmail);
-    public List<Bestellung> alleBestellungenByMandant(long mandantid);
+    List<BestellDto> getBestellDto(String KundenEmail);
+    List<Bestellung> alleBestellungenByMandant(long mandantid);
+    boolean makeRating(UserPrincipal principal, long bestellId, int rating);
 }

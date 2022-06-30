@@ -2,6 +2,7 @@ package com.htlimst.lieferrex.dto;
 
 import lombok.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @AllArgsConstructor
@@ -13,12 +14,13 @@ import java.util.List;
 public class BestellDto {
 
     private long bestellId;
-    private boolean bestellTyp;
+    private String bestellArt;
     private String datum;
     private double preis;
     private String status;
     private String restaurantName;
-    private String StrasseHausnummer;
-    private List<EinkaufswagenDatailDto> einkaufswagenDatailDtoList;
+    private String strasseHausnummer;
+    private Integer rating;
+    private HashMap<String, Integer> gerichtNameAnzahl;
 
 }

@@ -2,6 +2,7 @@ package com.htlimst.lieferrex.controller.LoginRegistration;
 
 import com.htlimst.lieferrex.dto.KundeRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
+import com.htlimst.lieferrex.dto.PasswortAendernDto;
 import com.htlimst.lieferrex.service.kunde.KundeService;
 import com.htlimst.lieferrex.service.mandant.MandantService;
 import com.htlimst.lieferrex.service.security.UserPojo;
@@ -55,7 +56,6 @@ public class LoginRegistrationController {
         return new KundeRegistrationDto();
     }
 
-
     @PostMapping("/register")
     public String registerUserAccount(@ModelAttribute("user") @Valid KundeRegistrationDto registrationDto, BindingResult result) {
 
@@ -90,8 +90,7 @@ public class LoginRegistrationController {
         } else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANGESTELLTER")) || principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANDANT"))) {
             System.out.println("test");
             return "redirect:/dashboard";
-        }
-        else {
+        } else {
             return "redirect:/";
         }
     }
@@ -137,5 +136,40 @@ public class LoginRegistrationController {
         return "redirect:/restaurantpartner?success";
 
     }
+
+
+    @ModelAttribute("pw")
+    public PasswortAendernDto passwortAendernDto() {
+        return new PasswortAendernDto();
+    }
+
+    @GetMapping("/changePassword")
+    public String showChangePasswordPage() {
+        return "main/changepassword.html";
+    }
+
+
+    @PostMapping("/changePassword")
+    public String changePasswort(@ModelAttribute("pw") @Valid PasswortAendernDto passwortAendernDto, BindingResult result, @AuthenticationPrincipal UserPrincipal principal) {
+        if (result.hasErrors()) {
+            List<FieldError> errors = result.getFieldErrors();
+            for (FieldError error : errors) {
+                System.out.println(error.getField() + " - " + error.getDefaultMessage());
+            }
+            List<ObjectError> globalError = result.getGlobalErrors();
+            for (ObjectError error : globalError) {
+                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+
+            return "redirect:/changePassword?error";
+        }
+
+        if (!kundeService.passwortAendern(passwortAendernDto, principal)) {
+            return "redirect:/changePassword?error";
+        }
+
+        return "redirect:/changePassword?success";
+    }
+
 
 }

@@ -13,7 +13,7 @@
 <div id="reg-div">
 
     <!--  POST Form  -->
-    <form class="col s12" id="reg-form" th:action="@{/register}" th:object="${user}" method="post">
+    <form class="col s12" id="reg-form" th:action="@{/register}" th:object="${user}" th:method="POST">
 
         <h1 class="login-form-ueb reg-form-ueb">Registrieren</h1>
 
@@ -228,8 +228,8 @@
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
+<script>
+
 
     $(document).ready(function () {
         let searchParams = new URLSearchParams(window.location.search);
@@ -252,5 +252,4 @@
         // options
         firstActive: 0 // this is the default
     })
-    /*]]>*/
 </script>

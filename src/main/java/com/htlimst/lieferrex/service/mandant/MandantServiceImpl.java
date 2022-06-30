@@ -234,7 +234,7 @@ public class MandantServiceImpl implements MandantService {
                     .firmenname(mandant.getFirmenname())
                     .ort(mandant.getOrt())
                     .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
-                    .rating(3)
+                    .rating(5)
                     .geöffnet(open)
                     .build());
         }

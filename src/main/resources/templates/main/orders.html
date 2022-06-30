@@ -7,18 +7,17 @@
     <div th:replace="main/fragments/header"></div>
 
 
-
 </head>
 <body>
 
 <div th:replace="main/fragments/modals"></div>
 
 
-
 <nav class="nav-main">
     <div class="nav-wrapper">
 
-        <a href="/" class="sr-back-arr-a hide-mob"><span class="material-icons-outlined sr-back-arr">arrow_back</span></a>
+        <a href="/" class="sr-back-arr-a hide-mob"><span
+                class="material-icons-outlined sr-back-arr">arrow_back</span></a>
         <!-- <a href="index.html" class="brand-logo sr-back-txt-a">ZURÜCK</a> -->
 
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons menu-icon">menu</i></a>
@@ -26,7 +25,6 @@
 
     </div>
 </nav>
-
 
 
 <div class="row">
@@ -39,169 +37,95 @@
 
 
         <ul class="collapsible c-orders">
-            <li>
-                <div class="collapsible-header"><i class="material-icons">airport_shuttle</i>07.03.2022 — 23,45 €
-                    <span class="new badge" data-badge-caption="">in Zustellung</span>
+            <li th:each="bestellung :${bestellungen}">
+                <div class="collapsible-header">
+                    <i class="material-icons"
+                       th:text="${bestellung.bestellArt} == 'LIEFERUNG' ? 'airport_shuttle' : 'directions_run'">Art</i>
+                    <div th:text="${bestellung.datum}">datum</div>
+                    <div> &nbsp — &nbsp</div>
+                    <div th:text="${bestellung.preis + ' €'}">preis</div>
+                    <span class="new badge" data-badge-caption="" th:text="${bestellung.status}">status</span>
                 </div>
                 <div class="collapsible-body c-body-orders">
 
                     <div class="row">
                         <div class="col s12 l8">
-                            <h6 class="m0">&nbsp; Asiamix Imst - Hinterseberweg 12</h6> <br>
+                            <h6 class="m0"
+                                th:text="${bestellung.restaurantName + ' - ' + bestellung.strasseHausnummer}">&nbsp;
+                                Asiamix Imst - Hinterseberweg 12</h6> <br>
 
-                            <div class="chip">
-                                1x - Schnitzel mit Kebab
+                            <div class="chip" th:each="gerichtNameAnzahl :${bestellung.gerichtNameAnzahl}">
+                                <div th:text="${gerichtNameAnzahl.value + 'x' + ' - ' + gerichtNameAnzahl.key}">Gericht
+                                    u. Anzahl
+                                </div>
                             </div>
-                            <div class="chip">
-                                1x - Dürüm
-                            </div>
-                            <div class="chip">
-                                2x - Coca Cola
-                            </div>
+
                         </div>
 
+                        <div th:if="${bestellung.rating}==null" class="col s12 l4  sr-rest-stars hide-tab-rest-stars">
 
-                            <div class="col s12 l4  sr-rest-stars hide-tab-rest-stars">
-
-                                <form action="/HALLO" method="post" class="d-inline">
-                                    <a onclick="$(this).closest('form').submit();">
-                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-1">star_rate </span>
-                                        <input type="hidden" name="star" value="1">
-                                    </a>
-                                </form>
-
-                                <form action="/HALLO" method="post" class="d-inline">
-                                    <a onclick="$(this).closest('form').submit();">
-                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-2">star_rate </span>
-                                        <input type="hidden" name="star" value="2">
-                                    </a>
-                                </form>
-
-                                <form action="/HALLO" method="post" class="d-inline">
-                                    <a onclick="$(this).closest('form').submit();">
-                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-3">star_rate </span>
-                                        <input type="hidden" name="star" value="3">
-                                    </a>
-                                </form>
-
-                                <form action="/HALLO" method="post" class="d-inline">
-                                    <a onclick="$(this).closest('form').submit();">
-                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-4" >star_rate </span>
-                                        <input type="hidden" name="star" value="4">
-                                    </a>
-                                </form>
-
-                                <form action="/HALLO" method="post" class="d-inline">
-                                    <a onclick="$(this).closest('form').submit();">
-                                        <span class="material-icons-outlined sr-rest-star-span c-pointer star-5">star_rate </span>
-                                        <input type="hidden" name="star" value="5">
-                                    </a>
-                                </form>
-
-
-                            </div>
-
-
-
-                    </div>
-
-
-                </div>
-            </li>
-
-
-
-
-
-
-            <li>
-                <div class="collapsible-header"><i class="material-icons">directions_run</i>02.03.2022 — 12,79 €
-                    <span class="new badge" data-badge-caption="">Zugestellt</span>
-                </div>
-                <div class="collapsible-body c-body-orders">
-
-                    <div class="row">
-                        <div class="col s12 l8">
-                            <h6 class="m0">&nbsp; Burgerista - Ziegelstadelstraße 2A</h6> <br>
-
-                            <div class="chip">
-                                1x - Schnitzel mit Kebab
-                            </div>
-                            <div class="chip">
-                                1x - Dürüm
-                            </div>
-                            <div class="chip">
-                                2x - Coca Cola
-                            </div>
-                        </div>
-
-
-                        <div class="col s12 l4  sr-rest-stars hide-tab-rest-stars">
-
-                            <form action="/HALLO" method="post" class="d-inline">
+                            <form th:action="@{/rate/{bestellId}(bestellId=${bestellung.bestellId})}" method="get"
+                                  class="d-inline">
                                 <a onclick="$(this).closest('form').submit();">
                                     <span class="material-icons-outlined sr-rest-star-span c-pointer star-1">star_rate </span>
-                                    <input type="hidden" name="star" value="1">
+                                    <input type="hidden" th:name="rating" th:value="1">
                                 </a>
                             </form>
 
-                            <form action="/HALLO" method="post" class="d-inline">
+                            <form th:action="@{/rate/{bestellId}(bestellId=${bestellung.bestellId})}" method="get"
+                                  class="d-inline">
                                 <a onclick="$(this).closest('form').submit();">
                                     <span class="material-icons-outlined sr-rest-star-span c-pointer star-2">star_rate </span>
-                                    <input type="hidden" name="star" value="2">
+                                    <input type="hidden" th:name="rating" th:value="2">
                                 </a>
                             </form>
 
-                            <form action="/HALLO" method="post" class="d-inline">
+                            <form th:action="@{/rate/{bestellId}(bestellId=${bestellung.bestellId})}" method="get"
+                                  class="d-inline">
                                 <a onclick="$(this).closest('form').submit();">
                                     <span class="material-icons-outlined sr-rest-star-span c-pointer star-3">star_rate </span>
-                                    <input type="hidden" name="star" value="3">
+                                    <input type="hidden" th:name="rating" th:value="3">
                                 </a>
                             </form>
 
-                            <form action="/HALLO" method="post" class="d-inline">
+                            <form th:action="@{/rate/{bestellId}(bestellId=${bestellung.bestellId})}" method="get"
+                                  class="d-inline">
                                 <a onclick="$(this).closest('form').submit();">
-                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-4" >star_rate </span>
-                                    <input type="hidden" name="star" value="4">
+                                    <span class="material-icons-outlined sr-rest-star-span c-pointer star-4">star_rate </span>
+                                    <input type="hidden" th:name="rating" th:value="4">
                                 </a>
                             </form>
 
-                            <form action="/HALLO" method="post" class="d-inline">
+                            <form th:action="@{/rate/{bestellId}(bestellId=${bestellung.bestellId})}" method="get"
+                                  class="d-inline">
                                 <a onclick="$(this).closest('form').submit();">
                                     <span class="material-icons-outlined sr-rest-star-span c-pointer star-5">star_rate </span>
-                                    <input type="hidden" name="star" value="5">
+                                    <input type="hidden" th:name="rating" th:value="5">
                                 </a>
                             </form>
-
 
                         </div>
 
-
+                        <div th:unless="${bestellung.rating}==null" >
+                            <span th:each="i : ${#numbers.sequence(1, bestellung.rating)}"
+                                  class="material-icons-outlined sr-rest-star-span">star </span>
+                            <span th:unless="${bestellung.rating}==5"
+                                  th:each="i : ${#numbers.sequence(1, 5-bestellung.rating)}"
+                                  class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                        </div>
 
                     </div>
 
 
-
+                </div>
             </li>
-
-
 
 
         </ul>
 
-
-
     </div>
     <div class="col l3 s10 m10"></div>
 </div>
-
-
-
-
-
-
-
-
 
 
 <footer class="footer-b">
@@ -224,23 +148,23 @@
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
 
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
 
         $(".star-1").hover(function () {
-            $('.star-1').text("star");
-        },
-        function () {
-            $('.star-1').text("star_rate");
-        });
+                $('.star-1').text("star");
+            },
+            function () {
+                $('.star-1').text("star_rate");
+            });
 
         $(".star-2").hover(function () {
                 $('.star-1').text("star");
                 $('.star-2').text("star");
-        },
-        function () {
-            $('.star-1').text("star_rate");
-            $('.star-2').text("star_rate");
-        });
+            },
+            function () {
+                $('.star-1').text("star_rate");
+                $('.star-2').text("star_rate");
+            });
 
         $(".star-3").hover(function () {
                 $('.star-1').text("star");
@@ -283,7 +207,15 @@
             });
 
 
+        let searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has('error') == true) {
+            M.toast({html: 'Bewertung konnte nicht eingetragen werden'})
+        }
+
+        if (searchParams.has('success') == true) {
+            M.toast({html: 'Bewertung erfolgreich eintragen'})
+        }
+
+
     });
-
-
 </script>

@@ -162,10 +162,7 @@ public class MainController {
         return "main/changeaddress.html";
     }
 
-    @GetMapping("/changePassword")
-    public String showChangePasswordPage() {
-        return "main/changepassword.html";
-    }
+
 
 
     
