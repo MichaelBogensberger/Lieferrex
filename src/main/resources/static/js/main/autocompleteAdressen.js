@@ -16,6 +16,8 @@ async function search(adresse) {
 
     if (await data.length != 0){
         show(data);
+    }else {
+        clear();
     }
 }
 
@@ -27,7 +29,6 @@ input.addEventListener('keyup', (e) => {
 
     // Clear timer
     clearTimeout(timer);
-
     // Wait for X ms and then process the request
     timer = setTimeout(() => {
         search(text);
@@ -46,6 +47,10 @@ async function show(data) {
     })
     document.getElementById("adressen").innerHTML = tab;
 
+}
+
+async function clear() {
+    document.getElementById("adressen").innerHTML = null;
 }
 
 

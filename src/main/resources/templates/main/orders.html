@@ -35,8 +35,14 @@
         <h1 class="orders-ueb">Alle Bestellungen</h1>
         <p class="orders-p">Hier können sie alle Ihre Bestellungen einsehen:</p>
 
+        <div class="card-panel white" th:if="${bestellungen.size()}==0">
+            <h5 class="center-align">Noch keine Bestellungen vorhanden</h5>
+        </div>
 
-        <ul class="collapsible c-orders">
+        <ul class="collapsible c-orders" th:if="${bestellungen.size()}!=0">
+
+
+
             <li th:each="bestellung :${bestellungen}">
                 <div class="collapsible-header">
                     <i class="material-icons"

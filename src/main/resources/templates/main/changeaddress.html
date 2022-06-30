@@ -17,7 +17,7 @@
 <div id="login-div">
 
 
-    <form class="col s12" id="reg-form" method="post" th:action="@{/changeAddress}" >
+    <form class="col s12" id="reg-form" method="post" th:action="@{/changeAddress}" th:object="${adresse}">
 
 
         <h1 class="login-form-ueb">Adresse ändern</h1>
@@ -31,7 +31,6 @@
         -->
 
 
-
         <div class="col s12">
 
 
@@ -40,7 +39,7 @@
                     <div class="input-field login-div-mail col s12 m12 l12">
                         <i class="material-icons-outlined white-dm prefix">home</i>
                         <input id="adresse" type="text" class="validate login-inp" placeholder="Adresse"
-                               >
+                               th:field="*{adresse}">
                         <label for="adresse"></label>
                     </div>
                 </div>
@@ -48,18 +47,20 @@
                 <div class="row" id="adressen">
 
                 </div>
-                <input th:name="ort" id="ort" type="hidden">
-                <input th:name="strasse" id="strasse" type="hidden">
-                <input th:name="land" id="land" type="hidden">
-                <input th:name="hausnummer" id="hausnummer" type="hidden">
-                <input th:name="placeId" id="placeId" type="hidden">
+                <input th:field="*{ort}" id="ort" type="hidden">
+                <input th:field="*{strasse}" id="strasse" type="hidden">
+                <input th:field="*{land}" id="land" type="hidden">
+                <input th:field="*{hausnummer}" id="hausnummer" type="hidden">
+                <input th:field="*{placeId}" id="placeId" type="hidden">
             </div>
 
 
         </div>
 
 
-        <button type="submit" name="login-submit" id="login-submit" class=" btn waves-light btn-raised btn-round waves-effect btn-login">speichern</button>
+        <button type="submit" name="login-submit" id="login-submit"
+                class=" btn waves-light btn-raised btn-round waves-effect btn-login">speichern
+        </button>
 
 
         <!--
@@ -68,8 +69,8 @@
 
         <button class="login-google-btn" type="submit">
           <img class="login-google-img hoverable" src="google.png" alt="submit" />
-      </button>
-      -->
+        </button>
+        -->
         <!--
         <btn class="btn waves-light btn-raised btn-round waves-effect login-btn-google">Google</btn>
         -->
@@ -91,10 +92,27 @@
 
 
 </body>
-
 <script>
+
+    $(document).ready(function () {
+        let searchParams = new URLSearchParams(window.location.search);
+
+        if (searchParams.has('error')) {
+            var toastHTML = `Adresse konnte nicht geändert werden`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+        if (searchParams.has('success')) {
+            var toastHTML = `Adresse erfolgreich geändert`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+        if (searchParams.has('NA')) {
+            var toastHTML = `Bitte wählen sie eine Adresse aus`;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+    });
 
 </script>
 
+<script type="text/javascript" th:src="@{/js/main/autocompleteAdressen.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>

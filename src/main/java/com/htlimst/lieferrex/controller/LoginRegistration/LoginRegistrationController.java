@@ -179,15 +179,19 @@ public class LoginRegistrationController {
     }
 
 
-    @ModelAttribute("Adresse")
+    @ModelAttribute("adresse")
     public AdressDto adresseAendernDto() {
         return new AdressDto();
     }
 
     @PostMapping("/changeAddress")
-    public String changeAddress(@ModelAttribute("Adresse") AdressDto adressDto, @AuthenticationPrincipal UserPrincipal principal) {
-
-
+    public String changeAddress(@ModelAttribute("adresse") AdressDto adressDto, @AuthenticationPrincipal UserPrincipal principal) {
+        if (adressDto.getPlaceId().isEmpty()){
+            return "redirect:/changeAddress?NA";
+        }
+        if (!kundeService.adresseAendern(adressDto, principal)) {
+            return "redirect:/changeAddress?error";
+        }
 
         return "redirect:/changeAddress?success";
     }
