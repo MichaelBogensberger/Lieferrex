@@ -111,15 +111,15 @@ public class OeffnungszeitenController {
                 elementId2 = "day-act-sa";
                 idFieldOffenVon = "day-von-sa";
                 idFieldOffenBis = "day-bis-sa";
-                idFieldPausenVon = "pause-von-fr";
-                idFieldPausenBis = "pause-bis-fr";
+                idFieldPausenVon = "pause-von-sa";
+                idFieldPausenBis = "pause-bis-sa";
             } else if(oeffnungszeit.getTag() == WochentagEnum.SUNDAY){
                 elementId = "pause-act-so";
                 elementId2 = "day-act-so";
                 idFieldOffenVon = "day-von-so";
                 idFieldOffenBis = "day-bis-so";
-                idFieldPausenVon = "pause-von-fr";
-                idFieldPausenBis = "pause-bis-fr";
+                idFieldPausenVon = "pause-von-so";
+                idFieldPausenBis = "pause-bis-so";
             }
 
             oeffnungensZeiten.add(new OeffnungsDarstellungModel(endepause, oeffnungszit, schliessungszeit, startpause, oeffnungszeit.getTag(), elementId , elementId2, idFieldOffenVon, idFieldOffenBis
