@@ -62,36 +62,27 @@
 
     <div th:each="gericht: ${gerichte}" class="col s12 m12 l3">
         <ul class="collection with-header card-karte">
+
             <li class="collection-header">
-
-
-
-
                 <div class="row mb-0 mt-10">
                     <div class="col s8 pb-0">
-                        <h4 class="mt-0" th:text="${gericht.name}"></h4>
+                        <h4 class="mt-0" th:id="${'name-' + gericht.id}" th:text="${gericht.name}"></h4>
                     </div>
                     <div class="col s4 pb-0">
 
                         <div class="input-field">
-                            <input type="number" id="tentacles" name="anzahl" min="1" max="100">
-                            <label class="active" for="anzahl">Anzahl</label>
+                            <input type="number" th:id="${'anzahl-' + gericht.id}" min="1" max="100">
+                            <label class="active" th:for="${'anzahl-' + gericht.id}">Anzahl</label>
                         </div>
 
                     </div>
                 </div>
-
-
             </li>
 
             <li class="collection-item">
-
                 <div class="desc-item"><i class="material-icons desc-i">assignment</i>
                     <div th:text="${gericht.beschreibung}"></div>
                 </div>
-
-
-
             </li>
 
             <ul class="collapsible anmerkung-collaps">
@@ -99,20 +90,18 @@
                     <div class="collapsible-header"><i class="material-icons">arrow_downward</i>Anmerkung hinzufügen
                     </div>
                     <div class="collapsible-body">
-
                         <div class="input-field">
-                            <input id="anmerkung" type="text" class="validate">
-                            <label class="active" for="anmerkung">Anmerkung</label>
+                            <input th:id="${'anmerkung-' + gericht.id}" type="text" class="validate">
+                            <label class="active" th:for="${'anmerkung-' + gericht.id}">Anmerkung</label>
                         </div>
-
                     </div>
                 </li>
             </ul>
 
             <li class="collection-item" style="padding-bottom: 50px;">
                 <h6 th:text="${'Preis: ' + gericht.preis + '€'}" class="left"></h6>
-
-                <a class="waves-effect waves-light btn right"><i class="material-icons left">add</i>Hinzufügen</a>
+                <a class="waves-effect waves-light btn right buyButton" th:id="${'buy-' + gericht.id}"><i
+                        class="material-icons left">add</i>Hinzufügen</a>
             </li>
         </ul>
     </div>
@@ -120,8 +109,92 @@
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" crossorigin="anonymous"></script>
+
 <script>
     $(document).ready(function () {
         $('.collapsible').collapsible();
+
+        var warenkorb;
+        if (Cookies.get("warenkorb") == null) {
+            warenkorb = [];
+        } else {
+            warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+        }
+
+        updateWarenkorb(warenkorb);
     });
+
+    function openWarenkorb() {
+        $('#warenkorb').modal('open');
+    }
+
+    function updateWarenkorb(warenkorb) {
+        var data = "";
+        warenkorb.forEach(element => {
+            data += '\
+                <div class="collection-item row center">\
+                    <div class="col s6 m3 l3">' + element["name"] + '</div>\
+                    <div class="col s6 m3 l3">' + element["anmerkung"] + '</div>\
+                    <div class="col s6 m3 l3">' + element["anzahl"] + '</div>\
+                    <div class="col s6 m3 l3">\
+                        <a class="waves-effect waves-light btn" onclick="removeGericht(' + element["tmp"] + ')">Entfernen</a>\
+                    </div>\
+                </div>\
+            ';
+        });
+
+        $("#waren").html(data)
+    }
+
+    function removeGericht(tmp) {
+        var warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+        var gerichtToRemove = "";
+
+        warenkorb.forEach(element => {
+            if (element["tmp"] == tmp) { gerichtToRemove = element };
+        });
+        warenkorb.splice(warenkorb.indexOf(gerichtToRemove), 1)
+
+        Cookies.set("warenkorb", window.JSON.stringify(warenkorb));
+        updateWarenkorb(warenkorb);
+    }
+
+    $(".buyButton").click(function () {
+
+        var gericht;
+        var warenkorb;
+        var id = $(this).attr("id").split("-")[1];
+
+        if (Cookies.get("warenkorb") == null) {
+            warenkorb = [];
+        } else {
+            warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+        }
+
+        gericht = {
+            id: id,
+            anmerkung: $("#anmerkung-" + id).val(),
+            anzahl: $("#anzahl-" + id).val(),
+            name: $("#name-" + id).text(),
+            tmp: Math.floor(Math.random() * 100000)
+        };
+
+        warenkorb.push(gericht);
+        Cookies.set("warenkorb", window.JSON.stringify(warenkorb));
+        updateWarenkorb(warenkorb);
+
+    });
+
 </script>
+
+<div id="warenkorb" class="modal">
+    <div class="modal-content">
+        <h4>Warenkorb</h4>
+
+        <div class="collection" id="waren">
+
+        </div>
+    </div>
+    <div class="modal-footer" style="height: 0;"></div>
+</div>

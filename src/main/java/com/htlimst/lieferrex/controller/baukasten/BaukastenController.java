@@ -127,7 +127,6 @@ public class BaukastenController {
         Mandant mandant = mandantServiceImpl.findMandantById(restaurant).get();
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
-        // Layout des Mandanten der VIEW uebergeben
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("restaurantName", mandant.getFirmenname());
         model.addAttribute("color", mandant.getAkzentFarbe());

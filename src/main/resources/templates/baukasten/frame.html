@@ -66,6 +66,9 @@
             <ul th:if="${Gallery != null and edit == null}" class="right hide-on-med-and-down">
                 <li><a th:href="${GalleryLink != null ? GalleryLink : './Gallery/'}">Fotosammlung</a></li>
             </ul>
+            <ul th:if="${edit == null}" class="right hide-on-med-and-down">
+                <li><a href="#" onclick="openWarenkorb()">Warenkorb</a></li>
+            </ul>
 
 
         </div>
@@ -87,6 +90,8 @@
                     class="material-icons icon-menu nav-mob-ico">info</i>Über uns</a></li>
         <li class="marg-t-20 marg-b-8"><a href="../../../../" class="waves-effect waves-light f-z-20 nav-mob-a"><i
                     class="material-icons icon-menu nav-mob-ico">home</i>Zurück zu Lieferrex</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="#" class="waves-effect waves-light f-z-20 nav-mob-a"
+                onclick="openWarenkorb()"><i class="material-icons icon-menu nav-mob-ico">home</i>Warenkorb</a></li>
     </ul>
 
     <div th:replace="${edit} ? ~{baukasten/fragments/sidenav} : ~{}"></div>
