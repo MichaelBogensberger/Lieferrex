@@ -1,5 +1,6 @@
 package com.htlimst.lieferrex.controller.LoginRegistration;
 
+import com.htlimst.lieferrex.dto.AdressDto;
 import com.htlimst.lieferrex.dto.KundeRegistrationDto;
 import com.htlimst.lieferrex.dto.MandantRegistrationDto;
 import com.htlimst.lieferrex.dto.PasswortAendernDto;
@@ -171,5 +172,24 @@ public class LoginRegistrationController {
         return "redirect:/changePassword?success";
     }
 
+
+    @GetMapping("/changeAddress")
+    public String showChangeAddressPage() {
+        return "main/changeaddress.html";
+    }
+
+
+    @ModelAttribute("Adresse")
+    public AdressDto adresseAendernDto() {
+        return new AdressDto();
+    }
+
+    @PostMapping("/changeAddress")
+    public String changeAddress(@ModelAttribute("Adresse") AdressDto adressDto, @AuthenticationPrincipal UserPrincipal principal) {
+
+
+
+        return "redirect:/changeAddress?success";
+    }
 
 }

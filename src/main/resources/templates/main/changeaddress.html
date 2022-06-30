@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Lieferrex - Login</title>
@@ -17,7 +17,7 @@
 <div id="login-div">
 
 
-    <form class="col s12" id="change-address-form" method="post">
+    <form class="col s12" id="reg-form" method="post" th:action="@{/changeAddress}" >
 
 
         <h1 class="login-form-ueb">Adresse ändern</h1>
@@ -32,52 +32,30 @@
 
 
 
-
         <div class="col s12">
-            <div class="row">
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">map</i>
-                    <input id="ort" type="text" class="validate login-inp" placeholder="Ort"
-                           >
-                    <label for="ort"></label>
-                </div>
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">location_city</i>
-                    <input id="plz" type="text" class="validate login-inp" placeholder="PLZ"
-                           >
-                    <label for="plz"></label>
-                </div>
-            </div>
+
 
             <div class="row">
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">home</i>
-                    <input id="strasse" type="text" class="validate login-inp" placeholder="Straße"
-                           >
-                    <label for="strasse"></label>
+                <div class="row">
+                    <div class="input-field login-div-mail col s12 m12 l12">
+                        <i class="material-icons-outlined white-dm prefix">home</i>
+                        <input id="adresse" type="text" class="validate login-inp" placeholder="Adresse"
+                               >
+                        <label for="adresse"></label>
+                    </div>
                 </div>
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                    <input id="hausnummer" type="text" class="validate login-inp"
-                           placeholder="Hausnummer" >
-                    <label for="hausnummer"></label>
+
+                <div class="row" id="adressen">
+
                 </div>
+                <input th:name="ort" id="ort" type="hidden">
+                <input th:name="strasse" id="strasse" type="hidden">
+                <input th:name="land" id="land" type="hidden">
+                <input th:name="hausnummer" id="hausnummer" type="hidden">
+                <input th:name="placeId" id="placeId" type="hidden">
             </div>
 
-            <div class="row">
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">call</i>
-                    <input id="telefonnummer" type="tel" class="validate login-inp"
-                           placeholder="Telefonnummer"
-                           >
-                    <label for="telefonnummer"></label>
-                </div>
-                <div class="input-field login-div-mail col s12 m6 l6">
-                    <i class="material-icons-outlined white-dm prefix">landscape</i>
-                    <input id="land" type="text" class="validate login-inp" placeholder="Land">
-                    <label for="land"></label>
-                </div>
-            </div>
+
         </div>
 
 
