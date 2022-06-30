@@ -43,13 +43,22 @@
                         </div>
 
                         <div class="row">
-                            <div class="input-field login-div-mail col s12 m12 l12">
+                            <div class="input-field login-div-mail col s12 m6 l6">
                                 <i class="material-icons-outlined white-dm prefix">email</i>
                                 <input id="email" type="email" class="validate login-inp" placeholder="Email"
                                        th:field="*{email}">
                                 <!--                                <p class="error-message" th:each="error: ${#fields.errors('email')}"-->
                                 <!--                                   th:text="${error}">Validation error</p>-->
                                 <label for="email"></label>
+                            </div>
+                            <div class="input-field login-div-mail col s12 m6 l6">
+                                <i class="material-icons-outlined white-dm prefix">call</i>
+                                <input id="telefonnummer" type="tel" class="validate login-inp"
+                                       placeholder="Telefonnummer"
+                                       th:field="*{telefonnummer}">
+                                <!--                                    <p class="error-message" th:each="error: ${#fields.errors('telefonnummer')}"-->
+                                <!--                                       th:text="${error}">Validation error</p>-->
+                                <label for="telefonnummer"></label>
                             </div>
                         </div>
 
@@ -88,67 +97,26 @@
                 <div class="step-content">
 
                     <div class="row">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">map</i>
-                                    <input id="ort" type="text" class="validate login-inp" placeholder="Ort"
-                                           th:field="*{ort}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('ort')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="ort"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">location_city</i>
-                                    <input id="plz" type="text" class="validate login-inp" placeholder="PLZ"
-                                           th:field="*{plz}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('plz')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="plz"></label>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">home</i>
-                                    <input id="strasse" type="text" class="validate login-inp" placeholder="Straße"
-                                           th:field="*{strasse}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('strasse')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="strasse"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">add_circle_outline</i>
-                                    <input id="hausnummer" type="text" class="validate login-inp"
-                                           placeholder="Hausnummer" th:field="*{hausnummer}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('hausnummer')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="hausnummer"></label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">call</i>
-                                    <input id="telefonnummer" type="tel" class="validate login-inp"
-                                           placeholder="Telefonnummer"
-                                           th:field="*{telefonnummer}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('telefonnummer')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="telefonnummer"></label>
-                                </div>
-                                <div class="input-field login-div-mail col s12 m6 l6">
-                                    <i class="material-icons-outlined white-dm prefix">landscape</i>
-                                    <input id="land" type="text" class="validate login-inp" placeholder="Land"
-                                           th:field="*{land}">
-                                    <!--                                    <p class="error-message" th:each="error: ${#fields.errors('land')}"-->
-                                    <!--                                       th:text="${error}">Validation error</p>-->
-                                    <label for="land"></label>
-                                </div>
+                        <div class="row">
+                            <div class="input-field login-div-mail col s12 m12 l12">
+                                <i class="material-icons-outlined white-dm prefix">home</i>
+                                <input id="adresse" type="text" class="validate login-inp" placeholder="Adresse"
+                                       th:field="*{adresse}">
+                                <label for="adresse"></label>
                             </div>
                         </div>
-                    </div>
 
+                        <div class="row" id="adressen">
+
+                        </div>
+                        <input th:name="ort" id="ort" type="hidden">
+                        <input th:name="strasse" id="strasse" type="hidden">
+                        <input th:name="land" id="land" type="hidden">
+                        <input th:name="hausnummer" id="hausnummer" type="hidden">
+                        <input th:name="placeId" id="placeId" type="hidden">
+
+                    </div>
 
                     <div class="step-actions">
                         <!-- Here goes your actions buttons -->
@@ -227,25 +195,30 @@
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
+<script type="text/javascript" th:src="@{/js/main/autocompleteAdressen.js}"></script>
 
-<script>
 
+<script th:inline="javascript">
+
+    var returnVal = /*[[${returnVal}]]*/;
 
     $(document).ready(function () {
-        let searchParams = new URLSearchParams(window.location.search);
-
-        if (searchParams.has('error')) {
-            var toastHTML = `Eingabe Fehler: Benutzer konnte nicht angelegt werden!`;
-            M.toast({html: toastHTML, displayLength: 10000});
+        if (returnVal!=null){
+            console.log(returnVal);
+            returnVal.forEach(postToast);
         }
-        if (searchParams.has('success')) {
-            var toastHTML = `Benutzer erfolgreich angelegt`;
-            M.toast({html: toastHTML, displayLength: 10000});
-        }
-
 
     });
 
+    function postToast(item) {
+        var toastHTML = item;
+        M.toast({html: toastHTML, displayLength: 10000});
+    }
+
+
+</script>
+
+<script>
 
     var stepper = document.querySelector('.stepper');
     var stepperInstace = new MStepper(stepper, {

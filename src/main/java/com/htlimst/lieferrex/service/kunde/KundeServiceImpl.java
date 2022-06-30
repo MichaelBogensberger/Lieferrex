@@ -43,20 +43,31 @@ public class KundeServiceImpl implements KundeService{
 
 
     @Override
-    public Kunde save(KundeRegistrationDto registrationDto) {
+    public boolean save(KundeRegistrationDto registrationDto) {
         Kunde kunde = new Kunde();
+        GeoPositionDto geoPositionDto = new GeoPositionDto();
+        try {
+            geoPositionDto = geocodingApi.getGeodaten(registrationDto.getPlaceId());
+        } catch (AdresseNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         kunde.setVorname(registrationDto.getVorname());
         kunde.setNachname(registrationDto.getNachname());
         kunde.setEmail(registrationDto.getEmail());
         kunde.setPasswort(passwordEncoder.encode(registrationDto.getPasswort()));
         kunde.setOrt(registrationDto.getOrt());
-        kunde.setPlz(registrationDto.getPlz());
+        kunde.setPlz(geoPositionDto.getPlz());
         kunde.setStrasse(registrationDto.getStrasse());
         kunde.setHausnummer(registrationDto.getHausnummer());
         kunde.setTelefonnummer(registrationDto.getTelefonnummer());
         kunde.setLand(registrationDto.getLand());
         kunde.setNewsletter(registrationDto.isNewsletter());
-        return kundeRepository.save(kunde);
+
+        kundeRepository.save(kunde);
+
+        return true;
     }
 
     @Override

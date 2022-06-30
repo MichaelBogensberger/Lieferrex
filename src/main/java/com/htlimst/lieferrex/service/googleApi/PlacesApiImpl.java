@@ -7,6 +7,7 @@ import com.google.maps.PlaceAutocompleteRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.AutocompletePrediction;
 import com.google.maps.model.ComponentFilter;
+import com.google.maps.model.PlaceAutocompleteType;
 import com.google.maps.model.PlaceType;
 import com.htlimst.lieferrex.dto.AdressDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
@@ -83,6 +84,7 @@ public class PlacesApiImpl implements PlacesApi {
             predictions = com.google.maps.PlacesApi.placeAutocomplete(context, adresse, new PlaceAutocompleteRequest.SessionToken("Lieferrex"))
                     .language("de")
                     .components(ComponentFilter.country("at"))
+                    .types(PlaceAutocompleteType.ADDRESS)
                     .await();
         } catch (ApiException e) {
             e.printStackTrace();
@@ -114,35 +116,32 @@ public class PlacesApiImpl implements PlacesApi {
         for (int i = 0; i < Integer.parseInt(geocodingResults); i++) {
             AdressDto adressDto = new AdressDto();
 
-            if (gson.toJson(predictions[i].types[0]).equals("\"premise\"")
-                    || gson.toJson(predictions[i].types[0]).equals("\"street_address\"")
-                    || gson.toJson(predictions[i].types[0]).equals("\"establishment\"")){
 
-                tmp = gson.toJson(predictions[i].description);
-                tmp = tmp.substring(1);
-                tmp = tmp.substring(0, tmp.length() - 1);
-                adressDto.setAdresse(tmp);
+            tmp = gson.toJson(predictions[i].description);
+            tmp = tmp.substring(1);
+            tmp = tmp.substring(0, tmp.length() - 1);
+            adressDto.setAdresse(tmp);
 
-                adressDto.setLand("Österreich");
-                if (!gson.toJson(predictions[i].terms.length).equals("4")){
-                    continue;
-                }
-                System.out.println(gson.toJson(predictions[i].terms.length));
-                String ort = gson.toJson(predictions[i].terms[2].value).replace("\"", "");
-                adressDto.setOrt(ort);
-
-                String strasse = gson.toJson(predictions[i].terms[0].value).replace("\"", "");
-                adressDto.setStrasse(strasse);
-
-                String hausnummer = gson.toJson(predictions[i].terms[1].value).replace("\"", "");
-                adressDto.setHausnummer(hausnummer);
-
-                String placeId = gson.toJson(predictions[i].placeId).replace("\"", "");
-                adressDto.setPlaceId(placeId);
-
-                System.out.println(adressDto.toString());
-                adressen.add(adressDto);
+            adressDto.setLand("Österreich");
+            if (!gson.toJson(predictions[i].terms.length).equals("4")) {
+                continue;
             }
+            System.out.println(gson.toJson(predictions[i].terms.length));
+            String ort = gson.toJson(predictions[i].terms[2].value).replace("\"", "");
+            adressDto.setOrt(ort);
+
+            String strasse = gson.toJson(predictions[i].terms[0].value).replace("\"", "");
+            adressDto.setStrasse(strasse);
+
+            String hausnummer = gson.toJson(predictions[i].terms[1].value).replace("\"", "");
+            adressDto.setHausnummer(hausnummer);
+
+            String placeId = gson.toJson(predictions[i].placeId).replace("\"", "");
+            adressDto.setPlaceId(placeId);
+
+            System.out.println(adressDto.toString());
+            adressen.add(adressDto);
+
 
         }
 

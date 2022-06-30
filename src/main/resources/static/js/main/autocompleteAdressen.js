@@ -35,6 +35,19 @@ input.addEventListener('keyup', (e) => {
     }, waitTime);
 });
 
+$(document).ready(function () {
+
+    const text = $(input).val();
+
+    // Clear timer
+    clearTimeout(timer);
+    // Wait for X ms and then process the request
+    timer = setTimeout(() => {
+        search(text);
+    }, waitTime);
+
+});
+
 
 async function show(data) {
     let tab = '<br>';
@@ -45,12 +58,17 @@ async function show(data) {
                     <button id="fill" class="btn-inline-search fade-in" type="button" onclick='fillAdresse("${index}")'> ${r.adresse} </button>
                 `;
     })
+    fillHidden(0);
     document.getElementById("adressen").innerHTML = tab;
-
 }
 
 async function clear() {
     document.getElementById("adressen").innerHTML = null;
+    document.getElementById("ort").value = null;
+    document.getElementById("hausnummer").value = null;
+    document.getElementById("strasse").value = null;
+    document.getElementById("land").value = null;
+    document.getElementById("placeId").value = null;
 }
 
 
@@ -70,6 +88,20 @@ function fillAdresse(r) {
     document.getElementById("land").value = land;
     document.getElementById("placeId").value = placeId;
 
+}
 
+function fillHidden(r) {
+    var ort = data[r].ort;
+    var hausnummer = data[r].hausnummer;
+    var strasse = data[r].strasse;
+    var land = data[r].land;
+    var placeId = data[r].placeId;
+
+
+    document.getElementById("ort").value = ort;
+    document.getElementById("hausnummer").value = hausnummer;
+    document.getElementById("strasse").value = strasse;
+    document.getElementById("land").value = land;
+    document.getElementById("placeId").value = placeId;
 
 }

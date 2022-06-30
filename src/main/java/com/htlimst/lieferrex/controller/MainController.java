@@ -69,6 +69,8 @@ public class MainController {
             KundenIndexDto kundenIndexDto = new KundenIndexDto().builder()
                     .kundenid(kunde.getId())
                     .kundenname(kunde.getVorname())
+                    .kundennameNachname(kunde.getVorname() + " " + kunde.getNachname())
+                    .initialen(kunde.getVorname().substring(0, 1) + kunde.getNachname().substring(0, 1))
                     .StrasseHausnummer(kunde.getStrasse() + " " + kunde.getHausnummer())
                     .PlzOrt(kunde.getPlz() + " " + kunde.getOrt()).build();
             model.addAttribute("kunde", kundenIndexDto);
@@ -149,5 +151,6 @@ public class MainController {
 
         return "dashboard/kategorien.html";
     }
+
 
 }

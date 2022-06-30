@@ -8,7 +8,7 @@ import com.htlimst.lieferrex.service.security.UserPrincipal;
 
 public interface KundeService {
 
-    Kunde save(KundeRegistrationDto userRegistrationDto);
+    boolean save(KundeRegistrationDto userRegistrationDto);
     boolean passwortAendern(PasswortAendernDto passwortAendernDto, UserPrincipal principal);
     boolean adresseAendern(AdressDto adressDto, UserPrincipal principal);
 }

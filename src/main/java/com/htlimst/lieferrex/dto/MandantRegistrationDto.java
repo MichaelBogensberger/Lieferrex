@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,61 +18,57 @@ import javax.validation.constraints.Size;
 })
 public class MandantRegistrationDto {
 
-    @NotEmpty
+    @NotEmpty(message = "Firmenname darf nicht leer sein")
     private String firmenname;
 
     @NotEmpty
-    @Email
+    @Email(message = "Email darf nicht leer sein")
     private String firmenemail;
 
-
+    @DecimalMin("0.0") @DecimalMax("100.0")
     private double mindestbestellwert;
 
-
+    @DecimalMin("0.0") @DecimalMax("100.0")
     private double lieferkosten;
 
     @ValidPhoneNumber
     private String telefonnummer;
 
+    @NotEmpty(message = "Adresse darf nicht leer sein")
     private String adresse;
 
     //from Adresse
-    @NotEmpty
     private String ort;
 
     private String plz;
 
-    @NotEmpty
     private String strasse;
 
-    @NotEmpty
     private String hausnummer;
 
-    @NotEmpty
     private String land;
 
-    @NotEmpty
     private String placeId;
 
-    @NotEmpty
+    @NotEmpty(message = "Vorname darf nicht leer sein")
     private String vorname;
 
-    @NotEmpty
+    @NotEmpty(message = "Nachname darf nicht leer sein")
     private String nachname;
 
-    @NotEmpty
+    @NotEmpty(message = "Email darf nicht leer sein")
     @Email
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Passwort darf nicht leer sein")
     @Size(min = 8)
     private String passwort;
 
-    @NotEmpty
+    @NotEmpty(message = "Prüf Passwort darf nicht leer sein")
     @Size(min = 8)
     private String confirmPasswort;
 
-    @AssertTrue
+    @AssertTrue(message = "Agbs müssen akzeptiert werden")
     private boolean agb;
 
     private boolean newsletter;
