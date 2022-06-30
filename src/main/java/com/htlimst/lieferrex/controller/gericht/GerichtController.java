@@ -55,7 +55,7 @@ public class GerichtController {
     }
 
     @PostMapping("/save")
-    public String saveGericht(Gericht gericht, @RequestParam Optional<String> aktiviert, @RequestParam Optional<String> aktion, @RequestParam Optional<String> addPreisangebot, @AuthenticationPrincipal UserPrincipal principal){
+    public String saveGericht(Gericht gericht, @RequestParam Optional<String> aktiviert, @RequestParam Optional<String> aktion, @AuthenticationPrincipal UserPrincipal principal){
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
         gericht.setMandant(foundMandant);
@@ -66,9 +66,7 @@ public class GerichtController {
         } else {
             gericht.setStatus(2);
         }
-        if(!addPreisangebot.isPresent()){
-            gericht.setPreisangebot(0.0);
-        }
+
         gerichtService.save(gericht);
         return "redirect:/dashboard/gerichte";
     }

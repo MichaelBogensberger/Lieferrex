@@ -104,7 +104,8 @@ public class BewertungController {
         }
 
         if(durchschnittBewertung != 0.0){
-            durchschnittBewertung = durchschnittBewertung / alleBestellungen.size();
+            BigDecimal proBestellungBD = new BigDecimal(durchschnittBewertung / alleBestellungen.size()).setScale(2, RoundingMode.HALF_UP);
+            durchschnittBewertung = proBestellungBD.doubleValue();
         }
 
 

@@ -165,11 +165,11 @@ public class DbInit implements CommandLineRunner {
                 mandantBestellart.add(bestellart);
                 Mandant mandant = new Mandant(null, "Asia Royal", "Österreich", "Zell am See", "5700",
                                 "Kitzsteinhornstraße",
-                                "33", "0654255264", 41.0, 50000, 15, 30, "aisaroyal@gmail.com", 10.0, 0, null,
+                                "33", "0654255264", 41.0, 50000, 15, 30, "mandant1@business.example.com", 10.0, 0, null,
                                 mandantBestellart,
                                 layouts.get(0), geoPosition);
                 Mandant mandant2 = new Mandant(null, "Asiamix", "Österreich", "Gemeinde Imst", "6460",
-                                "Franz-Xaver-Renn-Straße", "4", "0650123123", 0, 50000, 15, 30, "mandant@gmail.com",
+                                "Franz-Xaver-Renn-Straße", "4", "0650123123", 0, 50000, 15, 30, "mandant2@business.example.com",
                                 7.5, 3.5, null,
                                 mandantBestellart, layouts.get(1), geoPosition2);
 
@@ -215,17 +215,17 @@ public class DbInit implements CommandLineRunner {
                         fragmentHeaderRepository.save(fragmentHeader);
                 }
 
-                Kunde kunde = new Kunde(null, "Michael", "Bogensberger", "michaelbogensberger@gmail.com",
+                Kunde kunde = new Kunde(null, "Michael", "Bogensberger", "kunde01@example.com",
                                 this.passwordEncoder.encode("123"), "Salzburg", "5026", "Ziegelstadelstraße", "6a",
                                 "06123456789",
                                 "Österreich", true);
                 this.kundeRepository.save(kunde);
-                Kunde kunde2 = new Kunde(null, "Julian", "Meilinger", "meilinger7@gmail.com",
+                Kunde kunde2 = new Kunde(null, "Julian", "Meilinger", "kunde02@example.com",
                                 this.passwordEncoder.encode("123"), "Neukirchen am Großvenediger", "5741",
                                 "Geiernestgassl", "8",
                                 "065123456789", "Österreich", false);
                 this.kundeRepository.save(kunde2);
-                Kunde kunde3 = new Kunde(null, "Max", "Mustermann", "kunde@gmail.com",
+                Kunde kunde3 = new Kunde(null, "Max", "Mustermann", "kunde03@example.com",
                                 this.passwordEncoder.encode("123"),
                                 "Neukirchen am Großvenediger", "5741", "Geiernestgassl", "8", "065123456789",
                                 "Österreich", false);
