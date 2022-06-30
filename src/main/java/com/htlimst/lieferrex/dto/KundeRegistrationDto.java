@@ -18,43 +18,44 @@ import javax.validation.constraints.*;
 })
 public class KundeRegistrationDto {
 
-    @NotEmpty
+    @NotEmpty(message = "Vorname darf nicht leer sein")
     private String vorname;
 
-    @NotEmpty
+    @NotEmpty(message = "Nachname darf nicht leer sein")
     private String nachname;
 
-    @NotEmpty
+    @NotEmpty(message = "Email darf nicht leer sein")
     @Email
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Passwort darf nicht leer sein")
     @Size(min = 8)
     private String passwort;
 
-    @NotEmpty
+    @NotEmpty(message = "Prüf Passwort darf nicht leer sein")
     @Size(min = 8)
     private String confirmPasswort;
 
-    @NotEmpty
+    @NotEmpty(message = "Adresse darf nicht leer sein")
+    private String adresse;
+
     private String ort;
 
-    @Min(3)
+    private String placeId;
+
+    private String land;
+
     private String plz;
 
-    @NotEmpty
     private String strasse;
 
-    @NotEmpty
     private String hausnummer;
 
     @ValidPhoneNumber
     private String telefonnummer;
 
-    @NotEmpty
-    private String land;
 
-    @AssertTrue
+    @AssertTrue(message = "Agb's müssen angekreutzt sein")
     private boolean agb;
 
     private boolean newsletter;

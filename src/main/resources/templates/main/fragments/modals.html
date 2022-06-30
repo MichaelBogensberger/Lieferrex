@@ -1,49 +1,61 @@
- <div th:fragment="modals">
-  <!-- Modal Structure  PROFIL -->
-  <div id="prof-modal" class="modal">
-    <div class="modal-content">
-    <ul class="collection coll-profile">
-            <li class="collection-item avatar">
+<div th:fragment="modals">
+    <!-- Modal Structure  PROFIL -->
+    <div id="prof-modal" class="modal">
+        <div class="modal-content">
+            <ul class="collection coll-profile">
+                <li class="collection-item avatar">
 
-              <img class="circle pr-profile-img" src="https://via.placeholder.com/50">
-              <span class="title">Michael Bogensberger</span>
-              <p>Hinterseberweg 12 <br>
-                6460 Imst
-              </p>
-              <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-            </li>
+                    <img class="circle pr-profile-img" th:if="${login}" th:src="@{'https://eu.ui-avatars.com/api/?name=' + ${kunde.initialen} + '&background=5cdb95&color=fff'}">
+                    <span class="title" th:if="${login}" th:text="${kunde.kundennameNachname}">Vorname Nachname</span>
+                    <p th:if="${login}" th:text="${kunde.StrasseHausnummer}">Straße Hausnummer</p>
+                    <p th:if="${login}" th:text="${kunde.PlzOrt}">Straße Hausnummer</p>
+                    <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+                </li>
 
 
-            <li class="collection-item"><div>Meine Bestellungen<a href="/orders" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-            <li class="collection-item"><div>Addresse ändern<a href="/changeAddress" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-            <li class="collection-item"><div>Passwort ändern<a href="/changePassword" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-            <li class="collection-item"><div>Ausloggen<a href="/logout" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-  
-    </ul>
+                <li class="collection-item">
+                    <div>Meine Bestellungen<a href="/orders" class="secondary-content"><i
+                            class="material-icons">send</i></a></div>
+                </li>
+                <li class="collection-item">
+                    <div>Addresse ändern<a href="/changeAddress" class="secondary-content"><i class="material-icons">send</i></a>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>Passwort ändern<a href="/changePassword" class="secondary-content"><i class="material-icons">send</i></a>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>Ausloggen<a href="/logout" class="secondary-content"><i class="material-icons">send</i></a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="modal-close waves-effect waves-green btn-flat">Schließen</a>
+        </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Schließen</a>
-    </div>
-  </div>
 
 
-
-
-
-      
     <ul class="sidenav nav-mob" id="mobile-demo">
-      <h1 class="side-line-menu">LIEFERREX</h1>
-      <li class="marg-t-20 marg-b-8"><a href="/" class="waves-effect waves-light f-z-20 nav-mob-a"><i class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
-      <li class="marg-t-20 marg-b-8"><a href="/login" class="waves-effect waves-light f-z-20 nav-mob-a"><i class="material-icons icon-menu nav-mob-ico">login</i>Login</a></li>
-      <li class="marg-b-8"><a href="#" class="waves-effect waves-light f-z-20 nav-mob-a"><i class="material-icons icon-menu nav-mob-ico">how_to_reg</i>Kunde werden</a></li>
-      <li class="marg-b-8"><a href="#" class="waves-effect  waves-light f-z-20 nav-mob-a"><i class="material-icons icon-menu nav-mob-ico">info</i>Impressum</a></li>
-      <li class="marg-b-8"><a href="#prof-modal" class="waves-effect  waves-light f-z-20 nav-mob-a modal-trigger"><i class="material-icons icon-menu nav-mob-ico">account_circle</i>Profil</a></li>
-      
-      <!-- <h1 class="side-line-menu-end">&nbsp;</h1> -->
+        <h1 class="side-line-menu">LIEFERREX</h1>
+        <li class="marg-t-20 marg-b-8"><a href="/" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                class="material-icons icon-menu nav-mob-ico">home</i>Startseite</a></li>
+        <li class="marg-t-20 marg-b-8"><a href="/login" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                class="material-icons icon-menu nav-mob-ico">login</i>Login</a></li>
+        <li class="marg-b-8"><a href="#" class="waves-effect waves-light f-z-20 nav-mob-a"><i
+                class="material-icons icon-menu nav-mob-ico">how_to_reg</i>Kunde werden</a></li>
+        <li class="marg-b-8"><a href="#" class="waves-effect  waves-light f-z-20 nav-mob-a"><i
+                class="material-icons icon-menu nav-mob-ico">info</i>Impressum</a></li>
+        <li class="marg-b-8"><a href="#prof-modal" class="waves-effect  waves-light f-z-20 nav-mob-a modal-trigger"><i
+                class="material-icons icon-menu nav-mob-ico">account_circle</i>Profil</a></li>
 
-  </ul>
+        <!-- <h1 class="side-line-menu-end">&nbsp;</h1> -->
+
+    </ul>
 
 
- </div>
+</div>
 
   

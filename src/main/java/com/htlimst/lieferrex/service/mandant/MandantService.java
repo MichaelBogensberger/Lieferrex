@@ -6,7 +6,9 @@ import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.MandantNotFoundException;
 import com.htlimst.lieferrex.model.Kunde;
 import com.htlimst.lieferrex.model.Mandant;
+import com.htlimst.lieferrex.model.enums.WochentagEnum;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +23,9 @@ public interface MandantService {
     Mandant listAll();
     void save(Mandant mandant);
     public List<MandantSuchDto> findMandantByPlz(String Adresse, boolean isGeöffnet, double lieferKosten, double mindestbestellwert, String kategorie) throws MandantNotFoundException;
-
     boolean saveRegistrationDto(MandantRegistrationDto mandantRegistrationDto);
 
+    boolean isGeoeffnet(Mandant mandant, WochentagEnum currentDay, LocalTime currentTime);
+    int getBewertung(Mandant mandant);
 
 }

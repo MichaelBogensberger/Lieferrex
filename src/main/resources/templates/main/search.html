@@ -126,36 +126,38 @@
                                    type="hidden">
 
                             <div class="row">
-                            <div class="input-field col s3">
-                                <h1 class="sr-filter-u-ueb-m">Geöffnet</h1>
-                            </div>
-                            <div class="input-field col s6">
-                                <div class="switch">
-                                    <label>
-
-                                        <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
-                                               type="checkbox" checked>
-                                        <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
-                                               type="checkbox">
-                                        <span class="lever"></span>
-
-                                    </label>
+                                <div class="input-field col s3">
+                                    <h1 class="sr-filter-u-ueb-m">Geöffnet</h1>
                                 </div>
-                            </div>
+                                <div class="input-field col s6">
+                                    <div class="switch">
+                                        <label>
+
+                                            <input th:if="${param.geoeffnet != null}" th:name="geoeffnet"
+                                                   th:value="true"
+                                                   type="checkbox" checked>
+                                            <input th:if="${param.geoeffnet == null}" th:name="geoeffnet"
+                                                   th:value="true"
+                                                   type="checkbox">
+                                            <span class="lever"></span>
+
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
 
 
                             <h1 class="sr-filter-u-ueb-m">Lieferkosten</h1>
-                            <div  th:if="${param.lieferkosten != null}">
+                            <div th:if="${param.lieferkosten != null}">
                                 <div class="ml-30">
                                     <p class="sr-filter-auswählen-p">
                                         <label>
                                             <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
-                                                th:value="2.5"
-                                                type="radio" checked/>
+                                                   th:value="2.5"
+                                                   type="radio" checked/>
                                             <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
-                                                th:value="2.5"
-                                                type="radio"/>
+                                                   th:value="2.5"
+                                                   type="radio"/>
                                             <span>€2,50 oder weniger</span>
                                         </label>
                                     </p>
@@ -163,11 +165,11 @@
                                         <label>
 
                                             <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
-                                                th:value="5"
-                                                type="radio" checked/>
+                                                   th:value="5"
+                                                   type="radio" checked/>
                                             <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
-                                                th:value="5"
-                                                type="radio"/>
+                                                   th:value="5"
+                                                   type="radio"/>
 
                                             <span>€5,00 oder weniger</span>
                                         </label>
@@ -175,7 +177,7 @@
                                 </div>
                             </div>
 
-                            <div th:if="${param.lieferkosten == null}" class="ml-30" >
+                            <div th:if="${param.lieferkosten == null}" class="ml-30">
                                 <p class="sr-filter-auswählen-p">
                                     <label>
                                         <input th:name="lieferkosten"
@@ -251,7 +253,10 @@
                             <br>
 
 
-                            <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">Anwenden</button>
+                            <button type="submit"
+                                    class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">
+                                Anwenden
+                            </button>
                             <br>
 
                         </form>
@@ -260,7 +265,10 @@
                                    type="hidden">
                             <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
                                    type="hidden">
-                            <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">Zurücksetzen</button>
+                            <button type="submit"
+                                    class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">
+                                Zurücksetzen
+                            </button>
                         </form>
 
 
@@ -293,7 +301,8 @@
                             </div>
                             <div class="chip sr-chip waves-effect"
                                  th:classappend="(${param.kategorie}!=null) and (${param.kategorie[0]}=='FINE_DINING') ? 'sr-chip-active'  : 'sr-chip-mrg'">
-                                <button class="kategory-button" th:name="kategorie" th:value="FINE_DINING" type="submit">
+                                <button class="kategory-button" th:name="kategorie" th:value="FINE_DINING"
+                                        type="submit">
                                     Fine Dining
                                 </button>
 
@@ -356,9 +365,11 @@
                                     <!-- Filter Body mobile -->
 
                                     <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
-                                        <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                        <input th:name="adresse" th:if="${param.adresse != null}"
+                                               th:value="${param.adresse}"
                                                type="hidden">
-                                        <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                        <input th:name="kategorie" th:if="${param.kategorie != null}"
+                                               th:value="${param.kategorie}"
                                                type="hidden">
 
                                         <div class="row">
@@ -369,9 +380,11 @@
                                                 <div class="switch">
                                                     <label>
 
-                                                        <input th:if="${param.geoeffnet != null}" th:name="geoeffnet" th:value="true"
+                                                        <input th:if="${param.geoeffnet != null}" th:name="geoeffnet"
+                                                               th:value="true"
                                                                type="checkbox" checked>
-                                                        <input th:if="${param.geoeffnet == null}" th:name="geoeffnet" th:value="true"
+                                                        <input th:if="${param.geoeffnet == null}" th:name="geoeffnet"
+                                                               th:value="true"
                                                                type="checkbox">
                                                         <span class="lever"></span>
 
@@ -382,14 +395,16 @@
 
 
                                         <h1 class="sr-filter-u-ueb-m">Lieferkosten</h1>
-                                        <div  th:if="${param.lieferkosten != null}">
+                                        <div th:if="${param.lieferkosten != null}">
                                             <div class="ml-30">
                                                 <p class="sr-filter-auswählen-p">
                                                     <label>
-                                                        <input th:if="${param.lieferkosten[0] == '2.5'}" th:name="lieferkosten"
+                                                        <input th:if="${param.lieferkosten[0] == '2.5'}"
+                                                               th:name="lieferkosten"
                                                                th:value="2.5"
                                                                type="radio" checked/>
-                                                        <input th:if="${param.lieferkosten[0] != '2.5'}" th:name="lieferkosten"
+                                                        <input th:if="${param.lieferkosten[0] != '2.5'}"
+                                                               th:name="lieferkosten"
                                                                th:value="2.5"
                                                                type="radio"/>
                                                         <span>€2,50 oder weniger</span>
@@ -398,10 +413,12 @@
                                                 <p class="sr-filter-auswählen-p">
                                                     <label>
 
-                                                        <input th:if="${param.lieferkosten[0] == '5'}" th:name="lieferkosten"
+                                                        <input th:if="${param.lieferkosten[0] == '5'}"
+                                                               th:name="lieferkosten"
                                                                th:value="5"
                                                                type="radio" checked/>
-                                                        <input th:if="${param.lieferkosten[0] != '5'}" th:name="lieferkosten"
+                                                        <input th:if="${param.lieferkosten[0] != '5'}"
+                                                               th:name="lieferkosten"
                                                                th:value="5"
                                                                type="radio"/>
 
@@ -411,7 +428,7 @@
                                             </div>
                                         </div>
 
-                                        <div th:if="${param.lieferkosten == null}" class="ml-30" >
+                                        <div th:if="${param.lieferkosten == null}" class="ml-30">
                                             <p class="sr-filter-auswählen-p">
                                                 <label>
                                                     <input th:name="lieferkosten"
@@ -487,16 +504,24 @@
                                         <br>
 
 
-                                        <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">Anwenden</button>
+                                        <button type="submit"
+                                                class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt-130">
+                                            Anwenden
+                                        </button>
                                         <br>
 
                                     </form>
                                     <form th:action="@{/restaurants/{plz}(plz=${plz})}" method="get">
-                                        <input th:name="adresse" th:if="${param.adresse != null}" th:value="${param.adresse}"
+                                        <input th:name="adresse" th:if="${param.adresse != null}"
+                                               th:value="${param.adresse}"
                                                type="hidden">
-                                        <input th:name="kategorie" th:if="${param.kategorie != null}" th:value="${param.kategorie}"
+                                        <input th:name="kategorie" th:if="${param.kategorie != null}"
+                                               th:value="${param.kategorie}"
                                                type="hidden">
-                                        <button type="submit" class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">Zurücksetzen</button>
+                                        <button type="submit"
+                                                class="btn waves-light btn-raised btn-round waves-effect btn-dg btn-rp dark btn-filter mt--10">
+                                            Zurücksetzen
+                                        </button>
                                     </form>
 
                                     <!--- ------------------------------------------------------------------>
@@ -520,7 +545,7 @@
                         <div class="sr-restaurants" th:each="mandant : ${mandanten}">
                             <div class="col s1 sr-rest-left">
                                 <img class="sr-rest-img"
-                                     src="https://eu.ui-avatars.com/api/?name=AS&background=5cdb95&color=fff">
+                                     th:src="@{'https://eu.ui-avatars.com/api/?name=' + ${mandant.firmenname.substring(0,2)} + '&background=5cdb95&color=fff'}">
 
                             </div>
 
@@ -531,22 +556,24 @@
                             </div>
 
                             <div class="col s6  sr-rest-stars hide-tab-rest-stars">
-
-                                <span th:each="i : ${#numbers.sequence(1, mandant.rating)}"
-                                      class="material-icons-outlined sr-rest-star-span">star </span>
-                                <span th:unless="${mandant.rating}==5" th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}"
-                                      class="material-icons-outlined sr-rest-star-span">star_rate </span>
-
+                                <div th:if="${mandant.rating}==0">
+                                    <p class="sr-rest-p" style="margin-top: 35px"> Noch keine Bewertung vorhanden</p>
+                                </div>
+                                <div th:unless="${mandant.rating}==0">
+                                    <span th:each="i : ${#numbers.sequence(1, mandant.rating)}"
+                                          class="material-icons-outlined sr-rest-star-span">star </span>
+                                    <span th:unless="${mandant.rating}==5"
+                                          th:each="i : ${#numbers.sequence(1, 5-mandant.rating)}"
+                                          class="material-icons-outlined sr-rest-star-span">star_rate </span>
+                                </div>
                             </div>
 
                             <div class="col s1  sr-rest-enter">
-                                <span class="material-icons-outlined sr-rest-enter-ico"> <a class="restaurant-chip-arrow"
-                                                                                            th:href="@{'/restaurant/' + ${mandant.id}}">arrow_forward</a></span>
+                                <span class="material-icons-outlined sr-rest-enter-ico"> <a
+                                        class="restaurant-chip-arrow"
+                                        th:href="@{'/restaurant/' + ${mandant.id}}">arrow_forward</a></span>
                             </div>
                         </div>
-
-
-
 
 
                     </div>

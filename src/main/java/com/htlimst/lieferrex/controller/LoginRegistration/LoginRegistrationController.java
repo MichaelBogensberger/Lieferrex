@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,27 +59,42 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerUserAccount(@ModelAttribute("user") @Valid KundeRegistrationDto registrationDto, BindingResult result) {
+    public String registerUserAccount(@ModelAttribute("user") @Valid KundeRegistrationDto registrationDto, BindingResult result, Model model) {
+        List<String> returnVal = new ArrayList<>();
 
         UserPojo existingEmail = userPrincipalDetailsService.findUserByEmail(registrationDto.getEmail());
         if (existingEmail != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
-            System.out.println("Schon vorhanden");
+            returnVal.add("Benutzer mit dieser E-Mail Adresse existiert bereits");
+            model.addAttribute("returnVal", returnVal);
+            return "main/register";
         }
+
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
-                System.out.println(error.getField() + " - " + error.getDefaultMessage());
+                returnVal.add(error.getDefaultMessage());
+                model.addAttribute("returnVal", returnVal);
             }
             List<ObjectError> globalError = result.getGlobalErrors();
             for (ObjectError error : globalError) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+                returnVal.add(error.getDefaultMessage());
+                model.addAttribute("returnVal", returnVal);
             }
-            return "redirect:/register?error";
+            return "main/register";
         }
 
-        kundeService.save(registrationDto);
-        return "redirect:/register?success";
+
+
+        if (!kundeService.save(registrationDto)) {
+            returnVal.add("Addresse konnte nicht gefunden werden");
+            model.addAttribute("returnVal", returnVal);
+            return "main/register";
+
+        }
+
+        returnVal.add("Benutzer erfolgreich erstellt");
+        model.addAttribute("returnVal", returnVal);
+        return "main/register";
 
     }
 
@@ -108,33 +124,38 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/restaurantpartner")
-    public String registerMandantenAccount(@ModelAttribute("mandant") @Valid MandantRegistrationDto registrationDto, BindingResult result) {
+    public String registerMandantenAccount(@ModelAttribute("mandant") @Valid MandantRegistrationDto registrationDto, BindingResult result, Model model) {
+        List<String> returnVal = new ArrayList<>();
+
 
         UserPojo existingEmail = userPrincipalDetailsService.findUserByEmail(registrationDto.getEmail());
         if (existingEmail != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
-            System.out.println("Schon vorhanden");
-            return "redirect:/restaurantpartner?error";
+            returnVal.add("Benutzer mit dieser E-Mail Adresse existiert bereits");
+            model.addAttribute("returnVal", returnVal);
+            return "main/restaurantpartner.html";
         }
         if (result.hasErrors()) {
             List<FieldError> errors = result.getFieldErrors();
             for (FieldError error : errors) {
-                System.out.println(error.getField() + " - " + error.getDefaultMessage());
+                returnVal.add(error.getDefaultMessage());
             }
             List<ObjectError> globalError = result.getGlobalErrors();
             for (ObjectError error : globalError) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+                returnVal.add(error.getDefaultMessage());
             }
-
-            return "redirect:/restaurantpartner?error";
+            model.addAttribute("returnVal", returnVal);
+            return "main/restaurantpartner.html";
         }
 
         if (!mandantService.saveRegistrationDto(registrationDto)) {
-            return "redirect:/restaurantpartner?AdresseNotFound";
-
+            returnVal.add("Addresse konnte nicht gefunden werden");
+            model.addAttribute("returnVal", returnVal);
+            return "main/restaurantpartner.html";
         }
 
-        return "redirect:/restaurantpartner?success";
+        returnVal.add("Mandant erfolgreich erstellt");
+        model.addAttribute("returnVal", returnVal);
+        return "main/restaurantpartner.html";
 
     }
 
@@ -151,25 +172,32 @@ public class LoginRegistrationController {
 
 
     @PostMapping("/changePassword")
-    public String changePasswort(@ModelAttribute("pw") @Valid PasswortAendernDto passwortAendernDto, BindingResult result, @AuthenticationPrincipal UserPrincipal principal) {
+    public String changePasswort(@ModelAttribute("pw") @Valid PasswortAendernDto passwortAendernDto, BindingResult result, @AuthenticationPrincipal UserPrincipal principal, Model model) {
+        List<String> returnVal = new ArrayList<>();
         if (result.hasErrors()) {
-            List<FieldError> errors = result.getFieldErrors();
-            for (FieldError error : errors) {
-                System.out.println(error.getField() + " - " + error.getDefaultMessage());
+            List<FieldError> fieldErrors = result.getFieldErrors();
+            for (FieldError error : fieldErrors) {
+                returnVal.add(error.getDefaultMessage());
             }
             List<ObjectError> globalError = result.getGlobalErrors();
             for (ObjectError error : globalError) {
-                System.out.println(error.getObjectName() + " - " + error.getDefaultMessage());
+                returnVal.add(error.getDefaultMessage());
             }
-
-            return "redirect:/changePassword?error";
+            model.addAttribute("returnVal", returnVal);
+            return "main/changepassword.html";
         }
 
         if (!kundeService.passwortAendern(passwortAendernDto, principal)) {
-            return "redirect:/changePassword?error";
+            returnVal.add("Passwort konnte nicht geändert werden");
+            model.addAttribute("returnVal", returnVal);
+            return "main/changepassword.html";
         }
 
-        return "redirect:/changePassword?success";
+
+        returnVal.add("Erfolgreich geändert");
+
+        model.addAttribute("returnVal", returnVal);
+        return "main/changepassword.html";
     }
 
 

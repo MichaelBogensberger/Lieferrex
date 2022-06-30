@@ -165,64 +165,39 @@ public class MandantServiceImpl implements MandantService {
     }
 
 
+
+
     @Override
     public List<MandantSuchDto> findMandantByPlz(String Adresse, boolean isGeöffnet, double lieferKosten, double mindestbestellwert, String kategorie) throws MandantNotFoundException {
         List<Mandant> mandantenList = mandantRepository.findMandantByPlz(Adresse);
-        List<Mandant> filteredMandantenList = new ArrayList<>();
-        Stream<Mandant> mandantStream;
 
         if (mandantenList.isEmpty()) {
             throw new MandantNotFoundException();
         }
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDate currentDate = LocalDate.now();
         WochentagEnum currentDay = WochentagEnum.valueOf(String.valueOf(currentDate.getDayOfWeek()));
-
-        long now = System.currentTimeMillis();
         LocalTime currentTime = LocalTime.now();
-        System.out.println(currentTime);
 
 
         List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
         for (Mandant mandant : mandantenList) {
-            boolean open = true;
-            Optional<Oeffnungszeit> optHeutigeOeffungszeit = null;
-
-            optHeutigeOeffungszeit = oeffnungszeitRepository.findOeffnungszeitsByMandantAndTag(mandant, currentDay);
-            if (optHeutigeOeffungszeit.isPresent()) {
-                Oeffnungszeit heutigeOeffungszeit = optHeutigeOeffungszeit.get();
-
-                open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
-                System.out.println(open + " Is open");
-
-                System.out.println(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
-                System.out.println(currentTime);
-                open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
-                System.out.println(open + " Is open");
-
-
-                if (heutigeOeffungszeit.getStartpause() != null && heutigeOeffungszeit.getStartpause() != null) {
-                    open = open && (currentTime.isBefore(heutigeOeffungszeit.getStartpause().toLocalTime()) || currentTime.isAfter(heutigeOeffungszeit.getEndepause().toLocalTime()));
-                    System.out.println(open + " Is open");
-
-                }
-            } else {
-                System.out.println("tag nicht gefunden");
-                open = false;
+            int bewertung;
+            boolean open = isGeoeffnet(mandant, currentDay, currentTime);
+            if (mandant.getBestellungen().size()==0){
+                bewertung = 0;
+            }else {
+                bewertung = getBewertung(mandant);
             }
 
 
             if (lieferKosten != 0.0 && lieferKosten < mandant.getLieferkosten()) {
-                System.out.println(mandant.getFirmenname() + " liefer----");
                 continue;
             }
             if (mindestbestellwert != 0.0 && mindestbestellwert < mandant.getMindestbestellwert()) {
-                System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }
             if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName().toString())) {
-                System.out.println(mandant.getFirmenname() + " mind----");
                 continue;
             }
             if (isGeöffnet && !open) {
@@ -234,12 +209,51 @@ public class MandantServiceImpl implements MandantService {
                     .firmenname(mandant.getFirmenname())
                     .ort(mandant.getOrt())
                     .adresse(mandant.getStrasse() + " " + mandant.getHausnummer())
-                    .rating(5)
+                    .rating(bewertung)
                     .geöffnet(open)
                     .build());
         }
         return mandantSuchDtoList;
     }
 
+
+    @Override
+    public boolean isGeoeffnet(Mandant mandant, WochentagEnum currentDay, LocalTime currentTime) {
+
+        boolean open = true;
+        Optional<Oeffnungszeit> optHeutigeOeffungszeit = null;
+
+        optHeutigeOeffungszeit = oeffnungszeitRepository.findOeffnungszeitsByMandantAndTag(mandant, currentDay);
+        if (optHeutigeOeffungszeit.isPresent()) {
+
+            Oeffnungszeit heutigeOeffungszeit = optHeutigeOeffungszeit.get();
+            open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
+            open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
+
+
+            if (heutigeOeffungszeit.getStartpause() != null && heutigeOeffungszeit.getStartpause() != null) {
+                open = open && (currentTime.isBefore(heutigeOeffungszeit.getStartpause().toLocalTime()) || currentTime.isAfter(heutigeOeffungszeit.getEndepause().toLocalTime()));
+
+            }
+        } else {
+            System.out.println("tag nicht gefunden");
+            open = false;
+        }
+        return open;
+    }
+
+
+    @Override
+    public int getBewertung(Mandant mandant) {
+        double bewertungsSumme = 0.0;
+        double anzahl = 0.0;
+
+        for (Bestellung bestellung:mandant.getBestellungen()) {
+            bewertungsSumme += bestellung.getBewertung();
+            anzahl++;
+        }
+        int bewertung = (int) Math.round(bewertungsSumme/anzahl);
+        return bewertung;
+    }
 
 }
