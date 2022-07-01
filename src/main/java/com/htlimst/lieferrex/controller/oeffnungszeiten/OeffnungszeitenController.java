@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Array;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -162,22 +163,23 @@ public class OeffnungszeitenController {
             String startpause = oeffnungListModel.getList().get(counter).getStartpause();
             String endpause = oeffnungListModel.getList().get(counter).getEndepause();
 
-            if(oeffnungszit == null){
+
+            if(oeffnungszit == null || oeffnungszit.length() == 0){
                 oeffnungszeit.setOeffnungszeit(null);
             } else {
                 oeffnungszeit.setOeffnungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getOeffnungszeit()).getTime()));
             }
-            if(schleissungszit == null){
+            if(schleissungszit == null || schleissungszit.length() == 0){
                 oeffnungszeit.setSchliessungszeit(null);
             } else {
                 oeffnungszeit.setSchliessungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getSchliessungszeit()).getTime()));
             }
-            if(startpause == null){
+            if(startpause == null || startpause.length() == 0){
                 oeffnungszeit.setStartpause(null);
             } else {
                 oeffnungszeit.setStartpause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getStartpause()).getTime()));
             }
-            if(endpause == null){
+            if(endpause == null || endpause.length() == 0){
                 oeffnungszeit.setEndepause(null);
             } else {
                 oeffnungszeit.setEndepause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getEndepause()).getTime()));

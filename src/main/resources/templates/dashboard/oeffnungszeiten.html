@@ -240,7 +240,6 @@
                         <form th:action="@{/dashboard/oeffnungszeiten/save}" method="post" th:object="${ozl}">
                         <!-- Montag -->
                         <tr th:each="oz,iter : ${ozl.list}">
-                            <input type="hidden" th:field="*{list[__${iter.index}__].tag}">
                             <td th:text="${oz.tag}">Montag</td>
                             <td>
                                 <div class="custom-switch">
@@ -252,15 +251,15 @@
 
                             <td>
                                 <div class="input-group">
-                                    <input th:id="${oz.idFieldOffenVon}" th:name="${iter.index}" th:field="*{list[__${iter.index}__].oeffnungszeit}" type="time" class="form-control" placeholder="Von" th:value="${oz.oeffnungszeit}">
+                                    <input th:id="${oz.idFieldOffenVon}" th:name="fn1" th:field="*{list[__${iter.index}__].oeffnungszeit}" type="time" class="form-control" placeholder="Von" th:value="${oz.oeffnungszeit}">
                                     <input th:id="${oz.idFieldOffenBis}" th:name="fn2" type="time" th:field="*{list[__${iter.index}__].schliessungszeit}" class="form-control" placeholder="Bis" th:value="${oz.schliessungszeit}">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="custom-switch">
-                                    <input type="checkbox" th:id="${oz.eid}" th:name="btn2" value="true" checked th:if="${oz.endepause != null and oz.startpause != null}">
-                                    <input type="checkbox" th:id="${oz.eid}" value=""  th:unless="${oz.endepause == null and oz.startpause == null}">
+                                    <input type="checkbox" th:id="${oz.eid}" th:name="btn2" value="true" th:if="${oz.endepause != null and oz.startpause != null}" checked>
+                                    <input type="checkbox" th:id="${oz.eid}" value="" >
                                     <label th:for="${oz.eid}"></label>
                                 </div>
                             </td>
