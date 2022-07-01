@@ -237,36 +237,38 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <form th:action="@{/dashboard/oeffnungszeiten/save}" method="post">
                         <!-- Montag -->
-                        <tr th:each="oeffnungszeit : ${oeffnungszeiten}">
-                            <td th:text="${oeffnungszeit.tag}">Montag</td>
+                        <tr th:each="oz : ${oeffnungszeiten}">
+                            <td th:text="${oz.tag}">Montag</td>
                             <td>
                                 <div class="custom-switch">
-                                    <input type="checkbox" th:id="${oeffnungszeit.eid2}" value="" checked>
-                                    <label th:for="${oeffnungszeit.eid2}"></label>
+                                    <input th:if="${oz.oeffnungszeit != null and oz.schliessungszeit != null}" th:name="btn1" type="checkbox" th:id="${oz.eid2}" value="true" checked>
+                                    <input type="checkbox" th:id="${oz.eid2}" value="" >
+                                    <label th:for="${oz.eid2}"></label>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="input-group">
-                                    <input th:id="${oeffnungszeit.idFieldOffenVon}" type="time" class="form-control" placeholder="Von" th:value="${oeffnungszeit.oeffnungszeit}">
-                                    <input th:id="${oeffnungszeit.idFieldOffenBis}" type="time" class="form-control" placeholder="Bis" th:value="${oeffnungszeit.schliessungszeit}">
+                                    <input th:id="${oz.idFieldOffenVon}" th:name="fn1" type="time" class="form-control" placeholder="Von" th:value="${oz.oeffnungszeit}">
+                                    <input th:id="${oz.idFieldOffenBis}" th:name="fn2" type="time" class="form-control" placeholder="Bis" th:value="${oz.schliessungszeit}">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="custom-switch">
-                                    <input type="checkbox" th:id="${oeffnungszeit.eid}" value="" checked th:if="${oeffnungszeit.endepause != null and oeffnungszeit.startpause != null}">
-                                    <input type="checkbox" th:id="${oeffnungszeit.eid}" value=""  th:unless="${oeffnungszeit.endepause == null and oeffnungszeit.startpause == null}">
-                                    <label th:for="${oeffnungszeit.eid}"></label>
+                                    <input type="checkbox" th:id="${oz.eid}" th:name="btn2" value="true" checked th:if="${oz.endepause != null and oz.startpause != null}">
+                                    <input type="checkbox" th:id="${oz.eid}" value=""  th:unless="${oz.endepause == null and oz.startpause == null}">
+                                    <label th:for="${oz.eid}"></label>
                                 </div>
                             </td>
 
 
                             <td>
                                 <div class="input-group">
-                                    <input type="time" th:id="${oeffnungszeit.idFieldPausenVon}" class="form-control" placeholder="Von" th:value="${oeffnungszeit.startpause}">
-                                    <input type="time" th:id="${oeffnungszeit.idFieldPausenBis}" class="form-control" placeholder="Bis" th:value="${oeffnungszeit.endepause}">
+                                    <input type="time" th:id="${oz.idFieldPausenVon}" th:name="fn3" class="form-control" placeholder="Von" th:value="${oz.startpause}">
+                                    <input type="time" th:id="${oz.idFieldPausenBis}" th:name="fn4" class="form-control" placeholder="Bis" th:value="${oz.endepause}">
                                 </div>
                             </td>
                         </tr>
@@ -505,6 +507,7 @@
 
                     </div>
                 </div>
+                </form>
 
 
 

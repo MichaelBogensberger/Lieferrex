@@ -10,16 +10,14 @@ import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -78,4 +76,25 @@ public class BenutzerrechteController {
         angestellterService.saveAngestellter(angestellter, rollen, foundMandant);
         return "redirect:/dashboard/benutzer";
     }
+
+    @Transactional
+    @PostMapping("/delete")
+    public String deleteAngestellter(@AuthenticationPrincipal UserPrincipal principal, @RequestParam Optional<Long> deleteButton){
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
+
+        if (deleteButton.isPresent()){
+            Angestellter angestellter = angestellterService.getAngestellterByMandandIdAndId(foundMandant.getId(), deleteButton.get());
+            if(angestellter.getRolle().size() != 0){
+                angestellter.removeRolle(angestellter.getRolle().stream().findAny().get());
+                angestellterService.saveAngestellter(angestellter);
+            }
+
+            angestellterService.deleteAngestellter(deleteButton.get());
+        }
+
+        return "redirect:/dashboard/benutzer";
+    }
+
+
 }

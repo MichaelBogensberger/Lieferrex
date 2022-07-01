@@ -1,7 +1,9 @@
 package com.htlimst.lieferrex.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -35,6 +37,8 @@ public class Angestellter {
 
     private String token;
 
+
+    @JsonIgnoreProperties
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -43,6 +47,9 @@ public class Angestellter {
             inverseJoinColumns = @JoinColumn(name = "rolle_id"))
     private Collection<Rolle> rolle;
 
+    public void removeRolle(Rolle rolle){
+        this.rolle.remove(rolle);
+    }
 
 }
 
