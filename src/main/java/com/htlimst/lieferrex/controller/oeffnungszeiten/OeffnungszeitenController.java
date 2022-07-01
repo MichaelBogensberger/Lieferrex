@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -22,10 +23,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/dashboard/oeffnungszeiten")
@@ -58,7 +56,11 @@ public class OeffnungszeitenController {
         String idFieldPausenVon = null;
         String idFieldPausenBis = null;
 
+        int counter = 1;
+
         for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
+            String fieldname = "fn";
+
             if(oeffnungszeit.getEndepause() != null){
                 endepause = oeffnungszeit.getEndepause().toLocalTime().format(dtf);
             }
@@ -126,8 +128,38 @@ public class OeffnungszeitenController {
             , idFieldPausenVon, idFieldPausenBis));
         }
 
+        Oeffnungszeit neueOeffnungszeit = new Oeffnungszeit();
+        neueOeffnungszeit.setMandant(foundMandant);
+
+        model.addAttribute("oeffnungsz", neueOeffnungszeit);
         model.addAttribute("oeffnungszeiten", oeffnungensZeiten);
         return "dashboard/oeffnungszeiten.html";
+    }
+
+    @PostMapping("/save")
+    public String saveOeffnungszeiten(Oeffnungszeit oeffnungszeit,
+                                      @RequestParam String fn1,
+                                      @RequestParam String fn2,
+                                      @RequestParam String fn3,
+                                      @RequestParam String fn4,
+                                      @RequestParam Optional<Boolean> btn1,
+                                      @RequestParam Optional<Boolean> btn2
+
+    ){
+        System.out.println(fn1);
+        System.out.println(fn2);
+        System.out.println(fn3);
+        System.out.println(fn4);
+        System.out.println(btn1);
+        System.out.println(btn2);
+
+        if(btn2.isPresent() && btn1.isPresent()){
+            System.out.println("btn1 + btn2");
+        } else if (btn1.isPresent()){
+            System.out.println("only btn1");
+        }
+
+        return "redirect:/dashboard/oeffnungszeiten";
     }
 
 }

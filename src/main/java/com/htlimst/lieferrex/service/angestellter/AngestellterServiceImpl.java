@@ -80,4 +80,14 @@ public class AngestellterServiceImpl implements AngestellterService{
         angestellterRepository.save(angestellter);
     }
 
+    @Override
+    public void deleteAngestellter(Long angestellterId) {
+        angestellterRepository.deleteAngestellterById(angestellterId);
+    }
+
+    @Override
+    public Angestellter getAngestellterByMandandIdAndId(Long mandandId, Long angestellterID) {
+        return angestellterRepository.getAngestellterByMandant_IdAndAndId(mandandId,angestellterID);
+    }
+
 }

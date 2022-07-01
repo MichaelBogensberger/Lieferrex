@@ -22,4 +22,9 @@ public interface AngestellterRepository extends JpaRepository<Angestellter,Long>
     Optional<Angestellter> findAngestellterByToken(String token);
     List<Angestellter> getAllByMandant_Id(Long mandanid);
 
+//    @Query(value = "DELETE FROM angestellter WHERE angestellter_id = ?1", nativeQuery = true)
+    public void deleteAngestellterById(Long angestellterId);
+
+
+    public Angestellter getAngestellterByMandant_IdAndAndId(Long mandandId, Long id);
 }

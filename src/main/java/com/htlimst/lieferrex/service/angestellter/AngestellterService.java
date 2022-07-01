@@ -18,5 +18,7 @@ public interface AngestellterService {
     public void saveAngestellter(Angestellter angestellter, String rollen, Mandant mandant);
     public Optional<Angestellter> findAngestellterByToken(String token);
     public void saveAngestellter(Angestellter angestellter);
+    public void deleteAngestellter(Long angestellterId);
+    public Angestellter getAngestellterByMandandIdAndId(Long mandandId, Long angestellterID);
 
 }

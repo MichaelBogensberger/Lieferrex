@@ -1,6 +1,7 @@
 package com.htlimst.lieferrex.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Rolle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
+    @JsonIgnore
     private String rolle;
 
     public Rolle(String rolle) {
