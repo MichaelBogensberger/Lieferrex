@@ -24,4 +24,9 @@ public class OeffnungszeitenServiceImpl implements OeffnungszeitenService{
     public List<Oeffnungszeit> alleOeffnungszeiten(Mandant mandant) {
         return oeffnungszeitRepository.findOeffnungszeitByMandant(mandant);
     }
+
+    @Override
+    public void saveOeffnungszeiten(List<Oeffnungszeit> oeffnungszeitList) {
+        oeffnungszeitRepository.saveAll(oeffnungszeitList);
+    }
 }

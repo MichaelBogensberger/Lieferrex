@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface OeffnungszeitenService {
     public List<Oeffnungszeit> alleOeffnungszeiten(Mandant mandant);
+    public void saveOeffnungszeiten(List<Oeffnungszeit> oeffnungszeitList);
 
 }

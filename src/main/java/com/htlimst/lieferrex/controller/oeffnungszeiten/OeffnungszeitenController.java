@@ -7,16 +7,17 @@ import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import com.htlimst.lieferrex.service.angestellter.AngestellterService;
 import com.htlimst.lieferrex.service.oeffnungszeiten.OeffnungszeitenService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
+import net.bytebuddy.build.Plugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Array;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -57,6 +58,8 @@ public class OeffnungszeitenController {
         String idFieldPausenBis = null;
 
         int counter = 1;
+
+        OeffnungListModel oeffnungListModel = new OeffnungListModel();
 
         for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
             String fieldname = "fn";
@@ -131,33 +134,36 @@ public class OeffnungszeitenController {
         Oeffnungszeit neueOeffnungszeit = new Oeffnungszeit();
         neueOeffnungszeit.setMandant(foundMandant);
 
+        oeffnungListModel.setList(oeffnungensZeiten);
+
+
+
         model.addAttribute("oeffnungsz", neueOeffnungszeit);
         model.addAttribute("oeffnungszeiten", oeffnungensZeiten);
+        model.addAttribute("ozl", oeffnungListModel);
         return "dashboard/oeffnungszeiten.html";
     }
 
     @PostMapping("/save")
-    public String saveOeffnungszeiten(Oeffnungszeit oeffnungszeit,
-                                      @RequestParam String fn1,
-                                      @RequestParam String fn2,
-                                      @RequestParam String fn3,
-                                      @RequestParam String fn4,
-                                      @RequestParam Optional<Boolean> btn1,
-                                      @RequestParam Optional<Boolean> btn2
+    public String saveOeffnungszeiten(OeffnungListModel oeffnungListModel, @AuthenticationPrincipal UserPrincipal principal) throws ParseException {
 
-    ){
-        System.out.println(fn1);
-        System.out.println(fn2);
-        System.out.println(fn3);
-        System.out.println(fn4);
-        System.out.println(btn1);
-        System.out.println(btn2);
+        Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
+        List<Oeffnungszeit> oeffnungszeitList = oeffnungszeitenService.alleOeffnungszeiten(foundMandant);
+        int counter = 0;
 
-        if(btn2.isPresent() && btn1.isPresent()){
-            System.out.println("btn1 + btn2");
-        } else if (btn1.isPresent()){
-            System.out.println("only btn1");
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+
+        for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
+            oeffnungszeit.setOeffnungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getOeffnungszeit()).getTime()));
+            oeffnungszeit.setSchliessungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getSchliessungszeit()).getTime()));
+            oeffnungszeit.setStartpause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getStartpause()).getTime()));
+            oeffnungszeit.setEndepause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getEndepause()).getTime()));
+            counter++;
         }
+
+        oeffnungszeitenService.saveOeffnungszeiten(oeffnungszeitList);
+
 
         return "redirect:/dashboard/oeffnungszeiten";
     }

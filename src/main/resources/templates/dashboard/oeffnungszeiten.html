@@ -237,9 +237,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <form th:action="@{/dashboard/oeffnungszeiten/save}" method="post">
+                        <form th:action="@{/dashboard/oeffnungszeiten/save}" method="post" th:object="${ozl}">
                         <!-- Montag -->
-                        <tr th:each="oz : ${oeffnungszeiten}">
+                        <tr th:each="oz,iter : ${ozl.list}">
+                            <input type="hidden" th:field="*{list[__${iter.index}__].tag}">
                             <td th:text="${oz.tag}">Montag</td>
                             <td>
                                 <div class="custom-switch">
@@ -251,8 +252,8 @@
 
                             <td>
                                 <div class="input-group">
-                                    <input th:id="${oz.idFieldOffenVon}" th:name="fn1" type="time" class="form-control" placeholder="Von" th:value="${oz.oeffnungszeit}">
-                                    <input th:id="${oz.idFieldOffenBis}" th:name="fn2" type="time" class="form-control" placeholder="Bis" th:value="${oz.schliessungszeit}">
+                                    <input th:id="${oz.idFieldOffenVon}" th:name="${iter.index}" th:field="*{list[__${iter.index}__].oeffnungszeit}" type="time" class="form-control" placeholder="Von" th:value="${oz.oeffnungszeit}">
+                                    <input th:id="${oz.idFieldOffenBis}" th:name="fn2" type="time" th:field="*{list[__${iter.index}__].schliessungszeit}" class="form-control" placeholder="Bis" th:value="${oz.schliessungszeit}">
                                 </div>
                             </td>
 
@@ -267,8 +268,8 @@
 
                             <td>
                                 <div class="input-group">
-                                    <input type="time" th:id="${oz.idFieldPausenVon}" th:name="fn3" class="form-control" placeholder="Von" th:value="${oz.startpause}">
-                                    <input type="time" th:id="${oz.idFieldPausenBis}" th:name="fn4" class="form-control" placeholder="Bis" th:value="${oz.endepause}">
+                                    <input type="time" th:id="${oz.idFieldPausenVon}" th:name="fn3" class="form-control" placeholder="Von"th:field="*{list[__${iter.index}__].startpause}"  th:value="${oz.startpause}">
+                                    <input type="time" th:id="${oz.idFieldPausenBis}" th:name="fn4" class="form-control" placeholder="Bis" th:field="*{list[__${iter.index}__].endepause}" th:value="${oz.endepause}">
                                 </div>
                             </td>
                         </tr>
@@ -479,8 +480,6 @@
 <!--                                </div>-->
 <!--                            </td>-->
 <!--                        </tr>-->
-
-
 
                         </tbody>
                     </table>

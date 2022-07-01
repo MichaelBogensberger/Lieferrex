@@ -75,5 +75,10 @@ public class OverveiwServiceImpl implements OverviewService {
         return true;
     }
 
+    @Override
+    public List<Gericht> getPopularBestellungen(Long mandantId) {
+        return gerichtRepository.getAllByMandant_IdLimit(mandantId);
+    }
+
 
 }

@@ -15,4 +15,5 @@ public interface OverviewService {
     public List<Gericht> anzahlGeakuft(long mandantId);
     public List<Umsatz> alleUmsaetzeByMandant(Mandant mandant);
     public boolean checkIfUmsatzImMonatVorhanden(Mandant mandant);
+    public List<Gericht> getPopularBestellungen(Long mandantId);
 }

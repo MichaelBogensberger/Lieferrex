@@ -27,4 +27,7 @@ public interface GerichtRepository extends JpaRepository<Gericht,Long> {
 
     public List<Gericht> getAllByMandant_Id(long mandantId);
 
+    @Query(value = "SELECT * FROM `gericht` WHERE mandant_id = ?1 ORDER By anzahl_gekauft DESC LIMIT 3", nativeQuery = true)
+    public List<Gericht> getAllByMandant_IdLimit(long mandantId);
+
 }

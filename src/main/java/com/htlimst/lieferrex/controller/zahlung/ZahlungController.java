@@ -110,14 +110,18 @@ public class ZahlungController {
             durschnittProBestellungImMonat = diesenMonat / anzahlAnOrdersImMonat;
             durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImMonat;
 
-            BigDecimal proBestellungBD = new BigDecimal(proBestellung).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal durschnittProBestellungImMonatBD = new BigDecimal(durschnittProBestellungImMonat).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal durchschnittProBestellungImJahrBD = new BigDecimal(durchschnittProBestellungImJahr).setScale(2, RoundingMode.HALF_UP);
+            if(anzahlAnOrdersImMonat != 0 && anzahlAnOrdersImJahr != 0){
+                BigDecimal proBestellungBD = new BigDecimal(proBestellung).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal durschnittProBestellungImMonatBD = new BigDecimal(durschnittProBestellungImMonat).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal durchschnittProBestellungImJahrBD = new BigDecimal(durchschnittProBestellungImJahr).setScale(2, RoundingMode.HALF_UP);
 
-            proBestellung = proBestellungBD.doubleValue();
-            durschnittProBestellungImMonat = durschnittProBestellungImMonatBD.doubleValue();
-            durchschnittProBestellungImJahr = durchschnittProBestellungImJahrBD.doubleValue();
-
+                proBestellung = proBestellungBD.doubleValue();
+                durschnittProBestellungImMonat = durschnittProBestellungImMonatBD.doubleValue();
+                durchschnittProBestellungImJahr = durchschnittProBestellungImJahrBD.doubleValue();
+            } else {
+                durchschnittProBestellungImJahr = 0.0;
+                durschnittProBestellungImMonat = 0.0;
+            }
         }
 
         ZahlungModel zahlungModel = new ZahlungModel(zahlungen, proBestellung, diesenMonat, umsatzImMonat, anzahlAnOrdersImMonat, durschnittProBestellungImMonat, jahresUmsatz, anzahlAnOrdersImJahr, durchschnittProBestellungImJahr, letztenDreiBestellungen, kunde);

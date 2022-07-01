@@ -77,7 +77,7 @@ public class OverviewController {
         angestellterService.saveAngestellter(foundAngestellter);
         List<Bestellung> latestBestellungList = overviewService.getLatestBestellungen(foundMandant.getId());
         model.addAttribute("latestBestellungen", latestBestellungList);
-        model.addAttribute("popular", overviewService.anzahlGeakuft(foundMandant.getId()));
+        model.addAttribute("popular", overviewService.getPopularBestellungen(foundMandant.getId()));
         return "dashboard/dashboard.html";
     }
 
