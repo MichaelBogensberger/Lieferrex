@@ -154,11 +154,35 @@ public class OeffnungszeitenController {
 
         DateFormat formatter = new SimpleDateFormat("HH:mm");
 
+
         for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
-            oeffnungszeit.setOeffnungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getOeffnungszeit()).getTime()));
-            oeffnungszeit.setSchliessungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getSchliessungszeit()).getTime()));
-            oeffnungszeit.setStartpause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getStartpause()).getTime()));
-            oeffnungszeit.setEndepause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getEndepause()).getTime()));
+
+            String oeffnungszit = oeffnungListModel.getList().get(counter).getOeffnungszeit();
+            String schleissungszit = oeffnungListModel.getList().get(counter).getSchliessungszeit();
+            String startpause = oeffnungListModel.getList().get(counter).getStartpause();
+            String endpause = oeffnungListModel.getList().get(counter).getEndepause();
+
+            if(oeffnungszit == null){
+                oeffnungszeit.setOeffnungszeit(null);
+            } else {
+                oeffnungszeit.setOeffnungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getOeffnungszeit()).getTime()));
+            }
+            if(schleissungszit == null){
+                oeffnungszeit.setSchliessungszeit(null);
+            } else {
+                oeffnungszeit.setSchliessungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getSchliessungszeit()).getTime()));
+            }
+            if(startpause == null){
+                oeffnungszeit.setStartpause(null);
+            } else {
+                oeffnungszeit.setStartpause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getStartpause()).getTime()));
+            }
+            if(endpause == null){
+                oeffnungszeit.setEndepause(null);
+            } else {
+                oeffnungszeit.setEndepause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getEndepause()).getTime()));
+            }
+
             counter++;
         }
 
