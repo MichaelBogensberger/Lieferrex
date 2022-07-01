@@ -6,7 +6,6 @@ import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
 import com.htlimst.lieferrex.model.enums.KategorieEnum;
 import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import com.htlimst.lieferrex.model.fragments.FragmentHeader;
-import com.htlimst.lieferrex.model.fragments.FragmentMap;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
 import com.htlimst.lieferrex.repository.*;
@@ -36,8 +35,6 @@ public class DbInit implements CommandLineRunner {
         private FragmentHeaderRepository fragmentHeaderRepository;
         @Autowired
         private FragmentImageRepository fragmentImageRepository;
-        @Autowired
-        private FragmentMapRepository fragmentMapRepository;
         @Autowired
         private FragmentRepository fragmentRepository;
         @Autowired
@@ -169,7 +166,8 @@ public class DbInit implements CommandLineRunner {
                                 mandantBestellart,
                                 layouts.get(0), geoPosition);
                 Mandant mandant2 = new Mandant(null, "Asiamix", "Österreich", "Gemeinde Imst", "6460",
-                                "Franz-Xaver-Renn-Straße", "4", "0650123123", 0, 50000, 15, 30, "mandant2@business.example.com",
+                                "Franz-Xaver-Renn-Straße", "4", "0650123123", 0, 50000, 15, 30,
+                                "mandant2@business.example.com",
                                 7.5, 3.5, null,
                                 mandantBestellart, layouts.get(1), geoPosition2);
 
@@ -197,7 +195,7 @@ public class DbInit implements CommandLineRunner {
 
                 ArrayList<Fragment> fragments = new ArrayList<>();
 
-                fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(6), null, null, null,
+                fragments.add(new Fragment(null, positions.get(0), mandant, fragmentTypes.get(6), null, null,
                                 null));
 
                 for (Fragment fragment : fragments) {
@@ -342,7 +340,6 @@ public class DbInit implements CommandLineRunner {
                 oeffnungszeitRepository.deleteAll();
                 fragmentHeaderRepository.deleteAll();
                 fragmentImageRepository.deleteAll();
-                fragmentMapRepository.deleteAll();
                 fragmentRepository.deleteAll();
                 fragmentTextRepository.deleteAll();
                 kundeRepository.deleteAll();

@@ -177,7 +177,7 @@ public class BaukastenController {
                         || fragmenttype.get().getType().contains("karte")
                         || fragmenttype.get().getType().contains("map"))) {
                     fragment = fragmentServiceImpl.save(
-                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null,
+                            new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                     null));
                 }
                 // Fragment wether editing Header or adding new Fragment
@@ -187,7 +187,7 @@ public class BaukastenController {
                 switch (fragmenttype.get().getType()) {
                     case "text":
                         FragmentText fragmentText = fragmentTextServiceImpl.save(
-                                new FragmentText(null, result.get("title"), result.get("text"), "null", fragment));
+                                new FragmentText(null, result.get("title"), result.get("text"), fragment));
 
                         fragment.setFragmenttext(fragmentText);
                         fragmentServiceImpl.save(fragment);
@@ -227,7 +227,7 @@ public class BaukastenController {
 
                     case "kontakt":
                         fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null,
+                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                         null));
 
                         model.addAttribute("kontaktstrasse", mandant.get().getStrasse());
@@ -241,21 +241,21 @@ public class BaukastenController {
 
                     case "zeiten":
                         fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null,
+                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                         null));
 
                         model.addAttribute("zeiten", oeffnungszeitRepository.findOeffnungszeitByMandant(mandant.get()));
                         break;
                     case "karte":
                         fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null,
+                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                         null));
 
                         model.addAttribute("gerichte", mandant.get().getGerichte());
                         break;
                     case "map":
                         fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null, null,
+                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                         null));
 
                         model.addAttribute("lat", mandant.get().getGeoPosition().getGeoLat());

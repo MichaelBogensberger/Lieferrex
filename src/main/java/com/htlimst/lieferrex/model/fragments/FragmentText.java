@@ -1,6 +1,5 @@
 package com.htlimst.lieferrex.model.fragments;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ import com.htlimst.lieferrex.model.Fragment;
 @Table(name = "fragmenttext")
 public class FragmentText {
 
-
     @Id
     @Column(name = "fragmenttext_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +27,8 @@ public class FragmentText {
     @NotEmpty
     private String text;
 
-    @NotEmpty
-    private String farbe;
-
     @OneToOne
-    @JoinColumn(name="fragment_id")
+    @JoinColumn(name = "fragment_id")
     private Fragment fragment;
 
 }

@@ -2,7 +2,6 @@ package com.htlimst.lieferrex.controller;
 
 import java.util.List;
 
-
 import com.htlimst.lieferrex.dto.KundenIndexDto;
 import com.htlimst.lieferrex.dto.MandantSuchDto;
 import com.htlimst.lieferrex.exceptions.AdresseNotFoundException;
@@ -13,7 +12,6 @@ import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.repository.KundeRepository;
 import com.htlimst.lieferrex.repository.MandantRepository;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
-import com.htlimst.lieferrex.service.fragmentmap.FragmentMapServiceImpl;
 import com.htlimst.lieferrex.service.fragmenttext.FragmentTextServiceImpl;
 import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
 import com.htlimst.lieferrex.service.mandant.MandantService;
@@ -36,34 +34,31 @@ public class MainController {
     private MandantRepository mandantRepository;
     private FragmentServiceImpl fragmentServiceImpl;
     private FragmentTextServiceImpl fragmenttextServiceImpl;
-    private FragmentMapServiceImpl fragmentmapServiceImpl;
     private MandantService mandantService;
     private GeocodingApi geocodingApi;
     KundeRepository kundeRepository;
 
     @Autowired
-    public MainController(MandantRepository mandantRepository, FragmentServiceImpl fragmentServiceImpl, FragmentTextServiceImpl fragmenttextServiceImpl, FragmentMapServiceImpl fragmentmapServiceImpl, MandantService mandantService, GeocodingApi geocodingApi, KundeRepository kundeRepository) {
+    public MainController(MandantRepository mandantRepository, FragmentServiceImpl fragmentServiceImpl,
+            FragmentTextServiceImpl fragmenttextServiceImpl, MandantService mandantService, GeocodingApi geocodingApi,
+            KundeRepository kundeRepository) {
         this.mandantRepository = mandantRepository;
         this.fragmentServiceImpl = fragmentServiceImpl;
         this.fragmenttextServiceImpl = fragmenttextServiceImpl;
-        this.fragmentmapServiceImpl = fragmentmapServiceImpl;
         this.mandantService = mandantService;
         this.geocodingApi = geocodingApi;
         this.kundeRepository = kundeRepository;
     }
 
-
-
     @Value("${google.api.key}")
     String key;
 
-
     @GetMapping("")
     public String showIndexPage(@AuthenticationPrincipal UserPrincipal principal, Model model) {
-        if (principal == null){
+        if (principal == null) {
             System.out.println("Index page loaded");
             return "main/index";
-        }else {
+        } else {
             model.addAttribute("login", true);
             Kunde kunde = kundeRepository.findByEmail(principal.getUsername());
             KundenIndexDto kundenIndexDto = new KundenIndexDto().builder()
@@ -77,15 +72,15 @@ public class MainController {
             return "main/index";
         }
 
-
     }
 
     @GetMapping("/seach")
-    public String search(@RequestParam(value = "search", required = false) String adresse, RedirectAttributes redirectAttrs) {
+    public String search(@RequestParam(value = "search", required = false) String adresse,
+            RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
 
         List<Mandant> mandanten = mandantRepository.findMandantByPlz(adresse);
-        if (!mandanten.isEmpty()){
+        if (!mandanten.isEmpty()) {
             return "redirect:restaurants/" + adresse;
         }
 
@@ -100,15 +95,14 @@ public class MainController {
             return "redirect:/";
         }
 
-
     }
 
-
     @GetMapping("/restaurants/{plz}")
-    public String showRestaurants(@PathVariable String plz, @RequestParam(required = false) String geoeffnet, @RequestParam(required = false) String lieferkosten
-            , @RequestParam(required = false) String mindestbestellwert, @RequestParam(required = false) String kategorie,
-                                  @RequestParam(required = false) String adresse, Model model) {
-        //Alle Restaurants der PLZ anzeigen
+    public String showRestaurants(@PathVariable String plz, @RequestParam(required = false) String geoeffnet,
+            @RequestParam(required = false) String lieferkosten,
+            @RequestParam(required = false) String mindestbestellwert, @RequestParam(required = false) String kategorie,
+            @RequestParam(required = false) String adresse, Model model) {
+        // Alle Restaurants der PLZ anzeigen
         System.out.println(plz);
         System.out.println(Boolean.parseBoolean(geoeffnet));
         double dLieferKosten = lieferkosten == null ? 0.0 : Double.parseDouble(lieferkosten);
@@ -120,13 +114,12 @@ public class MainController {
         System.out.println(adresse);
         System.out.println("----------------------");
 
-
         try {
-            List<MandantSuchDto> mandanten = mandantService.findMandantByPlz(plz, Boolean.parseBoolean(geoeffnet), dLieferKosten, dMindestbestellwert, kategorie);
+            List<MandantSuchDto> mandanten = mandantService.findMandantByPlz(plz, Boolean.parseBoolean(geoeffnet),
+                    dLieferKosten, dMindestbestellwert, kategorie);
             model.addAttribute("plz", plz);
             model.addAttribute("adresse", adresse);
             model.addAttribute("mandanten", mandanten);
-
 
             return "main/search";
         } catch (MandantNotFoundException mandantNotFoundException) {
@@ -137,20 +130,15 @@ public class MainController {
 
     }
 
-
-
-
     @GetMapping("/buildOne")
     public String showBaukastenPage() {
         return "baukasten/one.html";
     }
-
 
     @GetMapping("/dashboard/kategorien")
     public String showDashboardKategorien() {
 
         return "dashboard/kategorien.html";
     }
-
 
 }
