@@ -1,14 +1,14 @@
 <div th:fragment="image(content, edit, position)" class="fragment-image br-16">
 
-  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}" class="fragment-delete material-icons">delete_forever</i>
+  <i th:if="${edit}" th:name="${position + '-' + content.fragmenttype.type}"
+    class="fragment-delete material-icons">delete_forever</i>
 
   <div>
     <div class="row " style="text-align: center;">
       <h1 class="mob-text-mod" th:text="${content.fragmentimage.titel}"></h1>
     </div>
-   
+
     <img class="br-16 p-10" th:src="${'data:image/png;base64,'+ __${position + 'image'}__}" />
-    
   </div>
 
 </div>

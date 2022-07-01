@@ -71,7 +71,7 @@
                     <div class="col s4 pb-0">
 
                         <div class="input-field">
-                            <input type="number" th:id="${'anzahl-' + gericht.id}" min="1" max="100">
+                            <input type="number" th:id="${'anzahl-' + gericht.id}" value="1" min="1" max="100">
                             <label class="active" th:for="${'anzahl-' + gericht.id}">Anzahl</label>
                         </div>
 
@@ -111,7 +111,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" crossorigin="anonymous"></script>
 
-<script>
+<script th:inline="javascript">
     $(document).ready(function () {
         $('.collapsible').collapsible();
 
@@ -132,29 +132,30 @@
     function updateWarenkorb(warenkorb) {
         var data = "";
         warenkorb.forEach(element => {
+
             data += '\
-                <div class="collection-item row center">\
-                    <div class="col s6 m3 l3">' + element["name"] + '</div>\
-                    <div class="col s6 m3 l3">' + element["anmerkung"] + '</div>\
-                    <div class="col s6 m3 l3">' + element["anzahl"] + '</div>\
-                    <div class="col s6 m3 l3">\
-                        <a class="waves-effect waves-light btn" onclick="removeGericht(' + element["tmp"] + ')">Entfernen</a>\
-                    </div>\
-                </div>\
-            ';
+                <tr>\
+                    <td>' + element["name"] + '</td>\
+                    <td>' + element["anmerkung"] + '</td>\
+                    <td>' + element["anzahl"] + '</td>\
+                    <td onclick="removeGericht(' + element["id"] + ', \'' + element["anmerkung"] + '\')"><a href="#">Entfernen</a></td>\
+                </tr>\
+            '
         });
 
         $("#waren").html(data)
     }
 
-    function removeGericht(tmp) {
+    function removeGericht(id, anmerkung) {
         var warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
         var gerichtToRemove = "";
 
         warenkorb.forEach(element => {
-            if (element["tmp"] == tmp) { gerichtToRemove = element };
+            if (element["id"] == id && element["anmerkung"] == anmerkung) { gerichtToRemove = element };
         });
         warenkorb.splice(warenkorb.indexOf(gerichtToRemove), 1)
+
+        M.toast({ html: 'Gericht entfernt!' })
 
         Cookies.set("warenkorb", window.JSON.stringify(warenkorb));
         updateWarenkorb(warenkorb);
@@ -162,14 +163,14 @@
 
     $(".buyButton").click(function () {
 
-        var gericht;
-        var warenkorb;
+        var added = false;
+        var mandantID = /*[[${restaurantID}]]*/ '0';
         var id = $(this).attr("id").split("-")[1];
 
         if (Cookies.get("warenkorb") == null) {
-            warenkorb = [];
+            var warenkorb = [];
         } else {
-            warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+            var warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
         }
 
         gericht = {
@@ -177,10 +178,19 @@
             anmerkung: $("#anmerkung-" + id).val(),
             anzahl: $("#anzahl-" + id).val(),
             name: $("#name-" + id).text(),
-            tmp: Math.floor(Math.random() * 100000)
+            madant: mandantID
         };
 
-        warenkorb.push(gericht);
+        warenkorb.forEach(element => {
+            if (element["id"] == gericht["id"] && element["anmerkung"] == gericht["anmerkung"]) {
+                element["anzahl"] = Number(element["anzahl"]) + Number(gericht["anzahl"]);
+                added = true;
+            }
+        });
+
+        if (!added) { warenkorb.push(gericht); }
+
+        M.toast({ html: 'Gericht hinzugefügt!' })
         Cookies.set("warenkorb", window.JSON.stringify(warenkorb));
         updateWarenkorb(warenkorb);
 
@@ -192,8 +202,19 @@
     <div class="modal-content">
         <h4>Warenkorb</h4>
 
-        <div class="collection" id="waren">
+        <div class="collection">
+            <table class="centered striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Anmerkung</th>
+                        <th>Anzahl</th>
+                        <th>Gericht Entfernen</th>
+                    </tr>
+                </thead>
 
+                <tbody id="waren"></tbody>
+            </table>
         </div>
     </div>
     <div class="modal-footer" style="height: 0;"></div>

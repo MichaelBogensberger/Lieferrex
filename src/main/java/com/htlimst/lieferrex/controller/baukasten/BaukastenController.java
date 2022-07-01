@@ -130,6 +130,7 @@ public class BaukastenController {
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("restaurantName", mandant.getFirmenname());
         model.addAttribute("color", mandant.getAkzentFarbe());
+        model.addAttribute("restaurantID", mandant.getId());
 
         allFragments(fragments, model, mandant);
 
