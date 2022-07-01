@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -120,6 +121,8 @@ public class MandantServiceImpl implements MandantService {
 
         geoPositionRepository.save(geoPosition);
 
+
+
         Mandant mandant = new Mandant().builder().
                 firmenname(mandantRegistrationDto.getFirmenname()).
                 land(mandantRegistrationDto.getLand()).
@@ -135,8 +138,9 @@ public class MandantServiceImpl implements MandantService {
                 .umsatz_summe(0.0)
                 .durchschnittsAbholZeit(15)
                 .durchschnittsLieferZeit(30)
-                .geoPosition(geoPosition).
-                kategorie(kategorieRepository.getKategorieByName(KategorieEnum.OTHER)).build();
+                .geoPosition(geoPosition)
+                .kategorie(kategorieRepository.getKategorieByName(KategorieEnum.OTHER))
+                .build();
         mandantRepository.save(mandant);
 
 
@@ -148,6 +152,15 @@ public class MandantServiceImpl implements MandantService {
                 passwort(passwordEncoder.encode(mandantRegistrationDto.getPasswort())).
                 rolle(Arrays.asList(roleRepository.findByRolle("ROLE_MANDANT"))).build();
         angestellterRepository.save(angestellter);
+
+
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.MONDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.TUESDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.WEDNESDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.THURSDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.FRIDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SATURDAY, null, null, null, null, mandant));
+        this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SUNDAY, null, null, null, null, mandant));
 
 
         LocalDate current_date = LocalDate.now();
