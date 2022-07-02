@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.w3.org/1999/html">
 <head>
 
     <title>Dashboard</title>
@@ -219,41 +219,49 @@
                                     <h2 class="card-title mb-5 mt-0">Bearbeiten</h2>
                                     <p class="mt-0">Hier können Sie eine Kategorie auswählen:</p>
 
+
+                                    <form th:action="@{/dashboard/kategorien/save}" method="post">
                                     <!-- First radio button -->
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="fine-dining" value="fine-dining">
+                                        <input type="radio" name="radio-set-1" id="fine-dining" checked="checked" value="FINE_DINING" th:if="${kategorie == 'FINE_DINING'}">
+                                        <input type="radio" name="radio-set-1" id="fine-dining" value="FINE_DINING">
                                         <label for="fine-dining">Fine Dining</label>
                                     </div>
 
                                     <!-- Second radio button (checked by default) -->
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="casual-dining" value="casual-dining">
+                                        <input type="radio" name="radio-set-1" id="casual-dining" checked="checked" value="CASUAL_DINING" th:if="${kategorie == 'CASUAL_DINING'}">
+                                        <input type="radio" name="radio-set-1" id="casual-dining" value="CASUAL_DINING">
                                         <label for="casual-dining">Casual Dining</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="family-style" value="family-style">
+                                        <input type="radio" name="radio-set-1" id="family-style" checked="checked" value="FAMILY_STYLE" th:if="${kategorie == 'FAMILY_STYLE'}">
+                                        <input type="radio" name="radio-set-1" id="family-style" value="FAMILY_STYLE">
                                         <label for="family-style">Family Style</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="fast-food" checked="checked" value="fast-food">
+                                        <input type="radio" name="radio-set-1" id="fast-food" checked="checked" value="FAST_FOOD" th:if="${kategorie == 'FAST_FOOD'}">
+                                        <input type="radio" name="radio-set-1" id="fast-food" value="FAST_FOOD">
                                         <label for="fast-food">Fast Food</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="buffet" value="buffet">
+                                        <input type="radio" name="radio-set-1" id="buffet" checked="checked" value="BUFFET" th:if="${kategorie == 'BUFFET'}">
+                                        <input type="radio" name="radio-set-1" id="buffet" value="BUFFET">
                                         <label for="buffet">Buffet</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="other" value="other">
+                                        <input type="radio" name="radio-set-1" id="other" checked="checked" value="OTHER" th:if="${kategorie == 'OTHER'}">
+                                        <input type="radio" name="radio-set-1" id="other" value="OTHER">
                                         <label for="other">other</label>
                                     </div>
 
 
-                                    <button class="btn btn-primary btn-block mb-0 mt-20 pb-0" type="button">speichern</button>
-
+                                    <button class="btn btn-primary btn-block mb-0 mt-20 pb-0" type="submit">speichern</button>
+                                    </form>
 
 
                                 </div>

@@ -135,10 +135,5 @@ public class MainController {
         return "baukasten/one.html";
     }
 
-    @GetMapping("/dashboard/kategorien")
-    public String showDashboardKategorien() {
-
-        return "dashboard/kategorien.html";
-    }
 
 }
