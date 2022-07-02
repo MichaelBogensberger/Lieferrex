@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -37,41 +38,55 @@ public class OverviewController {
     public BestellungService bestellungService;
 
     @Autowired
-    public OverviewController(OverviewService overviewService, AngestellterService angestellterService, BestellungService bestellungService) {
+    public OverviewController(OverviewService overviewService, AngestellterService angestellterService,
+            BestellungService bestellungService) {
         this.overviewService = overviewService;
         this.angestellterService = angestellterService;
         this.bestellungService = bestellungService;
     }
 
+    @Autowired
+    SeitenaufrufeRepository seitenaufrufeRepository;
 
     @GetMapping
-    public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model, HttpServletResponse response){
+    public String seitenAufruf(@AuthenticationPrincipal UserPrincipal principal, Model model,
+            HttpServletResponse response) {
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
 
-        Seitenaufrufe seitenaufrufe = overviewService.seitenaufrufe(foundMandant);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        Optional<Seitenaufrufe> seitenaufrufe = seitenaufrufeRepository
+                .getSeitenaufrufeByMandantAndJahrAndMonat(foundMandant, year, month);
+        int aufrufe;
+
+        if (seitenaufrufe.isPresent()) {
+            aufrufe = seitenaufrufe.get().getAufrufe();
+        } else {
+            seitenaufrufeRepository.save(new Seitenaufrufe(null, month, year, 0, foundMandant));
+            aufrufe = 0;
+        }
+
         long verkaufteGerichte = overviewService.getVerkaufteGerichte(foundMandant.getId());
 
         List<Umsatz> alleUmsaetzeByMandant = overviewService.alleUmsaetzeByMandant(foundMandant);
         double umsatzSumme = 0.0;
 
-        if(overviewService.checkIfUmsatzImMonatVorhanden(foundMandant)){
-            for (Umsatz umsatz : alleUmsaetzeByMandant){
-                if (umsatz.getMonat() == LocalDateTime.now().getMonthValue()){
+        if (overviewService.checkIfUmsatzImMonatVorhanden(foundMandant)) {
+            for (Umsatz umsatz : alleUmsaetzeByMandant) {
+                if (umsatz.getMonat() == LocalDateTime.now().getMonthValue()) {
                     umsatzSumme += umsatz.getUmsatz();
                 }
             }
         }
 
-
-        model.addAttribute("seitenaufrufe", seitenaufrufe.getAufrufe());
+        model.addAttribute("seitenaufrufe", aufrufe);
         model.addAttribute("umsatz", umsatzSumme);
         model.addAttribute("gerichteVerkauft", verkaufteGerichte);
         model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
         model.addAttribute("vname", foundAngestellter.getVorname());
         model.addAttribute("nname", foundAngestellter.getNachname());
         model.addAttribute("firmenname", foundMandant.getFirmenname());
-
 
         // -----------------------
         // Token in Daterbank und Cookie fuer REST.

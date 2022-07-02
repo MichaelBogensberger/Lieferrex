@@ -27,7 +27,7 @@ $(document).ready(function(){
       $(".AddFragment").off("click").click(function() {
         $('#selector').modal('close');
         name = '#' + $(this).attr('name')
-        $('#' + $(this).attr('name')).modal('open');
+        $(name).modal('open');
       });
 
       

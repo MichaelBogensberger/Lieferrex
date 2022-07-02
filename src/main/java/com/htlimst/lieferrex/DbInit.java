@@ -89,6 +89,8 @@ public class DbInit implements CommandLineRunner {
                 layouts.add(new Layout(null, "layoutZWEI", null, null));
                 layouts.add(new Layout(null, "layoutDREI", null, null));
                 layouts.add(new Layout(null, "layoutVIER", null, null));
+                layouts.add(new Layout(null, "Gallery", null, null));
+                layouts.add(new Layout(null, "AboutUs", null, null));
 
                 for (Layout layout : layouts) {
                         layoutRepository.save(layout);

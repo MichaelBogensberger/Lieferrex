@@ -2,6 +2,7 @@ package com.htlimst.lieferrex.controller.baukasten;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +16,14 @@ import com.htlimst.lieferrex.model.Gallery;
 import com.htlimst.lieferrex.model.Layout;
 import com.htlimst.lieferrex.model.Mandant;
 import com.htlimst.lieferrex.model.Position;
+import com.htlimst.lieferrex.model.Seitenaufrufe;
 import com.htlimst.lieferrex.model.fragments.FragmentHeader;
 import com.htlimst.lieferrex.model.fragments.FragmentImage;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
 import com.htlimst.lieferrex.model.fragments.FragmentType;
 import com.htlimst.lieferrex.repository.AngestellterRepository;
 import com.htlimst.lieferrex.repository.OeffnungszeitRepository;
+import com.htlimst.lieferrex.repository.SeitenaufrufeRepository;
 import com.htlimst.lieferrex.service.aboutus.AboutUsServiceImpl;
 import com.htlimst.lieferrex.service.fragment.FragmentServiceImpl;
 import com.htlimst.lieferrex.service.fragmentheader.FragmentHeaderServiceImpl;
@@ -81,6 +84,9 @@ public class BaukastenController {
     @Autowired
     GalleryServiceImpl galleryServiceImpl;
 
+    @Autowired
+    SeitenaufrufeRepository seitenaufrufeRepository;
+
     public void allFragments(List<Fragment> fragments, Model model, Mandant mandant) {
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
@@ -127,6 +133,18 @@ public class BaukastenController {
         Mandant mandant = mandantServiceImpl.findMandantById(restaurant).get();
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
 
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        Optional<Seitenaufrufe> seitenaufrufe = seitenaufrufeRepository
+                .getSeitenaufrufeByMandantAndJahrAndMonat(mandant, year, month);
+
+        if (seitenaufrufe.isPresent()) {
+            seitenaufrufe.get().setAufrufe(seitenaufrufe.get().getAufrufe() + 1);
+            seitenaufrufeRepository.save(seitenaufrufe.get());
+        } else {
+            seitenaufrufeRepository.save(new Seitenaufrufe(null, month, year, 1, mandant));
+        }
+
         model.addAttribute("layout", mandant.getLayout().getName());
         model.addAttribute("restaurantName", mandant.getFirmenname());
         model.addAttribute("color", mandant.getAkzentFarbe());
@@ -148,7 +166,44 @@ public class BaukastenController {
         model.addAttribute("restaurantName", mandant.getFirmenname());
         model.addAttribute("color", mandant.getAkzentFarbe());
 
-        allFragments(fragments, model, mandant);
+        boolean headerExists = false;
+        for (Fragment fragment : fragments) {
+            if (fragment.getFragmentheader() != null) {
+                headerExists = true;
+            }
+        }
+
+        if (!headerExists) {
+            String headerType = "";
+            switch (mandant.getLayout().getName()) {
+                case "layoutEINS":
+                    headerType = "header-1";
+                    break;
+                case "layoutZWEI":
+                    headerType = "header-2";
+                    break;
+                case "layoutDREI":
+                    headerType = "header-3";
+                    break;
+                case "layoutVIER":
+                    headerType = "header-4";
+                    break;
+                default:
+                    break;
+            }
+
+            Fragment fragment = new Fragment(null,
+                    positionServiceImpl.findPostitionByNameAndLayout("r1c1", mandant.getLayout()).get(),
+                    mandant, fragmentTypeServiceImpl.findFragmentTypeByType(headerType).get(), null, null,
+                    null);
+            fragmentServiceImpl.save(fragment);
+
+            FragmentHeader fragmentHeader = new FragmentHeader(null, "titel", "text", null, fragment);
+            fragmentHeaderServiceImpl.save(fragmentHeader);
+            fragment.setFragmentheader(fragmentHeader);
+        }
+
+        allFragments(fragmentServiceImpl.findFragmentByMandant_id(mandant.getId()), model, mandant);
 
         return "baukasten/frame";
     }
@@ -172,11 +227,7 @@ public class BaukastenController {
 
                 // Fragment wether editing Header or adding new Fragment
                 // -----------------------------------------------------
-                if (!(fragmenttype.get().getType().contains("header")
-                        || fragmenttype.get().getType().contains("kontakt")
-                        || fragmenttype.get().getType().contains("zeiten")
-                        || fragmenttype.get().getType().contains("karte")
-                        || fragmenttype.get().getType().contains("map"))) {
+                if (!fragmenttype.get().getType().contains("header")) {
                     fragment = fragmentServiceImpl.save(
                             new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
                                     null));
@@ -227,38 +278,23 @@ public class BaukastenController {
                         break;
 
                     case "kontakt":
-                        fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
-                                        null));
-
                         model.addAttribute("kontaktstrasse", mandant.get().getStrasse());
                         model.addAttribute("kontaktnummer", mandant.get().getHausnummer());
                         model.addAttribute("kontaktort", mandant.get().getOrt());
                         model.addAttribute("kontaktplz", mandant.get().getPlz());
                         model.addAttribute("kontaktmail", mandant.get().getEmail());
                         model.addAttribute("kontakttelefon", mandant.get().getTelefonnummer());
-
                         break;
 
                     case "zeiten":
-                        fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
-                                        null));
-
                         model.addAttribute("zeiten", oeffnungszeitRepository.findOeffnungszeitByMandant(mandant.get()));
                         break;
-                    case "karte":
-                        fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
-                                        null));
 
+                    case "karte":
                         model.addAttribute("gerichte", mandant.get().getGerichte());
                         break;
-                    case "map":
-                        fragment = fragmentServiceImpl.save(
-                                new Fragment(null, position.get(), mandant.get(), fragmenttype.get(), null, null,
-                                        null));
 
+                    case "map":
                         model.addAttribute("lat", mandant.get().getGeoPosition().getGeoLat());
                         model.addAttribute("long", mandant.get().getGeoPosition().getGeoLng());
                         break;
