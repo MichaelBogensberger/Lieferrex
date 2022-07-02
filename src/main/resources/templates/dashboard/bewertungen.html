@@ -287,7 +287,7 @@
                                                     Niklas G.
                                                 </td>
                                                 <td class=" d-md-table-cell">
-                                                    <i th:if="${entry.bestellung.bewertung != null}" th:each="i : ${#numbers.sequence(1, entry.bestellung.bewertung)}"
+                                                    <i th:if="${entry.bestellung.bewertung <= 5 and entry.bestellung.bewertung != null}" th:each="i : ${#numbers.sequence(1, entry.bestellung.bewertung)}"
                                                           class="fa fa-star  font-size-30" aria-hidden="true"></i>
 
                                                     <i th:if="${entry.bestellung.bewertung < 5 and entry.bestellung.bewertung != null}" th:each="i : ${#numbers.sequence(1, 5-entry.bestellung.bewertung)}"
@@ -347,13 +347,13 @@
 
 
 
+                                        <i th:if="${durchschnitt <= 5 and durchschnitt != null}" th:each="i : ${#numbers.sequence(1, durchschnitt)}" class="fa fa-star font-size-35" aria-hidden="true"></i>
 
-
-                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
-                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
-                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>
-                                        <i class="fa fa-star-half-o font-size-35" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o font-size-35" aria-hidden="true"></i>
+<!--                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>-->
+<!--                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>-->
+<!--                                        <i class="fa fa-star font-size-35" aria-hidden="true"></i>-->
+<!--                                        <i class="fa fa-star-half-o font-size-35" aria-hidden="true"></i>-->
+<!--                                        <i class="fa fa-star-o font-size-35" aria-hidden="true"></i>-->
 
                                     <div class="text-muted" th:text="${bewertungen} + ' rating/s'">2,145 ratings</div>
                                     </div>
