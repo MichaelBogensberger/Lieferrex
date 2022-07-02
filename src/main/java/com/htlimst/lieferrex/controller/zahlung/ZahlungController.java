@@ -156,6 +156,10 @@ public class ZahlungController {
 
         model.addAttribute("umsatzGesamt", foundMandant.getUmsatz_summe());
         model.addAttribute("zahlung" ,zahlungModel);
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
         return "dashboard/zahlungen.html";
     }
 

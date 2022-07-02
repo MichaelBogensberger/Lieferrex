@@ -142,6 +142,10 @@ public class OeffnungszeitenController {
         model.addAttribute("oeffnungsz", neueOeffnungszeit);
         model.addAttribute("oeffnungszeiten", oeffnungensZeiten);
         model.addAttribute("ozl", oeffnungListModel);
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
         return "dashboard/oeffnungszeiten.html";
     }
 

@@ -45,10 +45,11 @@ public class KategorieController {
             kategorieModel.setB1(foundMandant.getKategorie().getName());
         }
 
-
-
-
         model.addAttribute("kategorie",kategorieModel.getB1().toString());
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
         return "dashboard/kategorien.html";
     }
 

@@ -46,6 +46,10 @@ public class GerichtController {
         model.addAttribute("numberDisabled", gerichteListStatusZero.size());
         model.addAttribute("numberActive", gerichteList.size());
         model.addAttribute("numberAll", gerichteListStatusZero.size() + gerichteList.size());
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
         return "dashboard/gerichte.html";
     }
     @GetMapping(value="{id}")

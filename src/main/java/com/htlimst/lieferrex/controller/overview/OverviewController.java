@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,6 +67,10 @@ public class OverviewController {
         model.addAttribute("seitenaufrufe", seitenaufrufe.getAufrufe());
         model.addAttribute("umsatz", umsatzSumme);
         model.addAttribute("gerichteVerkauft", verkaufteGerichte);
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
 
 
         // -----------------------

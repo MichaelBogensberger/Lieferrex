@@ -28,8 +28,13 @@ public class MandantController {
     public String showDashboardMandant(Model model, @AuthenticationPrincipal UserPrincipal principal) {
 
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
+        Mandant foundMandant = foundAngestellter.getMandant();
         model.addAttribute("angestellter", foundAngestellter);
         model.addAttribute("mandant", foundAngestellter.getMandant());
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
 
         return "dashboard/mandant.html";
     }

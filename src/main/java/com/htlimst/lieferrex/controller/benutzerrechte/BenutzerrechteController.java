@@ -59,6 +59,10 @@ public class BenutzerrechteController {
         model.addAttribute("anzahl", angestellterService.countAngestellter(foundMandant.getId()) + angestellterService.countAdmins(foundMandant.getId()));
         model.addAttribute("admins", angestellterService.countAdmins(foundMandant.getId()));
         model.addAttribute("angestellte", angestellterService.countAngestellter(foundMandant.getId()));
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
         return "dashboard/benutzer.html";
     }
     @PostMapping("/save")

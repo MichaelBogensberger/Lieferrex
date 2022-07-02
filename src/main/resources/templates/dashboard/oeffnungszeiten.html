@@ -30,7 +30,7 @@
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            Asiamix Imst
+            [[${firmenname}]]
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -42,7 +42,7 @@
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <button class="btn btn-primary">Logout</button>
+            <a class="btn btn-primary" href="/logout">Logout</a>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -72,8 +72,8 @@
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
-                Michael B
+                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
+                [[${user}]]
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">

@@ -83,6 +83,10 @@ public class ZuestellungsController {
         }
         model.addAttribute("zustellungLieferungDetail", modeldata);
         model.addAttribute("zustellungAbholungDetail",modeldataAbholung);
+        model.addAttribute("user", foundAngestellter.getVorname() + ' ' + foundAngestellter.getNachname());
+        model.addAttribute("vname", foundAngestellter.getVorname());
+        model.addAttribute("nname", foundAngestellter.getNachname());
+        model.addAttribute("firmenname", foundMandant.getFirmenname());
 
         return "dashboard/zustellung.html";
     }
