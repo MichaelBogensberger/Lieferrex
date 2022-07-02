@@ -112,6 +112,7 @@ public class ZubereitungsController {
         model.addAttribute("vname", foundAngestellter.getVorname());
         model.addAttribute("nname", foundAngestellter.getNachname());
         model.addAttribute("firmenname", foundMandant.getFirmenname());
+        model.addAttribute("role", foundAngestellter.getRolle().iterator().next().getRolle());
         return "dashboard/bestellungen.html";
     }
 

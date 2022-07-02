@@ -104,14 +104,14 @@ public class LoginRegistrationController {
         if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_KUNDE"))) {
             redirectAttrs.addAttribute("login", "success");
             return "redirect:/";
-        } else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANGESTELLTER")) || principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANDANT"))) {
-            System.out.println("test");
+        } else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANDANT"))) {
             return "redirect:/dashboard";
+        }else if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANGESTELLTER"))) {
+            return "redirect:/dashboard/bestellungen";
         } else {
             return "redirect:/";
         }
     }
-
 
     @ModelAttribute("mandant")
     public MandantRegistrationDto mandantRegistrationDto() {
