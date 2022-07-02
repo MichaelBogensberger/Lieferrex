@@ -81,10 +81,11 @@ public class BewertungController {
         }
 
         Integer sum = 0;
-
+        Arrays.sort(numArray);
         double median = 0.0;
         if (numArray.length != 0 && numArray.length % 2 == 0){
             median = ((double)numArray[numArray.length/2] + (double)numArray[numArray.length/2 - 1])/2;
+            System.out.println(Arrays.toString(numArray));
         }else if (numArray.length != 0 && numArray.length % 2 == 1){
             median = (double) numArray[numArray.length/2];
         }

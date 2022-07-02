@@ -216,18 +216,18 @@ public class DbInit implements CommandLineRunner {
                 }
 
                 Kunde kunde = new Kunde(null, "Michael", "Bogensberger", "kunde01@example.com",
-                                this.passwordEncoder.encode("123"), "Salzburg", "5026", "Ziegelstadelstraße", "6a",
+                                this.passwordEncoder.encode("123"), "Imst", "6460 ", "Hinterseeberweg", "6",
                                 "06123456789",
                                 "Österreich", true);
                 this.kundeRepository.save(kunde);
                 Kunde kunde2 = new Kunde(null, "Julian", "Meilinger", "kunde02@example.com",
-                                this.passwordEncoder.encode("123"), "Neukirchen am Großvenediger", "5741",
-                                "Geiernestgassl", "8",
+                                this.passwordEncoder.encode("123"), "Imst", "6460 ",
+                                "Hinterseeberweg", "9",
                                 "065123456789", "Österreich", false);
                 this.kundeRepository.save(kunde2);
                 Kunde kunde3 = new Kunde(null, "Max", "Mustermann", "kunde03@example.com",
                                 this.passwordEncoder.encode("123"),
-                                "Neukirchen am Großvenediger", "5741", "Geiernestgassl", "8", "065123456789",
+                                "Imst", "5741", "Hinterseeberweg", "2", "065123456789",
                                 "Österreich", false);
                 this.kundeRepository.save(kunde3);
 
