@@ -238,8 +238,12 @@ public class MandantServiceImpl implements MandantService {
 
         optHeutigeOeffungszeit = oeffnungszeitRepository.findOeffnungszeitsByMandantAndTag(mandant, currentDay);
         if (optHeutigeOeffungszeit.isPresent()) {
-
             Oeffnungszeit heutigeOeffungszeit = optHeutigeOeffungszeit.get();
+            if (heutigeOeffungszeit.getOeffnungszeit() == null || heutigeOeffungszeit.getSchliessungszeit() == null){
+                open = false;
+                return open;
+            }
+
             open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
             open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
 

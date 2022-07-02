@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface GeocodingApi {
-    public GeoPositionDto getGeodaten(String placeId) throws AdresseNotFoundException ;
-    public String findPlzByAdresse(String adresse) throws AdresseNotFoundException;
-    String findAdresseByPlz(String plz);
+    GeoPositionDto getGeodaten(String placeId) throws AdresseNotFoundException ;
+    String findPlzByAdresse(String adresse) throws AdresseNotFoundException;
 }

@@ -21,7 +21,7 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
     private String apiKey;
 
     @Override
-    public String getPlz(LatLng latLng) throws AdresseNotFoundException {
+    public String getPlz(LatLng latLng){
 
 
         GeocodingResult[] results = new GeocodingResult[0];
@@ -29,8 +29,6 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(apiKey)
                 .build();
-
-
 
         try {
             results = GeocodingApi.reverseGeocode(context, latLng).language("de").resultType(AddressType.POSTAL_CODE).await();
@@ -45,7 +43,6 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
         context.shutdown();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String geocodingResults = gson.toJson(results.length);
 
         String tmp = gson.toJson(results[0].addressComponents[0].longName);
         tmp = tmp.substring(1);

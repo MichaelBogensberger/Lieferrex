@@ -78,7 +78,6 @@ public class MainController {
     public String search(@RequestParam(value = "search", required = false) String adresse,
             RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
-
         List<Mandant> mandanten = mandantRepository.findMandantByPlz(adresse);
         if (!mandanten.isEmpty()) {
             return "redirect:restaurants/" + adresse;
@@ -104,15 +103,8 @@ public class MainController {
             @RequestParam(required = false) String adresse, Model model) {
         // Alle Restaurants der PLZ anzeigen
         System.out.println(plz);
-        System.out.println(Boolean.parseBoolean(geoeffnet));
         double dLieferKosten = lieferkosten == null ? 0.0 : Double.parseDouble(lieferkosten);
-        System.out.println(dLieferKosten);
         double dMindestbestellwert = mindestbestellwert == null ? 0.0 : Double.parseDouble(mindestbestellwert);
-        System.out.println(dMindestbestellwert);
-
-        System.out.println(kategorie);
-        System.out.println(adresse);
-        System.out.println("----------------------");
 
         try {
             List<MandantSuchDto> mandanten = mandantService.findMandantByPlz(plz, Boolean.parseBoolean(geoeffnet),
@@ -120,7 +112,6 @@ public class MainController {
             model.addAttribute("plz", plz);
             model.addAttribute("adresse", adresse);
             model.addAttribute("mandanten", mandanten);
-
             return "main/search";
         } catch (MandantNotFoundException mandantNotFoundException) {
             System.out.println(mandantNotFoundException.getMessage());
