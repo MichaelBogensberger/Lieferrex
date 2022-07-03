@@ -108,7 +108,7 @@ public class ZahlungController {
         if(diesenMonat != 0.0 && jahresUmsatz != 0.0){
             proBestellung = proBestellung/(alleBestellungenList.size());
             durschnittProBestellungImMonat = diesenMonat / anzahlAnOrdersImMonat;
-            durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImMonat;
+            durchschnittProBestellungImJahr = jahresUmsatz / anzahlAnOrdersImJahr;
 
             if(anzahlAnOrdersImMonat != 0 && anzahlAnOrdersImJahr != 0){
                 BigDecimal proBestellungBD = new BigDecimal(proBestellung).setScale(2, RoundingMode.HALF_UP);

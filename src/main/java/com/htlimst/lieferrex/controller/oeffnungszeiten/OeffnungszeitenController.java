@@ -63,7 +63,6 @@ public class OeffnungszeitenController {
         OeffnungListModel oeffnungListModel = new OeffnungListModel();
 
         for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
-            String fieldname = "fn";
 
             if(oeffnungszeit.getEndepause() != null){
                 endepause = oeffnungszeit.getEndepause().toLocalTime().format(dtf);
