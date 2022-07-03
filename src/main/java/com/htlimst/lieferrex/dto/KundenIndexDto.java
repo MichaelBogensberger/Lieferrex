@@ -9,7 +9,6 @@ import lombok.*;
 @Setter
 @Builder
 public class KundenIndexDto {
-
     private Long kundenid;
     private String kundenname;
     private String kundennameNachname;

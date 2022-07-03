@@ -110,7 +110,6 @@ public class MandantServiceImpl implements MandantService {
         try {
             geoPositionDto = geocodingApi.getGeodaten(mandantRegistrationDto.getPlaceId());
         } catch (AdresseNotFoundException e) {
-            System.out.println("Geodaten nicht gefunden");
             return false;
         }
 
@@ -187,11 +186,9 @@ public class MandantServiceImpl implements MandantService {
         if (mandantenList.isEmpty()) {
             throw new MandantNotFoundException();
         }
-
         LocalDate currentDate = LocalDate.now();
         WochentagEnum currentDay = WochentagEnum.valueOf(String.valueOf(currentDate.getDayOfWeek()));
         LocalTime currentTime = LocalTime.now();
-
 
         List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
         for (Mandant mandant : mandantenList) {
@@ -203,19 +200,10 @@ public class MandantServiceImpl implements MandantService {
                 bewertung = getBewertung(mandant);
             }
 
-
-            if (lieferKosten != 0.0 && lieferKosten < mandant.getLieferkosten()) {
-                continue;
-            }
-            if (mindestbestellwert != 0.0 && mindestbestellwert < mandant.getMindestbestellwert()) {
-                continue;
-            }
-            if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName().toString())) {
-                continue;
-            }
-            if (isGeöffnet && !open) {
-                continue;
-            }
+            if (lieferKosten != 0.0 && lieferKosten < mandant.getLieferkosten()) {continue;}
+            if (mindestbestellwert != 0.0 && mindestbestellwert < mandant.getMindestbestellwert()) {continue;}
+            if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName().toString())) {continue;}
+            if (isGeöffnet && !open) {continue;}
 
             mandantSuchDtoList.add(new MandantSuchDto().builder()
                     .id(mandant.getId())
@@ -243,17 +231,13 @@ public class MandantServiceImpl implements MandantService {
                 open = false;
                 return open;
             }
-
             open = open && currentTime.isAfter(heutigeOeffungszeit.getOeffnungszeit().toLocalTime());
             open = open && currentTime.isBefore(heutigeOeffungszeit.getSchliessungszeit().toLocalTime());
 
-
             if (heutigeOeffungszeit.getStartpause() != null && heutigeOeffungszeit.getStartpause() != null) {
                 open = open && (currentTime.isBefore(heutigeOeffungszeit.getStartpause().toLocalTime()) || currentTime.isAfter(heutigeOeffungszeit.getEndepause().toLocalTime()));
-
             }
         } else {
-            System.out.println("tag nicht gefunden");
             open = false;
         }
         return open;

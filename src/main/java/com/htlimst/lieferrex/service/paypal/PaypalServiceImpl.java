@@ -84,8 +84,6 @@ public class PaypalServiceImpl implements PaypalService {
 
     @Override
     public void payMandant(BezahlDto bezahlDto) throws ClientsideMandantPaymentException, ServersideMandantPaymentException {
-        // Construct a request object and set desired parameters
-        // Here, CreatePayoutRequest() creates a POST request to /v1/payments/payouts
         double preis = new BigDecimal(bezahlDto.getPreis()).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         List<com.paypal.payouts.PayoutItem> items = new ArrayList<com.paypal.payouts.PayoutItem>();
@@ -99,22 +97,16 @@ public class PaypalServiceImpl implements PaypalService {
                         .emailSubject("Eingehende Lieferrex bestellung").note("Beste Grüße dein Lieferrex-Team").recipientType("EMAIL")).items(items);
 
         try {
-            // Call API with your client and get a response for your call
             PayoutsPostRequest httpRequest = new PayoutsPostRequest().requestBody(request);
             HttpResponse<CreatePayoutResponse> response = apiClient.execute(httpRequest);
 
-            // If call returns body in response, you can get the de-serialized version by
-            // calling result() on the response
             CreatePayoutResponse payouts = response.result();
-            System.out.println("Payouts Batch ID: " + payouts.batchHeader().payoutBatchId());
             payouts.links().forEach(link -> System.out.println(link.rel() + " => " + link.method() + ":" + link.href()));
         } catch (IOException ioe) {
             if (ioe instanceof HttpException) {
                 // Something went wrong server-side
                 HttpException he = (HttpException) ioe;
-                System.out.println("cool");
                 System.out.println(he.getMessage());
-                //he.headers().forEach(x -> System.out.println(x + " :" + he.headers().header(x)));
                 throw new ServersideMandantPaymentException();
             } else {
                 // Something went wrong client-side

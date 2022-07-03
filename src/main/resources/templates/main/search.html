@@ -598,6 +598,19 @@
 
 </body>
 
+<script th:inline="javascript">
+    var returnVal = /*[[${error}]]*/;
+
+    $(document).ready(function () {
+        if (returnVal!=null){
+            var toastHTML = returnVal;
+            M.toast({html: toastHTML, displayLength: 10000});
+        }
+    });
+
+</script>
+
+
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
 

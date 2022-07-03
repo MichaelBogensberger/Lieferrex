@@ -22,23 +22,15 @@ public class BestellController {
     }
 
     @GetMapping("/orders")
-    public String showOrdersPage(@AuthenticationPrincipal UserPrincipal principal, Model model) {
+    public String showOrders(@AuthenticationPrincipal UserPrincipal principal, Model model) {
         List<BestellDto> bestellDtos = bestellungService.getBestellDto(principal.getUsername());
 
-        for (BestellDto bestellDto: bestellDtos) {
-            System.out.println(bestellDto.toString());
-        }
-
         model.addAttribute("bestellungen", bestellDtos);
-
         return "main/orders";
     }
 
     @GetMapping("/rate/{bestellId}")
     public String showOrdersPage(@AuthenticationPrincipal UserPrincipal principal, @PathVariable long bestellId, @RequestParam int rating) {
-        System.out.println(principal.getUsername());
-        System.out.println(bestellId);
-        System.out.println(rating);
 
         if (bestellungService.makeRating(principal, bestellId, rating)){
             return "redirect:/orders?success";

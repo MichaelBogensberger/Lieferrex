@@ -199,7 +199,6 @@
 
 
 <script th:inline="javascript">
-
     var returnVal = /*[[${returnVal}]]*/;
 
     $(document).ready(function () {
@@ -207,15 +206,12 @@
             console.log(returnVal);
             returnVal.forEach(postToast);
         }
-
     });
 
     function postToast(item) {
         var toastHTML = item;
         M.toast({html: toastHTML, displayLength: 10000});
     }
-
-
 </script>
 
 <script>

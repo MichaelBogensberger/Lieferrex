@@ -83,7 +83,6 @@ public class KundeServiceImpl implements KundeService{
         kunde.setPasswort(bCryptPasswordEncoder.encode(passwortAendernDto.getPasswort()));
         kundeRepository.save(kunde);
 
-
         return true;
     }
 
@@ -99,13 +98,10 @@ public class KundeServiceImpl implements KundeService{
         }
 
         Kunde kunde = kundeRepository.findByEmail(principal.getUsername());
-
         kunde.setLand(adressDto.getLand());
         kunde.setOrt(adressDto.getOrt());
         kunde.setStrasse(adressDto.getStrasse());
         kunde.setHausnummer(adressDto.getHausnummer().toUpperCase());
-        kunde.setPlz(geoPositionDto.getPlz());
-
         kundeRepository.save(kunde);
 
         return true;

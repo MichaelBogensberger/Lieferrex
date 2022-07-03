@@ -29,5 +29,4 @@ public class PasswortAendernDto {
     @NotEmpty
     @Size(min = 8)
     private String confirmPasswort;
-
 }

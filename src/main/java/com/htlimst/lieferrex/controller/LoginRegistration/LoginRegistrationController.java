@@ -83,24 +83,19 @@ public class LoginRegistrationController {
             return "main/register";
         }
 
-
-
         if (!kundeService.save(registrationDto)) {
             returnVal.add("Addresse konnte nicht gefunden werden");
             model.addAttribute("returnVal", returnVal);
             return "main/register";
-
         }
 
         returnVal.add("Benutzer erfolgreich erstellt");
         model.addAttribute("returnVal", returnVal);
         return "main/register";
-
     }
 
     @GetMapping("/successLogin")
     public String redirectSuccesLogin(RedirectAttributes redirectAttrs, @AuthenticationPrincipal UserPrincipal principal) {
-        System.out.println(principal.getAuthorities());
         if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_KUNDE"))) {
             redirectAttrs.addAttribute("login", "success");
             return "redirect:/";
@@ -126,9 +121,8 @@ public class LoginRegistrationController {
     @PostMapping("/restaurantpartner")
     public String registerMandantenAccount(@ModelAttribute("mandant") @Valid MandantRegistrationDto registrationDto, BindingResult result, Model model) {
         List<String> returnVal = new ArrayList<>();
-
-
         UserPojo existingEmail = userPrincipalDetailsService.findUserByEmail(registrationDto.getEmail());
+
         if (existingEmail != null) {
             returnVal.add("Benutzer mit dieser E-Mail Adresse existiert bereits");
             model.addAttribute("returnVal", returnVal);
@@ -171,7 +165,7 @@ public class LoginRegistrationController {
     }
 
 
-    @PostMapping("/changePassword")
+    @PostMapping( )
     public String changePasswort(@ModelAttribute("pw") @Valid PasswortAendernDto passwortAendernDto, BindingResult result, @AuthenticationPrincipal UserPrincipal principal, Model model) {
         List<String> returnVal = new ArrayList<>();
         if (result.hasErrors()) {

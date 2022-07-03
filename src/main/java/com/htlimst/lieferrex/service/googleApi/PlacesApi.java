@@ -8,8 +8,6 @@ import java.util.List;
 
 @Service
 public interface PlacesApi {
-    public List<String> getPlaces(String adresse) throws AdresseNotFoundException;
-    public List<AdressDto> getAdressen(String adresse) throws AdresseNotFoundException;
-
-
-    }
+    List<String> getPlaces(String adresse) throws AdresseNotFoundException;
+    List<AdressDto> getAdressen(String adresse) throws AdresseNotFoundException;
+}

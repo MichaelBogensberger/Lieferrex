@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface UmsatzRepository extends JpaRepository<Umsatz,Long> {
-    public Umsatz getUmsatzByMandant(Mandant mandant);
-    public List<Umsatz> getAllByMandant(Mandant mandant);
+    Umsatz getUmsatzByMandant(Mandant mandant);
+    List<Umsatz> getAllByMandant(Mandant mandant);
     Umsatz findFirstByMandantOrderByJahrDescMonatDesc(Mandant mandant);
 }

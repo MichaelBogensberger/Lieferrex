@@ -7,7 +7,6 @@ var data;
 // Search function
 // Defining async function
 async function search(adresse) {
-
     // Storing response
     const response = await fetch(api_url + adresse);
 
@@ -26,7 +25,6 @@ async function search(adresse) {
 const input = document.querySelector('#adresse');
 input.addEventListener('keyup', (e) => {
     const text = e.currentTarget.value;
-
     // Clear timer
     clearTimeout(timer);
     // Wait for X ms and then process the request
@@ -51,8 +49,8 @@ $(document).ready(function () {
 
 async function show(data) {
     let tab = '<br>';
-    // Loop to access all rows
 
+    // Loop to access all rows
     await data.forEach((r, index) => {
         tab += `
                     <button id="fill" class="btn-inline-search fade-in" type="button" onclick='fillAdresse("${index}")'> ${r.adresse} </button>

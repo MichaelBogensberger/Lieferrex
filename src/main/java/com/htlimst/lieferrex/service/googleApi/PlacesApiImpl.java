@@ -50,13 +50,7 @@ public class PlacesApiImpl implements PlacesApi {
         String geocodingResults = gson.toJson(predictions.length);
 
         if (geocodingResults.length() == 0) {
-            System.out.println("User nicht vorhanden");
             throw new AdresseNotFoundException();
-        }
-
-        for (int i = 0; i < Integer.parseInt(geocodingResults); i++) {
-            System.out.println(gson.toJson(predictions[i]));
-            System.out.println("-------------------------------------------------------------");
         }
 
         List<String> adressen = new ArrayList<String>();
@@ -67,7 +61,6 @@ public class PlacesApiImpl implements PlacesApi {
             tmp = tmp.substring(1);
             tmp = tmp.substring(0, tmp.length() - 1);
             adressen.add(tmp);
-
         }
 
         return adressen;
@@ -81,7 +74,8 @@ public class PlacesApiImpl implements PlacesApi {
                 .build();
         AutocompletePrediction[] predictions = new AutocompletePrediction[0];
         try {
-            predictions = com.google.maps.PlacesApi.placeAutocomplete(context, adresse, new PlaceAutocompleteRequest.SessionToken("Lieferrex"))
+            predictions = com.google.maps.PlacesApi
+                    .placeAutocomplete(context, adresse, new PlaceAutocompleteRequest.SessionToken("Lieferrex"))
                     .language("de")
                     .components(ComponentFilter.country("at"))
                     .types(PlaceAutocompleteType.ADDRESS)

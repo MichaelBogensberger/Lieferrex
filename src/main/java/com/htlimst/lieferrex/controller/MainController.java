@@ -71,7 +71,6 @@ public class MainController {
             model.addAttribute("kunde", kundenIndexDto);
             return "main/index";
         }
-
     }
 
     @GetMapping("/seach")
@@ -82,18 +81,14 @@ public class MainController {
         if (!mandanten.isEmpty()) {
             return "redirect:restaurants/" + adresse;
         }
-
         try {
             String plz = geocodingApi.findPlzByAdresse(adresse);
-
             redirectAttrs.addAttribute("adresse", adresse);
             return "redirect:restaurants/" + plz;
-
         } catch (AdresseNotFoundException adresseNotFoundException) {
             System.out.println(adresseNotFoundException.getMessage());
             return "redirect:/";
         }
-
     }
 
     @GetMapping("/restaurants/{plz}")
@@ -118,7 +113,6 @@ public class MainController {
             model.addAttribute("error", "Es wurden keine Restaurants in der Umgebung gefunden!");
             return "main/search";
         }
-
     }
 
     @GetMapping("/buildOne")

@@ -4,6 +4,7 @@ import com.htlimst.lieferrex.dto.*;
 import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.model.enums.BestellartEnum;
 import com.htlimst.lieferrex.model.enums.BestellstatusEnum;
+import com.htlimst.lieferrex.model.enums.WochentagEnum;
 import com.htlimst.lieferrex.repository.*;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,8 @@ public class BestellungServiceImpl implements BestellungService{
         BestellartEnum bestellartEnum = BestellartEnum.valueOf(einkaufswagenDto.getBestellArt());
         int dauer = bestellartEnum == BestellartEnum.LIEFERUNG ? mandant.getDurchschnittsLieferZeit() : mandant.getDurchschnittsAbholZeit();
 
+        mandant = setUmsatz(mandant, bezahlDto.getPreis());
+
         Bestellung bestellung = new Bestellung().builder().id(null)
                 .dauer(dauer).bestelldatum(Timestamp.valueOf(LocalDateTime.now()))
                 .gesamtpreis(bezahlDto.getPreis()).trinkgeld(0.0)
@@ -62,6 +65,7 @@ public class BestellungServiceImpl implements BestellungService{
                 .bestellstatus(bestellstatusRepository.getBestellstatusByBestellstatus(BestellstatusEnum.IN_ZUBEREITUNG)).build();
 
         bestellungRepository.save(bestellung);
+
 
         for (EinkaufswagenDatailDto einkaufswagenDatailDto:einkaufswagenDto.getEinkaufswagenDatails()) {
             //einkaufswagenDatailDto.getGerichtID()
@@ -73,6 +77,32 @@ public class BestellungServiceImpl implements BestellungService{
         }
 
     }
+
+    private Mandant setUmsatz(Mandant mandant, double preis) {
+        mandant.setUmsatz_summe(mandant.getUmsatz_summe()+preis);
+        List<Umsatz> umsatzList = umsatzRepository.getAllByMandant(mandant);
+
+        LocalDate currentDate = LocalDate.now();
+        int currentMonat = currentDate.getMonthValue();
+        int currentYahr = currentDate.getYear();
+        System.out.println(currentMonat);
+        System.out.println(currentYahr);
+        boolean found = false;
+
+        for (Umsatz umsatz : umsatzList) {
+            if (umsatz.getMonat() == currentMonat && umsatz.getJahr() == currentYahr){
+                umsatz.setUmsatz(umsatz.getUmsatz()+preis);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            umsatzRepository.save(new Umsatz(null, currentMonat, currentYahr, preis, mandant));
+        }
+
+        return mandant;
+    }
+
 
     @Override
     public EinkaufswagenDto deserializeEinkaufswagen(String einkaufswagen) {
@@ -131,26 +161,17 @@ public class BestellungServiceImpl implements BestellungService{
     public List<BestellDto> getBestellDto(String kundenEmail) {
         Kunde kunde = kundeRepository.findByEmail(kundenEmail);
         List<Bestellung> bestellungList = bestellungRepository.getBestellungByKunde(kunde);
-
         List<BestellDto> bestellDtoList = new ArrayList<>();
-
         for (Bestellung bestellung: bestellungList) {
-
             HashMap<String, Integer> gerichtNameAnzahl = new HashMap<>();
-
             for (GerichtBestellung gericht : bestellung.getGerichteBestellungen()) {
-
                     if(!gerichtNameAnzahl.containsKey(gericht.getGericht().getName())){
                         gerichtNameAnzahl.put(gericht.getGericht().getName(),1);
                     } else{
                         gerichtNameAnzahl.put(gericht.getGericht().getName(),gerichtNameAnzahl.get(gericht.getGericht().getName())+1);
                     }
-
-
             }
-
             LocalDate localDate = bestellung.getBestelldatum().toLocalDateTime().toLocalDate();
-
 
             BestellDto bestellDto = new BestellDto().builder()
                     .bestellId(bestellung.getId())
@@ -166,8 +187,6 @@ public class BestellungServiceImpl implements BestellungService{
 
             bestellDtoList.add(bestellDto);
         }
-
-
         return bestellDtoList;
     }
 
@@ -195,9 +214,7 @@ public class BestellungServiceImpl implements BestellungService{
             return false;
         }
 
-
         optionalBestellung.get().setBewertung(rating);
-        System.out.println(optionalBestellung.get().getBewertung());
         bestellungRepository.save(optionalBestellung.get());
 
         return true;

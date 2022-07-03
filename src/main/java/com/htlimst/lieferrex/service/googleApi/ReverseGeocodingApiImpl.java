@@ -23,15 +23,14 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
     @Override
     public String getPlz(LatLng latLng){
 
-
         GeocodingResult[] results = new GeocodingResult[0];
-
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(apiKey)
                 .build();
 
         try {
-            results = GeocodingApi.reverseGeocode(context, latLng).language("de").resultType(AddressType.POSTAL_CODE).await();
+            results = GeocodingApi.reverseGeocode(context, latLng)
+                    .language("de").resultType(AddressType.POSTAL_CODE).await();
         } catch (ApiException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -39,15 +38,13 @@ public class ReverseGeocodingApiImpl implements ReverseGeocodingApi{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         context.shutdown();
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String plz = gson.toJson(results[0].addressComponents[0].longName);
+        plz = plz.substring(1);
+        plz = plz.substring(0,plz.length()-1);
 
-        String tmp = gson.toJson(results[0].addressComponents[0].longName);
-        tmp = tmp.substring(1);
-        tmp = tmp.substring(0,tmp.length()-1);
-
-        return tmp;
+        return plz;
     }
 }
