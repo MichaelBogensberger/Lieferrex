@@ -35,9 +35,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/index.html").permitAll()
+                .antMatchers("/restaurants/**").permitAll()
+                .antMatchers("/restaurant/**").permitAll()
+                .antMatchers("/orders").hasRole("KUNDE")
+                .antMatchers("/changeAddress").hasRole("KUNDE")
+                .antMatchers("/changePassword").hasRole("KUNDE")
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/dashboard/**").access("hasRole('ANGESTELLTER') or hasRole('MANDANT')")
-                .antMatchers("/baukasten/**").authenticated()
                 .antMatchers("/baukasten").hasRole("ANGESTELLTER")
                 .and()
                 .formLogin()
@@ -45,7 +49,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .and().csrf().disable();
-
     }
 
 
