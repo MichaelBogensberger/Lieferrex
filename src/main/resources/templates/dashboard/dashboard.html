@@ -30,7 +30,7 @@
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            [[${firmenname}]]
+            Asiamix Imst
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -42,7 +42,7 @@
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <a class="btn btn-primary" href="/logout">Logout</a>
+            <button class="btn btn-primary">Logout</button>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -72,8 +72,8 @@
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
-                [[${user}]]
+                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
+                Michael B
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">
@@ -102,12 +102,12 @@
             </a>
 
 
-            <br/>
-            <span th:if="${role == 'ROLE_MANDANT'}">
+            <br />
+
             <h5 class="sidebar-title">Verwaltung</h5>
             <div class="sidebar-divider"></div>
 
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
+            <a href="/baukasten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
                         <i class="fa fa-folder" aria-hidden="true"></i>
                     </span>
@@ -146,12 +146,7 @@
                     </span>
                 Mandant
             </a>
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
-                    <span class="sidebar-icon">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>
-                Suchmaschiene
-            </a>
+
 
             <a href="/dashboard/oeffnungszeiten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
@@ -166,7 +161,7 @@
                         </span>
                 Restaurantkategorien
             </a>
-        </span>
+
 
 
         </div>
@@ -197,7 +192,7 @@
                             <img th:src="@{/css/dashboard/3dIcons/boy-dynamic-gradient.png}"  width="200px" class="img-fluid rounded" alt="...">
                         </div>
                         <h2 class="content-title mb-0 text-center font-size-24 font-weight-bold">Dashboard</h2>
-                        <p class="mb-0 mt-0 text-center " th:text="'Willkommen zurück ' + ${vname} ">Willkommen zurück Michael!</p>
+                        <p class="mb-0 mt-0 text-center ">Willkommen zurück Michael!</p>
 
                     </div>
                 </div>
