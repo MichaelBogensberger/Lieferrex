@@ -129,7 +129,7 @@ public class BewertungController {
         model.addAttribute("nname", foundAngestellter.getNachname());
         model.addAttribute("firmenname", foundMandant.getFirmenname());
 
-        return "/dashboard/bewertungen.html";
+        return "dashboard/bewertungen.html";
     }
 
 
