@@ -157,9 +157,6 @@ public class BaukastenController {
 
     @GetMapping("/baukasten")
     public String showBaukasten(Model model, Authentication authentication) {
-        if(authentication==null){
-            return "redirect:/login?notAuthenticated";
-        }
 
         Mandant mandant = mandantServiceImpl.findMandantByAngestellterEmail(authentication.getName()).get();
         List<Fragment> fragments = fragmentServiceImpl.findFragmentByMandant_id(mandant.getId());
