@@ -36,12 +36,13 @@ public class MandantServiceImpl implements MandantService {
     private KategorieRepository kategorieRepository;
     private SeitenaufrufeRepository seitenaufrufeRepository;
     private UmsatzRepository umsatzRepository;
+    private LayoutRepository layoutRepository;
 
     @Autowired
     public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository,
                               RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository,
                               OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi, KategorieRepository kategorieRepository,
-                              SeitenaufrufeRepository seitenaufrufeRepository, UmsatzRepository umsatzRepository) {
+                              SeitenaufrufeRepository seitenaufrufeRepository, UmsatzRepository umsatzRepository, LayoutRepository layoutRepository) {
         this.angestellterRepository = angestellterRepository;
         this.mandantRepository = mandantRepository;
         this.roleRepository = roleRepository;
@@ -135,6 +136,7 @@ public class MandantServiceImpl implements MandantService {
                 lieferkosten(mandantRegistrationDto.getLieferkosten())
                 .seitenaufrufe_summe(0)
                 .umsatz_summe(0.0)
+                .layout(layoutRepository.getById(1L))
                 .durchschnittsAbholZeit(15)
                 .durchschnittsLieferZeit(30)
                 .geoPosition(geoPosition)
