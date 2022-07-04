@@ -13,6 +13,7 @@ import com.htlimst.lieferrex.service.angestellter.AngestellterService;
 import com.htlimst.lieferrex.service.bestellung.BestellungService;
 import com.htlimst.lieferrex.service.paypal.PaypalService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/restaurant")
 public class BezahlenController {
+
+    @Value("${paypal.redirect.link}")
+    String link;
 
     public PaypalService paypalService;
     public BestellungService bestellungService;
@@ -84,8 +88,8 @@ public class BezahlenController {
         BezahlDto bezahlDto = bestellungService.getBezahlDto(einkaufswagenDto);
 
         try {
-            Payment payment = paypalService.createPayment(bezahlDto.getPreis(), bezahlDto.getKundenNachricht(),"http://localhost:8080/restaurant/"+ id+ "/checkout/cancel",
-                    "http://localhost:8080/restaurant/" + id+ "/checkout/success");
+            Payment payment = paypalService.createPayment(bezahlDto.getPreis(), bezahlDto.getKundenNachricht(),link + id,
+                    link + id+ "/checkout/success");
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
                     return "redirect:"+link.getHref();
