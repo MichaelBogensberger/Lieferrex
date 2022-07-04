@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/changePassword").hasRole("KUNDE")
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/dashboard/**").access("hasRole('ANGESTELLTER') or hasRole('MANDANT')")
-                .antMatchers("/baukasten").access("hasRole('ANGESTELLTER') or hasRole('MANDANT')")
+                //.antMatchers("/baukasten").access("hasRole('ANGESTELLTER') or hasRole('MANDANT')")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll().defaultSuccessUrl("/successLogin")
