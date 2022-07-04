@@ -40,7 +40,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            [[${firmenname}]]
+            Asiamix Imst
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -52,7 +52,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <a class="btn btn-primary" href="/logout">Logout</a>
+            <button class="btn btn-primary">Logout</button>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -78,8 +78,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
-                [[${user}]]
+                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
+                Michael B
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">
@@ -112,7 +112,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
             <h5 class="sidebar-title">Verwaltung</h5>
             <div class="sidebar-divider"></div>
 
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
+            <a href="/baukasten" class="sidebar-link sidebar-link-with-icon">
                         <span class="sidebar-icon">
                             <i class="fa fa-folder" aria-hidden="true"></i>
                         </span>
@@ -151,12 +151,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                         </span>
                 Mandant
             </a>
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
-                        <span class="sidebar-icon">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </span>
-                Suchmaschiene
-            </a>
+
 
             <a href="/dashboard/oeffnungszeiten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
@@ -171,6 +166,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                         </span>
                 Restaurantkategorien
             </a>
+
         </div>
 
 
@@ -458,13 +454,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         datumBestellung.push(key);
         valueBestellung.push(value);
     })
-
-    datumUmsatz = datumUmsatz.reverse();
-    valueUmsatz = valueUmsatz.reverse();
-
-    var umsatzMax = Math.trunc(Math.max(...valueUmsatz));
-    var umsatzMin = Math.trunc(Math.min(...valueUmsatz));
-    var bestellungMax = Math.trunc(Math.max(...valueBestellung));
+    console.log(datumBestellung);
+    console.log(valueBestellung);
 
 </script>
 
@@ -490,13 +481,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         legend: {display: false},
         scales: {
           yAxes: [
-              {ticks: {min: umsatzMin, max:umsatzMax,
-                fontColor: darkModeOn() ? 'black' : 'white'
+              {ticks: {min: 30, max:1500,
+                fontColor: darkModeOn() ? 'white' : 'black'
                 }}
             ],
             xAxes: [
               {ticks: {
-                    fontColor: darkModeOn() ? 'black' : 'white'
+                    fontColor: darkModeOn() ? 'white' : 'black'
                 }}
             ],
         }
@@ -543,13 +534,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
             scales: {
                 yAxes: [
-                    {ticks: {min: 0, max:bestellungMax,
-                        fontColor: darkModeOn() ? 'black' : 'white'
+                    {ticks: {min: 5, max:80,
+                        fontColor: darkModeOn() ? 'white' : 'black'
                         }}
                     ],
                     xAxes: [
                     {ticks: {
-                            fontColor: darkModeOn() ? 'black' : 'white'
+                            fontColor: darkModeOn() ? 'white' : 'black'
                         }}
                     ],
             }

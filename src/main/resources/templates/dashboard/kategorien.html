@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" xmlns:th="http://www.w3.org/1999/html">
+<html lang="de">
 <head>
 
     <title>Dashboard</title>
@@ -30,7 +30,7 @@
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            [[${firmenname}]]
+            Asiamix Imst
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -42,7 +42,7 @@
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <a class="btn btn-primary" href="/logout">Logout</a>
+            <button class="btn btn-primary">Logout</button>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -69,8 +69,9 @@
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
-                [[${user}]]
+                <img class="sidenav-pfp rounded-circle"
+                     src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
+                Michael B
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">
@@ -103,7 +104,7 @@
             <h5 class="sidebar-title">Verwaltung</h5>
             <div class="sidebar-divider"></div>
 
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
+            <a href="/baukasten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
                         <i class="fa fa-folder" aria-hidden="true"></i>
                     </span>
@@ -142,12 +143,7 @@
                     </span>
                 Mandant
             </a>
-            <a href="#" class="sidebar-link sidebar-link-with-icon">
-                    <span class="sidebar-icon">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </span>
-                Suchmaschiene
-            </a>
+   
 
             <a href="/dashboard/oeffnungszeiten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
@@ -218,49 +214,41 @@
                                     <h2 class="card-title mb-5 mt-0">Bearbeiten</h2>
                                     <p class="mt-0">Hier können Sie eine Kategorie auswählen:</p>
 
-
-                                    <form th:action="@{/dashboard/kategorien/save}" method="post">
                                     <!-- First radio button -->
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="fine-dining" checked="checked" value="FINE_DINING" th:if="${kategorie == 'FINE_DINING'}">
-                                        <input type="radio" name="radio-set-1" id="fine-dining" value="FINE_DINING">
+                                        <input type="radio" name="radio-set-1" id="fine-dining" value="fine-dining">
                                         <label for="fine-dining">Fine Dining</label>
                                     </div>
 
                                     <!-- Second radio button (checked by default) -->
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="casual-dining" checked="checked" value="CASUAL_DINING" th:if="${kategorie == 'CASUAL_DINING'}">
-                                        <input type="radio" name="radio-set-1" id="casual-dining" value="CASUAL_DINING">
+                                        <input type="radio" name="radio-set-1" id="casual-dining" value="casual-dining">
                                         <label for="casual-dining">Casual Dining</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="family-style" checked="checked" value="FAMILY_STYLE" th:if="${kategorie == 'FAMILY_STYLE'}">
-                                        <input type="radio" name="radio-set-1" id="family-style" value="FAMILY_STYLE">
+                                        <input type="radio" name="radio-set-1" id="family-style" value="family-style">
                                         <label for="family-style">Family Style</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="fast-food" checked="checked" value="FAST_FOOD" th:if="${kategorie == 'FAST_FOOD'}">
-                                        <input type="radio" name="radio-set-1" id="fast-food" value="FAST_FOOD">
+                                        <input type="radio" name="radio-set-1" id="fast-food" checked="checked" value="fast-food">
                                         <label for="fast-food">Fast Food</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="buffet" checked="checked" value="BUFFET" th:if="${kategorie == 'BUFFET'}">
-                                        <input type="radio" name="radio-set-1" id="buffet" value="BUFFET">
+                                        <input type="radio" name="radio-set-1" id="buffet" value="buffet">
                                         <label for="buffet">Buffet</label>
                                     </div>
 
                                     <div class="custom-radio mb-5">
-                                        <input type="radio" name="radio-set-1" id="other" checked="checked" value="OTHER" th:if="${kategorie == 'OTHER'}">
-                                        <input type="radio" name="radio-set-1" id="other" value="OTHER">
+                                        <input type="radio" name="radio-set-1" id="other" value="other">
                                         <label for="other">other</label>
                                     </div>
 
 
-                                    <button class="btn btn-primary btn-block mb-0 mt-20 pb-0" type="submit">speichern</button>
-                                    </form>
+                                    <button class="btn btn-primary btn-block mb-0 mt-20 pb-0" type="button">speichern</button>
+
 
 
                                 </div>
