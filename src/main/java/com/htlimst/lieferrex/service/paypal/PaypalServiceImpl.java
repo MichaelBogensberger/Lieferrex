@@ -58,7 +58,7 @@ public class PaypalServiceImpl implements PaypalService {
         payer.setPaymentMethod("paypal");
 
         Payment payment = new Payment();
-        payment.setIntent("ORDER");
+        payment.setIntent("sale");
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();

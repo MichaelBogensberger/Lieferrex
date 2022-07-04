@@ -81,7 +81,7 @@
 
             <li class="collection-item">
                 <div class="desc-item"><i class="material-icons desc-i">assignment</i>
-                    <div th:text="${gericht.beschreibung}"></div>
+                    <div th:id="${'beschreibung-' + gericht.id}" th:text="${gericht.beschreibung}"></div>
                 </div>
             </li>
 
@@ -102,6 +102,8 @@
                 <h6 th:text="${'Preis: ' + gericht.preis + '€'}" class="left"></h6>
                 <a class="waves-effect waves-light btn right buyButton" th:id="${'buy-' + gericht.id}"><i
                         class="material-icons left">add</i>Hinzufügen</a>
+                <input th:id="${'preis-' + gericht.id}" th:value="${gericht.preis}" type="hidden">
+
             </li>
         </ul>
     </div>
@@ -178,8 +180,12 @@
             anmerkung: $("#anmerkung-" + id).val(),
             anzahl: $("#anzahl-" + id).val(),
             name: $("#name-" + id).text(),
-            madant: mandantID
+            madant: mandantID,
+            beschreibung: $("#beschreibung-" + id).text(),
+            preis: $("#preis-" + id).val()
         };
+
+        console.log(gericht)
 
         warenkorb.forEach(element => {
             if (element["id"] == gericht["id"] && element["anmerkung"] == gericht["anmerkung"]) {
@@ -212,10 +218,12 @@
                         <th>Gericht Entfernen</th>
                     </tr>
                 </thead>
-
                 <tbody id="waren"></tbody>
             </table>
         </div>
+        <a th:href="${restaurantID + '/checkout'}">bezahlen</a>
+
     </div>
-    <div class="modal-footer" style="height: 0;"></div>
+    <div class="modal-footer" style="height: 0;">
+    </div>
 </div>

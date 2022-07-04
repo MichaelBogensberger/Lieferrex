@@ -200,6 +200,7 @@ public class MandantServiceImpl implements MandantService {
                 bewertung = getBewertung(mandant);
             }
 
+
             if (lieferKosten != 0.0 && lieferKosten < mandant.getLieferkosten()) {continue;}
             if (mindestbestellwert != 0.0 && mindestbestellwert < mandant.getMindestbestellwert()) {continue;}
             if (kategorie != null && !kategorie.equals(mandant.getKategorie().getName().toString())) {continue;}
@@ -249,7 +250,11 @@ public class MandantServiceImpl implements MandantService {
         double bewertungsSumme = 0.0;
         double anzahl = 0.0;
 
+
         for (Bestellung bestellung:mandant.getBestellungen()) {
+            if (bestellung.getBewertung() == null){
+                continue;
+            }
             bewertungsSumme += bestellung.getBewertung();
             anzahl++;
         }

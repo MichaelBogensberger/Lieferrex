@@ -94,8 +94,11 @@
     $( document ).ready(function() {
 
         let searchParams = new URLSearchParams(window.location.search);
-        if(searchParams.has('error') == true) {
+        if(searchParams.has('error')) {
             M.toast({html: 'Email oder Passwort inkorrekt!'})
+        }
+        if(searchParams.has('notAuthenticated')) {
+            M.toast({html: 'Bitte anmelden'})
         }
     });
 

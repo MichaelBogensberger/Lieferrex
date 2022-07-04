@@ -105,17 +105,21 @@ public class BestellungServiceImpl implements BestellungService{
 
 
     @Override
-    public EinkaufswagenDto deserializeEinkaufswagen(String einkaufswagen) {
-
-        EinkaufswagenDatailDto einkaufswagenDatailDto = new EinkaufswagenDatailDto().builder().gerichtID(1L).anmerkung("Extra Tomaten").anzahl(1).build();
-        EinkaufswagenDatailDto einkaufswagenDatailDto2 = new EinkaufswagenDatailDto().builder().gerichtID(2L).anmerkung("Extra Tomaten").anzahl(3).build();
-
+    public EinkaufswagenDto deserializeEinkaufswagen(List<WarenkorbDetailDto> warenkorb, Long mandantId) {
         List<EinkaufswagenDatailDto> einkaufswagenDatailDtoList = new ArrayList<>();
-        einkaufswagenDatailDtoList.add(einkaufswagenDatailDto);
-        einkaufswagenDatailDtoList.add(einkaufswagenDatailDto2);
 
 
-        EinkaufswagenDto einkaufswagenDto = new EinkaufswagenDto().builder().mandantId(1L).einkaufswagenDatails(einkaufswagenDatailDtoList).bestellArt("LIEFERUNG").build();
+        for (WarenkorbDetailDto warenkorbDetailDto: warenkorb) {
+            if (mandantId ==  Long.valueOf(warenkorbDetailDto.getMadant())){
+                EinkaufswagenDatailDto einkaufswagenDatailDto = new EinkaufswagenDatailDto().builder().gerichtID(Long.parseLong(warenkorbDetailDto.getId())).anmerkung(warenkorbDetailDto.getAnmerkung()).anzahl(Integer.parseInt(warenkorbDetailDto.getAnzahl())).build();
+                einkaufswagenDatailDtoList.add(einkaufswagenDatailDto);
+            }
+
+
+        }
+
+
+        EinkaufswagenDto einkaufswagenDto = new EinkaufswagenDto().builder().mandantId(mandantId).einkaufswagenDatails(einkaufswagenDatailDtoList).bestellArt("ABHOLUNG").build();
 
         return einkaufswagenDto;
     }

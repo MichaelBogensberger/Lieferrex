@@ -1,8 +1,10 @@
 package com.htlimst.lieferrex.controller.bezahlen;
 
-import com.htlimst.lieferrex.dto.BezahlDto;
-import com.htlimst.lieferrex.dto.EinkaufswagenDatailDto;
-import com.htlimst.lieferrex.dto.EinkaufswagenDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.htlimst.lieferrex.dto.*;
 import com.htlimst.lieferrex.exceptions.ClientsideMandantPaymentException;
 import com.htlimst.lieferrex.exceptions.ServersideMandantPaymentException;
 import com.htlimst.lieferrex.model.Angestellter;
@@ -12,6 +14,7 @@ import com.htlimst.lieferrex.service.bestellung.BestellungService;
 import com.htlimst.lieferrex.service.paypal.PaypalService;
 import com.htlimst.lieferrex.service.security.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +24,12 @@ import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -47,16 +54,33 @@ public class BezahlenController {
     public static final String CANCEL_URL = "cancel";
 
     @GetMapping("/{id}/checkout")
-    public String showCheckoutPage(@PathVariable int id) {
+    public String showCheckoutPage(@PathVariable int id, @AuthenticationPrincipal UserPrincipal principal) {
+        if (principal == null){
+            return "redirect:/login?notAuthenticated";
+        }
         System.out.println(id);
         return "main/checkout";
     }
 
 
     @PostMapping("/{id}/checkout")
-    public String payment(@PathVariable String id) {
+    public String payment(@PathVariable String id, @CookieValue(name = "warenkorb") String cookie, @AuthenticationPrincipal UserPrincipal principal) {
+        if (principal == null){
+            return "redirect:/login?401";
+        }
+        System.out.println(cookie + "from cookie");
+        List<WarenkorbDetailDto> warenkorb = null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            warenkorb = Arrays.asList(mapper.readValue(cookie, WarenkorbDetailDto[].class));
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(id);
-        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
+        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen(warenkorb, Long.valueOf(id));
         BezahlDto bezahlDto = bestellungService.getBezahlDto(einkaufswagenDto);
 
         try {
@@ -76,17 +100,29 @@ public class BezahlenController {
 
 
     @GetMapping("/{id}/checkout/cancel")
-    public String cancelPay() {
+    public String cancelPay(@PathVariable String id, Model model) {
+        model.addAttribute("id", id);
         return "main/cancel";
     }
 
     @GetMapping("/{id}/checkout/success")
-    public String successPay(@AuthenticationPrincipal UserPrincipal principal, @RequestParam(name="paymentId", required = false) String paymentId, @RequestParam(name="PayerID", required = false) String payerId) {
+    public String successPay(@PathVariable String id, @AuthenticationPrincipal UserPrincipal principal,
+                             @RequestParam(name="paymentId", required = false) String paymentId, @RequestParam(name="PayerID", required = false)
+                                         String payerId, @CookieValue(name = "warenkorb") String cookie, HttpServletResponse response) {
         if (payerId==null || paymentId==null){
             return "redirect:/";
         }
 
-        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen("Einkaufswagen");
+        List<WarenkorbDetailDto> warenkorb = null;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            warenkorb = Arrays.asList(mapper.readValue(cookie, WarenkorbDetailDto[].class));
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        EinkaufswagenDto einkaufswagenDto = bestellungService.deserializeEinkaufswagen(warenkorb, Long.valueOf(id));
 
         try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
@@ -109,8 +145,13 @@ public class BezahlenController {
             return "redirect:/";
         }
 
+        Cookie resCookie = new Cookie("warenkorb", null); // Not necessary, but saves bandwidth.
+        resCookie.setPath("/");
+        resCookie.setHttpOnly(true);
+        resCookie.setMaxAge(0); // Don't set to -1 or it will become a session cookie!
+        response.addCookie(resCookie);
 
-        return "main/success";
+        return "redirect:/orders";
     }
 
 

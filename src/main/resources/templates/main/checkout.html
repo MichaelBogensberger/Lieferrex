@@ -17,87 +17,7 @@
 
         <h1 class="login-form-ueb reg-form-ueb mb-30-im mob-mt-0">Checkout</h1>
 
-
-
-        <div class="sr-restaurants row with-auto">
-            <div class="col l2">
-                <img class="sr-rest-img"
-                     src="https://eu.ui-avatars.com/api/?uppercase=false&name=2x&background=5cdb95&color=fff">
-
-            </div>
-
-            <div class="col l5">
-                <h1 class="sr-rest-ueb">Schnitzel</h1>
-                <p class="sr-rest-p">Schnitzel mit Kartoffelpampa</p>
-
-            </div>
-
-            <div class="col s4  sr-rest-stars hide-tab-rest-stars">
-                <h1 class="sr-rest-ueb mt-price">12,30 €</h1>
-            </div>
-
-
-
-            <div class="col l1  sr-rest-enter">
-                <span class="material-icons-outlined sr-rest-enter-ico">delete</span>
-            </div>
-
-        </div>
-
-
-        <div class="sr-restaurants row with-auto">
-            <div class="col l2">
-                <img class="sr-rest-img"
-                     src="https://eu.ui-avatars.com/api/?uppercase=false&name=2x&background=5cdb95&color=fff">
-
-            </div>
-
-            <div class="col l5">
-                <h1 class="sr-rest-ueb">Schnitzel</h1>
-                <p class="sr-rest-p">Schnitzel mit Kartoffelpampa</p>
-
-            </div>
-
-            <div class="col s4  sr-rest-stars hide-tab-rest-stars">
-                <h1 class="sr-rest-ueb mt-price">12,30 €</h1>
-            </div>
-
-
-
-            <div class="col l1  sr-rest-enter">
-                <span class="material-icons-outlined sr-rest-enter-ico">delete</span>
-            </div>
-
-        </div>
-
-        <div class="sr-restaurants row with-auto">
-            <div class="col l2">
-                <img class="sr-rest-img"
-                     src="https://eu.ui-avatars.com/api/?uppercase=false&name=2x&background=5cdb95&color=fff">
-
-            </div>
-
-            <div class="col l5">
-                <h1 class="sr-rest-ueb">Schnitzel</h1>
-                <p class="sr-rest-p">Schnitzel mit Kartoffelpampa</p>
-
-            </div>
-
-            <div class="col s4  sr-rest-stars hide-tab-rest-stars">
-                <h1 class="sr-rest-ueb mt-price">12,30 €</h1>
-            </div>
-
-
-
-            <div class="col l1  sr-rest-enter">
-                <span class="material-icons-outlined sr-rest-enter-ico">delete</span>
-            </div>
-
-        </div>
-
-
-
-
+        <div id="orders"></div>
 
         <div class="sr-restaurants row with-auto">
             <div class="col l10">
@@ -105,24 +25,14 @@
                 <p class="sr-rest-p ml-30-dek">inkl. Mehrwerststeuer</p>
             </div>
 
-
-
-
-
-
-
             <div class="col l2  sr-rest-enter fr-mobile">
-                <h1 class="sr-rest-ueb mt-price ">12,30 €</h1>
+                <h1 id="sum" class="sr-rest-ueb mt-price ">12,30 €</h1>
             </div>
 
         </div>
 
 
-
         <button class="waves-effect waves-dark btn float-r next-step-btn mob-w-100">Checkout and Pay</button>
-
-
-
 
 
     </form>
@@ -145,8 +55,70 @@
 
 <script type="text/javascript" th:src="@{/js/main/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/main/todark.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" crossorigin="anonymous"></script>
 
 <script th:inline="javascript">
+    var id = /*[[${id}]]*/;
+    var warenkorb;
+    if (Cookies.get("warenkorb") == null) {
+        warenkorb = [];
+    } else {
+        warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+        console.log(warenkorb);
+        console.log(id);
+    }
 
+    $(document).ready(function () {
+        showWarenkorb(warenkorb);
+    });
+
+    function removeGericht(id, anmerkung) {
+        var warenkorb = window.JSON.parse(Cookies.get("warenkorb"));
+        var gerichtToRemove = "";
+
+        warenkorb.forEach(element => {
+            if (element["id"] == id && element["anmerkung"] == anmerkung) {
+                gerichtToRemove = element
+            }
+            ;
+        });
+        warenkorb.splice(warenkorb.indexOf(gerichtToRemove), 1)
+        M.toast({html: 'Gericht entfernt!'})
+        Cookies.set("warenkorb", window.JSON.stringify(warenkorb));
+        showWarenkorb(warenkorb);
+    }
+
+    function showWarenkorb(warenkorb) {
+        let order = '<br>';
+        let sum = 0.0;
+        warenkorb.forEach((item, index) => {
+            if (id == item.madant){
+                let imageLink = "https://eu.ui-avatars.com/api/?uppercase=false&name=" + item.anzahl + "x&background=5cdb95&color=fff";
+                sum += (item.preis * item.anzahl);
+                order += `
+                <div class="sr-restaurants row with-auto">
+                    <div class="col l2">
+                        <img class="sr-rest-img"
+                             src="${imageLink}">
+                    </div>
+                    <div class="col l5">
+                        <h1 class="sr-rest-ueb">${item.name}</h1>
+                        <p class="sr-rest-p">${item.beschreibung}</p>
+                    </div>
+                    <div class="col s4  sr-rest-stars hide-tab-rest-stars">
+                        <h1 class="sr-rest-ueb mt-price">${item.preis * item.anzahl} €</h1>
+                    </div>
+                    <div class="col l1  sr-rest-enter">
+                        <div onclick="removeGericht('${item.id}', '${item.anmerkung}')"><span class="material-icons-outlined sr-rest-enter-ico">delete</span></div>
+                    </div>
+                </div>
+                </div>
+                `;
+            }
+
+        })
+        document.getElementById("orders").innerHTML = order;
+        document.getElementById("sum").innerHTML = sum + " €";
+    }
 
 </script>
