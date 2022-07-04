@@ -40,7 +40,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            Asiamix Imst
+            [[${firmenname}]]
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -52,7 +52,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <button class="btn btn-primary">Logout</button>
+            <a class="btn btn-primary" href="/logout">Logout</a>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -78,8 +78,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
-                Michael B
+                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
+                [[${user}]]
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">
@@ -166,7 +166,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                         </span>
                 Restaurantkategorien
             </a>
-
         </div>
 
 
@@ -454,8 +453,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         datumBestellung.push(key);
         valueBestellung.push(value);
     })
-    console.log(datumBestellung);
-    console.log(valueBestellung);
+
+    datumUmsatz = datumUmsatz.reverse();
+    valueUmsatz = valueUmsatz.reverse();
+
+    var umsatzMax = Math.trunc(Math.max(...valueUmsatz));
+    var umsatzMin = Math.trunc(Math.min(...valueUmsatz));
+    var bestellungMax = Math.trunc(Math.max(...valueBestellung));
 
 </script>
 
@@ -481,13 +485,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         legend: {display: false},
         scales: {
           yAxes: [
-              {ticks: {min: 30, max:1500,
-                fontColor: darkModeOn() ? 'white' : 'black'
+              {ticks: {min: umsatzMin, max:umsatzMax,
+                fontColor: darkModeOn() ? 'black' : 'white'
                 }}
             ],
             xAxes: [
               {ticks: {
-                    fontColor: darkModeOn() ? 'white' : 'black'
+                    fontColor: darkModeOn() ? 'black' : 'white'
                 }}
             ],
         }
@@ -534,13 +538,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
             scales: {
                 yAxes: [
-                    {ticks: {min: 5, max:80,
-                        fontColor: darkModeOn() ? 'white' : 'black'
+                    {ticks: {min: 0, max:bestellungMax,
+                        fontColor: darkModeOn() ? 'black' : 'white'
                         }}
                     ],
                     xAxes: [
                     {ticks: {
-                            fontColor: darkModeOn() ? 'white' : 'black'
+                            fontColor: darkModeOn() ? 'black' : 'white'
                         }}
                     ],
             }

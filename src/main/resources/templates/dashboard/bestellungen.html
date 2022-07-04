@@ -31,7 +31,7 @@
         <!-- Navbar brand -->
         <a href="#" class="navbar-brand">
             <!-- <img src="..." alt="..."> -->
-            Asiamix Imst
+            [[${firmenname}]]
         </a>
 
         <!-- text-monospace = font-family shifted to monospace -->
@@ -43,7 +43,7 @@
                 <i class="fa fa-moon-o" aria-hidden="true"></i>
                 <span class="sr-only">Toggle dark mode</span>
             </button>
-            <button class="btn btn-primary">Logout</button>
+            <a class="btn btn-primary" href="/logout">Logout</a>
         </div>
 
         <!-- Navbar content (with the dropdown menu) -->
@@ -68,8 +68,8 @@
         <div class="sidebar-menu">
             <!-- Sidebar brand -->
             <div class="sidebar-brand">
-                <img class="sidenav-pfp rounded-circle" src="https://eu.ui-avatars.com/api/?name=Michael+Bogensberger&background=ff0266&color=fff">
-                Michael B
+                <img class="sidenav-pfp rounded-circle" th:src="@{${'https://eu.ui-avatars.com/api/?name=' + vname + '+' + nname + '&background=ff0266&color=fff'}}">
+                [[${user}]]
             </div>
             <!-- Sidebar content with the search box -->
             <div class="sidebar-content">
@@ -78,7 +78,7 @@
             <!-- Sidebar links (with icons) and titles -->
             <h5 class="sidebar-title">Hauptregister</h5>
             <div class="sidebar-divider"></div>
-            <a href="/dashboard" class="sidebar-link sidebar-link-with-icon">
+            <a href="/dashboard" class="sidebar-link sidebar-link-with-icon" th:if="${role == 'ROLE_MANDANT'}">
                     <span class="sidebar-icon">
                         <i class="fa fa-home" aria-hidden="true"></i>
                     </span>
@@ -98,7 +98,7 @@
             </a>
 
             <br />
-
+            <span th:if="${role == 'ROLE_MANDANT'}">
             <h5 class="sidebar-title">Verwaltung</h5>
             <div class="sidebar-divider"></div>
 
@@ -142,7 +142,6 @@
                 Mandant
             </a>
 
-
             <a href="/dashboard/oeffnungszeiten" class="sidebar-link sidebar-link-with-icon">
                     <span class="sidebar-icon">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -156,7 +155,7 @@
                         </span>
                 Restaurantkategorien
             </a>
-
+            </span>
         </div>
 
 
