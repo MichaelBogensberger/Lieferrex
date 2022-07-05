@@ -6,13 +6,13 @@
 
                     <img th:src="@{../css/baukasten_images/background_sidenav.png}" class="overlayImg">
                 </div>
-                <a href="#user"><img class="circle" src="https://eu.ui-avatars.com/api/?name=John+Doe"></a>
-                <a href="#name"><span class="white-text name">John Doe</span></a>
-                <a href="#email"><span class="white-text email">agen007@gmail.com</span></a>
+                <a href="#user"><img class="circle" th:src="${'https://eu.ui-avatars.com/api/?name=' + navname}"></a>
+                <a href="#name"><span th:text="${navname}" class="white-text name"></span></a>
+                <a href="#email"><span th:text="${navmail}" class="white-text email"></span></a>
             </div>
         </li>
 
-        <li><a href="#!" class="waves-effect"><i class="material-icons">arrow_back</i>Zurück zum Dashboard</a></li>
+        <li><a href="../dashboard" class="waves-effect"><i class="material-icons">arrow_back</i>Zurück zum Dashboard</a></li>
         <li><a href="#!" class="saveSettings waves-effect"><i class="material-icons">save</i>Webseite speichern</a></li>
         <li><a href="#!" class="layout-change waves-effect"><i class="material-icons">autorenew</i>Layout ändern</a>
         </li>

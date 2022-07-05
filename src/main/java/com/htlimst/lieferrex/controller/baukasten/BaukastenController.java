@@ -122,6 +122,9 @@ public class BaukastenController {
             if (galleryServiceImpl.findGalleryByMandant(mandant).isPresent()) {
                 model.addAttribute("Gallery", true);
             }
+
+            model.addAttribute("navmail", mandant.getEmail());
+            model.addAttribute("navname", mandant.getFirmenname());
         }
     }
 

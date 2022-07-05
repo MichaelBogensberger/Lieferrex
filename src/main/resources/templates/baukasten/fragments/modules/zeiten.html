@@ -4,7 +4,7 @@
         class="fragment-delete material-icons">delete_forever</i>
 
     <div class="row">
-        <h1 class="mob-text-mod">Öffnungszeiten</h1>
+        <h1 class="mob-text-mod">Öffnungszeiten hi</h1>
     </div>
 
     <div class="row center" style="width: 100%; padding: 0 2em;">
@@ -19,9 +19,9 @@
 
             <tbody>
                 <tr th:each="zeit: ${zeiten}">
-                    <td th:text="${zeit.tag}"></td>
-                    <td th:text="${'__${zeit.oeffnungszeit}__  -  __${zeit.schliessungszeit}__'}"></td>
-                    <td th:text="${'__${zeit.startpause}__  -  __${zeit.endepause}__'}"></td>
+                    <td th:if="${zeit.oeffnungszeit != null}" th:text="${zeit.tag}"></td>
+                    <td th:if="${zeit.oeffnungszeit != null}" th:text="${'__${zeit.oeffnungszeit}__  -  __${zeit.schliessungszeit}__'}"></td>
+                    <td th:if="${zeit.oeffnungszeit != null}" th:text="${'__${zeit.startpause}__  -  __${zeit.endepause}__'}"></td>
                 </tr>
             </tbody>
         </table>
