@@ -19,7 +19,7 @@ nav {
     min-height: 20vh;
 }*/
 
-.fragment-header, .fragment-map, .fragment-text, .fragment-add, .fragment-imagem, .frag {
+.fragment-header, .fragment-map, .fragment-text, .fragment-add, .fragment-image, .frag {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     position: relative;
 }
