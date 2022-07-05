@@ -64,6 +64,6 @@ public class KategorieController {
         }
 
 
-        return "redirect:../";
+        return "redirect:./";
     }
 }
