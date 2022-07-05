@@ -1,22 +1,12 @@
 package com.htlimst.lieferrex.controller.baukasten;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.htlimst.lieferrex.model.AboutUs;
-import com.htlimst.lieferrex.model.Fragment;
-import com.htlimst.lieferrex.model.Gallery;
-import com.htlimst.lieferrex.model.Layout;
-import com.htlimst.lieferrex.model.Mandant;
-import com.htlimst.lieferrex.model.Position;
-import com.htlimst.lieferrex.model.Seitenaufrufe;
+import com.htlimst.lieferrex.model.*;
 import com.htlimst.lieferrex.model.fragments.FragmentHeader;
 import com.htlimst.lieferrex.model.fragments.FragmentImage;
 import com.htlimst.lieferrex.model.fragments.FragmentText;
@@ -91,8 +81,16 @@ public class BaukastenController {
         for (Fragment fragment : fragments) {
             model.addAttribute(fragment.getPosition().getName(), fragment);
 
+            ArrayList<Gericht> gerichte = new ArrayList<>();
+
+            for (Gericht ger : mandant.getGerichte()) {
+                if ( ger.getStatus() == 1) {
+                    gerichte.add(ger);
+                }
+            }
+
             if (fragment.getFragmenttype().getType().equals("karte")) {
-                model.addAttribute("gerichte", mandant.getGerichte());
+                model.addAttribute("gerichte", gerichte);
             } else if (fragment.getFragmenttype().getType().equals("kontakt")) {
                 model.addAttribute("kontaktstrasse", mandant.getStrasse());
                 model.addAttribute("kontaktnummer", mandant.getHausnummer());
