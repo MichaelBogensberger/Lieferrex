@@ -71,6 +71,10 @@ public class GerichtController {
             gericht.setStatus(2);
         }
 
+        if(gericht.getPreisangebot() == null){
+            gericht.setPreisangebot(0.0);
+        }
+
         gerichtService.save(gericht);
         return "redirect:../gerichte";
     }
