@@ -277,14 +277,21 @@ public class DbInit implements CommandLineRunner {
 
                 Set<Rolle> angestellerRollen = new HashSet<Rolle>();
                 angestellerRollen.add(rolle3);
+
+                Set<Rolle> angestellerRollen2 = new HashSet<Rolle>();
+                angestellerRollen.add(rolle2);
+
                 String token = UUID.randomUUID().toString();
                 Angestellter angestellter = new Angestellter(null, mandant, "Niklas", "Heim", "angestellt@gmail.com",
                                 this.passwordEncoder.encode("123"), token, angestellerRollen);
                 this.angestellterRepository.save(angestellter);
+                Angestellter angestellter2 = new Angestellter(null, mandant, "Michael", "Bogensberger", "mandant@gmail.com",
+                        this.passwordEncoder.encode("123"), token, angestellerRollen);
+                this.angestellterRepository.save(angestellter2);
                 String token1 = UUID.randomUUID().toString();
                 Angestellter angestellter1 = new Angestellter(null, mandant2, "Liuming", "Xia",
                                 "angestellter@gmail.com",
-                                this.passwordEncoder.encode("123"), token1, angestellerRollen);
+                                this.passwordEncoder.encode("123"), token1, angestellerRollen2);
                 this.angestellterRepository.save(angestellter1);
 
                 Oeffnungszeit oeffnungszeit = new Oeffnungszeit(null, WochentagEnum.MONDAY, new Time(10, 0, 0),
