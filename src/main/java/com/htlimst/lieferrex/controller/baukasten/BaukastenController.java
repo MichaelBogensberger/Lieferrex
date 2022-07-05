@@ -84,7 +84,7 @@ public class BaukastenController {
             ArrayList<Gericht> gerichte = new ArrayList<>();
 
             for (Gericht ger : mandant.getGerichte()) {
-                if ( ger.getStatus() == 1) {
+                if ( ger.getStatus() == 1 || ger.getStatus() == 2) {
                     gerichte.add(ger);
                 }
             }
