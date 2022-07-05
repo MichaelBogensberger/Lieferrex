@@ -164,7 +164,7 @@ public class DbInit implements CommandLineRunner {
                 mandantBestellart.add(bestellart);
                 Mandant mandant = new Mandant(null, "Asia Royal", "Österreich", "Zell am See", "5700",
                                 "Kitzsteinhornstraße",
-                                "33", "0654255264", 41.0, 50000, 15, 30, "mandant1@business.example.com", 10.0, 0, null,
+                                "33", "0654255264", 91.0, 50000, 15, 30, "mandant1@business.example.com", 10.0, 0, null,
                                 mandantBestellart,
                                 layouts.get(0), geoPosition);
                 Mandant mandant2 = new Mandant(null, "Asiamix", "Österreich", "Gemeinde Imst", "6460",
