@@ -154,11 +154,17 @@ public class DbInit implements CommandLineRunner {
                 this.bestellartRepository.save(bestellart1);
 
                 GeoPosition geoPosition = new GeoPosition(null, 47.2340197, 10.7398698);
-
                 GeoPosition geoPosition2 = new GeoPosition(null, 47.2240851, 10.7458147);
+                GeoPosition geoPosition3 = new GeoPosition(null, 47.2240851, 10.7458147);
+                GeoPosition geoPosition4 = new GeoPosition(null, 47.2240851, 10.7458147);
+                GeoPosition geoPosition5 = new GeoPosition(null, 47.2240851, 10.7458147);
+
 
                 geoPositionRepository.save(geoPosition);
                 geoPositionRepository.save(geoPosition2);
+                geoPositionRepository.save(geoPosition3);
+                geoPositionRepository.save(geoPosition4);
+
 
                 Set<Bestellart> mandantBestellart = new HashSet<Bestellart>();
                 mandantBestellart.add(bestellart);
@@ -172,6 +178,18 @@ public class DbInit implements CommandLineRunner {
                                 "mandant2@business.example.com",
                                 7.5, 3.5, null,
                                 mandantBestellart, layouts.get(1), geoPosition2);
+                Mandant mandant3 = new Mandant(null, "Burger House", "Österreich", "Gemeinde Imst", "6460",
+                        "Hinterseberweg", "12", "0650123123", 0, 50000, 15, 30,
+                        "mandant3@business.example.com",
+                        12, 1, null,
+                        mandantBestellart, layouts.get(1), geoPosition3);
+                Mandant mandant4 = new Mandant(null, "Schnitzel Meister", "Österreich", "Gemeinde Imst", "6460",
+                        "Franz-Xaver-Renn-Straße", "4", "0650123123", 0, 50000, 15, 30,
+                        "mandant4@business.example.com",
+                        16, 4, null,
+                        mandantBestellart, layouts.get(1), geoPosition4);
+
+
 
                 Kategorie kategorie = new Kategorie(null, KategorieEnum.FINE_DINING);
                 kategorieRepository.save(kategorie);
@@ -190,6 +208,10 @@ public class DbInit implements CommandLineRunner {
                 mandantRepository.save(mandant);
                 mandant2.setKategorie(kategorie);
                 mandantRepository.save(mandant2);
+                mandant3.setKategorie(kategorie1);
+                mandantRepository.save(mandant3);
+                mandant4.setKategorie(kategorie2);
+                mandantRepository.save(mandant4);
 
                 // |---------- Fragments
 
@@ -319,15 +341,55 @@ public class DbInit implements CommandLineRunner {
                 this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SUNDAY, new Time(10, 0, 0),
                                 new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant2));
 
+                Oeffnungszeit oeffnungszeit3 = new Oeffnungszeit(null, WochentagEnum.MONDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3);
+                this.oeffnungszeitRepository.save(oeffnungszeit3);
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.TUESDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.WEDNESDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.THURSDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.FRIDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SATURDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SUNDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant3));
+
+                Oeffnungszeit oeffnungszeit4 = new Oeffnungszeit(null, WochentagEnum.MONDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4);
+                this.oeffnungszeitRepository.save(oeffnungszeit4);
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.TUESDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.WEDNESDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.THURSDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.FRIDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SATURDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+                this.oeffnungszeitRepository.save(new Oeffnungszeit(null, WochentagEnum.SUNDAY, new Time(10, 0, 0),
+                        new Time(14, 0, 0), new Time(16, 0, 0), new Time(22, 0, 0), mandant4));
+
                 Umsatz umsatz = new Umsatz(null, localDateTime.getMonthValue(), localDateTime.getYear(), 41.0, mandant);
                 this.umsatzRepository.save(umsatz);
                 Umsatz umsatz2 = new Umsatz(null, 5, 2022, 1903.40, mandant2);
                 this.umsatzRepository.save(umsatz2);
+                Umsatz umsatz3 = new Umsatz(null, 5, 2022, 1903.40, mandant3);
+                this.umsatzRepository.save(umsatz3);
+                Umsatz umsatz4 = new Umsatz(null, 5, 2022, 1903.40, mandant4);
+                this.umsatzRepository.save(umsatz4);
 
                 Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
                 this.seitenaufrufeRepository.save(seitenaufrufe);
                 Seitenaufrufe seitenaufrufe1 = new Seitenaufrufe(null, 3, 2022, 5410, mandant2);
                 this.seitenaufrufeRepository.save(seitenaufrufe1);
+                Seitenaufrufe seitenaufrufe2 = new Seitenaufrufe(null, 3, 2022, 5410, mandant3);
+                this.seitenaufrufeRepository.save(seitenaufrufe2);
+                Seitenaufrufe seitenaufrufe3 = new Seitenaufrufe(null, 3, 2022, 5410, mandant4);
+                this.seitenaufrufeRepository.save(seitenaufrufe3);
 
         }
 
