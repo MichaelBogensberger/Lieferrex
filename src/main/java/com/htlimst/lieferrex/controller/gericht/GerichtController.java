@@ -55,7 +55,7 @@ public class GerichtController {
     @GetMapping(value="{id}")
     public String showModalGericht(@PathVariable("id") Long id){
         gerichtService.savingStatusGericht(id);
-        return "redirect:/dashboard/gerichte";
+        return "redirect:/.";
     }
 
     @PostMapping("/save")
@@ -72,7 +72,7 @@ public class GerichtController {
         }
 
         gerichtService.save(gericht);
-        return "redirect:/dashboard/gerichte";
+        return "redirect:";
     }
 
 
