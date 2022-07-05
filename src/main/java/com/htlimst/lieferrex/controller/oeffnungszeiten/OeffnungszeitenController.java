@@ -58,11 +58,13 @@ public class OeffnungszeitenController {
         String idFieldPausenVon = null;
         String idFieldPausenBis = null;
 
-        int counter = 1;
-
         OeffnungListModel oeffnungListModel = new OeffnungListModel();
 
         for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
+            endepause = null;
+            oeffnungszit = null;
+            schliessungszeit = null;
+            startpause = null;
 
             if(oeffnungszeit.getEndepause() != null){
                 endepause = oeffnungszeit.getEndepause().toLocalTime().format(dtf);
@@ -136,8 +138,6 @@ public class OeffnungszeitenController {
 
         oeffnungListModel.setList(oeffnungensZeiten);
 
-
-
         model.addAttribute("oeffnungsz", neueOeffnungszeit);
         model.addAttribute("oeffnungszeiten", oeffnungensZeiten);
         model.addAttribute("ozl", oeffnungListModel);
@@ -154,47 +154,41 @@ public class OeffnungszeitenController {
         Angestellter foundAngestellter = angestellterService.findByEmail(principal.getUsername());
         Mandant foundMandant = foundAngestellter.getMandant();
         List<Oeffnungszeit> oeffnungszeitList = oeffnungszeitenService.alleOeffnungszeiten(foundMandant);
-        int counter = 0;
 
         DateFormat formatter = new SimpleDateFormat("HH:mm");
+        int counter = 0;
 
+        if (oeffnungListModel.getList() != null){
+            for (OeffnungsDarstellungModel oeffnungsDarstellungModel : oeffnungListModel.getList()) {
 
-        for (Oeffnungszeit oeffnungszeit : oeffnungszeitList){
+                if (oeffnungsDarstellungModel.getOeffnungszeit() == null || oeffnungsDarstellungModel.getOeffnungszeit().length() == 0) {
+                    oeffnungszeitList.get(counter).setOeffnungszeit(null);
+                } else {
+                    oeffnungszeitList.get(counter).setOeffnungszeit(new Time(formatter.parse(oeffnungsDarstellungModel.getOeffnungszeit()).getTime()));
+                }
+                if (oeffnungsDarstellungModel.getSchliessungszeit() == null || oeffnungsDarstellungModel.getSchliessungszeit().length() == 0){
+                    oeffnungszeitList.get(counter).setSchliessungszeit(null);
+                } else {
+                    oeffnungszeitList.get(counter).setSchliessungszeit(new Time(formatter.parse(oeffnungsDarstellungModel.getSchliessungszeit()).getTime()));
+                }
+                if (oeffnungsDarstellungModel.getStartpause() == null || oeffnungsDarstellungModel.getStartpause().length() == 0){
+                    oeffnungszeitList.get(counter).setStartpause(null);
+                } else {
+                    oeffnungszeitList.get(counter).setStartpause(new Time(formatter.parse(oeffnungsDarstellungModel.getStartpause()).getTime()));
+                }
+                if (oeffnungsDarstellungModel.getEndepause() == null || oeffnungsDarstellungModel.getEndepause().length() == 0){
+                    oeffnungszeitList.get(counter).setEndepause(null);
+                } else {
+                    oeffnungszeitList.get(counter).setEndepause(new Time(formatter.parse(oeffnungsDarstellungModel.getEndepause()).getTime()));
+                }
 
-            String oeffnungszit = oeffnungListModel.getList().get(counter).getOeffnungszeit();
-            String schleissungszit = oeffnungListModel.getList().get(counter).getSchliessungszeit();
-            String startpause = oeffnungListModel.getList().get(counter).getStartpause();
-            String endpause = oeffnungListModel.getList().get(counter).getEndepause();
-
-
-            if(oeffnungszit == null || oeffnungszit.length() == 0){
-                oeffnungszeit.setOeffnungszeit(null);
-            } else {
-                oeffnungszeit.setOeffnungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getOeffnungszeit()).getTime()));
+                counter++;
             }
-            if(schleissungszit == null || schleissungszit.length() == 0){
-                oeffnungszeit.setSchliessungszeit(null);
-            } else {
-                oeffnungszeit.setSchliessungszeit(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getSchliessungszeit()).getTime()));
-            }
-            if(startpause == null || startpause.length() == 0){
-                oeffnungszeit.setStartpause(null);
-            } else {
-                oeffnungszeit.setStartpause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getStartpause()).getTime()));
-            }
-            if(endpause == null || endpause.length() == 0){
-                oeffnungszeit.setEndepause(null);
-            } else {
-                oeffnungszeit.setEndepause(new Time(formatter.parse(oeffnungListModel.getList().get(counter).getEndepause()).getTime()));
-            }
-
-            counter++;
         }
 
         oeffnungszeitenService.saveOeffnungszeiten(oeffnungszeitList);
 
-
-        return "redirect:/dashboard/oeffnungszeiten";
+        return "redirect:.";
     }
 
 }

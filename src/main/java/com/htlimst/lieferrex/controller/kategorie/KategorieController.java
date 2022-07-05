@@ -50,7 +50,7 @@ public class KategorieController {
         model.addAttribute("vname", foundAngestellter.getVorname());
         model.addAttribute("nname", foundAngestellter.getNachname());
         model.addAttribute("firmenname", foundMandant.getFirmenname());
-        return "/dashboard/kategorien.html";
+        return "dashboard/kategorien.html";
     }
 
     @PostMapping("/save")
@@ -64,6 +64,6 @@ public class KategorieController {
         }
 
 
-        return "redirect:/dashboard/kategorien";
+        return "redirect:.";
     }
 }
