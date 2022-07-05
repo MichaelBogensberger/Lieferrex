@@ -330,6 +330,8 @@ public class DbInit implements CommandLineRunner {
                 this.umsatzRepository.save(umsatz);
                 Umsatz umsatz2 = new Umsatz(null, 5, 2022, 1903.40, mandant2);
                 this.umsatzRepository.save(umsatz2);
+                Umsatz umsatz3 = new Umsatz(null, 6, 2022, 50.0, mandant);
+                this.umsatzRepository.save(umsatz3);
 
                 Seitenaufrufe seitenaufrufe = new Seitenaufrufe(null, 3, 2022, 666, mandant);
                 this.seitenaufrufeRepository.save(seitenaufrufe);
