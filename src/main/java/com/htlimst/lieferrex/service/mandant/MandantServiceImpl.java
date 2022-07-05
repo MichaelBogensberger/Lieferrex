@@ -12,6 +12,7 @@ import com.htlimst.lieferrex.repository.*;
 
 
 import com.htlimst.lieferrex.service.googleApi.GeocodingApi;
+import com.htlimst.lieferrex.service.layout.LayoutServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,13 +37,13 @@ public class MandantServiceImpl implements MandantService {
     private KategorieRepository kategorieRepository;
     private SeitenaufrufeRepository seitenaufrufeRepository;
     private UmsatzRepository umsatzRepository;
-    private LayoutRepository layoutRepository;
+    private LayoutServiceImpl layoutServiceImpl;
 
     @Autowired
     public MandantServiceImpl(AngestellterRepository angestellterRepository, MandantRepository mandantRepository,
                               RolleRepository roleRepository, PasswordEncoder passwordEncoder, GeoPositionRepository geoPositionRepository,
                               OeffnungszeitRepository oeffnungszeitRepository, GeocodingApi geocodingApi, KategorieRepository kategorieRepository,
-                              SeitenaufrufeRepository seitenaufrufeRepository, UmsatzRepository umsatzRepository, LayoutRepository layoutRepository) {
+                              SeitenaufrufeRepository seitenaufrufeRepository, UmsatzRepository umsatzRepository, LayoutServiceImpl layoutServiceImpl) {
         this.angestellterRepository = angestellterRepository;
         this.mandantRepository = mandantRepository;
         this.roleRepository = roleRepository;
@@ -53,6 +54,7 @@ public class MandantServiceImpl implements MandantService {
         this.kategorieRepository = kategorieRepository;
         this.seitenaufrufeRepository = seitenaufrufeRepository;
         this.umsatzRepository = umsatzRepository;
+        this.layoutServiceImpl = layoutServiceImpl;
     }
 
 
@@ -136,7 +138,7 @@ public class MandantServiceImpl implements MandantService {
                 lieferkosten(mandantRegistrationDto.getLieferkosten())
                 .seitenaufrufe_summe(0)
                 .umsatz_summe(0.0)
-                .layout(layoutRepository.getById(1L))
+                .layout(layoutServiceImpl.findLayoutByName("layoutEINS").get())
                 .durchschnittsAbholZeit(15)
                 .durchschnittsLieferZeit(30)
                 .geoPosition(geoPosition)

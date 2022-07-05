@@ -72,7 +72,7 @@ public class GerichtController {
         }
 
         gerichtService.save(gericht);
-        return "redirect:";
+        return "redirect:../gerichte";
     }
 
 
