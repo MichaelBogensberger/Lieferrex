@@ -77,6 +77,7 @@ public class MainController {
     public String search(@RequestParam(value = "search", required = false) String adresse,
             RedirectAttributes redirectAttrs) {
         // Adresse zu PLZ umwandeln
+
         List<Mandant> mandanten = mandantRepository.findMandantByPlz(adresse);
         if (!mandanten.isEmpty()) {
             return "redirect:restaurants/" + adresse;

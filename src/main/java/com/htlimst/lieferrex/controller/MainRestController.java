@@ -26,7 +26,6 @@ public class MainRestController {
 
     @GetMapping("/seach/restaurant/{inputAdresse}")
     public List<String> saveModule(@PathVariable String inputAdresse) {
-
         List<String> addressen = null;
         try {
             addressen = placesApi.getPlaces(inputAdresse);

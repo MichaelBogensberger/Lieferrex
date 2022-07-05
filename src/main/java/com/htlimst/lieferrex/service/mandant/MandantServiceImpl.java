@@ -193,7 +193,6 @@ public class MandantServiceImpl implements MandantService {
         LocalDate currentDate = LocalDate.now();
         WochentagEnum currentDay = WochentagEnum.valueOf(String.valueOf(currentDate.getDayOfWeek()));
         LocalTime currentTime = LocalTime.now();
-
         List<MandantSuchDto> mandantSuchDtoList = new ArrayList<>();
         for (Mandant mandant : mandantenList) {
             int bewertung;
